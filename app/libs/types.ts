@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export type OptionProps = {
 	reviewSelector: {
 		reviewListContainer?: string;
@@ -24,7 +26,7 @@ export type OptionProps = {
 export type MetaData = {
 	price: string | null;
 	totalReviews: string | null;
-	averageRating: string | null;
+	averageRating: number | null;
 	reviewHistData: (number | null)[] | null;
 };
 
@@ -32,5 +34,11 @@ export type Review = {
 	headline: string | null;
 	reviewText: string | null;
 	verifiedBuyer: boolean;
-	stars: string | null;
+	stars: number | null;
 };
+
+export const querySchema = z.object({
+	url: z.string().min(2, { message: "Please enter a valid URL" }),
+});
+
+export type TQuerySchema = z.infer<typeof querySchema>;

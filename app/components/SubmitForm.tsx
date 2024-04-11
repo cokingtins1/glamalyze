@@ -1,13 +1,18 @@
 "use client";
 
 import { useFormStatus } from "react-dom";
+import { Button } from "@/components/ui/button";
 
-export default function SubmitForm() {
-	const { pending } = useFormStatus();
+type SubmitFormProps = {
+	disabled: boolean;
+	pending: boolean
+};
+
+export default function SubmitForm({ disabled, pending }: SubmitFormProps) {
 
 	return (
-		<button className="bg-green-500 rounded-lg p-2" type="submit">
+		<Button type="submit" disabled={disabled}>
 			{pending ? "Fetching reviews..." : "Get reviews"}
-		</button>
+		</Button>
 	);
 }

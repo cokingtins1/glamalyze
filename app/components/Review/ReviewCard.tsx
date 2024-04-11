@@ -1,6 +1,8 @@
 import { Review } from "@/app/libs/types";
 import Stars from "./Stars";
 import Verified from './Verified';
+import { Separator } from "@/components/ui/separator"
+
 
 type ReviewData = {
 	reviewData: Review;
@@ -15,7 +17,7 @@ export default function ReviewCard({ reviewData }: ReviewData) {
 				<Verified verified={reviewData.verifiedBuyer}/>
 			</div>
 			<p className='text-sm'>{reviewData.reviewText}</p>
-			
+			<Separator/>
 		</div>
 	);
 }

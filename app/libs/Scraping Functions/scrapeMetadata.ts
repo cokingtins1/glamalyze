@@ -27,9 +27,13 @@ export async function scrapeMetadata(page: Page, options: OptionProps) {
 				document.querySelector(totalReviewsSelector)?.textContent ||
 				null;
 
-			const averageRating =
+			const averageRatingText =
 				document.querySelector(averageRatingSelector)?.textContent ||
 				null;
+			const averageRating =
+				averageRatingText !== null
+					? parseFloat(averageRatingText)
+					: null;
 
 			const reviewHistogram = document.querySelector(reviewDistSelector);
 			const reviewHistItems = reviewHistogram?.querySelectorAll("li");
@@ -41,7 +45,7 @@ export async function scrapeMetadata(page: Page, options: OptionProps) {
 						".pr-histogram-count"
 					);
 					return countElement
-						? parseFloat(countElement.textContent as string)
+						? parseInt(countElement.textContent as string)
 						: null;
 				});
 			}

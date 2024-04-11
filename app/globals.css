@@ -1,142 +1,76 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
+  @tailwind components;
+  @tailwind utilities;
 
-:root {
+  @layer base {
+    :root {
+      --background: 26 100% 94%;
+      --foreground: 240 10% 3.9%;
 
-  /* background colors */
-  --bg-base: hsla(60, 45%, 91%, 1);
-  --bg-elevated: #121212;
-  --bg-hover: #2a2a2a;
-  --bg-secondary: #242424;
+      --card: 0 0% 100%;
+      --card-foreground: 240 10% 3.9%;
 
-  /* text colors */
-  --text-primary: #000000;
-  --text-secondary: #a7a7a7;
-  --text-third: #78716cd9;
+      --popover: 0 0% 100%;
+      --popover-foreground: 240 10% 3.9%;
 
-  /* --border-primary: 1px solid #A4ADB7; */
-  --border-primary: #a7a7a7;
+      --primary: 234 12% 68%; /* Change bg of button  hsl(234.29,12.73%,67.65%) */
+      --primary-foreground: 0 0% 98%;
 
-  --headerHeight: 80px;
-  --screenMinusHeaderHeight: calc(100dvh - (var(--headerHeight))) 
+      --secondary: 240 4.8% 95.9%;
+      --secondary-foreground: 240 5.9% 10%;
 
-}
+      --muted: 240 4.8% 95.9%;
+      --muted-foreground: 240 3.8% 46.1%;
 
-html {
-	background-color: var(--bg-base);
-	color: var(--text-primary);
-	scroll-behavior: smooth;
-	/* scrollbar-gutter: stable; */
-	margin-left: 1rem;
-	margin-right: 1rem;
-}
+      --accent: 240 4.8% 95.9%;
+      --accent-foreground: 240 5.9% 10%;
 
-* {
-	scrollbar-color: var(--bg-secondary) var(--bg-primary);
-}
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 0 0% 98%;
 
-*::-webkit-scrollbar {
-	display: none;
-	width: 1rem;
-}
+      --border: 240 5.9% 90%;
+      --input: 240 5.9% 90%;
+      --ring: 240 10% 3.9%;
 
-*::-webkit-scrollbar-track {
-	background: var(--bg-primary);
-	border-radius: 100vw;
-	margin-block: 0.5em;
-}
+      --radius: 0.5rem;
+    }
 
-*::-webkit-scrollbar-thumb {
-	background-color: var(--bg-secondary);
-	border-radius: 100vw;
-	border: 3px solid var(--bg-primary);
-}
+    .dark {
+      --background: 240 10% 3.9%;
+      --foreground: 0 0% 98%;
 
-::-webkit-scrollbar-thumb:hover {
-	background-color: var(--bg-hover);
-}
+      --card: 240 10% 3.9%;
+      --card-foreground: 0 0% 98%;
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
+      --popover: 240 10% 3.9%;
+      --popover-foreground: 0 0% 98%;
 
-input[type="number"] {
-	-moz-appearance: textfield;
-}
+      --primary: 0 0% 98%;
+      --primary-foreground: 240 5.9% 10%;
 
-/* Box sizing rules */
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
-}
+      --secondary: 240 3.7% 15.9%;
+      --secondary-foreground: 0 0% 98%;
 
-/* Remove default margin */
-body {
-	margin-bottom: 1rem;
-	text-rendering: optimizeSpeed;
-	line-height: 1.5;
-}
-h1,
-h2,
-h3,
-h4,
-p,
-figure,
-blockquote,
-dl,
-dd {
-	margin: 0;
-}
+      --muted: 240 3.7% 15.9%;
+      --muted-foreground: 240 5% 64.9%;
 
-/* Set core root defaults */
-html:focus-within {
-	scroll-behavior: smooth;
-}
+      --accent: 240 3.7% 15.9%;
+      --accent-foreground: 0 0% 98%;
 
-/* Set core body defaults */
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 0 0% 98%;
 
-/* A elements that don't have a class get default styles */
-/* a:not([class]) {
-  text-decoration-skip-ink: auto;
-} */
+      --border: 240 3.7% 15.9%;
+      --input: 240 3.7% 15.9%;
+      --ring: 240 4.9% 83.9%;
+    }
+  }
 
-/* Make images easier to work with */
-img,
-picture {
-	max-width: 100%;
-	display: block;
-}
-
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-	font: inherit;
-}
-
-/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
-@media (prefers-reduced-motion: reduce) {
-	html:focus-within {
-		scroll-behavior: auto;
-	}
-
-	*,
-	*::before,
-	*::after {
-		animation-duration: 0.01ms !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
-		scroll-behavior: auto !important;
-	}
-}
-
-@layer components {
-	.bg-primary {
-		@apply bg-slate-600;
-	}
-}
+  @layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-background text-foreground;
+    }
+  }

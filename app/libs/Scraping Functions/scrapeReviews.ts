@@ -18,7 +18,7 @@ export async function scrapeReviews(page: Page, options: OptionProps) {
 				headline: string | null;
 				reviewText: string | null;
 				verifiedBuyer: boolean;
-				stars: string | null;
+				stars: number | null;
 			}[] = [];
 
 			Array.from(reviews).map((review: any) => {
@@ -44,7 +44,7 @@ export async function scrapeReviews(page: Page, options: OptionProps) {
 					? (reviewEl as HTMLParagraphElement).textContent
 					: null;
 				const stars = ratingEl
-					? (ratingEl as HTMLDivElement).textContent
+					? parseInt((ratingEl as HTMLDivElement).textContent || "0")
 					: null;
 
 				result.push({
