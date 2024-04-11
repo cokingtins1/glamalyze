@@ -1,33 +1,42 @@
 {
-  "name": "web-scraper",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "axios": "^1.6.8",
-    "cheerio": "^1.0.0-rc.12",
-    "next": "14.1.4",
-    "puppeteer": "^22.6.1",
-    "puppeteer-core": "^22.6.0",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
-    "react": "^18",
-    "react-dom": "^18"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.4",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "typescript": "^5"
-  }
+	"name": "web-scraper",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@emotion/react": "^11.11.4",
+		"@emotion/styled": "^11.11.5",
+		"@mui/icons-material": "^5.15.15",
+		"@mui/material": "^5.15.15",
+		"@mui/styled-engine-sc": "^6.0.0-alpha.18",
+		"@prisma/client": "^5.12.1",
+		"axios": "^1.6.8",
+		"cheerio": "^1.0.0-rc.12",
+		"material-icons": "^1.13.12",
+		"next": "14.1.4",
+		"prisma": "^5.12.1",
+		"puppeteer": "^22.6.1",
+		"puppeteer-core": "^22.6.0",
+		"puppeteer-extra": "^3.3.6",
+		"puppeteer-extra-plugin-stealth": "^2.11.2",
+		"react": "^18",
+		"react-dom": "^18",
+		"styled-components": "^6.1.8"
+	},
+	"devDependencies": {
+		"@types/node": "^20",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
+		"autoprefixer": "^10.0.1",
+		"eslint": "^8",
+		"eslint-config-next": "14.1.4",
+		"postcss": "^8",
+		"tailwindcss": "^3.3.0",
+		"typescript": "^5"
+	}
 }

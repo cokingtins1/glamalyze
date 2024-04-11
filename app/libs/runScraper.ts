@@ -1,31 +1,20 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
-type OptionProps = {
-	reviewSelector: {
-		reviewListContainer?: string;
-		reviewContainer?: string;
-		headline?: string;
-		reviewText?: string;
-		verifiedBuyer?: string;
-		rating?: string;
-	};
-	globalSelector: {
-		nextPageSelector: string;
-	};
-	paginationLimit?: number;
-	reviewsLimit?: number;
-};
+import { OptionProps } from "./types";
+import { scrapeReviews } from "./Scraping Functions/scrapeReviews";
+import { loadContent } from "./loadContent";
+import { scrapeMetadata } from "./Scraping Functions/scrapeMetadata";
 
-export async function runScraper(url: string, options: OptionProps) {
-	if (!url || !options) return [];
+import { MetaData, Review } from "./types";
+
+export async function runScraper(
+	url: string,
+	options: OptionProps
+): Promise<{ metaData: MetaData | null; reviewsData: Review[] }> {
+	if (!url || !options) return { metaData: null, reviewsData: [] };
 	const start = new Date().getTime();
 
-	function delay(time: number) {
-		return new Promise(function (resolve) {
-			setTimeout(resolve, time);
-		});
-	}
 	puppeteer.use(StealthPlugin());
 
 	try {
@@ -35,90 +24,58 @@ export async function runScraper(url: string, options: OptionProps) {
 
 		let reviewsData = [];
 		let moreReviewsExist = true;
-		let count = 0;
-		let reviewCount = 0;
+		let pageCount = 0;
+		let currentPage = 1;
+
+		// Scrape metadata once
+
+		const metaData = await scrapeMetadata(page, options);
 
 		while (moreReviewsExist) {
-			count++;
+			pageCount++;
 
-			await page.evaluate(() =>
-				window.scrollBy(0, window.innerHeight * 2)
-			);
-			await delay(1000);
-			await page.evaluate(() => window.scrollBy(0, -window.innerHeight));
+			// Navigation Code:
+
+			await loadContent(page);
+
+			// Filter Code:
+			const { selector, name } = options.filters.mostHelpful;
+
+			if (pageCount === 1) {
+				// Only select filter on first pagination
+				await page.select(selector, name);
+			}
 
 			const nextSelector = options.globalSelector.nextPageSelector;
 			const moreReviews = await page.$(nextSelector);
 
 			if (
 				!moreReviews ||
-				(options?.paginationLimit && count >= options.paginationLimit)
+				(options?.paginationLimit &&
+					pageCount >= options.paginationLimit)
 			) {
 				moreReviewsExist = false;
 			} else {
-				const reviewData = await page.evaluate((options: any) => {
-					const reviewListContainer = document.querySelector(
-						options?.reviewSelector.reviewListContainer
-					);
-					if (!reviewListContainer) return [];
+				const reviewData = await scrapeReviews(page, options);
 
-					const reviews = reviewListContainer.querySelectorAll(
-						options?.reviewSelector.reviewContainer
-					);
-
-					return Array.from(reviews).map((review: any) => {
-						if (
-							options.reviewsLimit &&
-							reviewCount === options.reviewsLimit
-						)
-							return;
-						const headerEl = review.querySelector(
-							options?.reviewSelector.headline
-						);
-						const reviewEl = review.querySelector(
-							options?.reviewSelector.reviewText
-						);
-						const ratingEl = review.querySelector(
-							options?.reviewSelector.rating
-						);
-						const verifiedBuyerEl = review.querySelector(
-							options?.reviewSelector.verifiedBuyer
-						);
-
-						const verifiedBuyer = verifiedBuyerEl !== null;
-
-						const header = headerEl
-							? (headerEl as HTMLHeadingElement).textContent
-							: null;
-						const reviewText = reviewEl
-							? (reviewEl as HTMLParagraphElement).textContent
-							: null;
-						const stars = ratingEl
-							? (ratingEl as HTMLDivElement).textContent
-							: null;
-
-						reviewCount++;
-
-						return {
-							headline: header,
-							reviewText: reviewText,
-							verifiedBuyer: verifiedBuyer,
-							stars: stars,
-						};
-					});
-				}, options);
-
-				reviewsData.push(...reviewData);
-				await page.click(nextSelector);
+				if (reviewData?.length === 0) {
+					moreReviewsExist = false;
+				} else {
+					reviewsData.push(...reviewData);
+					await moreReviews?.click();
+				}
 			}
+
+			// Navigate to new page
+			currentPage++;
 		}
 
 		const end = new Date().getTime();
 		console.log(`Execution time: ${(end - start) / 1000} seconds`);
 		await browser.close();
-		return reviewsData;
+		return { metaData, reviewsData };
 	} catch (error) {
 		console.error("Error occurred:", error);
-		return [];
+		return { metaData: null, reviewsData: [] };
 	}
 }

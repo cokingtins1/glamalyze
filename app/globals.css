@@ -3,31 +3,140 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+  /* background colors */
+  --bg-base: hsla(60, 45%, 91%, 1);
+  --bg-elevated: #121212;
+  --bg-hover: #2a2a2a;
+  --bg-secondary: #242424;
+
+  /* text colors */
+  --text-primary: #000000;
+  --text-secondary: #a7a7a7;
+  --text-third: #78716cd9;
+
+  /* --border-primary: 1px solid #A4ADB7; */
+  --border-primary: #a7a7a7;
+
+  --headerHeight: 80px;
+  --screenMinusHeaderHeight: calc(100dvh - (var(--headerHeight))) 
+
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html {
+	background-color: var(--bg-base);
+	color: var(--text-primary);
+	scroll-behavior: smooth;
+	/* scrollbar-gutter: stable; */
+	margin-left: 1rem;
+	margin-right: 1rem;
 }
 
+* {
+	scrollbar-color: var(--bg-secondary) var(--bg-primary);
+}
+
+*::-webkit-scrollbar {
+	display: none;
+	width: 1rem;
+}
+
+*::-webkit-scrollbar-track {
+	background: var(--bg-primary);
+	border-radius: 100vw;
+	margin-block: 0.5em;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: var(--bg-secondary);
+	border-radius: 100vw;
+	border: 3px solid var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--bg-hover);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* Remove default margin */
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+	margin-bottom: 1rem;
+	text-rendering: optimizeSpeed;
+	line-height: 1.5;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Set core root defaults */
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+
+/* A elements that don't have a class get default styles */
+/* a:not([class]) {
+  text-decoration-skip-ink: auto;
+} */
+
+/* Make images easier to work with */
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+@layer components {
+	.bg-primary {
+		@apply bg-slate-600;
+	}
 }
