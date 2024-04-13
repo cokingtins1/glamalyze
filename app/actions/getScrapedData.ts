@@ -1,11 +1,12 @@
 "use server";
 
-import { runScraper } from "../libs/runScraper";
+import { runScraper } from "../libs/Scraping Functions/Ulta/runScraper";
 
-export async function getScrapedData(formData: FormData) {
-	const url = formData.get("url");
+export async function getScrapedData(url: string) {
+	// const url = formData.get("url");
 
 	try {
+		// Ulta Scraper:
 		const { metaData, reviewsData } = await runScraper(url as string, {
 			reviewSelector: {
 				reviewListContainer: '[data-testid="review-list"]',

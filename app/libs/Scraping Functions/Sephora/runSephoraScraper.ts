@@ -1,14 +1,17 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
-import { OptionProps } from "./types";
-import { scrapeReviews } from "./Scraping Functions/scrapeReviews";
-import { loadContent } from "./loadContent";
-import { scrapeMetadata } from "./Scraping Functions/scrapeMetadata";
+import { OptionProps } from "../../types";
+import { scrapeSephoraReviews } from "./scrapeSephoraReviews";
 
-import { MetaData, Review } from "./types";
+import { scrapeSephoraMetadata } from "./scrapeSephoraMetadata";
 
-export async function runScraper(
+import { MetaData, Review } from "../../types";
+import { loadSephoraContent } from "./loadSephoraContent";
+
+import { test } from "./test";
+
+export async function runSephoraScraper(
 	url: string,
 	options: OptionProps
 ): Promise<{ metaData: MetaData | null; reviewsData: Review[] }> {
@@ -18,8 +21,11 @@ export async function runScraper(
 	puppeteer.use(StealthPlugin());
 
 	try {
-		const browser = await puppeteer.launch({ headless: true });
+		const browser = await puppeteer.launch({
+			headless: true,
+		});
 		const page = await browser.newPage();
+
 		await page.goto(url);
 
 		let reviewsData = [];
@@ -29,21 +35,32 @@ export async function runScraper(
 
 		// Scrape metadata once
 
-		const metaData = await scrapeMetadata(page, options);
+		const metaData = await scrapeSephoraMetadata(page, options);
 
 		while (moreReviewsExist) {
 			pageCount++;
 
 			// Navigation Code:
 
-			await loadContent(page);
-
 			// Filter Code:
-			const { selector, name } = options.filters.mostHelpful;
-
 			if (pageCount === 1) {
 				// Only select filter on first pagination
-				await page.select(selector, name);
+
+				console.log("clicking page!");
+				await page.waitForSelector("#custom_sort");
+				await page.click("#custom_sort");
+				const textContent = await page.evaluate(() => {
+					const element = document.querySelector(
+						"#custom_sort > :first-child"
+					);
+					return element ? element.textContent : null;
+				});
+				console.log(textContent);
+
+				await page.click(`text=${textContent}`);
+
+				// await page.waitForSelector("#css-1aawth6.eanm77i0")
+				// await page.click(".css-1aawth6.eanm77i0");
 			}
 
 			const nextSelector = options.globalSelector.nextPageSelector;
@@ -56,7 +73,19 @@ export async function runScraper(
 			) {
 				moreReviewsExist = false;
 			} else {
-				const reviewData = await scrapeReviews(page, options);
+				const reviewData = await scrapeSephoraReviews(page, options);
+
+				// const testResult: any = await test(page);
+				// console.log("testResult", testResult);
+
+				// const reviewData = [
+				// 	{
+				// 		headline: "test",
+				// 		reviewText: "test",
+				// 		verifiedBuyer: false,
+				// 		stars: 5,
+				// 	},
+				// ];
 
 				if (reviewData?.length === 0) {
 					moreReviewsExist = false;

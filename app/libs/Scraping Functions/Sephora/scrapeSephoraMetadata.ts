@@ -1,9 +1,9 @@
-import { loadContent } from "../loadContent";
-import { OptionProps } from "../types";
+import { OptionProps } from "../../types";
 import { Page } from "puppeteer";
+import { loadSephoraContent } from "./loadSephoraContent";
 
-export async function scrapeMetadata(page: Page, options: OptionProps) {
-	await loadContent(page);
+export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
+	await loadSephoraContent(page);
 
 	//Reviews Metadata:
 	const {
@@ -11,6 +11,7 @@ export async function scrapeMetadata(page: Page, options: OptionProps) {
 		totalReviewsSelector,
 		averageRatingSelector,
 		reviewDistSelector,
+		recommendedSelector,
 	} = options.globalSelector;
 
 	const metaData = await page.evaluate(
@@ -18,7 +19,8 @@ export async function scrapeMetadata(page: Page, options: OptionProps) {
 			priceSelector,
 			totalReviewsSelector,
 			averageRatingSelector,
-			reviewDistSelector
+			reviewDistSelector,
+			recommendedSelector
 		) => {
 			const priceParent = document.querySelector(priceSelector);
 			const price = priceParent?.firstElementChild?.textContent || null;
@@ -35,27 +37,42 @@ export async function scrapeMetadata(page: Page, options: OptionProps) {
 					? parseFloat(averageRatingText)
 					: null;
 
-			const reviewHistogram = document.querySelector(reviewDistSelector);
-			const reviewHistItems = reviewHistogram?.querySelectorAll("li");
+			const recommendedEl =
+				document.querySelector(recommendedSelector)?.textContent ||
+				null;
+
+			const reviewHistogram = document.querySelector(
+				'[data-comp="HistogramChart "]'
+			);
+			const reviewHistItems =
+				reviewHistogram?.querySelectorAll(reviewDistSelector);
 			let reviewHistData: (number | null)[] = [];
 
 			if (reviewHistItems && reviewHistItems.length > 0) {
 				reviewHistData = Array.from(reviewHistItems).map((item) => {
-					const countElement = item.querySelector(
-						".pr-histogram-count"
-					);
-					return countElement
-						? parseInt(countElement.textContent as string)
-						: null;
+					const regex = /(\d+)/;
+					const countElement = item.getAttribute("style");
+					const match = countElement?.match(regex);
+					const width = match ? parseInt(match[0]) : null;
+					return width;
 				});
 			}
 
-			return { price, totalReviews, averageRating, reviewHistData };
+			const company = "Sephora";
+			return {
+				company,
+				price,
+				totalReviews,
+				averageRating,
+				reviewHistData,
+				recommended,
+			};
 		},
 		priceSelector,
 		totalReviewsSelector,
 		averageRatingSelector,
-		reviewDistSelector
+		reviewDistSelector,
+		recommendedSelector
 	);
 
 	// if (!metaData) {

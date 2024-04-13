@@ -1,9 +1,10 @@
 import { getScrapedData } from "@/app/actions/getScrapedData";
+import { getSephoraData } from "@/app/actions/getSephoraData";
 import { querySchema } from "@/app/libs/types";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-	const body: FormData = await req.json();
+	const body = await req.json();
 
 	const result = querySchema.safeParse(body);
 	let zodErrors = {};
@@ -13,15 +14,15 @@ export async function POST(req: Request) {
 		});
 	}
 
-	console.log("body on server: ", body);
+	const { metaData, reviewsData } = await getSephoraData(body.url);
 
-	// const { metaData, reviewsData } = await getScrapedData(body);
+	//[metaData, reviewsData]
 
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+	await new Promise((resolve) => setTimeout(resolve, 3000));
 
 	return NextResponse.json(
 		Object.keys(zodErrors).length > 0
 			? { errors: zodErrors }
-			: { success: {data: "data..."} }
+			: { success: { data: "data..." } }
 	);
 }

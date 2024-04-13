@@ -1,6 +1,6 @@
 import { Page } from "puppeteer";
 
-import { OptionProps } from "../types";
+import { OptionProps } from "../../types";
 
 export async function scrapeReviews(page: Page, options: OptionProps) {
 	const reviewData = await page.evaluate(

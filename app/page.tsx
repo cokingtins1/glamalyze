@@ -3,8 +3,9 @@ import NewQueryDrawer from "./components/NewQueryDrawer";
 import UltaDisplay from "./components/Ulta/UltaDisplay";
 
 export default async function Home() {
-	const testData = {
+	const testDataUlta = {
 		metaData: {
+			company: "Ulta",
 			price: "$52.00 ",
 			totalReviews: "1679 Reviews",
 			averageRating: 4.1,
@@ -92,12 +93,108 @@ export default async function Home() {
 		],
 	};
 
+	const testDataSephora = {
+		metaData: {
+			company: "Sephora",
+			price: "$68.00",
+			totalReviews: "81 Reviews",
+			averageRating: 4,
+			reviewHistData: [37, 38, 14, 6, 5],
+		},
+		reviewsData: [
+			{
+				headline: "Hives and Rash",
+				reviewText:
+					"I used this product for a total of three days before I got a rash all over my face. It was itchy and lasted for a long time. It eventually scabbed and went away, a month later now my face is finally back to normal.",
+				verifiedBuyer: true,
+				stars: 2,
+			},
+			{
+				headline: "Smells amazing!!!",
+				reviewText:
+					"I love this product. It’s great hydration and the smell! I love it, great for combo dry skin needing a basic nighttime routine. But the smell, heaven!!",
+				verifiedBuyer: false,
+				stars: 5,
+			},
+			{
+				headline: null,
+				reviewText:
+					"I received this item for free from Influenster and Tula. I have been really enjoying this overnight treatment! I notice my skin is softer and smoother the next day. It does have a bit of a self tanner scent to my nose, but it isn’t strong and goes away quickly. The texture is slightly tacky, but it’s not bothersome. I would definitely purchase this product and recommend it to a friend",
+				verifiedBuyer: false,
+				stars: 5,
+			},
+			{
+				headline: "Super hydrating and nourishing",
+				reviewText:
+					"I have combination skin but I love the consistency of this product, it stays on your skin and it feels so hydrating in the morning, I am a fan of clean beauty and I like all of the ways this nourishes my skin.",
+				verifiedBuyer: false,
+				stars: 4,
+			},
+			{
+				headline: "Love it! Awesome product.",
+				reviewText:
+					"I’ve been using this product for a couple days and I can already tell a difference in my skin. It’s light and not heavy at all. I have some acne scars that I’m sure this will help lighten.",
+				verifiedBuyer: false,
+				stars: 5,
+			},
+			{
+				headline: "Nice night time moisturizer",
+				reviewText:
+					"My spouse and I both use this, and love the way it feels. One of us has dry mature skin and the other has mature combo, and it works great for both! The texture is nice, no strong smell, and leave a skin feeling moisturized, but not super greasy.",
+				verifiedBuyer: false,
+				stars: 4,
+			},
+			{
+				headline: "THE SMELL IS AWFUL!!!!!",
+				reviewText:
+					"This smells SOOOO bad!!! Like a bottle depot with fermenting juices. Honestly couldn’t even use the product for more than a week because I hated the smell.",
+				verifiedBuyer: false,
+				stars: 1,
+			},
+			{
+				headline: "Nope",
+				reviewText:
+					"This smells awful. Usually I’m not sensitive to smells but it’s just weird. It also has shimmer which is totally unnecessary for a night cream. Plus it stays sticky on my face so when I go to sleep it just comes off on the pillow.",
+				verifiedBuyer: false,
+				stars: 1,
+			},
+			{
+				headline: "Works but foul smelling",
+				reviewText:
+					"It works on dry winter skin, but the smell is really off putting.  It doesn’t linger so I’ll finish the jar, but I won’t but again.",
+				verifiedBuyer: false,
+				stars: 3,
+			},
+			{
+				headline: "Just can't get past the smell!",
+				reviewText:
+					"Normally love Tula products, especially the cleanser, so was looking forward to trying out this product. Unfortunately, I should have paid more attention to the reviews commenting on the sour smell. Facial products for me are all about the three F's...fragrance, feel, and function. This product rates zero on the scent, definitely a sour and unpleasant fragrance. The feel on my skin was a little too tacky and sticky for comfort. Not sure about function, as I won't be sticking with the product long enough to see if it produces results...disappointing.",
+				verifiedBuyer: true,
+				stars: 1,
+			},
+			{
+				headline: "Made a difference for me",
+				reviewText:
+					"I was very excited to receive free this sample product to test. I have enjoyed using it. It’s really smooth application to put on and does not take long either. I’m slightly sensitive to smells so it was a little bit of an adjustment. I did not and still don’t use a lot at once. My face looks so much better after a period of time. I think maybe a week or so. My skins usually pretty dull but this actually brought some glow to it. I am really happy with the product. It did feel like at first it was not soaking up, like it took time to soak into my skin so I could feel it if I was touching my face after applying it. That and the scent is why I gave it 4 stars. The product works and I love the packaging just could use some minor improvements.",
+				verifiedBuyer: false,
+				stars: 4,
+			},
+			{
+				headline: "Repairing moisturizer that feels pure and works!",
+				reviewText:
+					"Thick yogurt scented moisturizer, in a nifty cool gadget pretty container at a fair price point that can be purchased at Sephora. As someone who’s taken years to heal their acne prone skin I am cautious on what I apply especially a thickening moisturizer overnight. The packaging feels so tailored with premeasurized pumps. Warning it straight up has a lingering yogurt smell but once you are a habitual user, it’s not potent. Great for fall/winter months as our skin is less greasy. I apply mine overnight and can feel my plump skin in the morning after deep cleansing. It’s a must try.",
+				verifiedBuyer: false,
+				stars: 4,
+			},
+		],
+	};
+
 	return (
 		<main className="flex flex-col items-start justify-center">
 			<NewQueryDrawer />
 			<section className="grid grid-cols-2 gap-4 w-full mt-12">
-				<UltaDisplay data={testData} />
-				<UltaDisplay data={testData} />
+				<UltaDisplay data={testDataUlta} />
+				<UltaDisplay data={testDataSephora} />
 			</section>
 		</main>
 	);

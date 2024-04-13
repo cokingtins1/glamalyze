@@ -31,9 +31,9 @@ export default function RatingChart({
 
 	return (
 		<Card className="w-full">
-			<CardHeader>
+			<div className='flex items-center justify-between p-6'>
 				<div className="flex items-end gap-2">
-					<div className='flex'>
+					<div className="flex">
 						<Stars rating={averageRating} />
 
 						<p className="text-xl font-bold ml-4">
@@ -44,7 +44,11 @@ export default function RatingChart({
 						{ratingTotal} Reviews
 					</p>
 				</div>
-			</CardHeader>
+				<div className='flex flex-col items-center'>
+                    <p className='font-bold'>85%</p>
+                    <p className='text-xs'>Recommended</p>
+                </div>
+			</div>
 			<CardContent>
 				{reviewHistData &&
 					filteredRatings.map(
@@ -58,6 +62,9 @@ export default function RatingChart({
 									<Progress
 										value={(count / ratingTotal) * 100}
 									/>
+									<p className="text-sm text-slate-400 ml-4">
+										{count}
+									</p>
 								</div>
 							)
 					)}
