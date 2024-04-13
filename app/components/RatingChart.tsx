@@ -11,59 +11,86 @@ import {
 
 import { Progress } from "@/components/ui/progress";
 import Stars from "./Review/Stars";
+import { MetaData } from "../libs/types";
+import { formatRating, SephoraReviewCount } from "@/lib/utils";
+import { metadata } from "../layout";
 
 type RatingChartProps = {
-	reviewHistData: (number | null)[] | null;
-	averageRating: number | null;
+	metaData: MetaData;
 };
 
-export default function RatingChart({
-	reviewHistData,
-	averageRating,
-}: RatingChartProps) {
-	if (!reviewHistData || reviewHistData.some((r) => r === null)) return;
+export default function RatingChart({ metaData }: RatingChartProps) {
+	if (
+		!metaData.reviewHistData ||
+		metaData.reviewHistData.some((r) => r === null)
+	)
+		return;
 
-	const filteredRatings = reviewHistData.filter(
+	const filteredRatings = metaData.reviewHistData.filter(
 		(r) => r !== null
 	) as number[];
 
-	const ratingTotal = filteredRatings.reduce((sum, a) => sum + a, 0);
-
 	return (
 		<Card className="w-full">
-			<div className='flex items-center justify-between p-6'>
+			<div className="flex items-center justify-between p-6">
 				<div className="flex items-end gap-2">
 					<div className="flex">
-						<Stars rating={averageRating} />
+						<Stars rating={metaData.averageRating} />
 
 						<p className="text-xl font-bold ml-4">
-							{averageRating}
+							{metaData.averageRating &&
+								formatRating(metaData.averageRating)}
 						</p>
 					</div>
 					<p className="text-xs text-slate-400 pb-1">
-						{ratingTotal} Reviews
+						{metaData.totalReviews} Reviews
 					</p>
 				</div>
-				<div className='flex flex-col items-center'>
-                    <p className='font-bold'>85%</p>
-                    <p className='text-xs'>Recommended</p>
-                </div>
+				<div className="flex flex-col items-center">
+					<p className="font-bold">{metaData.recommended}%</p>
+					<p className="text-xs">Recommended</p>
+				</div>
 			</div>
 			<CardContent>
-				{reviewHistData &&
+				{metaData.reviewHistData &&
 					filteredRatings.map(
 						(count, index) =>
 							index < 5 && (
-								<div key={index} className="flex items-center">
-									<Stars
-										rating={reviewHistData.length - index}
-										reverse={true}
-									/>
-									<Progress
-										value={(count / ratingTotal) * 100}
-									/>
-									<p className="text-sm text-slate-400 ml-4">
-										{count}
+								<div
+									key={index}
+									style={{
+										display: "grid",
+										gridTemplateColumns:
+											"repeat(3, 20% 75% 5%)",
+									}}
+								>
+									{metaData.reviewHistData &&
+										metaData.totalReviews && (
+											<>
+												<Stars
+													rating={
+														metaData.reviewHistData
+															.length - index
+													}
+													reverse={true}
+												/>
+
+												<Progress
+													value={
+														(count /
+															metaData.totalReviews) *
+														100
+													}
+												/>
+											</>
+										)}
+									<p className="text-sm text-slate-400 w-[30px]">
+										{metaData.company === "Sephora"
+											? SephoraReviewCount(
+													count,
+													metaData.totalReviews
+											  )
+											: count}
 									</p>
 								</div>
 							)

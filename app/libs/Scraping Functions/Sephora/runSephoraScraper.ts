@@ -46,18 +46,22 @@ export async function runSephoraScraper(
 			if (pageCount === 1) {
 				// Only select filter on first pagination
 
-				console.log("clicking page!");
 				await page.waitForSelector("#custom_sort");
 				await page.click("#custom_sort");
-				const textContent = await page.evaluate(() => {
-					const element = document.querySelector(
-						"#custom_sort > :first-child"
-					);
-					return element ? element.textContent : null;
-				});
-				console.log(textContent);
+				// const textContent = await page.evaluate(() => {
+				// 	const element = document.querySelector(
+				// 		"#custom_sort > :first-child"
+				// 	);
+				// 	// if (element) {
+				// 	// 	console.log("clicking button");
+				// 	// 	(element as HTMLButtonElement).click();
+				// 	// }
+				// 	page.click("#custom_sort > :first-child")
+				// 	return element ? element.textContent : null;
+				// });
+				// console.log(textContent);
 
-				await page.click(`text=${textContent}`);
+				// await page.click(`text=${textContent}`);
 
 				// await page.waitForSelector("#css-1aawth6.eanm77i0")
 				// await page.click(".css-1aawth6.eanm77i0");

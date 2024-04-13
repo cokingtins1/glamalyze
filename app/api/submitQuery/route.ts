@@ -1,4 +1,4 @@
-import { getScrapedData } from "@/app/actions/getScrapedData";
+import { getScrapedData } from "@/app/actions/getUltaData";
 import { getSephoraData } from "@/app/actions/getSephoraData";
 import { querySchema } from "@/app/libs/types";
 import { NextResponse } from "next/server";

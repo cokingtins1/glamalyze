@@ -21,19 +21,20 @@ export default function UltaDisplay({ data }: { data: Data }) {
 		<div className="displayContainer flex flex-col justify-start items-center border border-white rounded-lg bg-white p-4">
 			<div className="h-[100px] w-[200px] relative">
 				<Image
-					src={data.metaData.company === "Sephora" ? SephoraLogo : UltaLogo}
-					layout="fill"
-					objectFit="contain"
+					src={
+						data.metaData.company === "Sephora"
+							? SephoraLogo
+							: UltaLogo
+					}
+					fill
+					style={{ objectFit: "contain" }}
 					sizes="(max-width: 430px), 300px "
 					alt="Ulta Logo"
 				/>
 			</div>
 			{data && (
 				<>
-					<RatingChart
-						reviewHistData={data.metaData.reviewHistData}
-						averageRating={data.metaData.averageRating}
-					/>
+					<RatingChart metaData={data.metaData}/>
 					{data.reviewsData.map((review, index) => (
 						<ReviewCard key={index} reviewData={review} />
 					))}

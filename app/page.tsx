@@ -7,9 +7,10 @@ export default async function Home() {
 		metaData: {
 			company: "Ulta",
 			price: "$52.00 ",
-			totalReviews: "1679 Reviews",
+			totalReviews: 1679,
 			averageRating: 4.1,
 			reviewHistData: [1118, 249, 169, 168, 219],
+			recommended: 85,
 		},
 		reviewsData: [
 			{
@@ -97,9 +98,10 @@ export default async function Home() {
 		metaData: {
 			company: "Sephora",
 			price: "$68.00",
-			totalReviews: "81 Reviews",
+			totalReviews: 81,
 			averageRating: 4,
 			reviewHistData: [37, 38, 14, 6, 5],
+			recommended: 81,
 		},
 		reviewsData: [
 			{

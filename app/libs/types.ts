@@ -15,7 +15,7 @@ export type OptionProps = {
 		totalReviewsSelector: string;
 		averageRatingSelector: string;
 		reviewDistSelector: string;
-		recommendedSelector?: string;
+		recommendedSelector: string;
 	};
 	filters: {
 		mostHelpful: { selector: string; name: string };
@@ -27,7 +27,7 @@ export type OptionProps = {
 export type MetaData = {
 	company: string | null;
 	price: string | null;
-	totalReviews: string | null;
+	totalReviews: number | null;
 	averageRating: number | null;
 	reviewHistData: (number | null)[] | null;
 	recommended?: number | null;

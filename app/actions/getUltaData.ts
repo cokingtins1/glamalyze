@@ -2,7 +2,7 @@
 
 import { runScraper } from "../libs/Scraping Functions/Ulta/runScraper";
 
-export async function getScrapedData(url: string) {
+export async function getUltaData(url: string) {
 	// const url = formData.get("url");
 
 	try {
@@ -24,6 +24,7 @@ export async function getScrapedData(url: string) {
 				totalReviewsSelector: ".pr-snippet-review-count",
 				averageRatingSelector: ".pr-snippet-rating-decimal",
 				reviewDistSelector: ".pr-ratings-histogram.pr-histogram-list",
+				recommendedSelector: ".pr-reco-value"
 			},
 			paginationLimit: 3,
 			reviewsLimit: 5,

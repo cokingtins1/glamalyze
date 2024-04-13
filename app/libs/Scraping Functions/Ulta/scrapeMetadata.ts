@@ -11,6 +11,7 @@ export async function scrapeMetadata(page: Page, options: OptionProps) {
 		totalReviewsSelector,
 		averageRatingSelector,
 		reviewDistSelector,
+		recommendedSelector,
 	} = options.globalSelector;
 
 	const metaData = await page.evaluate(
@@ -20,6 +21,15 @@ export async function scrapeMetadata(page: Page, options: OptionProps) {
 			averageRatingSelector,
 			reviewDistSelector
 		) => {
+			function getNumber(text: string | null) {
+				if (!text) return null;
+				const regex = /(\d+)/;
+				const match = text.match(regex);
+
+				const number = match ? parseInt(match[0]) : null;
+				return number;
+			}
+
 			const priceParent = document.querySelector(priceSelector);
 			const price = priceParent?.firstElementChild?.textContent || null;
 
@@ -34,6 +44,13 @@ export async function scrapeMetadata(page: Page, options: OptionProps) {
 				averageRatingText !== null
 					? parseFloat(averageRatingText)
 					: null;
+
+			const recommendedText =
+				document.querySelector(recommendedSelector)?.textContent ||
+				null;
+			let recommended;
+			if (recommendedText) recommended = getNumber(recommendedText);
+				
 
 			const reviewHistogram = document.querySelector(reviewDistSelector);
 			const reviewHistItems = reviewHistogram?.querySelectorAll("li");
@@ -57,12 +74,14 @@ export async function scrapeMetadata(page: Page, options: OptionProps) {
 				totalReviews,
 				averageRating,
 				reviewHistData,
+				recommended,
 			};
 		},
 		priceSelector,
 		totalReviewsSelector,
 		averageRatingSelector,
-		reviewDistSelector
+		reviewDistSelector,
+		recommendedSelector
 	);
 
 	// if (!metaData) {

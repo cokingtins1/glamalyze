@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { getScrapedData } from "../actions/getScrapedData";
+import { getScrapedData } from "../actions/getUltaData";
 import SubmitForm from "./SubmitForm";
 import { Review, MetaData, querySchema, TQuerySchema } from "../libs/types";
 import { Input } from "@/components/ui/input";
@@ -56,7 +56,7 @@ export default function GetProductForm() {
 			}
 		} else {
 			setResData(responseData.success.data);
-			console.log(responseData.success.data)
+			console.log(responseData.success.data);
 		}
 	};
 
