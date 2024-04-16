@@ -1,7 +1,8 @@
-import { getScrapedData } from "@/app/actions/getUltaData";
+import { getUltaData } from "@/app/actions/getUltaData";
 import { getSephoraData } from "@/app/actions/getSephoraData";
 import { querySchema } from "@/app/libs/types";
 import { NextResponse } from "next/server";
+import { detectionTest } from "@/app/actions/Detection/detectionTest";
 
 export async function POST(req: Request) {
 	const body = await req.json();
@@ -13,6 +14,8 @@ export async function POST(req: Request) {
 			zodErrors = { ...zodErrors, [issue.path[0]]: issue.message };
 		});
 	}
+
+	// await detectionTest()
 
 	const { metaData, reviewsData } = await getSephoraData(body.url);
 

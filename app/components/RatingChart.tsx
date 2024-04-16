@@ -62,6 +62,7 @@ export default function RatingChart({ metaData }: RatingChartProps) {
 										display: "grid",
 										gridTemplateColumns:
 											"repeat(3, 20% 75% 5%)",
+										alignItems: "center"
 									}}
 								>
 									{metaData.reviewHistData &&
@@ -84,7 +85,7 @@ export default function RatingChart({ metaData }: RatingChartProps) {
 												/>
 											</>
 										)}
-									<p className="text-sm text-slate-400 w-[30px]">
+									<p className="text-sm text-slate-400 ml-2 text-right">
 										{metaData.company === "Sephora"
 											? SephoraReviewCount(
 													count,

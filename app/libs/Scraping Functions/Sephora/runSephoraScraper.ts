@@ -6,16 +6,29 @@ import { scrapeSephoraReviews } from "./scrapeSephoraReviews";
 
 import { scrapeSephoraMetadata } from "./scrapeSephoraMetadata";
 
-import { MetaData, Review } from "../../types";
 import { loadSephoraContent } from "./loadSephoraContent";
 
 import { test } from "./test";
+import { Review, SephoraProduct } from "@prisma/client";
 
 export async function runSephoraScraper(
 	url: string,
 	options: OptionProps
-): Promise<{ metaData: MetaData | null; reviewsData: Review[] }> {
-	if (!url || !options) return { metaData: null, reviewsData: [] };
+): Promise<{ metaData: SephoraProduct; reviewsData: Review[] }> {
+	if (!url || !options)
+		return {
+			metaData: {
+				product_id: crypto.randomUUID(),
+				sku_id: null,
+				product_name: null,
+				price: null,
+				total_reviews: null,
+				avg_rating: null,
+				percent_recommended: null,
+				review_histogram: [],
+			},
+			reviewsData: [],
+		};
 	const start = new Date().getTime();
 
 	puppeteer.use(StealthPlugin());
@@ -35,7 +48,8 @@ export async function runSephoraScraper(
 
 		// Scrape metadata once
 
-		const metaData = await scrapeSephoraMetadata(page, options);
+		let metaData: SephoraProduct | null = null;
+		metaData = await scrapeSephoraMetadata(page, options);
 
 		while (moreReviewsExist) {
 			pageCount++;
@@ -109,6 +123,18 @@ export async function runSephoraScraper(
 		return { metaData, reviewsData };
 	} catch (error) {
 		console.error("Error occurred:", error);
-		return { metaData: null, reviewsData: [] };
+		return {
+			metaData: {
+				product_id: crypto.randomUUID(),
+				sku_id: null,
+				product_name: null,
+				price: null,
+				total_reviews: null,
+				avg_rating: null,
+				percent_recommended: null,
+				review_histogram: [],
+			},
+			reviewsData: [],
+		};
 	}
 }

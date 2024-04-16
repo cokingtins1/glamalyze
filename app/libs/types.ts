@@ -33,12 +33,12 @@ export type MetaData = {
 	recommended?: number | null;
 };
 
-export type Review = {
-	headline: string | null;
-	reviewText: string | null;
-	verifiedBuyer: boolean;
-	stars: number | null;
-};
+// export type Review = {
+// 	headline: string | null;
+// 	reviewText: string | null;
+// 	verifiedBuyer: boolean;
+// 	stars: number | null;
+// };
 
 export const querySchema = z.object({
 	url: z.string().min(2, { message: "Please enter a valid URL" }),
