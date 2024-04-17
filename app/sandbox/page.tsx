@@ -6,7 +6,7 @@ export default function page({}: Props) {
 	const string = "$20.99";
 	function getNumber(text: string | null): number | null {
 		if (!text) return null;
-		const regex = /(\d+(\.\d+)?)/;
+        const regex = /(\d{1,3}(,\d{3})*(\.\d+)?)/;
 		const match = text.match(regex);
 
 		if (!match) return null;
@@ -19,7 +19,7 @@ export default function page({}: Props) {
 		}
 	}
 
-	// console.log(getNumber(string));
+	console.log(getNumber(string));
 
 	return <div>page</div>;
 }

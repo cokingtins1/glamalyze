@@ -24,7 +24,10 @@ export async function getSephoraData(url: string) {
 					averageRatingSelector: ".css-1ac1x0l.eanm77i0", //Done
 					reviewDistSelector:
 						".Histogram-bar.css-rw2r6e.eanm77i0", //not used
-					recommendedSelector: ".css-1ac1x0l.eanm77i0"
+					recommendedSelector: ".css-1ac1x0l.eanm77i0",
+					brandNameSelector: '[data-at="brand_name"]',
+					productNameSelector: '[data-at="product_name"]'
+					
 				},
 				paginationLimit: 3,
 				reviewsLimit: 5,

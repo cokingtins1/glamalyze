@@ -35,8 +35,8 @@ model Query {
 model Product {
   product_id        String           @id @default(uuid())
   product_name      String
-  company_id        String           @default(uuid())
-  company_name      String
+  brand_id          String           @default(uuid())
+  brand_name        String
   product_image_url String
   retailer_id       String[]
   UltaProducts      UltaProduct[]
@@ -48,6 +48,7 @@ model UltaProduct {
   product_id          String  @id
   product             Product @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
   product_name        String?
+  brand_name          String?
   price               Int?
   total_reviews       Int?
   avg_rating          Float?
@@ -60,6 +61,7 @@ model SephoraProduct {
   product_id          String  @id
   product             Product @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
   product_name        String?
+  brand_name          String?
   price               Int?
   total_reviews       Int?
   avg_rating          Float?
@@ -79,7 +81,7 @@ model Review {
   review_rating   Int?
   review_date     String?
   reviewer_name   String?
-  reviewer_id      String
+  reviewer_id     String
   reviewer        Reviewer @relation(fields: [reviewer_id], references: [reviewer_id])
   verified_buyer  Boolean?
   up_votes        Int?
@@ -98,7 +100,7 @@ model Reviewer {
 // PK === query_id, created_at, retailer_data (JSON of ulta and sephora data)
 
 // Products Table
-// PK === product_id, product_name, company_id, company_name, image, retailer_id['ulta_id?, sephora_id?,...']
+// PK === product_id, product_name, brand_id, brand_name, image, retailer_id['ulta_id?, sephora_id?,...']
 
 // Ulta Products Table
 // PK/FK === product_id, price, reviews, avg_rating, recommended_%, 

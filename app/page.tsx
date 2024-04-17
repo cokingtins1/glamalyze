@@ -194,8 +194,8 @@ export default async function Home() {
 		<main className="flex flex-col items-start justify-center">
 			<NewQueryDrawer />
 			<section className="grid grid-cols-2 gap-4 w-full mt-12">
-				<DataDisplay data={testDataUlta} />
-				<DataDisplay data={testDataSephora} />
+				{/* <DataDisplay data={testDataUlta} />
+				<DataDisplay data={testDataSephora} /> */}
 			</section>
 		</main>
 	);

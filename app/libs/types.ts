@@ -16,6 +16,8 @@ export type OptionProps = {
 		averageRatingSelector: string;
 		reviewDistSelector: string;
 		recommendedSelector: string;
+		brandNameSelector: string;
+		productNameSelector: string;
 	};
 	filters: {
 		mostHelpful: { selector: string; name: string };
@@ -24,14 +26,14 @@ export type OptionProps = {
 	reviewsLimit?: number;
 };
 
-export type MetaData = {
-	company: string | null;
-	price: string | null;
-	totalReviews: number | null;
-	averageRating: number | null;
-	reviewHistData: (number | null)[] | null;
-	recommended?: number | null;
-};
+// export type MetaData = {
+// 	company: string | null;
+// 	price: string | null;
+// 	totalReviews: number | null;
+// 	averageRating: number | null;
+// 	reviewHistData: (number | null)[] | null;
+// 	recommended?: number | null;
+// };
 
 // export type Review = {
 // 	headline: string | null;
