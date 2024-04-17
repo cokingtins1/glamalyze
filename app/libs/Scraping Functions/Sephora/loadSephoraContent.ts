@@ -18,7 +18,7 @@ export async function loadSephoraContent(page: Page) {
 	await page.keyboard.down("End");
 	await page.keyboard.down("End");
 
-	await delay(1000);
+	await delay(2000);
 	// await page.evaluate(() => {
 	// 	window.scrollBy(0, -500);
 	// });

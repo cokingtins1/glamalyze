@@ -6,16 +6,30 @@ import { scrapeSephoraReviews } from "./scrapeSephoraReviews";
 
 import { scrapeSephoraMetadata } from "./scrapeSephoraMetadata";
 
-import { MetaData, Review } from "../../types";
 import { loadSephoraContent } from "./loadSephoraContent";
 
 import { test } from "./test";
+import { Review, SephoraProduct } from "@prisma/client";
 
 export async function runSephoraScraper(
 	url: string,
 	options: OptionProps
-): Promise<{ metaData: MetaData | null; reviewsData: Review[] }> {
-	if (!url || !options) return { metaData: null, reviewsData: [] };
+): Promise<{ metaData: SephoraProduct; reviewsData: Review[] }> {
+	if (!url || !options)
+		return {
+			metaData: {
+				product_id: crypto.randomUUID(),
+				sku_id: null,
+				product_name: null,
+				brand_name: null,
+				price: null,
+				total_reviews: null,
+				avg_rating: null,
+				percent_recommended: null,
+				review_histogram: [],
+			},
+			reviewsData: [],
+		};
 	const start = new Date().getTime();
 
 	puppeteer.use(StealthPlugin());
@@ -28,14 +42,15 @@ export async function runSephoraScraper(
 
 		await page.goto(url);
 
-		let reviewsData = [];
+		let reviewsData: Review[] = [];
 		let moreReviewsExist = true;
 		let pageCount = 0;
 		let currentPage = 1;
 
 		// Scrape metadata once
 
-		const metaData = await scrapeSephoraMetadata(page, options);
+		let metaData: SephoraProduct | null = null;
+		metaData = await scrapeSephoraMetadata(page, options);
 
 		while (moreReviewsExist) {
 			pageCount++;
@@ -79,18 +94,6 @@ export async function runSephoraScraper(
 			} else {
 				const reviewData = await scrapeSephoraReviews(page, options);
 
-				// const testResult: any = await test(page);
-				// console.log("testResult", testResult);
-
-				// const reviewData = [
-				// 	{
-				// 		headline: "test",
-				// 		reviewText: "test",
-				// 		verifiedBuyer: false,
-				// 		stars: 5,
-				// 	},
-				// ];
-
 				if (reviewData?.length === 0) {
 					moreReviewsExist = false;
 				} else {
@@ -109,6 +112,19 @@ export async function runSephoraScraper(
 		return { metaData, reviewsData };
 	} catch (error) {
 		console.error("Error occurred:", error);
-		return { metaData: null, reviewsData: [] };
+		return {
+			metaData: {
+				product_id: crypto.randomUUID(),
+				sku_id: null,
+				product_name: null,
+				brand_name: null,
+				price: null,
+				total_reviews: null,
+				avg_rating: null,
+				percent_recommended: null,
+				review_histogram: [],
+			},
+			reviewsData: [],
+		};
 	}
 }

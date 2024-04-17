@@ -2,12 +2,16 @@ import { z } from "zod";
 
 export type OptionProps = {
 	reviewSelector: {
-		reviewListContainer?: string;
-		reviewContainer?: string;
-		headline?: string;
-		reviewText?: string;
-		verifiedBuyer?: string;
-		rating?: string;
+		reviewListContSelector: string;
+		reviewContSelector: string;
+		headlineSelector: string;
+		reviewTextSelector: string;
+		reviewDateSelector: string;
+		reviewerNameSelector: string;
+		ratingSelector: string;
+		verifiedBuyerSelector: string;
+		upVoteSelector: string;
+		downVoteSelector: string;
 	};
 	globalSelector: {
 		nextPageSelector: string;
@@ -16,28 +20,14 @@ export type OptionProps = {
 		averageRatingSelector: string;
 		reviewDistSelector: string;
 		recommendedSelector: string;
+		brandNameSelector: string;
+		productNameSelector: string;
 	};
 	filters: {
 		mostHelpful: { selector: string; name: string };
 	};
 	paginationLimit?: number;
 	reviewsLimit?: number;
-};
-
-export type MetaData = {
-	company: string | null;
-	price: string | null;
-	totalReviews: number | null;
-	averageRating: number | null;
-	reviewHistData: (number | null)[] | null;
-	recommended?: number | null;
-};
-
-export type Review = {
-	headline: string | null;
-	reviewText: string | null;
-	verifiedBuyer: boolean;
-	stars: number | null;
 };
 
 export const querySchema = z.object({

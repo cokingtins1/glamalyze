@@ -15,63 +15,98 @@ datasource db {
 }
 
 model User {
-  id               String          @id @default(uuid())
-  name             String
-  age              Int
-  email            String          @unique
-  isAdmin          Role            @default(BASIC)
-  writtenPosts     Post[]          @relation("WrittenPosts")
-  favoritePosts    Post[]          @relation("FavoritePosts")
-  userPreference   UserPreference? @relation(fields: [userPreferenceId], references: [id])
-  userPreferenceId String?         @unique
-
-  @@unique([age, name]) //cannot have two users with same name and age
-  @@index([email])
+  user_id    String @id @default(uuid())
+  user_email String @unique
+  user_name  String
 }
 
-model UserPreference {
-  id           String  @id @default(uuid())
-  emailUpdates Boolean
-  user         User?
+model Retailer {
+  retailer_id String @id @default(uuid())
+
+  Review Review[]
 }
 
-model Post {
-  id            String     @id @default(uuid())
-  title         String
-  averageRating Float
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  author        User       @relation("WrittenPosts", fields: [authorId], references: [id])
-  authorId      String
-  favoritedBy   User?      @relation("FavoritePosts", fields: [favoritedById], references: [id])
-  favoritedById String?
-  categories    Category[]
+model Query {
+  query_id   String   @id @default(uuid())
+  created_at DateTime @default(now())
+  //retailer_data
 }
 
-model Category {
-  id    String @id @default(uuid())
-  name  String @unique
-  posts Post[]
+model Product {
+  product_id        String           @id
+  product_name      String
+  brand_id          String
+  brand_name        String
+  product_image_url String
+  retailer_id       String[]
+  UltaProducts      UltaProduct[]
+  SephoraProducts   SephoraProduct[]
+  Review            Review[]
 }
 
-enum Role {
-  BASIC
-  ADMIN
+model UltaProduct {
+  product_id          String  @id
+  product             Product @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  product_name        String?
+  brand_name          String?
+  price               Int?
+  total_reviews       Int?
+  avg_rating          Float?
+  percent_recommended Int?
+  review_histogram    Int[]
+  sku_id              String?
 }
 
-model UltaMetaData {
-  query_id            String   @id @default(uuid())
-  created_at          DateTime @default(now())
-  product_name        String
-  product_sku         String
-  product_price       Int
-  average_rating      Float
-  review_distribution Int[]
-  total_reviews       Int
-  // UltaReviews         UltaReviews[]
+model SephoraProduct {
+  product_id          String  @id
+  product             Product @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  product_name        String?
+  brand_name          String?
+  price               Int?
+  total_reviews       Int?
+  avg_rating          Float?
+  percent_recommended Int?
+  review_histogram    Int[]
+  sku_id              String?
 }
 
-// model UltaReviews {
-//   query_id             UltaMetaData @relation(fields: [ultaMetaDataQuery_id], references: [query_id])
-//   ultaMetaDataQuery_id String
-// }
+model Review {
+  review_id       String   @id @default(uuid())
+  product_id      String
+  product         Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  retailer_id     String
+  retailer        Retailer @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
+  review_headline String?
+  review_text     String?
+  review_rating   Int?
+  review_date     String?
+  reviewer_name   String?
+  reviewer_id     String
+  reviewer        Reviewer @relation(fields: [reviewer_id], references: [reviewer_id])
+  verified_buyer  Boolean?
+  up_votes        Int?
+  down_votes      Int?
+}
+
+model Reviewer {
+  reviewer_id String   @id @default(uuid())
+  Review      Review[]
+}
+
+// User Table
+// PK === user_id, user_email, user_name
+
+// Query Table
+// PK === query_id, created_at, retailer_data (JSON of ulta and sephora data)
+
+// Products Table
+// PK === product_id, product_name, brand_id, brand_name, image, retailer_id['ulta_id?, sephora_id?,...']
+
+// Ulta Products Table
+// PK/FK === product_id, price, reviews, avg_rating, recommended_%, 
+
+// Sephora Products Table
+// PK/FK === product_id, price, reviews, avg_rating, recommended_%, 
+
+// Reviews Table
+//PK/FK === product_id -> Product, retailer_id (sephora/ulta) === FK,  review ... rating ... review_date ...  

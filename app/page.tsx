@@ -1,6 +1,5 @@
-import GetProductForm from "./components/GetProductForm";
 import NewQueryDrawer from "./components/NewQueryDrawer";
-import UltaDisplay from "./components/Ulta/UltaDisplay";
+import DataDisplay from "./components/Ulta/DataDisplay";
 
 export default async function Home() {
 	const testDataUlta = {
@@ -195,8 +194,8 @@ export default async function Home() {
 		<main className="flex flex-col items-start justify-center">
 			<NewQueryDrawer />
 			<section className="grid grid-cols-2 gap-4 w-full mt-12">
-				<UltaDisplay data={testDataUlta} />
-				<UltaDisplay data={testDataSephora} />
+				{/* <DataDisplay data={testDataUlta} />
+				<DataDisplay data={testDataSephora} /> */}
 			</section>
 		</main>
 	);

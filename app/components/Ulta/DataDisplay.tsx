@@ -10,13 +10,7 @@ type Data = {
 	reviewsData: Review[];
 };
 
-export default function UltaDisplay({ data }: { data: Data }) {
-	const styles = {
-		textColor: "",
-		backgroundColor: "#F37830",
-		font: "Circular, sans serif",
-	};
-
+export default function DataDisplay({ data }: { data: Data }) {
 	return (
 		<div className="displayContainer flex flex-col justify-start items-center border border-white rounded-lg bg-white p-4">
 			<div className="h-[100px] w-[200px] relative">
@@ -29,12 +23,12 @@ export default function UltaDisplay({ data }: { data: Data }) {
 					fill
 					style={{ objectFit: "contain" }}
 					sizes="(max-width: 430px), 300px "
-					alt="Ulta Logo"
+					alt={`${data.metaData.company} Logo`}
 				/>
 			</div>
 			{data && (
 				<>
-					<RatingChart metaData={data.metaData}/>
+					<RatingChart metaData={data.metaData} />
 					{data.reviewsData.map((review, index) => (
 						<ReviewCard key={index} reviewData={review} />
 					))}
@@ -43,3 +37,7 @@ export default function UltaDisplay({ data }: { data: Data }) {
 		</div>
 	);
 }
+
+//lean data structures and algorithims
+//const foo = array.shift()!
+// city scape - be good with arrays
