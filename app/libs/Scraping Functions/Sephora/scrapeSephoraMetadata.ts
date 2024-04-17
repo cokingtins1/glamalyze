@@ -22,6 +22,28 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 			}
 		}
 
+		type Retailer = "Sephora" | "Ulta";
+		function getSku(url: URL | null, retailer: Retailer) {
+			if (!url) return null;
+
+			let param;
+
+			switch (retailer) {
+				case "Sephora":
+					param = "skuId";
+					break;
+				case "Ulta":
+					param = "sku";
+					break;
+				default:
+					param = "sku";
+			}
+
+			const searchParams = url.searchParams;
+			const skuNum = searchParams.get(param);
+			return skuNum;
+		}
+
 		const {
 			priceSelector,
 			totalReviewsSelector,
@@ -37,7 +59,7 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 		// }
 
 		const result: SephoraProduct = {
-			product_id: "",
+			product_id: crypto.randomUUID(),
 			sku_id: null,
 			product_name: null,
 			brand_name: null,
@@ -47,6 +69,10 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 			percent_recommended: null,
 			review_histogram: [],
 		};
+
+		const path = window.location.href;
+
+		result.sku_id = path ? getSku(new URL(path), "Sephora") : null;
 
 		const brandNameEl = document.querySelector(brandNameSelector);
 		result.brand_name = brandNameEl?.textContent || null;
@@ -99,9 +125,6 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 				})
 				.filter((width) => width !== null) as number[];
 		}
-
-		result.product_id = crypto.randomUUID();
-		result.sku_id = "12345"; // Need to scrape
 
 		return result;
 	}, options.globalSelector);

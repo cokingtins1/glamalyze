@@ -42,7 +42,7 @@ export async function runSephoraScraper(
 
 		await page.goto(url);
 
-		let reviewsData = [];
+		let reviewsData: Review[] = [];
 		let moreReviewsExist = true;
 		let pageCount = 0;
 		let currentPage = 1;
@@ -93,18 +93,6 @@ export async function runSephoraScraper(
 				moreReviewsExist = false;
 			} else {
 				const reviewData = await scrapeSephoraReviews(page, options);
-
-				// const testResult: any = await test(page);
-				// console.log("testResult", testResult);
-
-				// const reviewData = [
-				// 	{
-				// 		headline: "test",
-				// 		reviewText: "test",
-				// 		verifiedBuyer: false,
-				// 		stars: 5,
-				// 	},
-				// ];
 
 				if (reviewData?.length === 0) {
 					moreReviewsExist = false;
