@@ -155,6 +155,7 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 				verified_buyer: verifiedBuyer,
 				up_votes: upVoteText,
 				down_votes: downVoteText,
+				query_id: crypto.randomUUID()
 			});
 		});
 

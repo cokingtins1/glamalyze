@@ -1,6 +1,6 @@
 "use client";
 
-import { main } from '../actions/prisma/user';
+import { main } from '../actions/prisma/users';
 
 export default function page() {
 	return (

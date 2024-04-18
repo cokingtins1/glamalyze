@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Query" ALTER COLUMN "created_at" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "created_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP;

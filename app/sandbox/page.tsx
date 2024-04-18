@@ -1,3 +1,8 @@
+import { productSeeds } from "@/lib/seeding/seedingFuncs";
+import { randomUserName } from "@/lib/utils";
+import { randomInt } from "crypto";
+import dayjs from "dayjs";
+import { generate } from "random-words";
 import React from "react";
 
 type Props = {};
@@ -91,7 +96,36 @@ export default function page({}: Props) {
 		return reviewDate;
 	}
 
-	console.log(getReviewTimeStamp("17 Jan 2024"));
+	function getRandomTimestamp() {
+		// Current date
+		const currentDate = new Date();
+		// Timestamp of April 18, 2022
+		const targetDate = new Date("2022-04-18");
+
+		// Calculate the difference in milliseconds between now and the target date
+		const difference = targetDate.getTime() - currentDate.getTime();
+		// Generate a random number within this difference
+		const randomDifference = Math.floor(Math.random() * difference);
+
+		// Add the random difference to the current date to get a random date
+		const randomDate = new Date(currentDate.getTime() + randomDifference);
+
+		return randomDate.toISOString(); // Convert to ISO format
+	}
+
+	// console.log(productBank(10))
+
+	function randomBrandName() {
+		const brandName = generate({
+			exactly: 1,
+			wordsPerString: 2,
+			formatter: (word) =>
+				word.slice(0, 1).toUpperCase().concat(word.slice(1)),
+		});
+		return brandName[0];
+	}
+
+	// console.log(dayjs())
 
 	return <div>page</div>;
 }

@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import { generate } from "random-words";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -59,12 +60,10 @@ export function getReviewTimeStamp(dateString: string | null): Date | null {
 		"Dec",
 	];
 
-	let reviewDate: Date | null = null
+	let reviewDate: Date | null = null;
 	if (mdh === "h") {
 		reviewDate = new Date(
-			currentDate.setHours(
-				currentDate.getHours() - parseInt(count)
-			)
+			currentDate.setHours(currentDate.getHours() - parseInt(count))
 		);
 	} else if (mdh === "d") {
 		reviewDate = new Date(
@@ -72,13 +71,36 @@ export function getReviewTimeStamp(dateString: string | null): Date | null {
 		);
 	} else if (monthNames.includes(mdh)) {
 		const monthIndex = monthNames.indexOf(mdh);
-		reviewDate = new Date(
-			parseInt(trailer),
-			monthIndex,
-			parseInt(count)
-		);
+		reviewDate = new Date(parseInt(trailer), monthIndex, parseInt(count));
 	}
 
 	return reviewDate;
 }
+
+export function getRandomTimestamp() {
+	const currentDate = new Date();
+
+	// Timestamp of April 18, 2022
+	const targetDate = new Date("2022-04-18");
+
+	const difference = targetDate.getTime() - currentDate.getTime();
+	const randomDifference = Math.floor(Math.random() * difference);
+
+	const randomDate = new Date(currentDate.getTime() + randomDifference);
+
+	return randomDate.toISOString();
+}
+
+export function randomUserName() {
+	const randomNumber = Math.floor(Math.random() * (999999 - 10 + 1)) + 10;
+
+	const usernameWords = generate({
+		exactly: 2,
+		join: "",
+	});
+
+	return usernameWords + randomNumber;
+}
+
+
 

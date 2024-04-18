@@ -23,7 +23,8 @@ export async function POST(req: Request) {
 	if (reviewsData.length > 0) {
 		try {
 			console.log("inserting data into db");
-			await insertData(metaData, reviewsData);
+			const userId = "69957123-2318-464c-996a-1875984745ab"
+			await insertData(metaData, reviewsData, userId);
 		} catch (error) {
 			console.log(error);
 		}
