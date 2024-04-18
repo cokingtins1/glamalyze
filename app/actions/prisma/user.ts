@@ -1,6 +1,13 @@
 "use server";
 
-import { PrismaClient, Review, Reviewer, SephoraProduct } from "@prisma/client";
+import { getReviewTimeStamp } from "@/lib/utils";
+import {
+	PrismaClient,
+	Product,
+	Review,
+	Reviewer,
+	SephoraProduct,
+} from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function main() {
@@ -108,104 +115,8 @@ export async function main() {
 		],
 	};
 
-	// const retailer = await prisma.retailer.create({
-	// 	data: {
-	// 		retailer_id: ultaRetailerId,
-	// 	},
-	// });
-
-	const randomId_1 = crypto.randomUUID();
-	const scrapedData = {
-		product_id: randomId_1,
-		product_name: "Test Product",
-		company_id: "123abc",
-		company_name: "Comany ABC",
-		product_image_url: "xyz.png",
-		retailer_id: [sephoraRetailerId, ultaRetailerId],
-
-		sephoraProduct: {
-			productId: randomId_1,
-			productName: "Foundation 123",
-			price: 19.99 * 100,
-			reviews: 1182,
-			avg_rating: 4.5,
-			percent_recommended: 81,
-		},
-
-		ultaProduct: {
-			productId: randomId_1,
-			productName: "Foundation 456",
-			price: 24.99 * 100,
-			reviews: 652,
-			avg_rating: 3.6,
-			percent_recommended: 75,
-		},
-	};
-
-	// const product = await prisma.product.create({
-	// 	data: {
-	// 		product_id: scrapedData.product_id,
-	// 		product_name: scrapedData.product_name,
-	// 		company_id: scrapedData.company_id,
-	// 		company_name: scrapedData.company_name,
-	// 		product_image_url: scrapedData.product_image_url,
-	// 		retailer_id: scrapedData.retailer_id,
-	// 	},
-	// });
-
-	// const sephoraProduct = await prisma.sephoraProduct.create({
-	// 	data: {
-	// 		product_id: scrapedData.sephoraProduct.productId,
-	// 		product_name: scrapedData.sephoraProduct.productName,
-	// 		price: scrapedData.sephoraProduct.price,
-	// 		reviews: scrapedData.sephoraProduct.reviews,
-	// 		avg_rating: scrapedData.sephoraProduct.avg_rating,
-	// 		percent_recommended: scrapedData.sephoraProduct.percent_recommended,
-	// 	},
-	// });
-
-	// const ultaProduct = await prisma.ultaProduct.create({
-	// 	data: {
-	// 		product_id: scrapedData.ultaProduct.productId,
-	// 		product_name: scrapedData.ultaProduct.productName,
-	// 		price: scrapedData.ultaProduct.price,
-	// 		reviews: scrapedData.ultaProduct.reviews,
-	// 		avg_rating: scrapedData.ultaProduct.avg_rating,
-	// 		percent_recommended: scrapedData.ultaProduct.percent_recommended,
-	// 	},
-	// });
-
-	// for (const review of testDataUlta.reviewsData) {
-	// 	await prisma.review.create({
-	// 		data: {
-	// 			review_id: crypto.randomUUID(),
-	// 			product_id: globalProductId,
-	// 			retailer_id: ultaRetailerId,
-	// 			review_text: review.reviewText,
-	// 			review_rating: review.stars,
-	// 			review_date: new Date().toISOString(),
-	// 			review_author: `Reviewer${randomNumber(1, 10)}`,
-	// 			verified_buyer: review.verifiedBuyer,
-	// 			up_votes: parseInt(randomNumber(1, 10)),
-	// 			down_votes: parseInt(randomNumber(1, 10)),
-	// 		},
-	// 	});
-	// }
-
-	// const bigData = Array.from({ length: 10 }).map(() => ({
-	// 	review_id: crypto.randomUUID(),
-	// 	product_id: globalProductId,
-	// 	retailer_id: ultaRetailerId,
-	// 	review_text: "Dummy Text",
-	// 	review_rating: 5,
-	// 	review_date: new Date().toISOString(),
-	// 	review_author: `Reviewer${randomNumber(1, 10)}`,
-	// 	verified_buyer: true,
-	// 	up_votes: parseInt(randomNumber(1, 10)),
-	// 	down_votes: parseInt(randomNumber(1, 10)),
-	// }));
-
 	const metaData: SephoraProduct = {
+		retailer_id: "Sephora123",
 		product_id: "95c080b6-816b-424d-ad39-9b9b8b3b1d2d",
 		sku_id: "2230829",
 		product_name: "ORIGINAL Beautyblender Makeup Sponge",
@@ -217,6 +128,15 @@ export async function main() {
 		review_histogram: [72, 15, 5, 3, 4],
 	};
 
+	const productData: Product = {
+		product_id: "95c080b6-816b-424d-ad39-9b9b8b3b1d2d",
+		product_name: metaData.product_name,
+		brand_id: crypto.randomUUID(),
+		brand_name: metaData.brand_name,
+		product_image_url: "image.png",
+		retailer_id: [metaData.retailer_id],
+	};
+
 	const reviewsData: Review[] = [
 		{
 			review_id: "3a77c3a6-cd33-42fd-b245-34995589d9f6",
@@ -226,7 +146,7 @@ export async function main() {
 			review_text:
 				"I use this to apply liquid and cream products. It works so well in seamlessly blending bc cream, skin tints, and even foundation. I also use it to blend countour and liquid blush. Since it is a makeup sponge, it is so soft and gentle on my skin!",
 			review_rating: 5,
-			review_date: "4 h ago",
+			review_date: getReviewTimeStamp("4 h ago"),
 			reviewer_name: "Michutch",
 			reviewer_id: "7312927d-7ccd-478e-8a44-6640c858872b",
 			verified_buyer: false,
@@ -241,7 +161,7 @@ export async function main() {
 			review_text:
 				"This beauty blender is the softest makeup sponge I’ve ever used! I use it for blending my concealer and foundation, it blends effortlessly. The sponge doesn’t feel stiff either. I like this way more than other makeup sponges I’ve used.",
 			review_rating: 5,
-			review_date: "7 h ago",
+			review_date: getReviewTimeStamp("7 h ago"),
 			reviewer_name: "diane0000",
 			reviewer_id: "1497e4b9-3980-4ef7-b66f-211339c49c37",
 			verified_buyer: false,
@@ -257,7 +177,7 @@ export async function main() {
 				"I cannot say how great it works to spread the foundation. \n" +
 				"I love it and definitely recommand it!",
 			review_rating: 5,
-			review_date: "19 h ago",
+			review_date: getReviewTimeStamp("19 h ago"),
 			reviewer_name: "Atefeh88",
 			reviewer_id: "a28323e3-61b7-484c-9c3b-dd6f59eec3a4",
 			verified_buyer: false,
@@ -272,7 +192,7 @@ export async function main() {
 			review_text:
 				"I’ve never used the original beauty blender before because I thought others would do the same thing, but this is so much better! My makeup comes on silky smooth and my foundation, contour and blush come out perfectly blended and not patchy at all. I used to think it was the product that came out patchy but the tools you use to blend definitely make a difference. Repurchasing!",
 			review_rating: 5,
-			review_date: "21 h ago",
+			review_date: getReviewTimeStamp("21 h ago"),
 			reviewer_name: "ritaashlee",
 			reviewer_id: "4d9e2671-134f-4bf3-8bc3-3361318b3045",
 			verified_buyer: false,
@@ -287,7 +207,7 @@ export async function main() {
 			review_text:
 				"The original Beauty Blender is a makeup essential that lives up to its hype. Its unique shape and texture effortlessly blend foundation, concealer, and cream products for a flawless finish. The soft, bouncy material ensures seamless application without streaks or cakiness, even in hard-to-reach areas like around the nose and eyes. Plus, it's easy to clean and durable, making it a long-lasting investment for achieving professional-quality makeup looks at home.",
 			review_rating: 5,
-			review_date: "1 d ago",
+			review_date: getReviewTimeStamp("1 d ago"),
 			reviewer_name: "Nikiwaki21",
 			reviewer_id: "b5cc1da8-648c-4499-9bbf-be9866d82b51",
 			verified_buyer: false,
@@ -300,9 +220,9 @@ export async function main() {
 			retailer_id: "Sephora123",
 			review_headline: "A must have!",
 			review_text:
-				"i love this! i have never had an actual beauty blender but i def get the hype! it is so soft and makes my makeup go on super smooth. my application is always flawless with this and it doesn’t soak up all my makeup.",
+				"i love this! i have never had an actual beauty blender but i def get the hype! it is so soft and makes my makeup go on super smooth. my application is always flawless with this and it doesn't soak up all my makeup.",
 			review_rating: 5,
-			review_date: "1 d ago",
+			review_date: getReviewTimeStamp("1 d ago"),
 			reviewer_name: "ugcbyley",
 			reviewer_id: "c3a5faa3-4dc6-4033-baef-f73a9748ea8b",
 			verified_buyer: false,
@@ -317,7 +237,7 @@ export async function main() {
 			review_text:
 				"the best sponge! worth the price and splurge. it works to well to do pretty much my makeup routine which is perfect for travel since i dont have to fuss with bringing so many different brushes. perfect for a quick everyday routine",
 			review_rating: 5,
-			review_date: "1 d ago",
+			review_date: getReviewTimeStamp("1 d ago"),
 			reviewer_name: "alyzzaaxo",
 			reviewer_id: "40b02c66-2ec8-42fd-be67-ca65f8c5f653",
 			verified_buyer: false,
@@ -332,7 +252,7 @@ export async function main() {
 			review_text:
 				"The og beauty blender is the og for a reason I guess this is actually my first original one and there definitely is a difference. This one is soo much more bouncy and not as wet and just blends all my cream products super effortlessly",
 			review_rating: 5,
-			review_date: "1 d ago",
+			review_date: getReviewTimeStamp("1 d ago"),
 			reviewer_name: "cherrybombbabe",
 			reviewer_id: "3470221b-28a0-4939-afdf-d9713cac5ff5",
 			verified_buyer: false,
@@ -347,7 +267,7 @@ export async function main() {
 			review_text:
 				"I received this from beauty blender in exchange for my honest review. Honestly, I didn’t understand what the hype before but after tried it, I can definitely see why it is one of a kind. It’s so smooth. It leaves my make up flawless..",
 			review_rating: 5,
-			review_date: "1 d ago",
+			review_date: getReviewTimeStamp("1 d ago"),
 			reviewer_name: "seily",
 			reviewer_id: "1e9328c8-8125-4b23-8d2d-6bf7e868f34c",
 			verified_buyer: false,
@@ -362,7 +282,7 @@ export async function main() {
 			review_text:
 				"Another amazing sponge blender from Beauty Blender! They are the the one and only best one ever since they are the original og ones. They are so soft and blends really well for your makeup. They are always well worth the price!",
 			review_rating: 5,
-			review_date: "1 d ago",
+			review_date: getReviewTimeStamp("1 d ago"),
 			reviewer_name: "Sheena35504",
 			reviewer_id: "e507b976-c6ba-4fb2-8873-042639a1d933",
 			verified_buyer: false,
@@ -377,7 +297,7 @@ export async function main() {
 			review_text:
 				"I have used this product for years and absolutely love it! It helps my makeup go on smoothly and flawlessly! There is not a better makeup sponge on the market! I highly recommend this to anyone that wants to make makeup application easy!",
 			review_rating: 5,
-			review_date: "1 d ago",
+			review_date: getReviewTimeStamp("1 d ago"),
 			reviewer_name: "kmberry14",
 			reviewer_id: "db56798f-37b0-4058-a9b9-51e673233d34",
 			verified_buyer: false,
@@ -392,7 +312,7 @@ export async function main() {
 			review_text:
 				"What more can be said about these? The best for applying and blending flawlessly.",
 			review_rating: 5,
-			review_date: "2 d ago",
+			review_date: getReviewTimeStamp("2 d ago"),
 			reviewer_name: "cecrn4",
 			reviewer_id: "938eb063-f720-47b9-bf40-49cd38d0ef2a",
 			verified_buyer: false,
@@ -401,12 +321,19 @@ export async function main() {
 		},
 	];
 
-	await prisma.sephoraProduct
-		.create({ data: metaData })
-		.then((res) => console.log(res));
-	// await prisma.review
-	// 	.createMany({ data: reviewsData })
-	// 	.then((res) => console.log(res));
+
+	const reviewers: Reviewer[] = reviewsData.map((review) => {
+		return {
+			reviewer_id: review.reviewer_id,
+			reviewer_name: review.reviewer_name,
+		};
+	});
+
+	await prisma.product.create({ data: productData });
+	await prisma.sephoraProduct.create({ data: metaData });
+
+	await prisma.reviewer.createMany({ data: reviewers });
+	await prisma.review.createMany({ data: reviewsData });
 
 	const end = new Date().getTime();
 	console.log(`Execution time: ${(end - start) / 1000} seconds`);

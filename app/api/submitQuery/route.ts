@@ -29,10 +29,6 @@ export async function POST(req: Request) {
 		}
 	}
 
-	//[metaData, reviewsData]
-
-	await new Promise((resolve) => setTimeout(resolve, 3000));
-
 	return NextResponse.json(
 		Object.keys(zodErrors).length > 0
 			? { errors: zodErrors }

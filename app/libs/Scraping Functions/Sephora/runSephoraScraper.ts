@@ -27,6 +27,7 @@ export async function runSephoraScraper(
 				avg_rating: null,
 				percent_recommended: null,
 				review_histogram: [],
+				retailer_id: "",
 			},
 			reviewsData: [],
 		};
@@ -107,7 +108,7 @@ export async function runSephoraScraper(
 		}
 
 		const end = new Date().getTime();
-		console.log(`Execution time: ${(end - start) / 1000} seconds`);
+		// console.log(`Execution time: ${(end - start) / 1000} seconds`);
 		await browser.close();
 		return { metaData, reviewsData };
 	} catch (error) {
@@ -123,6 +124,7 @@ export async function runSephoraScraper(
 				avg_rating: null,
 				percent_recommended: null,
 				review_histogram: [],
+				retailer_id: "",
 			},
 			reviewsData: [],
 		};

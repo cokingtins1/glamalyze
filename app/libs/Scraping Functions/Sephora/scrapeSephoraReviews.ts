@@ -4,7 +4,6 @@ import { OptionProps } from "../../types";
 import { Review } from "@prisma/client";
 
 export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
-
 	const reviewData = await page.evaluate((options) => {
 		const {
 			reviewListContSelector,
@@ -31,6 +30,52 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 			} else {
 				return parseInt(numberString, 10);
 			}
+		}
+
+		function getReviewTimeStamp(dateString: string | null): Date | null {
+			if (!dateString) return null;
+
+			const currentDate = new Date();
+			const dateParts = dateString.split(" ");
+
+			const [count, mdh, trailer] = dateParts;
+
+			const monthNames = [
+				"Jan",
+				"Feb",
+				"Mar",
+				"Apr",
+				"May",
+				"Jun",
+				"Jul",
+				"Aug",
+				"Sep",
+				"Oct",
+				"Nov",
+				"Dec",
+			];
+
+			let reviewDate: Date | null = null;
+			if (mdh === "h") {
+				reviewDate = new Date(
+					currentDate.setHours(
+						currentDate.getHours() - parseInt(count)
+					)
+				);
+			} else if (mdh === "d") {
+				reviewDate = new Date(
+					currentDate.setDate(currentDate.getDate() - parseInt(count))
+				);
+			} else if (monthNames.includes(mdh)) {
+				const monthIndex = monthNames.indexOf(mdh);
+				reviewDate = new Date(
+					parseInt(trailer),
+					monthIndex,
+					parseInt(count)
+				);
+			}
+
+			return reviewDate;
 		}
 
 		const reviewListContainer = document.querySelector(
@@ -70,7 +115,7 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 			const reviewDateEl =
 				review.querySelector<HTMLSpanElement>(reviewDateSelector);
 			const reviewDateText = reviewDateEl
-				? reviewDateEl.textContent
+				? getReviewTimeStamp(reviewDateEl.textContent)
 				: null;
 
 			const reviewNameEl =

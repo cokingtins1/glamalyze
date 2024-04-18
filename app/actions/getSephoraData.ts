@@ -59,6 +59,7 @@ export async function getSephoraData(
 			percent_recommended: null,
 			review_histogram: [],
 			sku_id: null,
+			retailer_id: "",
 		};
 		return { metaData, reviewsData: [] };
 	}

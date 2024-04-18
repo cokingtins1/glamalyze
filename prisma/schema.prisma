@@ -15,29 +15,34 @@ datasource db {
 }
 
 model User {
-  user_id    String @id @default(uuid())
-  user_email String @unique
+  user_id    String  @id @default(uuid())
+  user_email String  @unique
   user_name  String
+  Query      Query[]
 }
 
 model Retailer {
   retailer_id String @id @default(uuid())
 
-  Review Review[]
+  Review         Review[]
+  UltaProduct    UltaProduct[]
+  SephoraProduct SephoraProduct[]
 }
 
 model Query {
   query_id   String   @id @default(uuid())
   created_at DateTime @default(now())
+  queryBy    User     @relation(fields: [user_id], references: [user_id])
   //retailer_data
+  user_id    String
 }
 
 model Product {
-  product_id        String           @id
-  product_name      String
-  brand_id          String
-  brand_name        String
-  product_image_url String
+  product_id        String           @id @default(uuid())
+  product_name      String?
+  brand_id          String?
+  brand_name        String?
+  product_image_url String?
   retailer_id       String[]
   UltaProducts      UltaProduct[]
   SephoraProducts   SephoraProduct[]
@@ -45,8 +50,8 @@ model Product {
 }
 
 model UltaProduct {
-  product_id          String  @id
-  product             Product @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  product_id          String   @id
+  product             Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
   product_name        String?
   brand_name          String?
   price               Int?
@@ -55,11 +60,13 @@ model UltaProduct {
   percent_recommended Int?
   review_histogram    Int[]
   sku_id              String?
+  retailer            Retailer @relation(fields: [retailer_id], references: [retailer_id])
+  retailer_id         String
 }
 
 model SephoraProduct {
-  product_id          String  @id
-  product             Product @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  product_id          String   @id
+  product             Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
   product_name        String?
   brand_name          String?
   price               Int?
@@ -68,6 +75,8 @@ model SephoraProduct {
   percent_recommended Int?
   review_histogram    Int[]
   sku_id              String?
+  retailer            Retailer @relation(fields: [retailer_id], references: [retailer_id])
+  retailer_id         String
 }
 
 model Review {
@@ -79,7 +88,7 @@ model Review {
   review_headline String?
   review_text     String?
   review_rating   Int?
-  review_date     String?
+  review_date     DateTime?
   reviewer_name   String?
   reviewer_id     String
   reviewer        Reviewer @relation(fields: [reviewer_id], references: [reviewer_id])
@@ -89,24 +98,7 @@ model Review {
 }
 
 model Reviewer {
-  reviewer_id String   @id @default(uuid())
-  Review      Review[]
+  reviewer_id   String   @id @default(uuid())
+  reviewer_name String?
+  Review        Review[]
 }
-
-// User Table
-// PK === user_id, user_email, user_name
-
-// Query Table
-// PK === query_id, created_at, retailer_data (JSON of ulta and sephora data)
-
-// Products Table
-// PK === product_id, product_name, brand_id, brand_name, image, retailer_id['ulta_id?, sephora_id?,...']
-
-// Ulta Products Table
-// PK/FK === product_id, price, reviews, avg_rating, recommended_%, 
-
-// Sephora Products Table
-// PK/FK === product_id, price, reviews, avg_rating, recommended_%, 
-
-// Reviews Table
-//PK/FK === product_id -> Product, retailer_id (sephora/ulta) === FK,  review ... rating ... review_date ...  

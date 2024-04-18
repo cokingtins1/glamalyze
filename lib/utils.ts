@@ -35,3 +35,50 @@ export function getNumber(text: string | null): number | null {
 		return parseInt(numberString, 10);
 	}
 }
+
+export function getReviewTimeStamp(dateString: string | null): Date | null {
+	if (!dateString) return null;
+
+	const currentDate = new Date();
+	const dateParts = dateString.split(" ");
+
+	const [count, mdh, trailer] = dateParts;
+
+	const monthNames = [
+		"Jan",
+		"Feb",
+		"Mar",
+		"Apr",
+		"May",
+		"Jun",
+		"Jul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec",
+	];
+
+	let reviewDate: Date | null = null
+	if (mdh === "h") {
+		reviewDate = new Date(
+			currentDate.setHours(
+				currentDate.getHours() - parseInt(count)
+			)
+		);
+	} else if (mdh === "d") {
+		reviewDate = new Date(
+			currentDate.setDate(currentDate.getDate() - parseInt(count))
+		);
+	} else if (monthNames.includes(mdh)) {
+		const monthIndex = monthNames.indexOf(mdh);
+		reviewDate = new Date(
+			parseInt(trailer),
+			monthIndex,
+			parseInt(count)
+		);
+	}
+
+	return reviewDate;
+}
+

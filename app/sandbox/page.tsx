@@ -30,7 +30,68 @@ export default function page({}: Props) {
 	const url = null;
 
 	// console.log(getSku(new URL(url)));
-	console.log(getNumber(""))
+
+	// 5 h ago
+	// 1 d ago,
+	// 31 d ago
+	// 17 Dec 2024
+	// 17 Nov 2024
+	// 17 Oct 2024
+	// 17 Sep 2024
+	// 17 Aug 2024
+	// 17 Jul 2024
+	// 17 Jun 2024
+	// 17 May 2024
+	// 17 Apr 2024
+	// 17 Mar 2024
+	// 17 Feb 2024
+	// 17 Jan 2024
+
+	function getReviewTimeStamp(dateString: string) {
+		if (!dateString) return null;
+
+		const currentDate = new Date();
+		const dateParts = dateString.split(" ");
+
+		const [count, mdh, trailer] = dateParts;
+
+		const monthNames = [
+			"Jan",
+			"Feb",
+			"Mar",
+			"Apr",
+			"May",
+			"Jun",
+			"Jul",
+			"Aug",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dec",
+		];
+
+		let reviewDate;
+		if (mdh === "h") {
+			reviewDate = new Date(
+				currentDate.setHours(currentDate.getHours() - parseInt(count))
+			);
+		} else if (mdh === "d") {
+			reviewDate = new Date(
+				currentDate.setDate(currentDate.getDate() - parseInt(count))
+			);
+		} else if (monthNames.includes(mdh)) {
+			const monthIndex = monthNames.indexOf(mdh);
+			reviewDate = new Date(
+				parseInt(trailer),
+				monthIndex,
+				parseInt(count)
+			);
+		}
+
+		return reviewDate;
+	}
+
+	console.log(getReviewTimeStamp("17 Jan 2024"));
 
 	return <div>page</div>;
 }

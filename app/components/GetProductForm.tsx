@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { getScrapedData } from "../actions/getUltaData";
 import SubmitForm from "./SubmitForm";
-import { Review, MetaData, querySchema, TQuerySchema } from "../libs/types";
+import { querySchema, TQuerySchema } from "../libs/types";
 import { Input } from "@/components/ui/input";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
@@ -17,11 +16,12 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { Review, SephoraProduct } from "@prisma/client";
 
 export default function GetProductForm() {
 	const [loading, setLoading] = useState<Boolean>(false);
 	const [reviews, setReviews] = useState<Review[] | null>(null);
-	const [metaData, setMetaData] = useState<MetaData | null>(null);
+	const [metaData, setMetaData] = useState<SephoraProduct | null>(null);
 
 	const [resData, setResData] = useState("");
 
@@ -33,6 +33,7 @@ export default function GetProductForm() {
 	});
 
 	const onSubmit = async (data: TQuerySchema) => {
+		const start = new Date().getTime();
 		const res = await fetch("/api/submitQuery", {
 			method: "POST",
 			body: JSON.stringify({ url: data.url }),
@@ -41,9 +42,13 @@ export default function GetProductForm() {
 			},
 		});
 
+		const end = new Date().getTime();
+
 		const responseData = await res.json();
 		if (!res.ok) {
 			alert("Query failed");
+		} else {
+			console.log(`Execution time: ${(end - start) / 1000} seconds`);
 		}
 
 		if (responseData.errors) {
