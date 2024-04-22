@@ -13,3 +13,5 @@ export async function seedProduct(userData: Product[]) {
 export async function seedReviewer(userData: Reviewer[]) {
 	await prisma.reviewer.createMany({ data: userData });
 }
+
+

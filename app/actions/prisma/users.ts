@@ -17,7 +17,7 @@ import {
 } from "@prisma/client";
 import { randomInt } from "crypto";
 import { generate } from "random-words";
-import { seedProduct, seedReview, seedUser } from './seed';
+import { seedProduct, seedReview, seedReviewer, seedUser } from './seed';
 
 const prisma = new PrismaClient();
 
@@ -60,15 +60,15 @@ export async function main(userId: string) {
 
 	await seedUser(userSeed)
 	await seedProduct(productSeed)
-	await seedReview(reviewerSeed)
+	await seedReviewer(reviewerSeed)
 
 
-	const userData: User = {
-		user_id: userId,
-		user_email: "seancokingtin@gmail.com",
-		user_name: "cokingtins1",
-		created_at: new Date(),
-	};
+	// const userData: User = {
+	// 	user_id: userId,
+	// 	user_email: "seancokingtin@gmail.com",
+	// 	user_name: "cokingtins1",
+	// 	created_at: new Date(),
+	// };
 
 	const queryData: Query = {
 		query_id: queryId,
@@ -103,6 +103,7 @@ export async function main(userId: string) {
 		brand_name: metaData.brand_name,
 		product_image_url: "image.png",
 		retailer_id: [metaData.retailer_id],
+		queries: [""]
 	};
 
 	const reviewSeeds = Array.from({ length: 10 }).map(() => ({

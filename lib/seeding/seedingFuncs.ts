@@ -1,10 +1,14 @@
-import { Product, User } from "@prisma/client";
+import { Product, Review, Reviewer, User } from "@prisma/client";
 import { generate } from "random-words";
 
 import dayjs from "dayjs";
 
+function randomNum(min: number, max: number) {
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 function randomUserName() {
-	const randomNumber = Math.floor(Math.random() * (999999 - 10 + 1)) + 10;
+	const randomNumber = randomNum(10, 999999);
 
 	const usernameWords = generate({
 		exactly: 2,
@@ -23,9 +27,7 @@ function getRandomTimestamp() {
 	const difference = targetDate.getTime() - currentDate.getTime();
 	const randomDifference = Math.floor(Math.random() * difference);
 
-	const randomDate = new Date(currentDate.getTime() + randomDifference);
-
-	return randomDate.toISOString();
+	return new Date(currentDate.getTime() + randomDifference);
 }
 
 function randomText() {
@@ -55,6 +57,7 @@ export function userSeeds(length: number) {
 			billing_period_start: new Date(),
 			billing_period_end: dayjs().add(1, "month").toDate(),
 			queries_in_period: 0,
+			allowedqueries: allowedQueries[randomNum(0, 2)],
 		};
 	});
 
@@ -111,11 +114,11 @@ export function productSeeds(length: number) {
 	return productBank;
 }
 
-export function reviewerSeeds(length: number) {
+export function reviewerSeeds(length: number): Reviewer[] {
 	const reviewerBank = Array.from({ length: length }, () => {
 		return {
 			reviewer_name: randomUserName(),
-			id: crypto.randomUUID(),
+			reviewer_id: crypto.randomUUID(),
 			retailer_id: Math.random() < 0.5 ? "Sephora123" : "Ulta123",
 		};
 	});
@@ -123,7 +126,7 @@ export function reviewerSeeds(length: number) {
 	return reviewerBank;
 }
 
-export function randomReview(productId: string, queryId: string) {
+export function randomReview(productId: string, queryId: string): Review {
 	const review = {
 		review_id: crypto.randomUUID(),
 		product_id: crypto.randomUUID(),
