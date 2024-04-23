@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -15,110 +9,107 @@ datasource db {
 }
 
 model User {
-  user_id              String    @id @default(uuid())
   user_email           String    @unique
+  user_id              String    @id @default(uuid())
   user_name            String
   created_at           DateTime? @default(now()) @db.Timestamptz(6)
-  billing_period_start DateTime? @default(now()) @db.Timestamptz(6)
   billing_period_end   DateTime? @default(now()) @db.Timestamptz(6)
+  billing_period_start DateTime? @default(now()) @db.Timestamptz(6)
   queries_in_period    Int?      @default(0)
   allowedqueries       Int?      @default(0)
   Query                Query[]
 }
 
 model Retailer {
-  retailer_id String @id @default(uuid())
-
-  Review         Review[]
-  UltaProduct    UltaProduct[]
-  SephoraProduct SephoraProduct[]
+  retailer_id    String           @id @default(uuid())
   Query          Query[]
+  Review         Review[]
   Reviewer       Reviewer[]
+  SephoraProduct SephoraProduct[]
+  UltaProduct    UltaProduct[]
 }
 
 model Query {
   query_id    String   @id @default(uuid())
   created_at  DateTime @default(now()) @db.Timestamptz(6)
-  queryBy     User     @relation(fields: [user_id], references: [user_id])
   user_id     String
-  retailer    Retailer @relation(fields: [retailer_id], references: [retailer_id])
-  retailer_id String
-  // product     Product  @relation(fields: [product_id], references: [product_id])
-  product_id  String?
   filters     String[]
+  product_id  String?
+  retailer_id String
+  retailer    Retailer @relation(fields: [retailer_id], references: [retailer_id])
+  queryBy     User     @relation(fields: [user_id], references: [user_id])
   Review      Review[]
-  // Product     Product[]
 }
 
 model Product {
-  product_id        String           @id @default(uuid())
+  product_id        String          @id @default(uuid())
   product_name      String?
-  brand_id          String?
-  brand_name        String?
   product_image_url String?
   retailer_id       String[]
-  // query             Query            @relation(fields: [query_id], references: [query_id])
-  UltaProducts      UltaProduct[]
-  SephoraProducts   SephoraProduct[]
+  brand_id          String?
+  brand_name        String?
+  queries           String[]        @default([""])
   Review            Review[]
-  // Query             Query[]
-  queries           String[]         @default([""])
+  SephoraProducts   SephoraProduct?
+  UltaProducts      UltaProduct?
 }
 
 model UltaProduct {
   product_id          String   @id
-  product             Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
-  product_name        String?
-  brand_name          String?
   price               Int?
-  total_reviews       Int?
   avg_rating          Float?
   percent_recommended Int?
+  product_name        String?
   review_histogram    Int[]
   sku_id              String?
-  retailer            Retailer @relation(fields: [retailer_id], references: [retailer_id])
+  total_reviews       Int?
+  brand_name          String?
   retailer_id         String
+  product             Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  retailer            Retailer @relation(fields: [retailer_id], references: [retailer_id])
+  queries             String[] @default([""])
 }
 
 model SephoraProduct {
   product_id          String   @id
-  product             Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
-  product_name        String?
-  brand_name          String?
   price               Int?
-  total_reviews       Int?
   avg_rating          Float?
   percent_recommended Int?
+  product_name        String?
   review_histogram    Int[]
   sku_id              String?
-  retailer            Retailer @relation(fields: [retailer_id], references: [retailer_id])
+  total_reviews       Int?
+  brand_name          String?
   retailer_id         String
+  product             Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  retailer            Retailer @relation(fields: [retailer_id], references: [retailer_id])
+  queries             String[] @default([""])
 }
 
 model Review {
   review_id       String    @id @default(uuid())
   product_id      String
-  product         Product   @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
   retailer_id     String
-  retailer        Retailer  @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
-  review_headline String?
-  review_text     String?
   review_rating   Int?
-  review_date     DateTime? @db.Timestamptz(6)
-  reviewer_name   String?
-  reviewer_id     String
-  reviewer        Reviewer  @relation(fields: [reviewer_id], references: [reviewer_id])
   verified_buyer  Boolean?
   up_votes        Int?
   down_votes      Int?
-  query           Query     @relation(fields: [query_id], references: [query_id])
+  review_text     String?
+  review_headline String?
+  reviewer_id     String
+  reviewer_name   String?
+  review_date     DateTime? @db.Timestamptz(6)
   query_id        String
+  product         Product   @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  query           Query     @relation(fields: [query_id], references: [query_id])
+  retailer        Retailer  @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
+  reviewer        Reviewer  @relation(fields: [reviewer_id], references: [reviewer_id])
 }
 
 model Reviewer {
   reviewer_id   String   @id @default(uuid())
   reviewer_name String?
-  retailer      Retailer @relation(fields: [retailer_id], references: [retailer_id])
-  Review        Review[]
   retailer_id   String
+  Review        Review[]
+  retailer      Retailer @relation(fields: [retailer_id], references: [retailer_id])
 }

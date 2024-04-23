@@ -12,7 +12,7 @@ export default function page({}: Props) {
 		return Math.floor(Math.random() * (max - min + 1) + min);
 	}
 
-	console.log(randomNum(0, 2));
+	console.log(randomNum(1, 5));
 
 	return <div>page</div>;
 }

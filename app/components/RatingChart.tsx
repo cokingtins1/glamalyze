@@ -11,48 +11,48 @@ import {
 
 import { Progress } from "@/components/ui/progress";
 import Stars from "./Review/Stars";
-import { MetaData } from "../libs/types";
 import { formatRating, SephoraReviewCount } from "@/lib/utils";
-import { metadata } from "../layout";
+import { SephoraProduct, UltaProduct } from "@prisma/client";
 
-type RatingChartProps = {
-	metaData: MetaData;
+type DataProps = {
+	metaData: UltaProduct | SephoraProduct;
 };
 
-export default function RatingChart({ metaData }: RatingChartProps) {
+export default function RatingChart({ metaData }: DataProps) {
 	if (
-		!metaData.reviewHistData ||
-		metaData.reviewHistData.some((r) => r === null)
+		!metaData.review_histogram ||
+		metaData.review_histogram.some((r) => r === null)
 	)
 		return;
 
-	const filteredRatings = metaData.reviewHistData.filter(
+	const filteredRatings = metaData.review_histogram.filter(
 		(r) => r !== null
 	) as number[];
+
 
 	return (
 		<Card className="w-full">
 			<div className="flex items-center justify-between p-6">
 				<div className="flex items-end gap-2">
 					<div className="flex">
-						<Stars rating={metaData.averageRating} />
+						<Stars rating={metaData.avg_rating} />
 
 						<p className="text-xl font-bold ml-4">
-							{metaData.averageRating &&
-								formatRating(metaData.averageRating)}
+							{metaData.avg_rating &&
+								formatRating(metaData.avg_rating)}
 						</p>
 					</div>
 					<p className="text-xs text-slate-400 pb-1">
-						{metaData.totalReviews} Reviews
+						{metaData.total_reviews} Reviews
 					</p>
 				</div>
 				<div className="flex flex-col items-center">
-					<p className="font-bold">{metaData.recommended}%</p>
+					<p className="font-bold">{metaData.percent_recommended}%</p>
 					<p className="text-xs">Recommended</p>
 				</div>
 			</div>
 			<CardContent>
-				{metaData.reviewHistData &&
+				{metaData.review_histogram &&
 					filteredRatings.map(
 						(count, index) =>
 							index < 5 && (
@@ -62,15 +62,16 @@ export default function RatingChart({ metaData }: RatingChartProps) {
 										display: "grid",
 										gridTemplateColumns:
 											"repeat(3, 20% 75% 5%)",
-										alignItems: "center"
+										alignItems: "center",
 									}}
 								>
-									{metaData.reviewHistData &&
-										metaData.totalReviews && (
+									{metaData.review_histogram &&
+										metaData.total_reviews && (
 											<>
 												<Stars
 													rating={
-														metaData.reviewHistData
+														metaData
+															.review_histogram
 															.length - index
 													}
 													reverse={true}
@@ -79,17 +80,17 @@ export default function RatingChart({ metaData }: RatingChartProps) {
 												<Progress
 													value={
 														(count /
-															metaData.totalReviews) *
+															metaData.total_reviews) *
 														100
 													}
 												/>
 											</>
 										)}
 									<p className="text-sm text-slate-400 ml-2 text-right">
-										{metaData.company === "Sephora"
+										{metaData.retailer_id === "Sephora123"
 											? SephoraReviewCount(
 													count,
-													metaData.totalReviews
+													metaData.total_reviews
 											  )
 											: count}
 									</p>

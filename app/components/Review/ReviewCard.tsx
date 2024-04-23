@@ -1,4 +1,4 @@
-import { Review } from "@/app/libs/types";
+import { Review } from '@prisma/client';
 import Stars from "./Stars";
 import Verified from "./Verified";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,13 +12,13 @@ export default function ReviewCard({ reviewData }: ReviewData) {
 		<Card className="flex flex-col w-full gap-2 my-4">
 			<CardContent>
 				<div className="flex items-center gap-4 pt-4">
-					<Stars rating={reviewData.stars} />
+					<Stars rating={reviewData.review_rating} />
 					<p className="text-lg font-semibold">
-						{reviewData.headline}
+						{reviewData.review_headline}
 					</p>
-					<Verified verified={reviewData.verifiedBuyer} />
+					<Verified verified={reviewData.verified_buyer} />
 				</div>
-				<p className="text-sm">{reviewData.reviewText}</p>
+				<p className="text-sm">{reviewData.review_text}</p>
 			</CardContent>
 		</Card>
 	);

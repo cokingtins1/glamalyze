@@ -1,35 +1,41 @@
+import { MetaData, Review } from "@/app/libs/types";
 import Image from "next/image";
 import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
 import ReviewCard from "../Review/ReviewCard";
 import RatingChart from "../RatingChart";
-import { Review, SephoraProduct, UltaProduct } from "@prisma/client";
 
-type DataProps = {
-	data: UltaProduct | SephoraProduct;
-	reviewsData: Review[]
+type Data = {
+	metaData: MetaData;
+	reviewsData: Review[];
 };
 
-export default function DataDisplay({ data, reviewsData }: DataProps) {
+export default function UltaDisplay({ data }: { data: Data }) {
+	const styles = {
+		textColor: "",
+		backgroundColor: "#F37830",
+		font: "Circular, sans serif",
+	};
+
 	return (
 		<div className="displayContainer flex flex-col justify-start items-center border border-white rounded-lg bg-white p-4">
 			<div className="h-[100px] w-[200px] relative">
 				<Image
 					src={
-						data.retailer_id === "Sephora123"
+						data.metaData.company === "Sephora"
 							? SephoraLogo
 							: UltaLogo
 					}
 					fill
 					style={{ objectFit: "contain" }}
 					sizes="(max-width: 430px), 300px "
-					alt={`${data.retailer_id} Logo`}
+					alt="Ulta Logo"
 				/>
 			</div>
 			{data && (
 				<>
-					<RatingChart metaData={data} />
-					{reviewsData.map((review, index) => (
+					<RatingChart metaData={data.metaData}/>
+					{data.reviewsData.map((review, index) => (
 						<ReviewCard key={index} reviewData={review} />
 					))}
 				</>
@@ -37,7 +43,3 @@ export default function DataDisplay({ data, reviewsData }: DataProps) {
 		</div>
 	);
 }
-
-//lean data structures and algorithims
-//const foo = array.shift()!
-// city scape - be good with arrays

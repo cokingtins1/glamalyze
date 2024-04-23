@@ -1,7 +1,7 @@
 import CheckIcon from "@mui/icons-material/Check";
 
 type Verified = {
-	verified: boolean;
+	verified: boolean | null;
 };
 export default function Verified({ verified }: Verified) {
 	return (

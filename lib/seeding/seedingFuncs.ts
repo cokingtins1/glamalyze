@@ -1,7 +1,16 @@
-import { Product, Review, Reviewer, User } from "@prisma/client";
+import {
+	Product,
+	Query,
+	Review,
+	Reviewer,
+	SephoraProduct,
+	UltaProduct,
+	User,
+} from "@prisma/client";
 import { generate } from "random-words";
 
 import dayjs from "dayjs";
+import { randomInt } from "crypto";
 
 function randomNum(min: number, max: number) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
@@ -64,52 +73,44 @@ export function userSeeds(length: number) {
 	return userBank;
 }
 
-export function productSeeds(length: number) {
-	const productBank: Product[] = Array.from(
-		{ length: length },
-		(_, index) => {
-			const retailerBank = ["Sephora123", "Ulta123"];
+export function productSeeds(query: Query) {
+	const retailerBank = ["Sephora123", "Ulta123"];
 
-			const retailer: string[] = [];
-			const includeFirst = Math.random() < 0.5;
-			const includeSecond = Math.random() < 0.5;
+	const retailer: string[] = [];
+	const includeFirst = Math.random() < 0.5;
+	const includeSecond = Math.random() < 0.5;
 
-			if (includeFirst || includeSecond) {
-				if (includeFirst) {
-					retailer.push(retailerBank[0]);
-				}
-				if (includeSecond) {
-					retailer.push(retailerBank[1]);
-				}
-			} else {
-				retailer.push(
-					retailerBank[
-						Math.floor(Math.random() * retailerBank.length)
-					]
-				);
-			}
-
-			const generatedName = generate({
-				exactly: 2,
-				join: "",
-			});
-
-			const name =
-				generatedName.charAt(0).toUpperCase() + generatedName.slice(1);
-
-			return {
-				product_id: crypto.randomUUID(),
-				product_name: name,
-				product_image_url: `https://picsum.photos/id/${
-					index + 100
-				}/200/300`,
-				retailer_id: retailer,
-				brand_id: crypto.randomUUID(),
-				brand_name: randomBrandName(),
-				queries: [""],
-			};
+	if (includeFirst || includeSecond) {
+		if (includeFirst) {
+			retailer.push(retailerBank[0]);
 		}
-	);
+		if (includeSecond) {
+			retailer.push(retailerBank[1]);
+		}
+	} else {
+		retailer.push(
+			retailerBank[Math.floor(Math.random() * retailerBank.length)]
+		);
+	}
+
+	const generatedName = generate({
+		exactly: 2,
+		join: "",
+	});
+
+	const name = generatedName.charAt(0).toUpperCase() + generatedName.slice(1);
+	const productBank = {
+		product_id: crypto.randomUUID(),
+		product_name: name,
+		product_image_url: `https://picsum.photos/id/${randomNum(
+			1,
+			200
+		)}/200/300`,
+		retailer_id: retailer,
+		brand_id: crypto.randomUUID(),
+		brand_name: randomBrandName(),
+		queries: [query.query_id],
+	};
 
 	return productBank;
 }
@@ -126,22 +127,94 @@ export function reviewerSeeds(length: number): Reviewer[] {
 	return reviewerBank;
 }
 
-export function randomReview(productId: string, queryId: string): Review {
-	const review = {
-		review_id: crypto.randomUUID(),
-		product_id: crypto.randomUUID(),
-		retailer_id: "Sephora123",
-		review_headline: generate({ min: 3, max: 8, join: " " }),
-		review_text: randomText(),
-		review_rating: Math.floor(Math.random() * 5) + 1,
-		review_date: getRandomTimestamp(),
-		reviewer_name: randomUserName(),
-		reviewer_id: crypto.randomUUID(),
-		verified_buyer: Math.random() < 0.5,
-		up_votes: Math.floor(Math.random() * 100) + 1,
-		down_votes: Math.floor(Math.random() * 100) + 1,
-		query_id: queryId,
+export function querySeeds(allUsers: User[]): Query {
+	const userIds = allUsers.map((q) => q.user_id);
+
+	const queryBank: Query = {
+		query_id: crypto.randomUUID(),
+		created_at: new Date(),
+		user_id: userIds[randomNum(0, userIds.length - 1)],
+		filters: ["None"],
+		product_id: crypto.randomUUID(), // assign placeholder id
+		retailer_id: Math.random() < 0.5 ? "Sephora123" : "Ulta123",
 	};
 
-	return review;
+	return queryBank;
+}
+
+export function reviewSeeds(
+	query: Query,
+	product: Product,
+	reviewers: Reviewer[],
+	length: number
+): Review[] {
+	const retailerBank = ["Sephora123", "Ulta123"];
+	let reviews: Review[] = [];
+
+	retailerBank.forEach((retailerId) => {
+		const productReviews: Review[] = Array.from({ length: length }, () => {
+			let randIndex = randomNum(0, reviewers.length - 1);
+			const randReviewer = {
+				reviewer_id: reviewers[randIndex].reviewer_id,
+				reviewer_name: reviewers[randIndex].reviewer_name,
+			};
+
+			return {
+				review_id: crypto.randomUUID(),
+				product_id: product.product_id,
+				retailer_id: retailerId,
+				review_headline: generate({ min: 3, max: 8, join: " " }),
+				review_text: randomText(),
+				review_rating: randomNum(1, 5),
+				review_date: getRandomTimestamp(),
+				reviewer_name: randReviewer.reviewer_name,
+				reviewer_id: randReviewer.reviewer_id,
+				verified_buyer: Math.random() < 0.5,
+				up_votes: Math.floor(Math.random() * 100) + 1,
+				down_votes: Math.floor(Math.random() * 100) + 1,
+				query_id: query.query_id,
+			};
+		});
+		reviews = reviews.concat(productReviews);
+	});
+
+	return reviews;
+}
+
+export function retailerProductSeeds(
+	query: Query,
+	product: Product
+): SephoraProduct[] | UltaProduct[] {
+	const retailerBank = ["Sephora123", "Ulta123"];
+	let productData: (SephoraProduct | UltaProduct)[] = [];
+
+	retailerBank.forEach((retailer) => {
+		const ratingArray = Array.from({ length: 5 }).map(() => randomInt(99));
+		const totalReviews = ratingArray.reduce(
+			(acc, currVal) => acc + currVal,
+			0
+		);
+		const weightedSum = ratingArray.reduce(
+			(sum, count, index) => sum + count * (index + 1),
+			0
+		);
+
+		const avgRating = parseFloat((weightedSum / totalReviews).toFixed(1));
+		const data = {
+			retailer_id: retailer,
+			product_id: product.product_id,
+			sku_id: randomInt(999999).toString(),
+			product_name: product.product_name,
+			brand_name: product.brand_name,
+			price: parseFloat(`${randomInt(100)}.${randomInt(100)}`),
+			total_reviews: totalReviews,
+			avg_rating: avgRating,
+			percent_recommended: null,
+			review_histogram: ratingArray,
+			queries: [query.query_id],
+		};
+		productData.push(data);
+	});
+
+	return productData;
 }
