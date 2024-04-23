@@ -74,7 +74,7 @@ export function userSeeds(length: number) {
 }
 
 export function productSeeds(query: Query) {
-	const retailerBank = ["Sephora123", "Ulta123"];
+	const retailerBank = ["Ulta123", "Sephora123"];
 
 	const retailer: string[] = [];
 	const includeFirst = Math.random() < 0.5;
@@ -99,7 +99,7 @@ export function productSeeds(query: Query) {
 	});
 
 	const name = generatedName.charAt(0).toUpperCase() + generatedName.slice(1);
-	const productBank = {
+	const productBank: Product = {
 		product_id: crypto.randomUUID(),
 		product_name: name,
 		product_image_url: `https://picsum.photos/id/${randomNum(
@@ -110,6 +110,8 @@ export function productSeeds(query: Query) {
 		brand_id: crypto.randomUUID(),
 		brand_name: randomBrandName(),
 		queries: [query.query_id],
+		ulta_sku_id: null,
+		sephora_sku_id: null,
 	};
 
 	return productBank;
@@ -148,7 +150,7 @@ export function reviewSeeds(
 	reviewers: Reviewer[],
 	length: number
 ): Review[] {
-	const retailerBank = ["Sephora123", "Ulta123"];
+	const retailerBank = ["Ulta123", "Sephora123"];
 	let reviews: Review[] = [];
 
 	retailerBank.forEach((retailerId) => {
@@ -185,7 +187,7 @@ export function retailerProductSeeds(
 	query: Query,
 	product: Product
 ): SephoraProduct[] | UltaProduct[] {
-	const retailerBank = ["Sephora123", "Ulta123"];
+	const retailerBank = ["Ulta123", "Sephora123"];
 	let productData: (SephoraProduct | UltaProduct)[] = [];
 
 	retailerBank.forEach((retailer) => {
@@ -209,7 +211,7 @@ export function retailerProductSeeds(
 			price: parseFloat(`${randomInt(100)}.${randomInt(100)}`),
 			total_reviews: totalReviews,
 			avg_rating: avgRating,
-			percent_recommended: null,
+			percent_recommended: randomInt(100),
 			review_histogram: ratingArray,
 			queries: [query.query_id],
 		};

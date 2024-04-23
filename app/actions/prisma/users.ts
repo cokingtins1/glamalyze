@@ -19,6 +19,8 @@ import {
 	seedReview,
 	seedReviewer,
 	seedUser,
+	updateQuery,
+	updateSku,
 } from "./seed";
 
 const prisma = new PrismaClient();
@@ -44,35 +46,48 @@ export async function main() {
 	// }
 
 	// Clear DB
-	await prisma.product.deleteMany({});
-	await prisma.query.deleteMany({});
-	await prisma.review.deleteMany({});
-	await prisma.reviewer.deleteMany({});
-	await prisma.sephoraProduct.deleteMany({});
-	await prisma.ultaProduct.deleteMany({});
-	await prisma.user.deleteMany({});
+	// await prisma.product.deleteMany({});
+	// await prisma.query.deleteMany({});
+	// await prisma.review.deleteMany({});
+	// await prisma.reviewer.deleteMany({});
+	// await prisma.sephoraProduct.deleteMany({});
+	// await prisma.ultaProduct.deleteMany({});
+	// await prisma.user.deleteMany({});
 
 	// Create seeds
 	const userSeed = userSeeds(10);
-	await seedUser(userSeed);
+	// await seedUser(userSeed);
 
-	for (let i = 0; i < 10; i++) {
+	for (let i = 0; i < 1; i++) {
+		//getting sku from initial baby scrape of sku #'s
+		const dummySku = ["103310", "909626"];
+
 		// initialize the query
 		const querySeed = querySeeds(userSeed);
-		await seedQuery(querySeed);
+		// await seedQuery(querySeed);
 
 		//check ulta and sephora DB if product exists
-		const dataExists = await productExists("Product Name");
+		const existingData = await productExists(querySeed, dummySku);
+		if (existingData) {
+			return existingData;
+		}
 
 		// "scrape" the product data:
 		const productSeed = productSeeds(querySeed);
-		await seedProduct(querySeed, productSeed);
+		// await seedProduct(querySeed, productSeed);
 
 		const retailerSeed = retailerProductSeeds(querySeed, productSeed);
-		await seedRetailerProduct(retailerSeed);
+		// await seedRetailerProduct(retailerSeed);
+
+		//Add skus back into Product
+		const skuIds = [retailerSeed[0].sku_id, retailerSeed[1].sku_id];
+
+		// Retroactive Updating: SKU's and query product_id
+		// await updateQuery(productSeed.product_id, querySeed);
+		// await updateSku(productSeed.product_id, skuIds);
 
 		const reviewerSeed = reviewerSeeds(25);
-		await seedReviewer(reviewerSeed);
+		// await seedReviewer(reviewerSeed);
 
 		const reviewSeed = reviewSeeds(
 			querySeed,
@@ -80,10 +95,9 @@ export async function main() {
 			reviewerSeed,
 			10
 		);
-		await seedReview(reviewSeed);
+		// await seedReview(reviewSeed);
 	}
 
 	const end = new Date().getTime();
 	console.log(`Execution time: ${(end - start) / 1000} seconds`);
-
 }

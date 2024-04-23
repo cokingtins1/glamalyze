@@ -3,6 +3,7 @@ import NewQueryDrawer from "./components/NewQueryDrawer";
 import DataDisplay from "./components/Ulta/DataDisplay";
 import NextId from "./components/Data Validation/NextId";
 import { Suspense } from "react";
+import DisplaySkeleton from "./components/Loading Skeletons/DisplaySkeleton";
 
 export default async function Home() {
 	const prisma = new PrismaClient();
@@ -16,18 +17,21 @@ export default async function Home() {
 	const productIds = productIdData.map((id) => id.product_id);
 	const selectedProduct = productIds[0];
 
-	const ultaData = await prisma.ultaProduct.findUnique({
-		where: {
-			product_id: selectedProduct,
-		},
-	});
+	let ultaData, sephoraData;
 
-	const sephoraData = await prisma.sephoraProduct.findUnique({
-		where: {
-			product_id: selectedProduct,
-		},
-	});
+	if (selectedProduct) {
+		ultaData = await prisma.ultaProduct.findUnique({
+			where: {
+				product_id: selectedProduct,
+			},
+		});
 
+		sephoraData = await prisma.sephoraProduct.findUnique({
+			where: {
+				product_id: selectedProduct,
+			},
+		});
+	}
 	const ultaReviewsData = await prisma.review.findMany({
 		where: {
 			product_id: selectedProduct,
@@ -49,16 +53,19 @@ export default async function Home() {
 			<section className="grid grid-cols-2 gap-4 w-full mt-12">
 				{ultaData && sephoraData && (
 					<>
-						<Suspense fallback>
+						<Suspense fallback={<DisplaySkeleton />}>
 							<DataDisplay
 								data={ultaData}
 								reviewsData={ultaReviewsData}
 							/>
 						</Suspense>
-						<DataDisplay
-							data={sephoraData}
-							reviewsData={sephoraReviewsData}
-						/>
+
+						<Suspense fallback={<DisplaySkeleton />}>
+							<DataDisplay
+								data={sephoraData}
+								reviewsData={sephoraReviewsData}
+							/>
+						</Suspense>
 					</>
 				)}
 			</section>
