@@ -3,7 +3,9 @@ import { Page } from "puppeteer";
 import { OptionProps } from "../../types";
 import { Review } from "@prisma/client";
 
-export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
+export async function scrapeUltaReviews(page: Page, options: OptionProps) {
+	let consoleMessage: any = [];
+
 	const reviewData = await page.evaluate((options) => {
 		const {
 			reviewListContSelector,
@@ -33,50 +35,35 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 		}
 
 		function getReviewTimeStamp(dateString: string | null): string | null {
-			// Sephora Formats:
-			// "x h ago"
-			// "x d ago" (1-30 days)
-			// "20 Mar 2024" (after 30 days)
+			// Ulta Formats:
+			// "x day(s) ago" (1-30 days)
+			// "x month(s) ago" (after 30 days)
+			// "x year(s) ago"
 
 			if (!dateString) return null;
 
 			const currentDate = new Date();
+
 			const dateParts = dateString.trim().split(" ");
 
-			const [count, mdh, trailer] = dateParts;
-
-			const monthNames = [
-				"Jan",
-				"Feb",
-				"Mar",
-				"Apr",
-				"May",
-				"Jun",
-				"Jul",
-				"Aug",
-				"Sep",
-				"Oct",
-				"Nov",
-				"Dec",
-			];
+			const [count, mdy, trailer] = dateParts;
 
 			let reviewDate: Date | null = null;
-			if (mdh === "h") {
-				reviewDate = new Date(
-					currentDate.setHours(
-						currentDate.getHours() - parseInt(count)
-					)
-				);
-			} else if (mdh === "d") {
+			if (mdy === "day" || mdy === "days") {
 				reviewDate = new Date(
 					currentDate.setDate(currentDate.getDate() - parseInt(count))
 				);
-			} else if (monthNames.includes(mdh)) {
-				const monthIndex = monthNames.indexOf(mdh);
+			} else if (mdy === "month" || mdy === "months") {
 				reviewDate = new Date(
-					parseInt(trailer),
-					monthIndex,
-					parseInt(count)
+					currentDate.setMonth(
+						currentDate.getMonth() - parseInt(count)
+					)
+				);
+			} else if (mdy === "year" || mdy === "years") {
+				reviewDate = new Date(
+					currentDate.setFullYear(
+						currentDate.getFullYear() - parseInt(count)
+					)
 				);
 			}
 
@@ -84,18 +71,13 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 		}
 
 		const reviewListContainer = document.querySelector(
-			"#ratings-reviews-container"
+			reviewListContSelector
 		);
 
 		if (!reviewListContainer) return [];
 
-		const reviewContChild = reviewListContainer.querySelector(
-			".css-1l6ttej.eanm77i0"
-		);
-
-		if (!reviewContChild) return [];
-
-		const reviews = reviewContChild?.querySelectorAll(reviewContSelector);
+		const reviews =
+			reviewListContainer.querySelectorAll(reviewContSelector);
 
 		const result: Review[] = [];
 
@@ -112,45 +94,50 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 				? (reviewEl as HTMLDivElement).textContent
 				: null;
 
-			const ratingEl = review
-				.querySelector(ratingSelector)
-				?.getAttribute("aria-label");
+			const ratingEl = review.querySelector(ratingSelector)?.textContent;
 			const rating = ratingEl ? parseInt(ratingEl || "0") : null;
 
-			const reviewDateEl =
-				review.querySelector<HTMLSpanElement>(reviewDateSelector);
+			const reviewDateContEl = review.querySelector(reviewDateSelector);
+			const reviewDateEl = reviewDateContEl?.querySelectorAll("span")[1];
+
 			const reviewDateText = reviewDateEl
 				? getReviewTimeStamp(reviewDateEl.textContent)
 				: null;
 
-			const reviewNameEl =
-				review.querySelector<HTMLAnchorElement>(reviewerNameSelector);
-			const reviewNameText = reviewNameEl
-				? reviewNameEl.textContent
-				: null;
+			const reviewNameCont = review.querySelector(reviewerNameSelector);
+			const reviewNameEl = reviewNameCont
+				?.querySelector("span")
+				?.querySelectorAll("span");
+
+			const reviewNameText =
+				reviewNameEl?.length === 2 ? reviewNameEl[1].textContent : null;
 
 			const verifiedBuyerEl = review.querySelector(verifiedBuyerSelector);
 			const verifiedBuyer = verifiedBuyerEl !== null;
 
+			const voteContEl = review.querySelector(upVoteSelector);
 			const voteEls =
-				review.querySelectorAll<HTMLButtonElement>(upVoteSelector);
+				voteContEl?.querySelectorAll<HTMLButtonElement>("button");
 
 			let upVoteText: number | null = null;
 			let downVoteText: number | null = null;
 
-			if (voteEls.length === 2) {
-				upVoteText = getNumber(
-					voteEls[0].querySelector("span")?.textContent || ""
-				);
-				downVoteText = getNumber(
-					voteEls[1].querySelector("span")?.textContent || ""
-				);
+			if (voteEls?.length === 2) {
+				const ariaUpVote = voteEls[0]
+					.getAttribute("aria-label")
+					?.split(" ");
+				upVoteText = ariaUpVote ? getNumber(ariaUpVote[0]) : null;
+
+				const ariaDownVote = voteEls[1]
+					.getAttribute("aria-label")
+					?.split(" ");
+				downVoteText = ariaDownVote ? getNumber(ariaDownVote[0]) : null;
 			}
 
 			result.push({
 				review_id: reviewId,
 				product_id: productId,
-				retailer_id: "Sephora123",
+				retailer_id: "Ulta123",
 				review_headline: header,
 				review_text: reviewText,
 				review_rating: rating,
@@ -166,5 +153,6 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 
 		return result;
 	}, options.reviewSelector);
+
 	return reviewData;
 }

@@ -6,6 +6,9 @@ import { Suspense } from "react";
 import DisplaySkeleton from "./components/Loading Skeletons/DisplaySkeleton";
 
 export default async function Home() {
+	//https://www.ulta.com/p/cult-classic-purifying-face-cleanser-xlsImpprod18731041?sku=2532485
+	//https://www.sephora.com/product/tula-skincare-the-cult-classic-purifying-face-cleanser-P475182?skuId=2500684&icid2=products%20grid:p475182:product
+
 	const prisma = new PrismaClient();
 
 	const productIdData = await prisma.product.findMany({
@@ -48,8 +51,8 @@ export default async function Home() {
 
 	return (
 		<main className="flex flex-col items-start justify-center">
-			{/* <NewQueryDrawer /> */}
-			<NextId />
+			<NewQueryDrawer />
+			{/* <NextId /> */}
 			<section className="grid grid-cols-2 gap-4 w-full mt-12">
 				{ultaData && sephoraData && (
 					<>

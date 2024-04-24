@@ -1,21 +1,24 @@
 "use server";
 
-import { runScraper } from "../libs/Scraping Functions/Ulta/runScraper";
+import { UltaProduct } from "@prisma/client";
+import { runUltaScraper } from "../libs/Scraping Functions/Ulta/runUltaScraper";
 
 export async function getUltaData(url: string) {
-	// const url = formData.get("url");
-
 	try {
-		// Ulta Scraper:
-		const { metaData, reviewsData } = await runScraper(url as string, {
+		const { metaData, reviewsData } = await runUltaScraper(url as string, {
 			reviewSelector: {
-				reviewListContainer: '[data-testid="review-list"]',
-				reviewContainer: ".pr-review",
-				headline: ".pr-rd-review-headline.pr-h2",
-				reviewText: ".pr-rd-description-text",
-
-				rating: ".pr-snippet-rating-decimal",
-				verifiedBuyer: ".pr-rd-badging-text",
+				reviewListContSelector: '[data-testid="review-list"]',
+				reviewContSelector: ".pr-review",
+				headlineSelector: ".pr-rd-review-headline.pr-h2",
+				reviewTextSelector: ".pr-rd-description-text",
+				reviewDateSelector:
+					".pr-rd-details.pr-rd-author-submission-date",
+				reviewerNameSelector: ".pr-rd-details.pr-rd-author-nickname",
+				ratingSelector: ".pr-snippet-rating-decimal",
+				verifiedBuyerSelector: ".pr-rd-badging-text",
+				upVoteSelector:
+					".pr-helpful-voting.pr-rd-helpful-action-btn-group",
+				downVoteSelector: "",
 			},
 			globalSelector: {
 				nextPageSelector:
@@ -24,7 +27,9 @@ export async function getUltaData(url: string) {
 				totalReviewsSelector: ".pr-snippet-review-count",
 				averageRatingSelector: ".pr-snippet-rating-decimal",
 				reviewDistSelector: ".pr-ratings-histogram.pr-histogram-list",
-				recommendedSelector: ".pr-reco-value"
+				recommendedSelector: ".pr-reco-value",
+				brandNameSelector: ".Link_Huge.Link_Huge--compact",
+				productNameSelector: ".Text-ds.Text-ds--title-5.Text-ds--left",
 			},
 			paginationLimit: 3,
 			reviewsLimit: 5,
@@ -36,7 +41,6 @@ export async function getUltaData(url: string) {
 			},
 		});
 
-		console.log("metaData and reviewsData:", metaData, reviewsData);
 		if (Array.isArray(reviewsData)) {
 			return { metaData, reviewsData };
 		} else {
@@ -44,6 +48,19 @@ export async function getUltaData(url: string) {
 		}
 	} catch (error) {
 		console.log(error);
-		return { metaData: null, reviewsData: [] };
+		const metaData: UltaProduct = {
+			product_id: "",
+			product_name: null,
+			brand_name: null,
+			price: null,
+			total_reviews: null,
+			avg_rating: null,
+			percent_recommended: null,
+			review_histogram: [],
+			sku_id: null,
+			retailer_id: "",
+			queries: [""],
+		};
+		return { metaData, reviewsData: [] };
 	}
 }

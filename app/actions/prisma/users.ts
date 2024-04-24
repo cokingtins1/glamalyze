@@ -17,7 +17,6 @@ import {
 	seedQuery,
 	seedRetailerProduct,
 	seedReview,
-	seedReviewer,
 	seedUser,
 	updateQuery,
 	updateSku,
@@ -46,13 +45,13 @@ export async function main() {
 	// }
 
 	// Clear DB
-	// await prisma.product.deleteMany({});
-	// await prisma.query.deleteMany({});
-	// await prisma.review.deleteMany({});
-	// await prisma.reviewer.deleteMany({});
-	// await prisma.sephoraProduct.deleteMany({});
-	// await prisma.ultaProduct.deleteMany({});
-	// await prisma.user.deleteMany({});
+	await prisma.product.deleteMany({});
+	await prisma.query.deleteMany({});
+	await prisma.review.deleteMany({});
+	await prisma.reviewer.deleteMany({});
+	await prisma.sephoraProduct.deleteMany({});
+	await prisma.ultaProduct.deleteMany({});
+	await prisma.user.deleteMany({});
 
 	// Create seeds
 	const userSeed = userSeeds(10);
@@ -79,11 +78,9 @@ export async function main() {
 		const retailerSeed = retailerProductSeeds(querySeed, productSeed);
 		// await seedRetailerProduct(retailerSeed);
 
-		//Add skus back into Product
-		const skuIds = [retailerSeed[0].sku_id, retailerSeed[1].sku_id];
-
 		// Retroactive Updating: SKU's and query product_id
 		// await updateQuery(productSeed.product_id, querySeed);
+		// const skuIds = [retailerSeed[0].sku_id, retailerSeed[1].sku_id];
 		// await updateSku(productSeed.product_id, skuIds);
 
 		const reviewerSeed = reviewerSeeds(25);

@@ -16,51 +16,71 @@ export async function seedUser(userData: User[]) {
 	await prisma.user.createMany({ data: userData });
 }
 
-export async function seedProduct(query: Query, productData: Product) {
-	const productsToAdd: Product[] = [];
+export async function seedProduct(productData: Product) {
+	await prisma.product.create({ data: productData });
 
-	const productFound = await prisma.product.findFirst({
-		where: { product_name: productData.product_name },
+	// const productsToAdd: Product[] = [];
+
+	// const productFound = await prisma.product.findFirst({
+	// 	where: { product_name: productData.product_name },
+	// });
+	// if (!productFound) {
+	// 	// Will need to do something if product is found
+	// 	productsToAdd.push(productData);
+	// } else {
+	// 	await prisma.product.update({
+	// 		data: {
+	// 			queries: {
+	// 				push: "currentQuery",
+	// 			},
+	// 		},
+	// 		where: { product_id: productFound.product_id },
+	// 	});
+	// }
+
+	// await prisma.product.createMany({ data: productsToAdd });
+}
+
+export async function seedReview(
+	reviewData: Review[],
+	productData: Product,
+	query: Query
+) {
+	const reviewers: Reviewer[] = reviewData.map((review) => {
+		return {
+			reviewer_id: review.reviewer_id,
+			reviewer_name: review.reviewer_name,
+			retailer_id: review.retailer_id,
+		};
 	});
-	if (!productFound) {
-		// Will need to do something if product is found
-		productsToAdd.push(productData);
-	} else {
-		await prisma.product.update({
-			data: {
-				queries: {
-					push: "currentQuery",
-				},
-			},
-			where: { product_id: productFound.product_id },
-		});
-	}
 
-	await prisma.product.createMany({ data: productsToAdd });
-}
+	reviewData.forEach((review) => {
+		(review.product_id = productData.product_id),
+			(review.query_id = query.query_id);
+	});
 
-export async function seedReviewer(reviewerData: Reviewer[]) {
-	await prisma.reviewer.createMany({ data: reviewerData });
-}
-
-export async function seedReview(reviewData: Review[]) {
+	await prisma.reviewer.createMany({ data: reviewers });
 	await prisma.review.createMany({ data: reviewData });
 }
 
 export async function seedQuery(queryData: Query) {
-	await prisma.query.createMany({ data: queryData });
+	await prisma.query.create({ data: queryData });
 }
 
 export async function seedRetailerProduct(
-	retailerSeed: (SephoraProduct | UltaProduct)[]
+	ultaProduct: UltaProduct,
+	sephoraProduct: SephoraProduct,
+	product: Product,
+	query: Query
 ) {
-	for (const retailer of retailerSeed) {
-		if (retailer.retailer_id === "Sephora123") {
-			await prisma.sephoraProduct.create({ data: retailer });
-		} else {
-			await prisma.ultaProduct.create({ data: retailer });
-		}
-	}
+	ultaProduct.product_id = product.product_id;
+	sephoraProduct.product_id = product.product_id;
+
+	ultaProduct.queries = [query.query_id];
+	sephoraProduct.queries = [query.query_id];
+
+	await prisma.ultaProduct.create({ data: ultaProduct });
+	await prisma.sephoraProduct.create({ data: sephoraProduct });
 }
 
 export async function productExists(querySeed: Query, productSku: string[]) {

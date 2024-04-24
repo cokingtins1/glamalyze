@@ -1,18 +1,35 @@
+import { createProduct, createQuery } from "@/lib/seeding/seedingFuncs";
 import {
 	PrismaClient,
-	Product,
 	Review,
-	Reviewer,
 	SephoraProduct,
+	UltaProduct,
+	User,
 } from "@prisma/client";
+import {
+	productExists,
+	seedProduct,
+	seedQuery,
+	seedRetailerProduct,
+	seedReview,
+	updateQuery,
+	updateSku,
+} from "./seed";
 const prisma = new PrismaClient();
 
 export async function insertData(
-	metaData: SephoraProduct,
-	reviewsData: Review[],
+	ultaProduct: UltaProduct,
+	sephoraProduct: SephoraProduct,
+	ultaReviews: Review[],
+	sephoraReviews: Review[],
 	userId: string
 ) {
 	// Check if user exists:
+
+	if (!ultaProduct.sku_id) return { missingParameter: "ultaProduct" };
+	if (!sephoraProduct.sku_id) return { missingParameter: "sephoraProduct" };
+	if (!ultaReviews) return { missingParameter: "ultaReviews" };
+	if (!sephoraReviews) return { missingParameter: "sephoraReviews" };
 
 	const user = await prisma.user.findUnique({
 		where: {
@@ -20,48 +37,36 @@ export async function insertData(
 		},
 	});
 
-	if (!user) return;
-
-
-	// Check if user exists - DONE
-	// Check if same query exists -> add expiration (could vary based on popularity)
-	// Check if same reviewer exists
-	// Check if same product exists -> upsert
-	// Check if same sephora/ulta product exists -> upsert
-
-	// Assign common global id's
-	const product_id = crypto.randomUUID();
-	const retailerId = "Sephora123"
-
-
-	metaData.product_id = product_id;
-
-	for (const review of reviewsData) {
-		review.product_id = product_id;
+	let newUser;
+	if (!user) {
+		newUser = await prisma.user.create({
+			data: {
+				user_email: "seancokingtin@gmail.com",
+				user_name: "cokingtins1",
+			},
+		});
 	}
 
-	const productData: Product = {
-		product_id: product_id,
-		product_name: metaData.product_name,
-		brand_id: crypto.randomUUID(),
-		brand_name: metaData.brand_name,
-		product_image_url: "image.png",
-		retailer_id: [metaData.retailer_id],
-	};
+	const dummySku = ["103310", "909626"];
 
-	const reviewers: Reviewer[] = reviewsData.map((review) => {
-		return {
-			reviewer_id: review.reviewer_id,
-			reviewer_name: review.reviewer_name,
-			retailer_id: retailerId
-		};
-	});
+	const query = createQuery(newUser ? newUser.user_id : userId);
+	await seedQuery(query);
 
-	// console.log("metaData and reviewsData back end:", metaData, reviewsData);
+	const existingData = await productExists(query, dummySku);
+	if (existingData) {
+		return existingData;
+	}
 
-	await prisma.product.create({ data: productData });
-	await prisma.sephoraProduct.create({ data: metaData });
+	const product = createProduct(ultaProduct, sephoraProduct, query);
+	await seedProduct(product);
 
-	await prisma.reviewer.createMany({ data: reviewers });
-	await prisma.review.createMany({ data: reviewsData });
+	await seedRetailerProduct(ultaProduct, sephoraProduct, product, query);
+	await seedReview([...ultaReviews, ...sephoraReviews], product, query);
+
+	// Retroactive Updating: SKU's and query product_id
+	await updateQuery(product.product_id, query);
+	const skuIds = [ultaProduct.sku_id, sephoraProduct.sku_id];
+	await updateSku(product.product_id, skuIds);
+
+	return "Success";
 }

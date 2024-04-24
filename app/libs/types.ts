@@ -31,7 +31,8 @@ export type OptionProps = {
 };
 
 export const querySchema = z.object({
-	url: z.string().min(2, { message: "Please enter a valid URL" }),
+	ultaUrl: z.string().min(2, { message: "Please enter a valid URL" }),
+	sephoraUrl: z.string().min(2, { message: "Please enter a valid URL" }),
 });
 
 export type TQuerySchema = z.infer<typeof querySchema>;

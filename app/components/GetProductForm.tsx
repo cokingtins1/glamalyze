@@ -28,7 +28,8 @@ export default function GetProductForm() {
 	const form = useForm<TQuerySchema>({
 		resolver: zodResolver(querySchema),
 		defaultValues: {
-			url: "",
+			ultaUrl: "",
+			sephoraUrl: "",
 		},
 	});
 
@@ -36,7 +37,10 @@ export default function GetProductForm() {
 		const start = new Date().getTime();
 		const res = await fetch("/api/submitQuery", {
 			method: "POST",
-			body: JSON.stringify({ url: data.url }),
+			body: JSON.stringify({
+				ultaUrl: data.ultaUrl,
+				sephoraUrl: data.sephoraUrl,
+			}),
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -54,7 +58,7 @@ export default function GetProductForm() {
 		if (responseData.errors) {
 			const errors = responseData.errors;
 			if (errors.url) {
-				form.setError("url", {
+				form.setError("ultaUrl", {
 					type: "server",
 					message: errors.url,
 				});
@@ -70,18 +74,32 @@ export default function GetProductForm() {
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 				<FormField
 					control={form.control}
-					name="url"
+					name="ultaUrl"
 					render={({ field }) => (
 						<FormItem>
+							<FormLabel>Ulta URL</FormLabel>
 							<FormControl>
 								<Input
-									placeholder="Search Products"
+									placeholder="Enter Ulta URL"
 									{...field}
 								/>
 							</FormControl>
-							<FormDescription>
-								Get reviews from Ulta and Sephora
-							</FormDescription>
+							<FormMessage />
+						</FormItem>
+					)}
+				/>
+				<FormField
+					control={form.control}
+					name="sephoraUrl"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Sephora URL</FormLabel>
+							<FormControl>
+								<Input
+									placeholder="Enter Sephora URL"
+									{...field}
+								/>
+							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
@@ -92,68 +110,5 @@ export default function GetProductForm() {
 				/>
 			</form>
 		</Form>
-
-		// <div className="flex flex-col items-center mt-12">
-		// 	<form
-		// 		className="flex gap-4 items-center"
-		// 		action={async (formData) => {
-		// 			setReviews(null);
-		// 			setLoading(true);
-		// 			const { metaData, reviewsData } = await getScrapedData(
-		// 				formData
-		// 			);
-		// 			if (reviewsData.length > 0) setReviews(reviewsData);
-		// 			if (metaData) setMetaData(metaData);
-
-		// 			setLoading(false);
-		// 		}}
-		// 	>
-		// 		<label htmlFor="url" className="text-white">
-		// 			URL
-		// 		</label>
-		// 		<Input
-		// 			className="text-black text-sm p-2"
-		// 			type="text"
-		// 			{...register("url")}
-		// 		/>
-		// 		<SubmitForm disabled={isSubmitting} />
-		// 	</form>
-		// 	{/* <div className="flex flex-col gap-4 mt-12 text-white mb-12">
-		// 		{loading && <p>Loading reviews...</p>}
-		// 		<p>{metaData?.price}</p>
-		// 		<p>{metaData?.averageRating}</p>
-		// 		<p>{metaData?.totalReviews}</p>
-		// 		{metaData?.reviewHistData &&
-		// 			metaData.reviewHistData.map((rating, index) => (
-		// 				<p key={index}>
-		// 					{`${5 - index} stars: `}
-		// 					{rating}
-		// 				</p>
-		// 			))}
-
-		// 		{reviews && reviews?.length > 0 && !loading && (
-		// 			<>
-		// 				<p>Review Count: {reviews.length}</p>
-
-		// 				{reviews &&
-		// 					reviews?.map((r, index) => (
-		// 						<div
-		// 							key={index}
-		// 							className="border border-slate-600 rounded-lg p-4"
-		// 						>
-		// 							<p className="font-bold">{r.headline}</p>
-		// 							<p className="text-slate-300 text-sm">
-		// 								{r.reviewText}
-		// 							</p>
-		// 							<p className="">Stars: {r.stars}</p>
-		// 							<p className="">
-		// 								{r.verifiedBuyer && "verified buyer"}
-		// 							</p>
-		// 						</div>
-		// 					))}
-		// 			</>
-		// 		)}
-		// 	</div> */}
-		// </div>
 	);
 }

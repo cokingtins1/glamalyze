@@ -60,6 +60,7 @@ export async function getSephoraData(
 			review_histogram: [],
 			sku_id: null,
 			retailer_id: "",
+			queries: [""]
 		};
 		return { metaData, reviewsData: [] };
 	}

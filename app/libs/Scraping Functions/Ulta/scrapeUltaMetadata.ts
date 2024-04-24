@@ -1,10 +1,10 @@
+import { loadContent } from "./loadContent";
 import { OptionProps } from "../../types";
 import { Page } from "puppeteer";
-import { loadSephoraContent } from "./loadSephoraContent";
-import { SephoraProduct } from "@prisma/client";
+import { UltaProduct } from "@prisma/client";
 
-export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
-	await loadSephoraContent(page);
+export async function scrapeUltaMetadata(page: Page, options: OptionProps) {
+	await loadContent(page);
 
 	const metaData = await page.evaluate((options) => {
 		function getNumber(text: string | null): number | null {
@@ -58,7 +58,7 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 		// 	console.log(`${key}: ${value}`);
 		// }
 
-		const result: SephoraProduct = {
+		const result: UltaProduct = {
 			product_id: crypto.randomUUID(),
 			sku_id: null,
 			product_name: null,
@@ -72,15 +72,22 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 			queries: [""],
 		};
 
-		result.retailer_id = "Sephora123";
+		result.retailer_id = "Ulta123";
 		const path = window.location.href;
 
-		result.sku_id = path ? getSku(new URL(path), "Sephora") : null;
+		result.sku_id = path ? getSku(new URL(path), "Ulta") : null;
 
-		const brandNameEl = document.querySelector(brandNameSelector);
+		const productInfoContSel = ".ProductInformation";
+		const productInfoCont = document.querySelector(productInfoContSel);
+
+		const brandNameEl = productInfoCont
+			? productInfoCont.querySelector(brandNameSelector)
+			: null;
+
 		result.brand_name = brandNameEl?.textContent || null;
 
-		const productNameEl = document.querySelector(productNameSelector);
+		const productNameEl =
+			productInfoCont?.querySelector(productNameSelector);
 
 		result.product_name = productNameEl?.textContent || null;
 
@@ -100,46 +107,30 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 		result.avg_rating = getNumber(averageRatingText);
 
 		const recommendedText =
-			document.querySelectorAll(recommendedSelector)[1]?.textContent ||
-			null;
+			document.querySelector(recommendedSelector)?.textContent || null;
 
 		if (recommendedText)
 			result.percent_recommended = getNumber(recommendedText);
 
-		const reviewHistogram = document.querySelector(
-			'[data-comp="HistogramChart "]'
-		);
-		const reviewHistItems =
-			reviewHistogram?.querySelectorAll(reviewDistSelector);
+		const reviewHistogram = document.querySelector(reviewDistSelector);
+		const reviewHistItems = reviewHistogram?.querySelectorAll("li");
+
+		let reviewHistData: number[] = [];
 
 		if (reviewHistItems && reviewHistItems.length > 0) {
-			result.review_histogram = Array.from(reviewHistItems)
-				.map((item) => {
-					let width;
-					const countElement = item.getAttribute("style");
+			reviewHistData = Array.from(reviewHistItems).map((item) => {
+				const countElement = item.querySelector(".pr-histogram-count");
 
-					if (!countElement) {
-						width = 0;
-					} else {
-						width = getNumber(countElement);
-					}
-
-					return width;
-				})
-				.filter((width) => width !== null) as number[];
+				return countElement
+					? parseInt(countElement.textContent as string)
+					: 0;
+			});
 		}
+
+		result.review_histogram = reviewHistData;
 
 		return result;
 	}, options.globalSelector);
-
-	// if (!metaData) {
-	// 	// Handle case where metaData is an empty array (never[])
-	// 	return null;
-	// }
-	//average rating
-	//rating distribution
-
-	//price
 
 	return metaData;
 }

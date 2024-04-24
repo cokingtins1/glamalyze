@@ -36,7 +36,7 @@ function getRandomTimestamp() {
 	const difference = targetDate.getTime() - currentDate.getTime();
 	const randomDifference = Math.floor(Math.random() * difference);
 
-	return new Date(currentDate.getTime() + randomDifference);
+	return new Date(currentDate.getTime() + randomDifference).toISOString();
 }
 
 function randomText() {
@@ -117,6 +117,28 @@ export function productSeeds(query: Query) {
 	return productBank;
 }
 
+export function createProduct(
+	ultaProduct: UltaProduct,
+	sephoraProduct: SephoraProduct,
+	query: Query
+) {
+	const product: Product = {
+		product_id: crypto.randomUUID(),
+		product_name: ultaProduct.product_name || sephoraProduct.product_name,
+		product_image_url: `https://picsum.photos/id/${randomNum(
+			1,
+			200
+		)}/200/300`,
+		retailer_id: [ultaProduct && "Ulta123", sephoraProduct && "Sephora123"],
+		brand_id: crypto.randomUUID(),
+		brand_name: ultaProduct.brand_name || sephoraProduct.brand_name,
+		queries: [query.query_id],
+		ulta_sku_id: ultaProduct.sku_id,
+		sephora_sku_id: sephoraProduct.sku_id,
+	};
+	return product;
+}
+
 export function reviewerSeeds(length: number): Reviewer[] {
 	const reviewerBank = Array.from({ length: length }, () => {
 		return {
@@ -136,6 +158,19 @@ export function querySeeds(allUsers: User[]): Query {
 		query_id: crypto.randomUUID(),
 		created_at: new Date(),
 		user_id: userIds[randomNum(0, userIds.length - 1)],
+		filters: ["None"],
+		product_id: crypto.randomUUID(), // assign placeholder id
+		retailer_id: Math.random() < 0.5 ? "Sephora123" : "Ulta123",
+	};
+
+	return queryBank;
+}
+
+export function createQuery(userId: string) {
+	const queryBank: Query = {
+		query_id: crypto.randomUUID(),
+		created_at: new Date(),
+		user_id: userId,
 		filters: ["None"],
 		product_id: crypto.randomUUID(), // assign placeholder id
 		retailer_id: Math.random() < 0.5 ? "Sephora123" : "Ulta123",

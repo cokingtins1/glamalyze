@@ -28,6 +28,7 @@ export async function runSephoraScraper(
 				percent_recommended: null,
 				review_histogram: [],
 				retailer_id: "",
+				queries: [""],
 			},
 			reviewsData: [],
 		};
@@ -125,6 +126,7 @@ export async function runSephoraScraper(
 				percent_recommended: null,
 				review_histogram: [],
 				retailer_id: "",
+				queries: [""]
 			},
 			reviewsData: [],
 		};

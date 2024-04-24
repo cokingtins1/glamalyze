@@ -89,7 +89,7 @@ model SephoraProduct {
 }
 
 model Review {
-  review_id       String    @id @default(uuid())
+  review_id       String   @id @default(uuid())
   product_id      String
   retailer_id     String
   review_rating   Int?
@@ -100,12 +100,13 @@ model Review {
   review_headline String?
   reviewer_id     String
   reviewer_name   String?
-  review_date     DateTime? @db.Timestamptz(6)
+  // review_date     DateTime? @db.Timestamptz(6)
+  review_date     String?
   query_id        String
-  product         Product   @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
-  query           Query     @relation(fields: [query_id], references: [query_id])
-  retailer        Retailer  @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
-  reviewer        Reviewer  @relation(fields: [reviewer_id], references: [reviewer_id])
+  product         Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  query           Query    @relation(fields: [query_id], references: [query_id])
+  retailer        Retailer @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
+  reviewer        Reviewer @relation(fields: [reviewer_id], references: [reviewer_id])
 }
 
 model Reviewer {
