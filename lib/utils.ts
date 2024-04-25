@@ -102,5 +102,56 @@ export function randomUserName() {
 	return usernameWords + randomNumber;
 }
 
+export function parseReviewTimeStamp(timestamp: string | null): string | null {
+	if (!timestamp) return null;
 
+	const currentDate = new Date(timestamp);
+	const now = new Date();
 
+	// Difference in milliseconds
+	const diffMs = now.getTime() - currentDate.getTime();
+
+	// Difference in seconds
+	const diffSeconds = Math.floor(diffMs / 1000);
+
+	// Difference in minutes
+	const diffMinutes = Math.floor(diffSeconds / 60);
+
+	// Difference in hours
+	const diffHours = Math.floor(diffMinutes / 60);
+
+	// Difference in days
+	const diffDays = Math.floor(diffHours / 24);
+
+	// Check if it's within the same day
+	if (diffMinutes < 1440) {
+		return `${diffHours} h ago`;
+	}
+	// Check if it's within the same month
+	else if (diffDays < 30) {
+		return `${diffDays} d ago`;
+	}
+	// Otherwise, return the date in the format "DD Mon YYYY"
+	else {
+		const monthNames = [
+			"Jan",
+			"Feb",
+			"Mar",
+			"Apr",
+			"May",
+			"Jun",
+			"Jul",
+			"Aug",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dec",
+		];
+
+		const day = currentDate.getDate();
+		const monthIndex = currentDate.getMonth();
+		const year = currentDate.getFullYear();
+
+		return `${day} ${monthNames[monthIndex]} ${year}`;
+	}
+}

@@ -29,7 +29,6 @@ export default function RatingChart({ metaData }: DataProps) {
 		(r) => r !== null
 	) as number[];
 
-
 	return (
 		<Card className="w-full">
 			<div className="flex items-center justify-between p-6">
@@ -79,9 +78,12 @@ export default function RatingChart({ metaData }: DataProps) {
 
 												<Progress
 													value={
-														(count /
-															metaData.total_reviews) *
-														100
+														metaData.retailer_id ===
+														"Sephora123"
+															? count
+															: (count /
+																	metaData.total_reviews) *
+															  100
 													}
 												/>
 											</>

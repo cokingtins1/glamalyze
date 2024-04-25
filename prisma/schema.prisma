@@ -116,3 +116,7 @@ model Reviewer {
   Review        Review[]
   retailer      Retailer @relation(fields: [retailer_id], references: [retailer_id])
 }
+
+model AllProducts {
+  product_id String   @id @default(uuid())
+}

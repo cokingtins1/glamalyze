@@ -395,6 +395,23 @@ export default function Page() {
 		}
 	}
 
+	function getNumber(text: string | null): number | null {
+		if (!text) return null;
+		const regex = /(\d{1,3}(,\d{3})*(\.\d+)?)/;
+		const match = text.match(regex);
+
+		if (!match) return null;
+
+		let numberString = match[0].replace(/[^\d.]/g, "");
+		if (numberString.includes(".")) {
+			return parseFloat(numberString);
+		} else {
+			return parseInt(numberString, 10);
+		}
+	}
+
+	console.log(parseInt("4109"))
+
 	return (
 		<form action={handleSubmit}>
 			<Button type="submit">Add Data</Button>

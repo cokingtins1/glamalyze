@@ -99,7 +99,9 @@ export async function scrapeUltaMetadata(page: Page, options: OptionProps) {
 		const totalReviewsText =
 			document.querySelector(totalReviewsSelector)?.textContent || null;
 
-		result.total_reviews = getNumber(totalReviewsText);
+		result.total_reviews = totalReviewsText
+			? parseInt(totalReviewsText)
+			: 0;
 
 		const averageRatingText =
 			document.querySelector(averageRatingSelector)?.textContent || null;
