@@ -30,6 +30,25 @@ export type OptionProps = {
 	reviewsLimit?: number;
 };
 
+export type AllProductsSelectors = {
+	sephoraByBrand?: {
+
+	},
+	sephoraSelectors: {
+		allProductsContSelector: string,
+		productCardContSelector: string,
+		productNameSelector: string;
+		productImageSelector: string;
+		brandNameSelector: string;
+		productPriceSelector: string;
+		skuIdSelector: string;
+		avgRatingSelector: string;
+		totalReviewsSelector: string;
+		pageLinkSelector: string;
+		loadMoreSelector: string
+	};
+};
+
 export const querySchema = z.object({
 	ultaUrl: z.string().min(2, { message: "Please enter a valid URL" }),
 	sephoraUrl: z.string().min(2, { message: "Please enter a valid URL" }),

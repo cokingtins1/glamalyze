@@ -4,7 +4,6 @@ import { OptionProps } from "../../types";
 import { Review } from "@prisma/client";
 
 export async function scrapeUltaReviews(page: Page, options: OptionProps) {
-	let consoleMessage: any = [];
 
 	const reviewData = await page.evaluate((options) => {
 		const {
