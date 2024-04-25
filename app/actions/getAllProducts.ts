@@ -12,7 +12,7 @@ export async function getAllProducts(url: string): Promise<AllProducts[]> {
 				productNameSelector: ".ProductTile-name.css-h8cc3p.eanm77i0",
 				productImageSelector: "picture.css-yq9732", // get srcset
 				brandNameSelector: ".css-ft3vv3.eanm77i0",
-				productPriceSelector: ".css-0",
+				productPriceSelector: ".css-1f35s9q",
 				skuIdSelector: "string",
 				avgRatingSelector: '[data-at="star_rating_style"]', // get style width
 				totalReviewsSelector: '[data-at="review_count"]',
@@ -22,7 +22,6 @@ export async function getAllProducts(url: string): Promise<AllProducts[]> {
 			},
 		});
 
-		console.log("productData:", allProducts);
 		return allProducts;
 	} catch (error) {
 		console.log(error);

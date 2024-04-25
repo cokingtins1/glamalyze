@@ -6,13 +6,16 @@ export async function scrapeAllProducts(
 	page: Page,
 	options: AllProductsSelectors
 ) {
+	page.on("console", (msg) => console.log("PAGE LOG:", msg.text()));
+
 	const productData = await page.evaluate((options) => {
 		function getNumber(text: string | null): number | null {
-			if (!text) return null;
+			if (!text) return 69;
+
 			const regex = /(\d{1,3}(,\d{3})*(\.\d+)?)/;
 			const match = text.match(regex);
 
-			if (!match) return null;
+			if (!match) return 69;
 
 			let numberString = match[0].replace(/[^\d.]/g, "");
 			let numberValue: number;
@@ -30,26 +33,8 @@ export async function scrapeAllProducts(
 			return numberValue;
 		}
 
-		type Retailer = "Sephora" | "Ulta";
-		function getSku(url: string | null, retailer: Retailer) {
-			if (!url) return null;
-
-			// let param;
-
-			// switch (retailer) {
-			// 	case "Sephora":
-			// 		param = "skuId";
-			// 		break;
-			// 	case "Ulta":
-			// 		param = "sku";
-			// 		break;
-			// 	default:
-			// 		param = "sku";
-			// }
-
-			// const searchParams = url.searchParams;
-			// const skuNum = searchParams.get(param);
-			// return skuNum;
+		function getSku(url: string | null) {
+			if (!url) return "SKU ERROR";
 
 			const regex = /skuId=(\d+)/;
 			const match = url.match(regex);
@@ -83,12 +68,18 @@ export async function scrapeAllProducts(
 
 		const result: AllProducts[] = [];
 
+		let count: number = 0;
 		productCards.forEach((card: Element) => {
+			count++;
 			const productNameEl = card.querySelector(productNameSelector);
+
 			const productName = productNameEl
 				? productNameEl.textContent
 				: null;
 
+			if (!productName) {
+				console.log("PRODUCT NAME:", count);
+			}
 			const productImageEl = card.querySelector(productImageSelector);
 			const productSourceEl = productImageEl
 				? productImageEl.querySelector("source")
@@ -100,17 +91,36 @@ export async function scrapeAllProducts(
 			const brandNameEl = card.querySelector(brandNameSelector);
 			const brandName = brandNameEl ? brandNameEl.textContent : null;
 
-			const productPriceEl = card.querySelector(productPriceSelector);
-			const productPrice = productPriceEl
-				? productPriceEl.textContent
-				: null;
+			const productPriceContEl = card.querySelector(productPriceSelector);
+			const productPriceRange = productPriceContEl
+				? productPriceContEl.querySelectorAll("span")
+				: [];
+
+			let productPrices: number[] = [];
+
+			if (productPriceRange.length > 0) {
+				productPriceRange.forEach((element) => {
+					const priceText = element.textContent;
+					if (priceText) {
+						const parsedPrice = priceText?.split(" ");
+
+						if (parsedPrice?.length === 3) {
+							const [minPriceText, _, maxPriceText] = parsedPrice;
+							productPrices.push(getNumber(minPriceText) ?? 0);
+							productPrices.push(getNumber(maxPriceText) ?? 0);
+						} else {
+							productPrices.push(getNumber(priceText) ?? 0);
+						}
+					}
+				});
+			}
 
 			const pageLinkEl = card.querySelector(pageLinkSelector);
 			const pageLink = pageLinkEl
 				? pageLinkEl.getAttribute("href")
 				: null;
 
-			const skuId = pageLink ? getSku(pageLink, "Sephora") : null;
+			const skuId = pageLink ? getSku(pageLink) : null;
 
 			const avgRatingEl = card.querySelector(avgRatingSelector);
 			const avgRating = avgRatingEl
@@ -129,7 +139,7 @@ export async function scrapeAllProducts(
 				retailer_id: "Sephora123",
 				brand_id: crypto.randomUUID(),
 				brand_name: brandName,
-				product_price: getNumber(productPrice),
+				product_price: productPrices,
 				sku_id: skuId,
 				avg_rating: getNumber(avgRating),
 				total_reviews: getNumber(totalReviews),

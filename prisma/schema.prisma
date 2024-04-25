@@ -118,13 +118,13 @@ model Reviewer {
 }
 
 model AllProducts {
-  product_id        String   @id @default(uuid())
+  product_id        String  @id @default(uuid())
   product_name      String?
   product_image_url String?
   retailer_id       String?
   brand_id          String?
   brand_name        String?
-  product_price     Float?
+  product_price     Float[]
   sku_id            String?
   avg_rating        Float?
   total_reviews     Float?

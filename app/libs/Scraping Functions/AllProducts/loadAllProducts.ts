@@ -15,24 +15,28 @@ export async function loadAllProducts(page: Page) {
 
 	// await page.evaluate(() => window.scrollBy(0, window.innerHeight));
 	await page.keyboard.down("End");
+	await delay(2000);
+
 	await page.keyboard.down("End");
+	await delay(2000);
+
 	await page.keyboard.down("End");
 
 	await delay(2000);
-	// await page.evaluate(() => {
-	// 	window.scrollBy(0, -500);
-	// });
-	// await delay(500);
+	await page.evaluate(() => {
+		window.scrollBy(0, -500);
+	});
+	await delay(500);
 
-	// await page.evaluate(() => {
-	// 	window.scrollBy(0, -200);
-	// });
+	await page.evaluate(() => {
+		window.scrollBy(0, -200);
+	});
 
-	// await delay(500);
+	await delay(500);
 
-	// await page.evaluate(() => {
-	// 	window.scrollBy(0, -200);
-	// });
+	await page.evaluate(() => {
+		window.scrollBy(0, -200);
+	});
 
 	return;
 }
