@@ -6,8 +6,6 @@ export async function scrapeAllProducts(
 	page: Page,
 	options: AllProductsSelectors
 ) {
-	page.on("console", (msg) => console.log("PAGE LOG:", msg.text()));
-
 	const productData = await page.evaluate((options) => {
 		function getNumber(text: string | null): number | null {
 			if (!text) return 0;
@@ -76,17 +74,18 @@ export async function scrapeAllProducts(
 			'[data-at="number_of_products"]'
 		);
 
-		if (!resultsEl) return null;
+		if (!resultsEl) return [];
 
 		const totalResultsText = resultsEl.textContent?.trim();
-		if (!totalResultsText) return null;
+		if (!totalResultsText) return [];
 
 		const resultsNum = parseInt(
 			totalResultsText.split(" ")[0].replace(/\D/g, "")
 		);
 
+		if(Number.isNaN(resultsNum)) return []
+
 		const result: AllProducts[] = [];
-		let count = 0;
 		Array.from({ length: resultsNum }).forEach((order, index) => {
 			let selector: string = "";
 			if (index < 60) {
@@ -163,8 +162,6 @@ export async function scrapeAllProducts(
 			const totalReviews = totalReviewsEl
 				? totalReviewsEl.textContent
 				: null;
-
-			count++;
 
 			result.push({
 				product_id: crypto.randomUUID(),
