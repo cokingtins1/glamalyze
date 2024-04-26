@@ -28,21 +28,91 @@ export async function runAllProductsScraper(
 
 		// brand page is open
 		// load all content (scrolls to bottom)
-		await loadAllProducts(page);
 
 		let loadMoreButton = await page.$(
 			options.sephoraSelectors.loadMoreSelector
 		);
 
-		while (loadMoreButton) {
-			await page.click(options.sephoraSelectors.loadMoreSelector);
-			await loadAllProducts(page);
-			loadMoreButton = await page.$(
-				options.sephoraSelectors.loadMoreSelector
-			);
+		// const totalResults = await page.evaluate(() => {
+		// 	const totalResultsEl = document.querySelector(
+		// 		'[data-at="number_of_products"]'
+		// 	);
+
+		// 	if (!totalResultsEl) return null;
+
+		// 	const totalResultsText = totalResultsEl.textContent?.trim();
+		// 	if (!totalResultsText) return null;
+
+		// 	const totalResultsArr = totalResultsText?.split(" ");
+
+		// 	if (totalResultsArr.length < 1) return null;
+
+		// 	const totalResultsNum = parseInt(
+		// 		totalResultsArr[0].replace(/[^0-9]/g, "")
+		// 	);
+
+		// 	if (isNaN(totalResultsNum)) return null;
+		// 	return totalResultsNum;
+		// });
+
+		const totalResults = 0;
+		console.log("totalResults:", totalResults);
+
+		let data: AllProducts[] = [];
+		if (!totalResults || totalResults === 0) {
+			console.log("running fallback");
+			while (loadMoreButton) {
+				await loadAllProducts(page, false);
+				await page.click(options.sephoraSelectors.loadMoreSelector);
+				await loadAllProducts(page, true);
+
+
+				const results = await page.evaluate(() => {
+					const resultsEl = document.querySelector(
+						".css-1k3zwd9.eanm77i0"
+					);
+
+					const resultsText = resultsEl
+						? resultsEl.textContent
+						: "ERROR";
+
+					return resultsText;
+				});
+
+				console.log("Showing Results:", results);
+
+				loadMoreButton = await page.$(
+					options.sephoraSelectors.loadMoreSelector
+				);
+			}
+			data = await scrapeAllProducts(page, options);
+		} else {
+			const resultsPerPage = 60;
+			const pageCount = Math.ceil(totalResults / resultsPerPage);
+			console.log("page count found", pageCount);
+
+			if (!pageCount || pageCount < 1) return [];
+
+			let currentPage = 0;
+			while (currentPage < pageCount) {
+				currentPage++;
+
+				console.log("currentPage", currentPage);
+				console.log("url:", `${url}?currentPage=${currentPage}`);
+
+				await page.goto(`${url}?currentPage=${currentPage}`);
+				await loadAllProducts(page, true);
+				const pageData = await scrapeAllProducts(page, options);
+
+				if (pageData?.length > 0) {
+					// console.log("pageData", pageData);
+					console.log("pageData length", pageData.length);
+					data.push(...pageData);
+				}
+			}
 		}
 
-		const data = await scrapeAllProducts(page, options);
+		// console.log("data:",data)
 
 		// while load more button exists, load content
 		// begin scraping...

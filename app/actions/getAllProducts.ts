@@ -10,6 +10,7 @@ export async function getAllProducts(url: string): Promise<AllProducts[]> {
 				allProductsContSelector: ".css-1322gsb",
 				productCardContSelector: ".css-1qe8tjm",
 				productNameSelector: ".ProductTile-name.css-h8cc3p.eanm77i0",
+				// ProductTile-name.css-h8cc3p.eanm77i0
 				productImageSelector: "picture.css-yq9732", // get srcset
 				brandNameSelector: ".css-ft3vv3.eanm77i0",
 				productPriceSelector: ".css-1f35s9q",

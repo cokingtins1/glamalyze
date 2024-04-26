@@ -10,12 +10,12 @@ export async function scrapeAllProducts(
 
 	const productData = await page.evaluate((options) => {
 		function getNumber(text: string | null): number | null {
-			if (!text) return 69;
+			if (!text) return 0;
 
 			const regex = /(\d{1,3}(,\d{3})*(\.\d+)?)/;
 			const match = text.match(regex);
 
-			if (!match) return 69;
+			if (!match) return 0;
 
 			let numberString = match[0].replace(/[^\d.]/g, "");
 			let numberValue: number;
@@ -33,12 +33,24 @@ export async function scrapeAllProducts(
 			return numberValue;
 		}
 
-		function getSku(url: string | null) {
+		function getSku(url: string | null): string {
 			if (!url) return "SKU ERROR";
 
 			const regex = /skuId=(\d+)/;
 			const match = url.match(regex);
-			return match ? match[1] : null;
+			return match ? match[1] : "SKU ERROR";
+		}
+
+		function parseImageUrl(url: string | null): string[] {
+			if (!url) return ["URL ERROR"];
+
+			const parsedString = url.split(" ");
+
+			if (parsedString.length !== 4) return [url];
+
+			const [smallImage, one, largeImage, two] = parsedString;
+
+			return [smallImage, largeImage];
 		}
 
 		const {
@@ -60,38 +72,57 @@ export async function scrapeAllProducts(
 
 		if (!allProductsCont) return [];
 
-		const productCards = allProductsCont.querySelectorAll(
-			productCardContSelector
+		const resultsEl = document.querySelector(
+			'[data-at="number_of_products"]'
 		);
 
-		if (!productCards) return [];
+		if (!resultsEl) return null;
+
+		const totalResultsText = resultsEl.textContent?.trim();
+		if (!totalResultsText) return null;
+
+		const resultsNum = parseInt(
+			totalResultsText.split(" ")[0].replace(/\D/g, "")
+		);
 
 		const result: AllProducts[] = [];
+		let count = 0;
+		Array.from({ length: resultsNum }).forEach((order, index) => {
+			let selector: string = "";
+			if (index < 60) {
+				selector = `div[style*="order:${index}"]`;
+			} else if (index >= 60) {
+				selector = `div[style*="order: ${index};"]`;
+			}
 
-		let count: number = 0;
-		productCards.forEach((card: Element) => {
-			count++;
-			const productNameEl = card.querySelector(productNameSelector);
+			const productCard = allProductsCont.querySelector(selector);
+
+			if (!productCard) return [];
+			const productNameEl =
+				productCard.querySelector(productNameSelector);
 
 			const productName = productNameEl
 				? productNameEl.textContent
 				: null;
 
 			if (!productName) {
-				console.log("PRODUCT NAME:", count);
+				console.log("PRODUCT NAME:", productName);
 			}
-			const productImageEl = card.querySelector(productImageSelector);
+			const productImageEl =
+				productCard.querySelector(productImageSelector);
 			const productSourceEl = productImageEl
 				? productImageEl.querySelector("source")
 				: null;
-			const productImageUrl = productSourceEl
+			const productImageUrlText = productSourceEl
 				? productSourceEl.getAttribute("srcset")
 				: null;
+			const productImageUrl = parseImageUrl(productImageUrlText);
 
-			const brandNameEl = card.querySelector(brandNameSelector);
+			const brandNameEl = productCard.querySelector(brandNameSelector);
 			const brandName = brandNameEl ? brandNameEl.textContent : null;
 
-			const productPriceContEl = card.querySelector(productPriceSelector);
+			const productPriceContEl =
+				productCard.querySelector(productPriceSelector);
 			const productPriceRange = productPriceContEl
 				? productPriceContEl.querySelectorAll("span")
 				: [];
@@ -115,22 +146,25 @@ export async function scrapeAllProducts(
 				});
 			}
 
-			const pageLinkEl = card.querySelector(pageLinkSelector);
+			const pageLinkEl = productCard.querySelector(pageLinkSelector);
 			const pageLink = pageLinkEl
 				? pageLinkEl.getAttribute("href")
 				: null;
 
 			const skuId = pageLink ? getSku(pageLink) : null;
 
-			const avgRatingEl = card.querySelector(avgRatingSelector);
+			const avgRatingEl = productCard.querySelector(avgRatingSelector);
 			const avgRating = avgRatingEl
 				? avgRatingEl.getAttribute("style")
 				: null;
 
-			const totalReviewsEl = card.querySelector(totalReviewsSelector);
+			const totalReviewsEl =
+				productCard.querySelector(totalReviewsSelector);
 			const totalReviews = totalReviewsEl
 				? totalReviewsEl.textContent
 				: null;
+
+			count++;
 
 			result.push({
 				product_id: crypto.randomUUID(),
