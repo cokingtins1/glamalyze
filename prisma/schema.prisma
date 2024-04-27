@@ -130,3 +130,15 @@ model AllProducts {
   total_reviews     Float?
   page_link         String?
 }
+
+model UltaBrand {
+  brand_id        String  @id @default(uuid())
+  brand_name      String?
+  brand_page_link String?
+}
+
+model SephoraBrand {
+  brand_id        String  @id @default(uuid())
+  brand_name      String?
+  brand_page_link String?
+}

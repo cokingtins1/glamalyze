@@ -10,6 +10,8 @@ import { getAllSephoraProducts } from "../actions/getAllSephoraProducts";
 import elements from "@/app/libs/JSON/elemets.json";
 import { AllProductsSelectors } from "../libs/types";
 import { getAllUltaProducts } from "../actions/getAllUltaProducts";
+import { getAllUltaBrands } from "../actions/getAllUltaBrands";
+import { getAllSephoraBrands } from "../actions/getAllSephoraBrands";
 
 export default function Page() {
 	async function handleSubmit() {
@@ -18,7 +20,7 @@ export default function Page() {
 		const start = new Date().getTime();
 
 		const url = "https://www.ulta.com/brand/chanel";
-		// const allProducts = await getAllUltaProducts(url);
+		// const allProducts = await getAllSephoraBrands();
 
 		const end = new Date().getTime();
 
@@ -50,6 +52,4395 @@ export default function Page() {
 		// 	"Filtered Products",
 		// 	allProducts.map((item) => item.product_name)
 		// );
+
+		const allSephoraBrands = [
+			{
+				brand_id: "11e59c38-ddb9-4dc7-869e-89df155087b0",
+				brand_name: "AAVRANI",
+				brand_page_link: "/brand/aavrani",
+			},
+			{
+				brand_id: "cf007fcb-5eb0-4245-a8d1-01dc23c00219",
+				brand_name: "ABBOTT",
+				brand_page_link: "/brand/abbott",
+			},
+			{
+				brand_id: "264c0078-8d67-4f9f-ba38-d836e4a2576b",
+				brand_name: "Act+Acre",
+				brand_page_link: "/brand/act-acre",
+			},
+			{
+				brand_id: "cd9795b3-7f1d-4328-b64e-e9db6f94f7dc",
+				brand_name: "adwoa beauty",
+				brand_page_link: "/brand/adwoa-beauty",
+			},
+			{
+				brand_id: "027297d0-b415-43d6-8d39-e418eddc843a",
+				brand_name: "AERIN",
+				brand_page_link: "/brand/aerin-perfume",
+			},
+			{
+				brand_id: "e3f4e284-a932-4f18-a4e9-1efb30faaf08",
+				brand_name: "Algenist",
+				brand_page_link: "/brand/algenist",
+			},
+			{
+				brand_id: "40352226-4da9-4344-9d57-fe43d4fb5f3d",
+				brand_name: "ALO",
+				brand_page_link: "/brand/alo",
+			},
+			{
+				brand_id: "7fa3e505-11ea-46a6-94ae-bc9063fddb57",
+				brand_name: "Alpyn Beauty",
+				brand_page_link: "/brand/alpyn-beauty",
+			},
+			{
+				brand_id: "e84ec3f9-f7ae-4d70-8379-6dd0d2babcc6",
+				brand_name: "ALTERNA Haircare",
+				brand_page_link: "/brand/alterna",
+			},
+			{
+				brand_id: "2561f7ca-022b-4305-8324-6a3ea36882c9",
+				brand_name: "Ami Colé",
+				brand_page_link: "/brand/ami-cole",
+			},
+			{
+				brand_id: "f108fdde-7084-40a6-a365-ee162e2babe0",
+				brand_name: "amika",
+				brand_page_link: "/brand/amika",
+			},
+			{
+				brand_id: "acf42bf3-6015-4751-9250-f52164338cf1",
+				brand_name: "Anastasia Beverly Hills",
+				brand_page_link: "/brand/anastasia-beverly-hills",
+			},
+			{
+				brand_id: "e26bc72e-3413-42ce-a00d-3c5ff458760e",
+				brand_name: "Aquis",
+				brand_page_link: "/brand/aquis",
+			},
+			{
+				brand_id: "fd4a1aee-6719-44f0-a537-7aecda559741",
+				brand_name: "Armani Beauty",
+				brand_page_link: "/brand/giorgio-armani-beauty",
+			},
+			{
+				brand_id: "6c6502df-9678-45e7-885b-d5b545f77f21",
+				brand_name: "Artist Couture",
+				brand_page_link: "/brand/artist-couture",
+			},
+			{
+				brand_id: "ab8fbbd2-c832-4697-baf4-be66df7d5ea5",
+				brand_name: "Augustinus Bader",
+				brand_page_link: "/brand/augustinus-bader",
+			},
+			{
+				brand_id: "f4f23c10-3fe4-4bc0-acfa-3e8f4f167bea",
+				brand_name: "Azzaro",
+				brand_page_link: "/brand/azzaro",
+			},
+			{
+				brand_id: "16a22107-68ed-45c6-981a-4f656973700a",
+				brand_name: "BaBylissPRO",
+				brand_page_link: "/brand/babylisspro",
+			},
+			{
+				brand_id: "0ce43757-7d7f-4bc7-a64d-aa19ea007a6d",
+				brand_name: "bareMinerals",
+				brand_page_link: "/brand/bareminerals",
+			},
+			{
+				brand_id: "7ebacda3-85e8-4138-b0d8-300e411a0236",
+				brand_name: "BASMA",
+				brand_page_link: "/brand/basma",
+			},
+			{
+				brand_id: "302ade0e-ab9a-480a-9662-7685e8613436",
+				brand_name: "BeautyBio",
+				brand_page_link: "/brand/beautybio",
+			},
+			{
+				brand_id: "6218a8a4-c869-4ee1-b089-a7c2394de06d",
+				brand_name: "Beautyblender",
+				brand_page_link: "/brand/beautyblender",
+			},
+			{
+				brand_id: "e0954a8f-5a8c-41ce-b195-fb8d1611315e",
+				brand_name: "belif",
+				brand_page_link: "/brand/belif",
+			},
+			{
+				brand_id: "b7e6c6bb-b1ed-4e21-b303-d320e25f697b",
+				brand_name: "Benefit Cosmetics",
+				brand_page_link: "/brand/benefit-cosmetics",
+			},
+			{
+				brand_id: "5e9fa539-a630-484d-8e9b-edb672a449bb",
+				brand_name: "Bio Ionic",
+				brand_page_link: "/brand/bio-ionic",
+			},
+			{
+				brand_id: "ebe88821-e8e7-4c40-9920-98aa9d6940f6",
+				brand_name: "Biossance",
+				brand_page_link: "/brand/biossance",
+			},
+			{
+				brand_id: "9a277fc5-72b1-49df-8151-42a28f67d556",
+				brand_name: "Blinc",
+				brand_page_link: "/brand/blinc",
+			},
+			{
+				brand_id: "8bc69561-f9ef-46a3-9d72-1807cb00dbdf",
+				brand_name: "Bobbi Brown",
+				brand_page_link: "/brand/bobbi-brown",
+			},
+			{
+				brand_id: "1bde7255-083b-4e35-8f96-b261e8160a9b",
+				brand_name: "BondiBoost",
+				brand_page_link: "/brand/bondi-boost",
+			},
+			{
+				brand_id: "6d3731ce-652d-4797-81c7-904b8c09dfb7",
+				brand_name: "Boy Smells",
+				brand_page_link: "/brand/boysmells",
+			},
+			{
+				brand_id: "2650949a-6998-48c1-9e83-07febc3d3a8e",
+				brand_name: "BREAD BEAUTY SUPPLY",
+				brand_page_link: "/brand/bread-beauty-supply",
+			},
+			{
+				brand_id: "94850d43-7ac2-4fc3-bcd7-0ce8562062e8",
+				brand_name: "Briogeo",
+				brand_page_link: "/brand/briogeo",
+			},
+			{
+				brand_id: "4c6a36de-23c5-43b8-881b-1c2b50005a6e",
+				brand_name: "Brown Girl Jane",
+				brand_page_link: "/brand/brown-girl-jane",
+			},
+			{
+				brand_id: "bd061887-8a87-4e31-9d23-4a7a87976b23",
+				brand_name: "Bumble and bumble",
+				brand_page_link: "/brand/bumble-bumble",
+			},
+			{
+				brand_id: "76c15fb5-93ae-43c1-8021-d6fbee534b7e",
+				brand_name: "BURBERRY",
+				brand_page_link: "/brand/burberry",
+			},
+			{
+				brand_id: "cb14a7b7-a31f-422c-b902-883d0f9c467a",
+				brand_name: "Buxom",
+				brand_page_link: "/brand/buxom",
+			},
+			{
+				brand_id: "6e8b2324-73b2-4f0b-8085-356bebae2d92",
+				brand_name: "By Rosie Jane",
+				brand_page_link: "/brand/by-rosie-jane",
+			},
+			{
+				brand_id: "a3e0c5b1-6bff-4e69-9493-068e871fd4cd",
+				brand_name: "caliray",
+				brand_page_link: "/brand/caliray",
+			},
+			{
+				brand_id: "60815bc3-15f3-4307-85f4-6fa11e295ca6",
+				brand_name: "CANOPY",
+				brand_page_link: "/brand/canopy",
+			},
+			{
+				brand_id: "016d512c-a976-4fcf-8503-af88c40e9a7c",
+				brand_name: "Carolina Herrera",
+				brand_page_link: "/brand/carolina-herrera",
+			},
+			{
+				brand_id: "f5c094e9-4012-40f4-b36b-6964ec1e1fdb",
+				brand_name: "Caudalie",
+				brand_page_link: "/brand/caudalie",
+			},
+			{
+				brand_id: "279fe0d8-cab5-4b23-8427-e5a38263c364",
+				brand_name: "CAY SKIN",
+				brand_page_link: "/brand/cay-skin",
+			},
+			{
+				brand_id: "52049489-2906-4cbb-83d7-644648eaaf32",
+				brand_name: "Ceremonia",
+				brand_page_link: "/brand/ceremonia",
+			},
+			{
+				brand_id: "6ff41695-069a-4bcf-a65b-da8019313701",
+				brand_name: "CHANEL",
+				brand_page_link: "/brand/chanel",
+			},
+			{
+				brand_id: "a71d98ff-bfb4-4d69-a026-3666bdae2480",
+				brand_name: "Charlotte Tilbury",
+				brand_page_link: "/brand/charlotte-tilbury",
+			},
+			{
+				brand_id: "4e6ae479-eccb-4f5b-9795-e9779e4f7f6a",
+				brand_name: "Chloé",
+				brand_page_link: "/brand/chloe",
+			},
+			{
+				brand_id: "02cf9a36-2a98-44b6-b239-3342021a0f90",
+				brand_name: "Ciaté London",
+				brand_page_link: "/brand/ciate",
+			},
+			{
+				brand_id: "14232484-8974-4611-990a-5ed01d049d16",
+				brand_name: "ciele",
+				brand_page_link: "/brand/ciele",
+			},
+			{
+				brand_id: "a8dd8b8c-4079-4f8e-beab-0edb34190f00",
+				brand_name: "Cinema Secrets",
+				brand_page_link: "/brand/cinema-secrets",
+			},
+			{
+				brand_id: "4ee89547-5932-4bd1-a92b-e3695286bee7",
+				brand_name: "Clarins",
+				brand_page_link: "/brand/clarins",
+			},
+			{
+				brand_id: "40133e4c-a504-4f4d-bb8b-67fa3db244bf",
+				brand_name: "CLEAN RESERVE",
+				brand_page_link: "/brand/clean-reserve",
+			},
+			{
+				brand_id: "a08624c2-8056-43d3-a029-4a2062e93690",
+				brand_name: "CLINIQUE",
+				brand_page_link: "/brand/clinique",
+			},
+			{
+				brand_id: "ddbc3898-8fde-4dfe-afb1-eed826db10da",
+				brand_name: "COLOR WOW",
+				brand_page_link: "/brand/color-wow",
+			},
+			{
+				brand_id: "b6c71a54-c6a2-48dc-b764-a6ecd2c07036",
+				brand_name: "Commodity",
+				brand_page_link: "/brand/commodity",
+			},
+			{
+				brand_id: "855c63f3-481c-4d2b-9ef1-f107dd57ada0",
+				brand_name: "Community Sixty-Six",
+				brand_page_link: "/brand/community-sixty-six",
+			},
+			{
+				brand_id: "24a70961-fb33-4d50-a3ef-c6e53f696c1b",
+				brand_name: "COOLA",
+				brand_page_link: "/brand/coola-suncare",
+			},
+			{
+				brand_id: "79987d71-7fa1-4d61-9e67-8ee3c5f51a05",
+				brand_name: "Crown Affair",
+				brand_page_link: "/brand/crown-affair",
+			},
+			{
+				brand_id: "5dc0c110-7225-42a6-8487-a4fc867cbac6",
+				brand_name: "Curlsmith",
+				brand_page_link: "/brand/curlsmith",
+			},
+			{
+				brand_id: "22819731-65c3-421c-8088-8fc5ec80fce3",
+				brand_name: "dae",
+				brand_page_link: "/brand/dae",
+			},
+			{
+				brand_id: "f5765141-c7b5-45d9-a369-7244547a6786",
+				brand_name: "DAMDAM",
+				brand_page_link: "/brand/dam-dam",
+			},
+			{
+				brand_id: "a9fa62f4-9bd5-439a-9cc6-91cf17d1bf61",
+				brand_name: "Danessa Myricks Beauty",
+				brand_page_link: "/brand/danessa-myricks-beauty",
+			},
+			{
+				brand_id: "c519492e-224b-4d7e-8d49-c809fc9310d3",
+				brand_name: "Deborah Lippmann",
+				brand_page_link: "/brand/deborah-lippmann",
+			},
+			{
+				brand_id: "00fc528b-dd36-4474-8c8c-8741aeabd4cc",
+				brand_name: "DedCool",
+				brand_page_link: "/brand/dedcool",
+			},
+			{
+				brand_id: "d3e99123-f579-487e-87d9-b8f34b514b81",
+				brand_name: "DEREK LAM 10 CROSBY",
+				brand_page_link: "/brand/derek-lam-10-crosby",
+			},
+			{
+				brand_id: "05de1514-f793-4ea4-90c1-f7436e87f910",
+				brand_name: "DERMAFLASH",
+				brand_page_link: "/brand/dermaflash",
+			},
+			{
+				brand_id: "8d7cdb2e-a9b0-4141-9a5a-9f0676a63743",
+				brand_name: "Dermalogica",
+				brand_page_link: "/brand/dermalogica",
+			},
+			{
+				brand_id: "f763c9c5-7c9c-4235-b1b9-698873950d99",
+				brand_name: "Dieux",
+				brand_page_link: "/brand/dieux",
+			},
+			{
+				brand_id: "c047279a-352c-4bd8-933d-3d11ed0d84e5",
+				brand_name: "Dior",
+				brand_page_link: "/brand/dior",
+			},
+			{
+				brand_id: "5df5360e-fd57-4ccc-bc7b-f47f35b9139e",
+				brand_name: "Dolce&Gabbana",
+				brand_page_link: "/brand/dolce-gabbana",
+			},
+			{
+				brand_id: "c36f3ee0-8229-48a2-866f-df4fe4ebbf28",
+				brand_name: "DOMINIQUE COSMETICS",
+				brand_page_link: "/brand/dominique-cosmetics",
+			},
+			{
+				brand_id: "86c78cb8-cff5-4a9f-ab3b-0534af984504",
+				brand_name: "Donna Karan",
+				brand_page_link: "/brand/donna-karan",
+			},
+			{
+				brand_id: "a938569e-c4af-4bfc-970b-cf68cc767909",
+				brand_name: "Dr. Barbara Sturm",
+				brand_page_link: "/brand/dr-barbara-sturm",
+			},
+			{
+				brand_id: "a3d7114a-2cba-4dd0-8db0-f22f0b4805d8",
+				brand_name: "Dr. Brandt Skincare",
+				brand_page_link: "/brand/dr-brandt-skincare",
+			},
+			{
+				brand_id: "7adee243-8893-4011-8ae1-e16539ed7f91",
+				brand_name: "Dr. Dennis Gross Skincare",
+				brand_page_link: "/brand/dr-dennis-gross-skincare",
+			},
+			{
+				brand_id: "c632f53c-debb-4a36-a66b-62efd5c6b58a",
+				brand_name: "Dr. Idriss",
+				brand_page_link: "/brand/dr-idriss",
+			},
+			{
+				brand_id: "1d49b0c0-abeb-4eee-b0c6-a447667aeb94",
+				brand_name: "Dr. Jart+",
+				brand_page_link: "/brand/dr-jart",
+			},
+			{
+				brand_id: "7ef3686c-41ed-43f0-bec1-c5b9aa24d7f6",
+				brand_name: "Drunk Elephant",
+				brand_page_link: "/brand/drunk-elephant",
+			},
+			{
+				brand_id: "3840b28c-60f2-4e7b-b103-d553a5945cb2",
+				brand_name: "Drybar",
+				brand_page_link: "/brand/drybar",
+			},
+			{
+				brand_id: "a1ed728c-5c7e-4657-8b0e-e6683988b40e",
+				brand_name: "DUO",
+				brand_page_link: "/brand/duo",
+			},
+			{
+				brand_id: "025cfe0f-ab92-46cd-a09a-e3cb093845da",
+				brand_name: "Dyson",
+				brand_page_link: "/brand/dyson",
+			},
+			{
+				brand_id: "b3faead8-31ef-4804-9281-5c25169d305b",
+				brand_name: "EADEM",
+				brand_page_link: "/brand/eadem",
+			},
+			{
+				brand_id: "91fea944-b84a-49a0-9612-a0eb2385b2e2",
+				brand_name: "Eight & Bob",
+				brand_page_link: "/brand/eight-bob",
+			},
+			{
+				brand_id: "4a70053f-6b97-41bf-8ab2-c7ed1b38ed4e",
+				brand_name: "Elemis",
+				brand_page_link: "/brand/elemis",
+			},
+			{
+				brand_id: "36a7f4db-2908-4f45-99f2-920a224b26a1",
+				brand_name: "Ellis Brooklyn",
+				brand_page_link: "/brand/ellis-brooklyn",
+			},
+			{
+				brand_id: "b48daa1e-309c-4784-b34f-dfd5171040a4",
+				brand_name: "Estée Lauder",
+				brand_page_link: "/brand/estee-lauder",
+			},
+			{
+				brand_id: "c03a0203-9923-4d75-83f4-ea2bd77779b5",
+				brand_name: "Fable & Mane",
+				brand_page_link: "/brand/fable-mane",
+			},
+			{
+				brand_id: "ce587bc7-87b0-42f6-99db-3f574c00b28d",
+				brand_name: "FaceGym",
+				brand_page_link: "/brand/facegym",
+			},
+			{
+				brand_id: "08fa0293-3eee-4f19-868b-3402b54323b0",
+				brand_name: "Farmacy",
+				brand_page_link: "/brand/farmacy",
+			},
+			{
+				brand_id: "14d87024-ea89-41a4-afc4-a984991c6b3a",
+				brand_name: "Fashion Fair",
+				brand_page_link: "/brand/fashion-fair",
+			},
+			{
+				brand_id: "a8bf95a6-c32d-484d-8d60-5dbc471d48ee",
+				brand_name: "Fenty Beauty by Rihanna",
+				brand_page_link: "/brand/fenty-beauty-rihanna",
+			},
+			{
+				brand_id: "bb235a52-1ba2-4269-bf3a-5a7a40d11dde",
+				brand_name: "Fenty Skin",
+				brand_page_link: "/brand/fenty-skin-rihanna",
+			},
+			{
+				brand_id: "46fd5bc7-7828-4f9b-b0e0-bb82919688a5",
+				brand_name: "First Aid Beauty",
+				brand_page_link: "/brand/first-aid-beauty",
+			},
+			{
+				brand_id: "798dd815-3a7f-4191-8de1-28cdf241d634",
+				brand_name: "Flora + Bast",
+				brand_page_link: "/brand/flora-bast",
+			},
+			{
+				brand_id: "27cb5501-71ec-46a2-a9b4-b6236b050638",
+				brand_name: "FOREO",
+				brand_page_link: "/brand/foreo",
+			},
+			{
+				brand_id: "7ae7815b-a5fa-4354-b7a1-70c96754b1e8",
+				brand_name: "FORVR Mood",
+				brand_page_link: "/brand/forvr-mood",
+			},
+			{
+				brand_id: "a998227e-bedf-4264-9627-96e4966a2e98",
+				brand_name: "Freck Beauty",
+				brand_page_link: "/brand/freck-beauty",
+			},
+			{
+				brand_id: "d0c5f972-bc03-4b52-a7b8-4bce04bfb2ec",
+				brand_name: "fresh",
+				brand_page_link: "/brand/fresh",
+			},
+			{
+				brand_id: "7a51a0ea-4698-4240-8d55-67a45ee32a11",
+				brand_name: "Function of Beauty PRO",
+				brand_page_link: "/brand/function-of-beauty-pro",
+			},
+			{
+				brand_id: "1ab59d81-e339-475f-a552-46f5a00f994b",
+				brand_name: "ghd",
+				brand_page_link: "/brand/ghd",
+			},
+			{
+				brand_id: "bdee2bc1-3697-4142-a607-ee63f6aa5846",
+				brand_name: "Gisou",
+				brand_page_link: "/brand/gisou",
+			},
+			{
+				brand_id: "a6fef8ad-d8ed-487f-874f-b0285e376d96",
+				brand_name: "Givenchy",
+				brand_page_link: "/brand/givenchy",
+			},
+			{
+				brand_id: "64b5f961-c7d4-4401-9e36-a2a4e76473d4",
+				brand_name: "Glamnetic",
+				brand_page_link: "/brand/glamnetic",
+			},
+			{
+				brand_id: "18b27d0d-cb6d-4415-98b5-6c434a9e7653",
+				brand_name: "GLO Science",
+				brand_page_link: "/brand/glo-science",
+			},
+			{
+				brand_id: "61add336-dc13-4f37-835e-e1060711e860",
+				brand_name: "Glossier",
+				brand_page_link: "/brand/glossier",
+			},
+			{
+				brand_id: "48c5bbd7-9e0c-43aa-8570-034a17b0d59b",
+				brand_name: "Glow Recipe",
+				brand_page_link: "/brand/glow-recipe",
+			},
+			{
+				brand_id: "2456313c-2656-41ad-a793-230caeb77754",
+				brand_name: "goop",
+				brand_page_link: "/brand/goop",
+			},
+			{
+				brand_id: "233ce8b5-2306-4428-9da2-f85efd9323ef",
+				brand_name: "Grace Eleyae",
+				brand_page_link: "/brand/grace-eleyae",
+			},
+			{
+				brand_id: "86add9d6-f492-484e-b186-23793d4b2005",
+				brand_name: "Grande Cosmetics",
+				brand_page_link: "/brand/grande-cosmetics",
+			},
+			{
+				brand_id: "09e6e7f6-ea1a-4a07-a24b-4ac848391ad1",
+				brand_name: "Gucci",
+				brand_page_link: "/brand/gucci",
+			},
+			{
+				brand_id: "9c1502d3-63b7-4c1a-9c47-ad61bd968ee1",
+				brand_name: "GUERLAIN",
+				brand_page_link: "/brand/guerlain",
+			},
+			{
+				brand_id: "c30cc8ea-e171-4bbc-866a-12cfa5f40798",
+				brand_name: "GXVE BY GWEN STEFANI",
+				brand_page_link: "/brand/gxve-by-gwen-stefani",
+			},
+			{
+				brand_id: "9039d7d9-c7ad-47d6-be72-32999ed11c62",
+				brand_name: "HABIT",
+				brand_page_link: "/brand/habit",
+			},
+			{
+				brand_id: "393c8f7f-1f17-4e64-920a-700a598058b0",
+				brand_name: "Hanni",
+				brand_page_link: "/brand/hanni",
+			},
+			{
+				brand_id: "cb30c69b-fecf-41f8-b45e-bcd9a888be99",
+				brand_name: "HAUS LABS BY LADY GAGA",
+				brand_page_link: "/brand/haus-labs-by-lady-gaga",
+			},
+			{
+				brand_id: "d01a7dcb-44eb-4847-8ae0-a959665d48d4",
+				brand_name: "Hello Sunday",
+				brand_page_link: "/brand/hello-sunday",
+			},
+			{
+				brand_id: "b51fba14-b5af-4a4c-b7e7-3eaf248d28ea",
+				brand_name: "Henry Rose",
+				brand_page_link: "/brand/henry-rose",
+			},
+			{
+				brand_id: "9c7a1429-957e-45bf-ae50-00ed7316b59a",
+				brand_name: "Herbivore",
+				brand_page_link: "/brand/herbivore-botanicals",
+			},
+			{
+				brand_id: "4ce93406-4f39-4a67-8b1d-fd7618577961",
+				brand_name: "HERMÈS",
+				brand_page_link: "/brand/hermes",
+			},
+			{
+				brand_id: "805cef9a-2f43-44a4-abf0-2d4313f97e6f",
+				brand_name: "HigherDOSE",
+				brand_page_link: "/brand/higherdose",
+			},
+			{
+				brand_id: "b1f60d96-b831-4f62-b5ca-fb7e01055d21",
+				brand_name: "Hourglass",
+				brand_page_link: "/brand/hourglass",
+			},
+			{
+				brand_id: "8fdcb29c-be2f-438f-8939-277374e88b74",
+				brand_name: "House of Lashes",
+				brand_page_link: "/brand/house-lashes",
+			},
+			{
+				brand_id: "8e24e301-56a6-4957-9094-ef75a4b0e8f9",
+				brand_name: "HUDA BEAUTY",
+				brand_page_link: "/brand/huda-beauty",
+			},
+			{
+				brand_id: "43b88bc3-bdc2-4e7a-9eae-1f65809e3db3",
+				brand_name: "Hyper Skin",
+				brand_page_link: "/brand/hyper-skin",
+			},
+			{
+				brand_id: "af7331d6-96b7-4b5d-b08a-44a377fc25cd",
+				brand_name: "Iconic London",
+				brand_page_link: "/brand/iconic-london",
+			},
+			{
+				brand_id: "250f9dae-7bed-4745-b59d-c3a41be1a17a",
+				brand_name: "IGK",
+				brand_page_link: "/brand/igk",
+			},
+			{
+				brand_id: "2482ac6c-9315-40b7-bc61-2ee93bf8f9f3",
+				brand_name: "ILIA",
+				brand_page_link: "/brand/ilia",
+			},
+			{
+				brand_id: "16d0e356-b2f5-4186-a7c7-e03971c2b8a5",
+				brand_name: "iluminage",
+				brand_page_link: "/brand/iluminage",
+			},
+			{
+				brand_id: "53585545-b8d2-4545-a08c-ce1c1cab3251",
+				brand_name: "INC.redible",
+				brand_page_link: "/brand/incredible",
+			},
+			{
+				brand_id: "827b224f-9150-4e27-9517-b99513ee9966",
+				brand_name: "Indie Lee",
+				brand_page_link: "/brand/indie-lee",
+			},
+			{
+				brand_id: "6ac72d8f-f9bb-4a95-baf4-b50ad885e652",
+				brand_name: "The INKEY List",
+				brand_page_link: "/brand/the-inkey-list",
+			},
+			{
+				brand_id: "9151c14e-2040-41c8-b2a2-5835d6588ade",
+				brand_name: "iNNBEAUTY PROJECT",
+				brand_page_link: "/brand/innbeauty-project",
+			},
+			{
+				brand_id: "241421ae-3c84-4898-b121-9e72eeecafe4",
+				brand_name: "innisfree",
+				brand_page_link: "/brand/innisfree",
+			},
+			{
+				brand_id: "74e83f18-c954-4744-830e-377fee97e8c1",
+				brand_name: "Iris&Romeo",
+				brand_page_link: "/brand/iris-romeo",
+			},
+			{
+				brand_id: "3954e08a-2942-4500-b235-7f018d461e7e",
+				brand_name: "Isle of Paradise",
+				brand_page_link: "/brand/isle-paradise",
+			},
+			{
+				brand_id: "8b0e136e-6773-480e-a053-724bb41b3e36",
+				brand_name: "IT Cosmetics",
+				brand_page_link: "/brand/it-cosmetics",
+			},
+			{
+				brand_id: "f7e27168-35c4-4840-acab-25b2f965ce5c",
+				brand_name: "Jack Black",
+				brand_page_link: "/brand/jack-black",
+			},
+			{
+				brand_id: "5e5d60a8-1d57-44ac-90c8-b310ef36345f",
+				brand_name: "Jean Paul Gaultier",
+				brand_page_link: "/brand/jean-paul-gaultier",
+			},
+			{
+				brand_id: "7535d333-92fc-4bdc-95a9-8feb3e2703e0",
+				brand_name: "Jillian Dempsey",
+				brand_page_link: "/brand/jillian-dempsey",
+			},
+			{
+				brand_id: "b6dc3710-22c4-4ad9-bd1b-7945b5cf2bee",
+				brand_name: "JIMMY CHOO",
+				brand_page_link: "/brand/jimmy-choo",
+			},
+			{
+				brand_id: "3132239c-4d72-4031-ac54-d017175ced01",
+				brand_name: "JLo Beauty",
+				brand_page_link: "/brand/jlo-beauty",
+			},
+			{
+				brand_id: "f50ddb5a-881b-4157-853b-1ae0dd8d5c65",
+				brand_name: "Jo Malone London",
+				brand_page_link: "/brand/jo-malone-london",
+			},
+			{
+				brand_id: "c0904ba3-ad37-4dfe-9390-a6b35a632246",
+				brand_name: "Josie Maran",
+				brand_page_link: "/brand/josie-maran",
+			},
+			{
+				brand_id: "365accb0-69d6-49e6-96cf-42a8a784acdd",
+				brand_name: "Jouer Cosmetics",
+				brand_page_link: "/brand/jouer-cosmetics",
+			},
+			{
+				brand_id: "84233dfd-6e5f-4f65-b800-8267531753a3",
+				brand_name: "Juicy Couture",
+				brand_page_link: "/brand/juicy-couture",
+			},
+			{
+				brand_id: "bcd65900-c102-4887-ade4-d2025ff8d108",
+				brand_name: "Juliette Has a Gun",
+				brand_page_link: "/brand/juliette-has-a-gun",
+			},
+			{
+				brand_id: "3a02408e-5721-40e7-bab2-934f6721789d",
+				brand_name: "JVN",
+				brand_page_link: "/brand/jvn",
+			},
+			{
+				brand_id: "1b01d35d-46ee-4794-83dd-3777bf31bc99",
+				brand_name: "K18 Biomimetic Hairscience",
+				brand_page_link: "/brand/k18-hair",
+			},
+			{
+				brand_id: "c0178c82-6b85-49ba-8cae-8a8712592023",
+				brand_name: "Kaja",
+				brand_page_link: "/brand/kaja",
+			},
+			{
+				brand_id: "686f43ee-d166-439d-8d6e-78de2698420e",
+				brand_name: "Kate McLeod",
+				brand_page_link: "/brand/kate-mcleod",
+			},
+			{
+				brand_id: "dea5dbbf-ef7e-4f95-94b4-cfaa166f2416",
+				brand_name: "Kate Somerville",
+				brand_page_link: "/brand/kate-somerville",
+			},
+			{
+				brand_id: "ecf92f90-ca10-4d4e-822b-2154e72f9f21",
+				brand_name: "KAYALI",
+				brand_page_link: "/brand/kayali-by-huda",
+			},
+			{
+				brand_id: "0e1eba38-1bd7-448d-a910-b8189f1257df",
+				brand_name: "Kérastase",
+				brand_page_link: "/brand/kerastase",
+			},
+			{
+				brand_id: "65009dc4-7ce9-4752-a269-a2982ea4f91b",
+				brand_name: "Kiehl's Since 1851",
+				brand_page_link: "/brand/kiehls",
+			},
+			{
+				brand_id: "66757769-0e46-4d68-af2b-b312b7c728b0",
+				brand_name: "KILIAN Paris",
+				brand_page_link: "/brand/kilian",
+			},
+			{
+				brand_id: "1266e223-d96a-4abd-a9e3-8e0de570c20a",
+				brand_name: "KORA Organics",
+				brand_page_link: "/brand/kora-organics",
+			},
+			{
+				brand_id: "fc2c8e33-496b-4ce3-9560-85a7071b1dff",
+				brand_name: "KORRES",
+				brand_page_link: "/brand/korres",
+			},
+			{
+				brand_id: "564cb572-da7a-4cdd-9c47-1c02087c7c12",
+				brand_name: "Kosas",
+				brand_page_link: "/brand/kosas",
+			},
+			{
+				brand_id: "75fbfe23-a10b-4ee3-afc5-754cd72d5c08",
+				brand_name: "Kulfi",
+				brand_page_link: "/brand/kulfi",
+			},
+			{
+				brand_id: "afef6564-bd6b-4722-8991-2d4a8501870e",
+				brand_name: "KVD Beauty",
+				brand_page_link: "/brand/kvd-vegan-beauty",
+			},
+			{
+				brand_id: "99d6ce09-803f-4726-8f0e-94ea945f204a",
+				brand_name: "L'Occitane",
+				brand_page_link: "/brand/l-occitane",
+			},
+			{
+				brand_id: "90527ac4-01eb-4ae9-9af7-f8b883eb2336",
+				brand_name: "L'Oréal Professionnel",
+				brand_page_link: "/brand/l-oreal-professionnel",
+			},
+			{
+				brand_id: "22ff8ddf-4102-4bac-82f6-5bc30e12c226",
+				brand_name: "L'Oréal Professionnel Steampod",
+				brand_page_link: "/brand/l-oreal-professionnel-steampod",
+			},
+			{
+				brand_id: "1a94c3ee-90a9-4422-94cc-84e98fdb4684",
+				brand_name: "La Mer",
+				brand_page_link: "/brand/la-mer",
+			},
+			{
+				brand_id: "92580074-d5c8-439f-835d-2b3534c17387",
+				brand_name: "Lancôme",
+				brand_page_link: "/brand/lancome",
+			},
+			{
+				brand_id: "04cbc2c0-f9e7-4e03-bf4d-f8a70877f390",
+				brand_name: "LANEIGE",
+				brand_page_link: "/brand/laneige",
+			},
+			{
+				brand_id: "8a98677d-14a1-4676-812b-21808ad65a4c",
+				brand_name: "Laura Mercier",
+				brand_page_link: "/brand/laura-mercier",
+			},
+			{
+				brand_id: "65f124f0-6f38-49d3-9909-c952219cc674",
+				brand_name: "LAWLESS",
+				brand_page_link: "/brand/lawless",
+			},
+			{
+				brand_id: "796555b9-abf8-454c-b0f3-614d89ec45e7",
+				brand_name: "Lilly Lashes",
+				brand_page_link: "/brand/lilly-lashes",
+			},
+			{
+				brand_id: "a61289f2-77be-437c-bec6-1c3dd2396f12",
+				brand_name: "Lion Pose",
+				brand_page_link: "/brand/lion-pose",
+			},
+			{
+				brand_id: "5b86f9df-2969-4ec5-b821-235b22c095e5",
+				brand_name: "Living Proof",
+				brand_page_link: "/brand/living-proof",
+			},
+			{
+				brand_id: "5aefbded-cee2-44ee-81b8-70b637f73f17",
+				brand_name: "LoveShackFancy",
+				brand_page_link: "/brand/loveshackfancy",
+			},
+			{
+				brand_id: "d4454246-c8d7-4b16-b060-a4cdb2064f4c",
+				brand_name: "Luna Daily",
+				brand_page_link: "/brand/luna-daily",
+			},
+			{
+				brand_id: "e65682f5-103d-4530-b196-763374cb5c8b",
+				brand_name: "LYS Beauty",
+				brand_page_link: "/brand/lys-beauty",
+			},
+			{
+				brand_id: "8add26f4-3e34-467d-8321-fc326115017b",
+				brand_name: "MACRENE actives",
+				brand_page_link: "/brand/macrene-actives",
+			},
+			{
+				brand_id: "a432faad-9de4-4e6a-ab5b-23728a729707",
+				brand_name: "Maison Louis Marie",
+				brand_page_link: "/brand/maison-louis-marie",
+			},
+			{
+				brand_id: "aa664d2a-29ac-4a71-bd7b-284170e1fdcc",
+				brand_name: "Maison Margiela",
+				brand_page_link: "/brand/maison-margiela",
+			},
+			{
+				brand_id: "c31136cd-9f0d-4ee5-bf9a-4ef86c288a61",
+				brand_name: "MAKE UP FOR EVER",
+				brand_page_link: "/brand/make-up-for-ever",
+			},
+			{
+				brand_id: "ba1c9632-25c4-47de-9750-fbbf49adc818",
+				brand_name: "The Maker",
+				brand_page_link: "/brand/the-maker",
+			},
+			{
+				brand_id: "edfd04e4-fc27-41f0-af10-4718a6e21fbc",
+				brand_name: "MAKEUP BY MARIO",
+				brand_page_link: "/brand/makeup-by-mario",
+			},
+			{
+				brand_id: "75c77470-40d7-4a2d-a704-79fc4e43d519",
+				brand_name: "Mane",
+				brand_page_link: "/brand/mane",
+			},
+			{
+				brand_id: "f094acfa-1715-4a2e-ba32-4bb667de8fc2",
+				brand_name: "Mango People",
+				brand_page_link: "/brand/mango-people",
+			},
+			{
+				brand_id: "55e56447-f87a-4cd7-9c09-a8173cae68bd",
+				brand_name: "MARA",
+				brand_page_link: "/brand/mara",
+			},
+			{
+				brand_id: "46a2493d-cc3b-4fda-92fc-97c8822ef2f9",
+				brand_name: "Marc Jacobs Fragrances",
+				brand_page_link: "/brand/marc-jacobs-fragrances",
+			},
+			{
+				brand_id: "306c8eb0-c246-4e5b-978f-6a760e172dcc",
+				brand_name: "Mario Badescu",
+				brand_page_link: "/brand/mario-badescu",
+			},
+			{
+				brand_id: "69574edf-e107-438d-ab81-35e8c0715ccf",
+				brand_name: "MATTER OF FACT",
+				brand_page_link: "/brand/matter-of-fact",
+			},
+			{
+				brand_id: "bed51468-4834-4b5d-b3e7-a106c2988293",
+				brand_name: "maude",
+				brand_page_link: "/brand/maude",
+			},
+			{
+				brand_id: "5d2fdcce-2be5-4dc4-bdc7-c9e2bbd0238f",
+				brand_name: "Melanin Haircare",
+				brand_page_link: "/brand/melanin-haircare",
+			},
+			{
+				brand_id: "3f8fce35-b32c-4217-bace-d173617986ef",
+				brand_name: "Melt Cosmetics",
+				brand_page_link: "/brand/melt-cosmetics",
+			},
+			{
+				brand_id: "a0d7eedc-dbb0-41e4-b074-2f9db6d38728",
+				brand_name: "MERIT",
+				brand_page_link: "/brand/merit",
+			},
+			{
+				brand_id: "cd81e533-5f7d-488a-b5c6-e29acb01e05b",
+				brand_name: "Milk Makeup",
+				brand_page_link: "/brand/milk-makeup",
+			},
+			{
+				brand_id: "90399b07-1503-4206-b56e-d901299d3bb0",
+				brand_name: "Mizani",
+				brand_page_link: "/brand/mizani",
+			},
+			{
+				brand_id: "86001cd4-bea0-471c-bec8-90bcd8bf357d",
+				brand_name: "Montblanc",
+				brand_page_link: "/brand/montblanc",
+			},
+			{
+				brand_id: "5574eb5c-d027-47ac-8a99-2ecbd227b4ec",
+				brand_name: "Moon Juice",
+				brand_page_link: "/brand/moon-juice",
+			},
+			{
+				brand_id: "150a3254-c871-4c29-86fe-621a09a35925",
+				brand_name: "Moroccanoil",
+				brand_page_link: "/brand/moroccanoil",
+			},
+			{
+				brand_id: "a7fc79d2-bbf3-4595-b94f-dd2befee29ae",
+				brand_name: "Mount Lai",
+				brand_page_link: "/brand/mount-lai",
+			},
+			{
+				brand_id: "4be719dc-0ee7-4436-9fa5-b199550be345",
+				brand_name: "Mugler",
+				brand_page_link: "/brand/mugler",
+			},
+			{
+				brand_id: "411352da-8fff-4d95-8c1f-aab6ab6ebbfe",
+				brand_name: "Murad",
+				brand_page_link: "/brand/murad",
+			},
+			{
+				brand_id: "c5c6364d-1596-468f-b042-201ae6b29e6c",
+				brand_name: "NAILS INC.",
+				brand_page_link: "/brand/nails-inc",
+			},
+			{
+				brand_id: "735819a6-8a14-45eb-8241-22ba1d850a87",
+				brand_name: "NARS",
+				brand_page_link: "/brand/nars",
+			},
+			{
+				brand_id: "305874d8-49b6-4022-a274-b00edc261c56",
+				brand_name: "Natasha Denona",
+				brand_page_link: "/brand/natasha-denona",
+			},
+			{
+				brand_id: "6958b9d7-bcab-464b-8a7e-32b87168fbb5",
+				brand_name: "Naturally Serious",
+				brand_page_link: "/brand/naturally-serious",
+			},
+			{
+				brand_id: "414d759c-e5e3-4112-8b56-4451b90e645f",
+				brand_name: "Nécessaire",
+				brand_page_link: "/brand/necessaire",
+			},
+			{
+				brand_id: "513e7098-5489-483c-b24e-9501de9a04f8",
+				brand_name: "NEST New York",
+				brand_page_link: "/brand/nest",
+			},
+			{
+				brand_id: "a2ec968e-fd09-4441-a3c6-a2d9a3869f28",
+				brand_name: "Nette",
+				brand_page_link: "/brand/nette",
+			},
+			{
+				brand_id: "524dcfb3-a618-43fb-9f32-0b506b13c78b",
+				brand_name: "NUDESTIX",
+				brand_page_link: "/brand/nudestix",
+			},
+			{
+				brand_id: "8d3d13f8-7373-4184-a88f-93b259901ce3",
+				brand_name: "The Nue Co.",
+				brand_page_link: "/brand/the-nue-co",
+			},
+			{
+				brand_id: "3a19346b-011d-444f-bb6a-38c3856525a8",
+				brand_name: "NuFACE",
+				brand_page_link: "/brand/nuface",
+			},
+			{
+				brand_id: "e67742b1-08a5-4e49-8d5d-af0705625b8e",
+				brand_name: "Nutrafol",
+				brand_page_link: "/brand/nutrafol",
+			},
+			{
+				brand_id: "bd602fa9-6297-4940-8a6f-fc94d877d903",
+				brand_name: "Olaplex",
+				brand_page_link: "/brand/olaplex",
+			},
+			{
+				brand_id: "be4b94f0-841f-4a60-bd97-402f8fc39431",
+				brand_name: "OLEHENRIKSEN",
+				brand_page_link: "/brand/ole-henriksen",
+			},
+			{
+				brand_id: "61ce0c12-4ea4-4f42-aec1-6fe93a006ded",
+				brand_name: "ONE/SIZE by Patrick Starrr",
+				brand_page_link: "/brand/one-size-by-patrick-starrr",
+			},
+			{
+				brand_id: "6fa47605-9f3d-4b0e-83c9-952815bba6f9",
+				brand_name: "The Ordinary",
+				brand_page_link: "/brand/the-ordinary",
+			},
+			{
+				brand_id: "6bd6b835-c8f0-47fb-9828-0a7e1bc70e74",
+				brand_name: "Oribe",
+				brand_page_link: "/brand/oribe",
+			},
+			{
+				brand_id: "db775cdd-65fa-48e9-881f-550cccb251fd",
+				brand_name: "The Original MakeUp Eraser",
+				brand_page_link: "/brand/makeup-eraser",
+			},
+			{
+				brand_id: "3babc906-cb69-46ea-911a-53e33b7c7da5",
+				brand_name: "Origins",
+				brand_page_link: "/brand/origins",
+			},
+			{
+				brand_id: "e1f6c7fd-00b7-42bb-b7bf-22237d0b9cc5",
+				brand_name: "OTHERLAND",
+				brand_page_link: "/brand/otherland",
+			},
+			{
+				brand_id: "786b1424-4b03-4f8d-a00a-9d0bc602039d",
+				brand_name: "OUAI",
+				brand_page_link: "/brand/ouai-haircare",
+			},
+			{
+				brand_id: "525ebd7f-3b20-427c-863f-2460f5e7ef7f",
+				brand_name: "OUI the People",
+				brand_page_link: "/brand/oui-the-people",
+			},
+			{
+				brand_id: "e55112e5-9f53-4521-868f-a4e773034c4d",
+				brand_name: "The Outset",
+				brand_page_link: "/the-outset",
+			},
+			{
+				brand_id: "5fafa163-3d98-440b-ae3f-199541757995",
+				brand_name: "Overose",
+				brand_page_link: "/brand/overose",
+			},
+			{
+				brand_id: "5dc9e243-0e2a-4c94-a187-fb5820e621f3",
+				brand_name: "PAT McGRATH LABS",
+				brand_page_link: "/brand/pat-mcgrath-labs",
+			},
+			{
+				brand_id: "70e2d12c-65c8-4883-93c3-d51c5598bf8e",
+				brand_name: "PATRICK TA",
+				brand_page_link: "/brand/patrick-ta",
+			},
+			{
+				brand_id: "ec38f741-68ea-429f-9e58-4a6e345901cb",
+				brand_name: "PATTERN by Tracee Ellis Ross",
+				brand_page_link: "/brand/pattern-beauty-by-tracee-ellis-ross",
+			},
+			{
+				brand_id: "caa53d67-87b4-4a3a-83f4-3962d1f604c7",
+				brand_name: "Paula's Choice",
+				brand_page_link: "/brand/paulas-choice",
+			},
+			{
+				brand_id: "419f08b2-97ac-48e3-959f-5208ed5545aa",
+				brand_name: "Peace Out",
+				brand_page_link: "/brand/peace-out",
+			},
+			{
+				brand_id: "85ac575c-49fc-4e77-8ca1-3c722a43535a",
+				brand_name: "Peter Thomas Roth",
+				brand_page_link: "/brand/peter-thomas-roth",
+			},
+			{
+				brand_id: "f4c1567e-e0e8-4fb7-9af3-648b25a66a77",
+				brand_name: "PHLUR",
+				brand_page_link: "/brand/phlur",
+			},
+			{
+				brand_id: "a851482c-ae3b-4d19-b128-c071e08497fc",
+				brand_name: "PMD",
+				brand_page_link: "/brand/pmd",
+			},
+			{
+				brand_id: "136b23a0-f93a-4581-8523-c897d19a5a0c",
+				brand_name: "Prada",
+				brand_page_link: "/brand/prada",
+			},
+			{
+				brand_id: "14f59552-3b5f-472c-83d3-4ea9a67fb6aa",
+				brand_name: "Prada Beauty",
+				brand_page_link: "/brand/prada-beauty",
+			},
+			{
+				brand_id: "3a5cdf99-f540-4bc6-beb0-51427f174279",
+				brand_name: "Prima",
+				brand_page_link: "/brand/prima",
+			},
+			{
+				brand_id: "63f09330-c004-4b5b-8f55-b07545dcb269",
+				brand_name: "Pureology",
+				brand_page_link: "/brand/pureology",
+			},
+			{
+				brand_id: "19e58b8f-8cdf-4f52-aef7-a592a56164c0",
+				brand_name: "Rabanne",
+				brand_page_link: "/brand/paco-rabanne",
+			},
+			{
+				brand_id: "fd9cdeb8-081d-40d6-8083-796e9f3491a3",
+				brand_name: "Rahua",
+				brand_page_link: "/brand/rahua",
+			},
+			{
+				brand_id: "20726b75-5f03-41c0-93a8-9274a065a93d",
+				brand_name: "Ralph Lauren",
+				brand_page_link: "/brand/ralph-lauren",
+			},
+			{
+				brand_id: "21e1f704-f475-4ee5-8345-8a629678f41a",
+				brand_name: "RANAVAT",
+				brand_page_link: "/brand/ranavat",
+			},
+			{
+				brand_id: "6a0e623b-249b-418a-8bc3-9002b075528e",
+				brand_name: "Rare Beauty by Selena Gomez",
+				brand_page_link: "/brand/rare-beauty-by-selena-gomez",
+			},
+			{
+				brand_id: "722b8b15-9124-4d44-8c71-794aa53051a8",
+				brand_name: "REFY",
+				brand_page_link: "/brand/refy-beauty",
+			},
+			{
+				brand_id: "53eedc31-dc9b-446e-b4d5-04ae6a557f91",
+				brand_name: "REN Clean Skincare",
+				brand_page_link: "/brand/ren",
+			},
+			{
+				brand_id: "2256cd57-ade6-4bf6-8868-a578d08cff6e",
+				brand_name: "Reverie",
+				brand_page_link: "/brand/reverie",
+			},
+			{
+				brand_id: "a0d76366-c05d-45be-88a7-37e689afa75b",
+				brand_name: "RIES",
+				brand_page_link: "/brand/ries",
+			},
+			{
+				brand_id: "af96c07a-ee23-4e6c-95f5-900825909675",
+				brand_name: "The Rootist",
+				brand_page_link: "/brand/the-rootist",
+			},
+			{
+				brand_id: "6b8af57e-b7bc-47c6-92c8-3dcf5a3883b0",
+				brand_name: "ROSE INC",
+				brand_page_link: "/brand/rose-inc",
+			},
+			{
+				brand_id: "5e993201-40b4-4728-acbd-14a4ada9c25a",
+				brand_name: "ROSE Ingleton MD",
+				brand_page_link: "/brand/rose-ingleton-md",
+			},
+			{
+				brand_id: "87fa178a-5761-422f-919f-ff6c00036f8c",
+				brand_name: "Rosebud Perfume Co.",
+				brand_page_link: "/brand/rosebud-perfume-co",
+			},
+			{
+				brand_id: "e2b03fec-8b21-4a5c-9a03-df95d7465278",
+				brand_name: "Rossano Ferretti Parma",
+				brand_page_link: "/brand/rossano-ferretti-parma",
+			},
+			{
+				brand_id: "fe130325-411e-46c1-a3f0-c8c7c731456a",
+				brand_name: "Saie",
+				brand_page_link: "/brand/saie",
+			},
+			{
+				brand_id: "677fc73e-b33d-41a0-b89f-713d8b95b588",
+				brand_name: "Saint Jane",
+				brand_page_link: "/brand/saint-jane-beauty",
+			},
+			{
+				brand_id: "dfa8d1d9-6d7f-4245-bd39-ed5df6f1a8a7",
+				brand_name: "Salt & Stone",
+				brand_page_link: "/brand/salt-stone",
+			},
+			{
+				brand_id: "c5dea9e9-2db6-4778-b46f-9b4e0d807b89",
+				brand_name: "SEPHORA COLLECTION",
+				brand_page_link: "/brand/sephora-collection",
+			},
+			{
+				brand_id: "89fc38d7-14e1-41dc-8a86-203b257cdae5",
+				brand_name: "Sephora Favorites",
+				brand_page_link: "/brand/sephora-favorites",
+			},
+			{
+				brand_id: "1dde0c38-1fae-432a-b5a9-0b0e5c896a52",
+				brand_name: "Shani Darden Skin Care",
+				brand_page_link: "/brand/shani-darden",
+			},
+			{
+				brand_id: "ba94a185-5941-474b-b0be-72fb5681420e",
+				brand_name: "Shark Beauty",
+				brand_page_link: "/brand/shark-beauty",
+			},
+			{
+				brand_id: "40a00474-863e-41e9-83d6-6032906588a4",
+				brand_name: "SHAZ & KIKS",
+				brand_page_link: "/brand/shaz-kiks",
+			},
+			{
+				brand_id: "e667e69c-ac10-407e-91ef-74c560f071d1",
+				brand_name: "Shiseido",
+				brand_page_link: "/brand/shiseido",
+			},
+			{
+				brand_id: "897a2175-a073-4604-824c-7d82e71b51d3",
+				brand_name: "shu uemura",
+				brand_page_link: "/brand/shu-uemura",
+			},
+			{
+				brand_id: "193aff90-4cc8-4544-b333-bedaccfe76d6",
+				brand_name: "SIMIHAZE BEAUTY",
+				brand_page_link: "/brand/simihaze",
+			},
+			{
+				brand_id: "a3d8382b-5d12-4ac8-8c8a-fd329f599905",
+				brand_name: "SK-II",
+				brand_page_link: "/brand/sk-ii",
+			},
+			{
+				brand_id: "24981484-28b0-487c-ac88-1d9d62b6cb37",
+				brand_name: "Skin Laundry",
+				brand_page_link: "/brand/skin-laundry",
+			},
+			{
+				brand_id: "2fb0b54e-8251-4378-8cb8-47a8cf9c0457",
+				brand_name: "Skinfix",
+				brand_page_link: "/brand/skinfix",
+			},
+			{
+				brand_id: "0b600cac-17ca-45b7-9ef4-bbfa2db15400",
+				brand_name: "Skylar",
+				brand_page_link: "/brand/skylar",
+			},
+			{
+				brand_id: "81bedcef-07d5-43ff-a101-81ca62522d21",
+				brand_name: "Slip",
+				brand_page_link: "/brand/slip",
+			},
+			{
+				brand_id: "a0514346-09d3-46df-a5c7-d56883a61c45",
+				brand_name: "Smashbox",
+				brand_page_link: "/brand/smashbox",
+			},
+			{
+				brand_id: "f368133d-68d6-4d85-ab13-72cfffd03de0",
+				brand_name: "Smile Makers",
+				brand_page_link: "/brand/smile-makers",
+			},
+			{
+				brand_id: "9e7a9b48-36b0-409b-bdf1-c3576e52845a",
+				brand_name: "Soft Services",
+				brand_page_link: "/brand/soft-services",
+			},
+			{
+				brand_id: "107ce7d8-06d6-4464-87fe-9691f934a4e5",
+				brand_name: "Sol de Janeiro",
+				brand_page_link: "/brand/sol-de-janeiro",
+			},
+			{
+				brand_id: "c9d5a644-a8d0-4fcd-a873-b6546b8b8549",
+				brand_name: "Soleil Toujours",
+				brand_page_link: "/brand/soleil-toujours",
+			},
+			{
+				brand_id: "70189257-4bf5-4d44-89a0-a3c610635e11",
+				brand_name: "Sourse",
+				brand_page_link: "/brand/sourse",
+			},
+			{
+				brand_id: "08d11fc5-7662-4226-a1e7-7b22227a0a5e",
+				brand_name: "St. Tropez",
+				brand_page_link: "/brand/st-tropez-tanning-essentials",
+			},
+			{
+				brand_id: "b939881c-6731-4247-b6db-e269fdccb6bb",
+				brand_name: "stila",
+				brand_page_link: "/brand/stila",
+			},
+			{
+				brand_id: "db1c0f3f-1e51-4cc8-b05e-d739a6261115",
+				brand_name: "Stripes",
+				brand_page_link: "/brand/stripes",
+			},
+			{
+				brand_id: "c666919c-2a58-4444-b061-6e90cf04e34d",
+				brand_name: "StriVectin",
+				brand_page_link: "/brand/strivectin",
+			},
+			{
+				brand_id: "1d9d43f5-9203-49d9-b0cd-9930cbb6a907",
+				brand_name: "Sulwhasoo",
+				brand_page_link: "/brand/sulwhasoo",
+			},
+			{
+				brand_id: "1fd42ce6-2ab0-4ea6-b9f5-2b0fa5b095bc",
+				brand_name: "Summer Fridays",
+				brand_page_link: "/brand/summer-fridays",
+			},
+			{
+				brand_id: "7ba09a7f-f412-4aab-aa63-d12234f24469",
+				brand_name: "SUNDAY II SUNDAY",
+				brand_page_link: "/brand/sunday-ii-sunday",
+			},
+			{
+				brand_id: "c94e439c-9321-4b1e-a732-d6c74eda15ef",
+				brand_name: "Sunday Riley",
+				brand_page_link: "/brand/sunday-riley",
+			},
+			{
+				brand_id: "39a9288e-7697-461f-89ba-2a881229feac",
+				brand_name: "Supergoop!",
+				brand_page_link: "/brand/supergoop",
+			},
+			{
+				brand_id: "160a4ea7-34ab-4a4f-8fbd-fe4daf8e6cab",
+				brand_name: "superzero",
+				brand_page_link: "/brand/superzero",
+			},
+			{
+				brand_id: "eedd3a8a-a88d-47db-8c80-db82da4b4f8b",
+				brand_name: "Susteau",
+				brand_page_link: "/brand/susteau",
+			},
+			{
+				brand_id: "f926e813-a2ed-4d10-b480-ba19322ecf80",
+				brand_name: "T3",
+				brand_page_link: "/brand/t3",
+			},
+			{
+				brand_id: "a024f9d2-545e-493c-876f-4d58e68092c1",
+				brand_name: "Tabu",
+				brand_page_link: "/brand/tabu",
+			},
+			{
+				brand_id: "5278a194-b3d1-4ab6-bcaf-2e9c3c7e84a9",
+				brand_name: "TAN-LUXE",
+				brand_page_link: "/brand/tan-luxe",
+			},
+			{
+				brand_id: "abaa804f-22c3-4add-9ee5-665f7593acfd",
+				brand_name: "tarte",
+				brand_page_link: "/brand/tarte",
+			},
+			{
+				brand_id: "5ee5daa2-79d2-4014-906d-baab05cf9cb3",
+				brand_name: "Tata Harper",
+				brand_page_link: "/brand/tata-harper",
+			},
+			{
+				brand_id: "cabf24cd-b900-4ef7-b864-0f4aa68044c4",
+				brand_name: "Tatcha",
+				brand_page_link: "/brand/tatcha",
+			},
+			{
+				brand_id: "a83d7511-c7ff-4211-b47b-1b0f25deb7b8",
+				brand_name: "TOM FORD",
+				brand_page_link: "/brand/tom-ford",
+			},
+			{
+				brand_id: "747111d9-80a3-4468-a5de-95c0519533ea",
+				brand_name: "Too Faced",
+				brand_page_link: "/brand/too-faced",
+			},
+			{
+				brand_id: "e08bb920-f884-46fe-9ca1-7247783f4780",
+				brand_name: "Topicals",
+				brand_page_link: "/brand/topicals",
+			},
+			{
+				brand_id: "af9b4573-225b-41a9-b4bf-d0fc98886697",
+				brand_name: "Touchland",
+				brand_page_link: "/brand/touchland",
+			},
+			{
+				brand_id: "96939c5f-5e48-49d6-8d95-255406b07f0b",
+				brand_name: "Tower 28 Beauty",
+				brand_page_link: "/brand/tower-28",
+			},
+			{
+				brand_id: "43f0c5ee-5ce7-430d-91c4-d315cd164bf8",
+				brand_name: "TULA Skincare",
+				brand_page_link: "/brand/tula-skincare",
+			},
+			{
+				brand_id: "f703cf6e-73d8-44b5-ac3c-a66b25889b74",
+				brand_name: "TWEEZERMAN",
+				brand_page_link: "/brand/tweezerman",
+			},
+			{
+				brand_id: "68af0a28-2bab-45c4-a4dc-cae6afafd846",
+				brand_name: "Urban Decay",
+				brand_page_link: "/brand/urban-decay",
+			},
+			{
+				brand_id: "2f6e9fad-219c-4efe-90cd-e2d8b2da89c2",
+				brand_name: "Valentino",
+				brand_page_link: "/brand/valentino",
+			},
+			{
+				brand_id: "37d75c9d-c9cf-4db5-a758-c23fe9eeae48",
+				brand_name: "Vegamour",
+				brand_page_link: "/brand/vegamour",
+			},
+			{
+				brand_id: "305747d7-ec6e-4757-80db-d2843ab073e3",
+				brand_name: "Velour Lashes",
+				brand_page_link: "/brand/velour-lashes",
+			},
+			{
+				brand_id: "3d97aa42-7e0c-4523-8dc0-b0fb08ec48e2",
+				brand_name: "Verb",
+				brand_page_link: "/brand/verb-hair-care",
+			},
+			{
+				brand_id: "d5ab2464-184a-4b7c-8003-ad3e837e65a1",
+				brand_name: "Versace",
+				brand_page_link: "/brand/versace",
+			},
+			{
+				brand_id: "4aad6c83-1e4c-435f-9fa8-65120e1660f7",
+				brand_name: "Viktor&Rolf",
+				brand_page_link: "/brand/viktor-rolf",
+			},
+			{
+				brand_id: "3994372e-9297-45ec-8c01-13f4a25c2121",
+				brand_name: "Violet Voss",
+				brand_page_link: "/brand/violet-voss",
+			},
+			{
+				brand_id: "b8c62452-64cc-46d8-a85f-e87fdebe3d5e",
+				brand_name: "Viori",
+				brand_page_link: "/brand/viori",
+			},
+			{
+				brand_id: "35d5eda9-d61c-4309-a905-e323a48283a0",
+				brand_name: "Virtue",
+				brand_page_link: "/brand/virtue",
+			},
+			{
+				brand_id: "77810804-a8a8-4b13-b017-dfc4bd1a80f5",
+				brand_name: "Viseart",
+				brand_page_link: "/brand/viseart",
+			},
+			{
+				brand_id: "6982dd26-751c-4588-98ce-5a4f6ddbbbd7",
+				brand_name: "Voluspa",
+				brand_page_link: "/brand/voluspa",
+			},
+			{
+				brand_id: "911bf3fc-c113-400c-9f86-c9b75bfb57ed",
+				brand_name: "Wander Beauty",
+				brand_page_link: "/brand/wander-beauty",
+			},
+			{
+				brand_id: "1c2edb7b-a7a3-4800-a812-5dc1ec721274",
+				brand_name: "Westman Atelier",
+				brand_page_link: "/brand/westman-atelier",
+			},
+			{
+				brand_id: "c4ad7371-b887-4209-b9c2-efcd6197e5c9",
+				brand_name: "Wishful",
+				brand_page_link: "/brand/wishful-by-huda",
+			},
+			{
+				brand_id: "00a99d38-9235-4672-a0a0-06afbad1905e",
+				brand_name: "World of Chris Collins",
+				brand_page_link: "/brand/chris-collins",
+			},
+			{
+				brand_id: "c067c98e-b18f-4a33-8c2e-0c534ce50bfd",
+				brand_name: "Youth To The People",
+				brand_page_link: "/brand/youth-to-the-people",
+			},
+			{
+				brand_id: "9a37ecae-9473-4e87-8551-1ce03369a241",
+				brand_name: "Yves Saint Laurent",
+				brand_page_link: "/brand/yves-saint-laurent",
+			},
+			{
+				brand_id: "41f9409f-81f1-420b-aef6-dfb1c9d97442",
+				brand_name: "19-69",
+				brand_page_link: "/brand/19-69",
+			},
+			{
+				brand_id: "2db760b5-d701-47d1-8544-2cf3e11ff843",
+				brand_name: "5 SENS",
+				brand_page_link: "/brand/5-sens",
+			},
+			{
+				brand_id: "fb742489-b7f4-48a6-ac24-621b77ca723c",
+				brand_name: "54 Thrones",
+				brand_page_link: "/brand/54-thrones",
+			},
+			{
+				brand_id: "b6cd2aed-0b75-4c24-be20-24484ec0ca38",
+				brand_name: "The 7 Virtues",
+				brand_page_link: "/brand/7-virtues",
+			},
+		];
+
+		const allBrands = [
+			{
+				brand_id: "0d52ac78-072f-4105-b320-e71215dc81ff",
+				brand_name: "about-face",
+				brand_page_link: "https://www.ulta.com/brand/about-face",
+			},
+			{
+				brand_id: "a28265e1-4577-44a8-b0d7-fb40beda804e",
+				brand_name: "ACURE",
+				brand_page_link: "https://www.ulta.com/brand/acure",
+			},
+			{
+				brand_id: "c8efdb74-6558-4e17-a3fd-03576078b7d1",
+				brand_name: "af94",
+				brand_page_link: "https://www.ulta.com/brand/af94",
+			},
+			{
+				brand_id: "1b8d9fa3-e7c0-4bbd-8a31-122e7c2c2f77",
+				brand_name: "AG Care",
+				brand_page_link: "https://www.ulta.com/brand/ag-care",
+			},
+			{
+				brand_id: "da63cfbe-8b85-44ef-9cf9-4f5896492352",
+				brand_name: "Ahava",
+				brand_page_link: "https://www.ulta.com/brand/ahava",
+			},
+			{
+				brand_id: "dc9380de-182e-453d-8674-1401192bcb07",
+				brand_name: "Alterna",
+				brand_page_link: "https://www.ulta.com/brand/alterna",
+			},
+			{
+				brand_id: "9355a7ec-a34d-4171-8286-fdbe41343c14",
+				brand_name: "American Crew",
+				brand_page_link: "https://www.ulta.com/brand/american-crew",
+			},
+			{
+				brand_id: "db88c2df-ac8e-449a-86a8-2691b70f5568",
+				brand_name: "AmLactin",
+				brand_page_link: "https://www.ulta.com/brand/amlactin",
+			},
+			{
+				brand_id: "67037db1-a134-41cc-a61b-f3613eff9e48",
+				brand_name: "Anastasia Beverly Hills",
+				brand_page_link:
+					"https://www.ulta.com/brand/anastasia-beverly-hills",
+			},
+			{
+				brand_id: "a454cb91-af9c-4732-898d-440095623b5d",
+				brand_name: "Andalou Naturals",
+				brand_page_link: "https://www.ulta.com/brand/andalou-naturals",
+			},
+			{
+				brand_id: "511b6145-aee0-4cd5-8791-2a3d5df2dfa2",
+				brand_name: "Andrew Fitzsimons",
+				brand_page_link: "https://www.ulta.com/brand/andrew-fitzsimons",
+			},
+			{
+				brand_id: "2dd377a9-ce13-487d-a7b1-e6cfa9b1b930",
+				brand_name: "Aquage",
+				brand_page_link: "https://www.ulta.com/brand/aquage",
+			},
+			{
+				brand_id: "c9cd5c0b-9449-4ab2-833f-a58c80bfb1b9",
+				brand_name: "Aquaphor",
+				brand_page_link: "https://www.ulta.com/brand/aquaphor",
+			},
+			{
+				brand_id: "29cb7524-4095-4025-9a30-66735f8046b4",
+				brand_name: "Aquis",
+				brand_page_link: "https://www.ulta.com/brand/aquis",
+			},
+			{
+				brand_id: "302cddc6-75c8-4769-a7f5-7898a4ac0b5c",
+				brand_name: "Arctic Fox",
+				brand_page_link: "https://www.ulta.com/brand/arctic-fox",
+			},
+			{
+				brand_id: "c1a7dc79-a00e-4890-ad23-0f47ec347a7f",
+				brand_name: "Ardell",
+				brand_page_link: "https://www.ulta.com/brand/ardell",
+			},
+			{
+				brand_id: "c0099e47-0f1f-47a1-8cfe-c2b591d738b2",
+				brand_name: "Ariana Grande",
+				brand_page_link: "https://www.ulta.com/brand/ariana-grande",
+			},
+			{
+				brand_id: "64e465f7-8a09-48ae-b75f-130936e7c783",
+				brand_name: "ARMANI",
+				brand_page_link: "https://www.ulta.com/brand/armani",
+			},
+			{
+				brand_id: "e26c6e29-1784-4a79-8be5-0770b4840629",
+				brand_name: "Australian Gold",
+				brand_page_link: "https://www.ulta.com/brand/australian-gold",
+			},
+			{
+				brand_id: "382b2c27-e437-4fcc-b318-1dfed06943c3",
+				brand_name: "Aveeno",
+				brand_page_link: "https://www.ulta.com/brand/aveeno",
+			},
+			{
+				brand_id: "0c1db790-c072-49d5-a36f-a68e10934b7f",
+				brand_name: "Avène",
+				brand_page_link: "https://www.ulta.com/brand/avene",
+			},
+			{
+				brand_id: "192e0e29-3002-463e-8336-780846648154",
+				brand_name: "Azzaro",
+				brand_page_link: "https://www.ulta.com/brand/azzaro",
+			},
+			{
+				brand_id: "eee44850-87b6-4c3b-9612-14736cf367a8",
+				brand_name: "b.tan",
+				brand_page_link: "https://www.ulta.com/brand/btan",
+			},
+			{
+				brand_id: "6ff03175-ab58-42d1-b7b1-ceb608614d20",
+				brand_name: "Baby Foot",
+				brand_page_link: "https://www.ulta.com/brand/baby-foot",
+			},
+			{
+				brand_id: "671dca83-f6b7-4ff0-bdd1-e7da609ecf6b",
+				brand_name: "BaBylissPRO",
+				brand_page_link: "https://www.ulta.com/brand/babylisspro",
+			},
+			{
+				brand_id: "60e2b3dc-b220-4468-aa9b-8de56fe61f5b",
+				brand_name: "Bali Body",
+				brand_page_link: "https://www.ulta.com/brand/bali-body",
+			},
+			{
+				brand_id: "0a1186dd-8f06-416b-914f-e4772ee43e2b",
+				brand_name: "Banila Co",
+				brand_page_link: "https://www.ulta.com/brand/banila-co",
+			},
+			{
+				brand_id: "fec09a4e-1e67-4079-bf65-383996281177",
+				brand_name: "bareMinerals",
+				brand_page_link: "https://www.ulta.com/brand/bareminerals",
+			},
+			{
+				brand_id: "50b58250-c11b-4bd8-b067-e3a371223504",
+				brand_name: "Batiste",
+				brand_page_link: "https://www.ulta.com/brand/batiste",
+			},
+			{
+				brand_id: "0e2d1fb8-beae-4f60-addb-9c71c6626cc5",
+				brand_name: "Beachwaver Co.",
+				brand_page_link: "https://www.ulta.com/brand/beachwaver-co",
+			},
+			{
+				brand_id: "77045a4f-f60f-4eac-a1a3-9e17c1c4c676",
+				brand_name: "Beast",
+				brand_page_link: "https://www.ulta.com/brand/beast",
+			},
+			{
+				brand_id: "b9ec988d-aafa-47e2-a63a-b84d8074e1b6",
+				brand_name: "Beauty Bakerie",
+				brand_page_link: "https://www.ulta.com/brand/beauty-bakerie",
+			},
+			{
+				brand_id: "dee83676-e930-418c-8bbd-b4432544913d",
+				brand_name: "Beauty Finds by ULTA Beauty",
+				brand_page_link:
+					"https://www.ulta.com/brand/beauty-finds-by-ulta-beauty",
+			},
+			{
+				brand_id: "5008f160-fef4-4cde-8ab3-01592613cb2c",
+				brand_name: "BeautyBio",
+				brand_page_link: "https://www.ulta.com/brand/beautybio",
+			},
+			{
+				brand_id: "62a0cd8b-04fd-4d50-bf42-331b3b1e4490",
+				brand_name: "beautyblender",
+				brand_page_link: "https://www.ulta.com/brand/beautyblender",
+			},
+			{
+				brand_id: "bd8f4cc5-61f6-451a-8cdc-b7563da67cda",
+				brand_name: "Beautycounter",
+				brand_page_link: "https://www.ulta.com/brand/beautycounter",
+			},
+			{
+				brand_id: "098e4402-0e41-4488-952f-3cfe4cf3d68f",
+				brand_name: "BeautyStat Cosmetics",
+				brand_page_link:
+					"https://www.ulta.com/brand/beautystat-cosmetics",
+			},
+			{
+				brand_id: "4b8eef9b-52e4-4f96-a513-89f139bc8ec6",
+				brand_name: "Bed Head",
+				brand_page_link: "https://www.ulta.com/brand/bed-head",
+			},
+			{
+				brand_id: "37edb8bb-2cc2-4636-8412-580d93f1a7fd",
+				brand_name: "Beekman 1802",
+				brand_page_link: "https://www.ulta.com/brand/beekman-1802",
+			},
+			{
+				brand_id: "f35ef7e5-20ad-4763-b640-d339a14cbe18",
+				brand_name: "belif",
+				brand_page_link: "https://www.ulta.com/brand/belif",
+			},
+			{
+				brand_id: "82f4563d-6145-4183-a9cb-fea7eca9214f",
+				brand_name: "Benefit Cosmetics",
+				brand_page_link: "https://www.ulta.com/brand/benefit-cosmetics",
+			},
+			{
+				brand_id: "7febe5c8-4c67-460a-b6d2-135d2b7251e5",
+				brand_name: "Better Not Younger",
+				brand_page_link:
+					"https://www.ulta.com/brand/better-not-younger",
+			},
+			{
+				brand_id: "883fe46f-f69d-4c67-b57e-b5aee072f809",
+				brand_name: "BETTER WORLD FRAGRANCE HOUSE",
+				brand_page_link:
+					"https://www.ulta.com/brand/better-world-fragrance-house",
+			},
+			{
+				brand_id: "14c22681-2fd4-473f-b728-4c3d1813c245",
+				brand_name: "BEVEL",
+				brand_page_link: "https://www.ulta.com/brand/bevel",
+			},
+			{
+				brand_id: "9ddbf850-b7d8-4878-a287-557997880714",
+				brand_name: "billie",
+				brand_page_link: "https://www.ulta.com/brand/billie",
+			},
+			{
+				brand_id: "dc439cca-e274-43c6-9013-bf3f90b2387b",
+				brand_name: "Billie Eilish",
+				brand_page_link: "https://www.ulta.com/brand/billie-eilish",
+			},
+			{
+				brand_id: "b5d73ba9-7860-483d-9c93-9313b53b854f",
+				brand_name: "Billy Jealousy",
+				brand_page_link: "https://www.ulta.com/brand/billy-jealousy",
+			},
+			{
+				brand_id: "ef4c4b30-70be-4e36-8491-265d32c607e5",
+				brand_name: "Bio Ionic",
+				brand_page_link: "https://www.ulta.com/brand/bio-ionic",
+			},
+			{
+				brand_id: "7d585ecf-5f6d-4bf2-b3e1-2b03abc1f3e6",
+				brand_name: "Bio-Oil",
+				brand_page_link: "https://www.ulta.com/brand/bio-oil",
+			},
+			{
+				brand_id: "3b48a3ad-6fd6-4aa9-acec-3125b90efbfe",
+				brand_name: "Biolage",
+				brand_page_link: "https://www.ulta.com/brand/biolage",
+			},
+			{
+				brand_id: "b5199292-3671-49fd-939f-c2e1cef480ed",
+				brand_name: "Bioré",
+				brand_page_link: "https://www.ulta.com/brand/biore",
+			},
+			{
+				brand_id: "d9f96012-678b-4ee6-a988-382f442c8355",
+				brand_name: "Biosilk",
+				brand_page_link: "https://www.ulta.com/brand/biosilk",
+			},
+			{
+				brand_id: "9edc96ad-1e9e-4c14-870a-f004b71bd8e2",
+				brand_name: "Black Girl Sunscreen",
+				brand_page_link:
+					"https://www.ulta.com/brand/black-girl-sunscreen",
+			},
+			{
+				brand_id: "e68f1b13-a3ec-4d78-a310-8aa0fef6d107",
+				brand_name: "Blind Barber",
+				brand_page_link: "https://www.ulta.com/brand/blind-barber",
+			},
+			{
+				brand_id: "8eb623f2-7096-4c56-beba-71b48b52ad0a",
+				brand_name: "Bliss",
+				brand_page_link: "https://www.ulta.com/brand/bliss",
+			},
+			{
+				brand_id: "9ead5fbe-10c7-4181-a5ca-95bf79e2439d",
+				brand_name: "BLK/OPL",
+				brand_page_link: "https://www.ulta.com/brand/blkopl",
+			},
+			{
+				brand_id: "2a61b772-2ff2-45d7-aeb9-3ef173f5e8c5",
+				brand_name: "BLONDME",
+				brand_page_link: "https://www.ulta.com/brand/blondme",
+			},
+			{
+				brand_id: "9e1851b6-acee-45cb-af19-39fe023de7f3",
+				brand_name: "BLOSSOM",
+				brand_page_link: "https://www.ulta.com/brand/blossom",
+			},
+			{
+				brand_id: "a322e847-2a16-4166-87d7-f1488a7921a7",
+				brand_name: "BLUE LIZARD AUSTRALIAN SUNSCREEN",
+				brand_page_link:
+					"https://www.ulta.com/brand/blue-lizard-australian-sunscreen",
+			},
+			{
+				brand_id: "3ae721f1-ffef-45ce-8365-57e8375b1301",
+				brand_name: "BLUME",
+				brand_page_link: "https://www.ulta.com/brand/blume",
+			},
+			{
+				brand_id: "d646c2ec-f7d4-47a7-8083-763575cadea7",
+				brand_name: "BOBBI BROWN",
+				brand_page_link: "https://www.ulta.com/brand/bobbi-brown",
+			},
+			{
+				brand_id: "e8d8f0e6-2bd1-4223-8971-7dd621a3c5d7",
+				brand_name: "BOKA",
+				brand_page_link: "https://www.ulta.com/brand/boka",
+			},
+			{
+				brand_id: "89faf3da-ebd9-45b7-a79b-0067ce7c3d04",
+				brand_name: "Bondi Boost",
+				brand_page_link: "https://www.ulta.com/brand/bondi-boost",
+			},
+			{
+				brand_id: "e6ce069c-6b91-4e79-b677-a1437717821e",
+				brand_name: "Bondi Sands",
+				brand_page_link: "https://www.ulta.com/brand/bondi-sands",
+			},
+			{
+				brand_id: "676c85b4-6f27-42ed-aea6-a0a24f88a382",
+				brand_name: "boscia",
+				brand_page_link: "https://www.ulta.com/brand/boscia",
+			},
+			{
+				brand_id: "003683c1-542d-45fe-a6ee-ad85a88f1a84",
+				brand_name: "BosleyMD",
+				brand_page_link: "https://www.ulta.com/brand/bosleymd",
+			},
+			{
+				brand_id: "3de304d3-99d6-49cb-832e-132a597a32f0",
+				brand_name: "Braun",
+				brand_page_link: "https://www.ulta.com/brand/braun",
+			},
+			{
+				brand_id: "65457516-f85e-41c2-b88d-042eb176e447",
+				brand_name: "BREAD BEAUTY SUPPLY",
+				brand_page_link:
+					"https://www.ulta.com/brand/bread-beauty-supply",
+			},
+			{
+				brand_id: "9f19731a-1eb9-4fca-a690-1aa4929d4126",
+				brand_name: "BREEZE BALM",
+				brand_page_link: "https://www.ulta.com/brand/breeze-balm",
+			},
+			{
+				brand_id: "a964a063-75d8-4a75-853c-7c5a21934388",
+				brand_name: "Briogeo",
+				brand_page_link: "https://www.ulta.com/brand/briogeo",
+			},
+			{
+				brand_id: "2c79beda-fdb7-4bba-9053-8b59bb5498fe",
+				brand_name: "Bubble",
+				brand_page_link: "https://www.ulta.com/brand/bubble",
+			},
+			{
+				brand_id: "015f5cbc-92c3-4346-8cf2-ddaea6bf2172",
+				brand_name: "Bumble and bumble",
+				brand_page_link: "https://www.ulta.com/brand/bumble-bumble",
+			},
+			{
+				brand_id: "b5433b49-52cb-4250-a26e-665d3c225698",
+				brand_name: "Burberry",
+				brand_page_link: "https://www.ulta.com/brand/burberry",
+			},
+			{
+				brand_id: "5a9ddca5-0c98-4cd9-b879-90c3d589b98f",
+				brand_name: "Burt's Bees",
+				brand_page_link: "https://www.ulta.com/brand/burts-bees",
+			},
+			{
+				brand_id: "7a8e66aa-9ce5-40ed-b5a7-c35348f900bb",
+				brand_name: "Bushbalm",
+				brand_page_link: "https://www.ulta.com/brand/bushbalm",
+			},
+			{
+				brand_id: "4bee1b67-dfee-45c7-acaa-d9f23ad1c988",
+				brand_name: "Buttah Skin",
+				brand_page_link: "https://www.ulta.com/brand/buttah-skin",
+			},
+			{
+				brand_id: "8aa2dae4-b159-491e-9e9b-b1075b90ffc6",
+				brand_name: "Buxom",
+				brand_page_link: "https://www.ulta.com/brand/buxom",
+			},
+			{
+				brand_id: "2b6eb208-67e2-4b8e-a74c-5358cebd27fd",
+				brand_name: "BYOMA",
+				brand_page_link: "https://www.ulta.com/brand/byoma",
+			},
+			{
+				brand_id: "6d6c3f4c-1fc0-4c76-ac18-0037e94982c7",
+				brand_name: "Caboodles",
+				brand_page_link: "https://www.ulta.com/brand/caboodles",
+			},
+			{
+				brand_id: "ca39adc0-fb30-45f4-be23-e2755acb471b",
+				brand_name: "Calvin Klein",
+				brand_page_link: "https://www.ulta.com/brand/calvin-klein",
+			},
+			{
+				brand_id: "4b052d20-f459-4b25-8ad6-71f5f0feaa5b",
+				brand_name: "Camille Rose",
+				brand_page_link: "https://www.ulta.com/brand/camille-rose",
+			},
+			{
+				brand_id: "616209e0-1272-463f-9ec1-adf78152cd62",
+				brand_name: "Candier",
+				brand_page_link: "https://www.ulta.com/brand/candier",
+			},
+			{
+				brand_id: "3a0fa4ac-352c-4f61-9061-9a9322d6f23b",
+				brand_name: "Capelli New York",
+				brand_page_link: "https://www.ulta.com/brand/capelli-new-york",
+			},
+			{
+				brand_id: "b0a25a23-25e3-4d18-801a-0564ac0826f9",
+				brand_name: "Carbon Theory.",
+				brand_page_link: "https://www.ulta.com/brand/carbon-theory",
+			},
+			{
+				brand_id: "298068eb-87a9-4834-a35a-00797abf9c02",
+				brand_name: "Carol's Daughter",
+				brand_page_link: "https://www.ulta.com/brand/carols-daughter",
+			},
+			{
+				brand_id: "15ff4c51-9d71-4686-8e90-894840726965",
+				brand_name: "Carolina Herrera",
+				brand_page_link: "https://www.ulta.com/brand/carolina-herrera",
+			},
+			{
+				brand_id: "d0d942ab-3883-47bb-96ff-74925f956dd3",
+				brand_name: "Céla",
+				brand_page_link: "https://www.ulta.com/brand/cela",
+			},
+			{
+				brand_id: "4552b51f-09b8-4136-8b80-c51ce0d94c15",
+				brand_name: "CeraVe",
+				brand_page_link: "https://www.ulta.com/brand/cerave",
+			},
+			{
+				brand_id: "bb4862f4-6404-44c2-9191-3cdb6a0d50a9",
+				brand_name: "Cetaphil",
+				brand_page_link: "https://www.ulta.com/brand/cetaphil",
+			},
+			{
+				brand_id: "fdc63af9-1c77-43a5-9c6b-715d7eb1a04c",
+				brand_name: "CHANEL",
+				brand_page_link: "https://www.ulta.com/brand/chanel",
+			},
+			{
+				brand_id: "909d4b44-6b79-47c2-bde2-11c6f0f2f6c7",
+				brand_name: "Charlotte Tilbury",
+				brand_page_link: "https://www.ulta.com/brand/charlotte-tilbury",
+			},
+			{
+				brand_id: "3bdf41c8-2744-49b1-bfbc-79c8f1609ad1",
+				brand_name: "Chi",
+				brand_page_link: "https://www.ulta.com/brand/chi",
+			},
+			{
+				brand_id: "1f920b3f-0cb5-4bdc-9c79-f893aaac68b1",
+				brand_name: "China Glaze",
+				brand_page_link: "https://www.ulta.com/brand/china-glaze",
+			},
+			{
+				brand_id: "92ce175b-f499-44db-8656-9698f7767ccc",
+				brand_name: "Chloé",
+				brand_page_link: "https://www.ulta.com/brand/chloe",
+			},
+			{
+				brand_id: "fe8c6652-6894-48c9-9e97-5ffd9db15ba3",
+				brand_name: "Clairol",
+				brand_page_link: "https://www.ulta.com/brand/clairol",
+			},
+			{
+				brand_id: "2cfb2be1-8ced-4631-80b1-ce8631453b44",
+				brand_name: "Clarins",
+				brand_page_link: "https://www.ulta.com/brand/clarins",
+			},
+			{
+				brand_id: "cedb1efa-aeb3-4651-bfb3-70f10dcf6ef7",
+				brand_name: "Clean",
+				brand_page_link: "https://www.ulta.com/brand/clean",
+			},
+			{
+				brand_id: "85db35d7-cd15-4738-9a91-0a45e0fac0ec",
+				brand_name: "Clinique",
+				brand_page_link: "https://www.ulta.com/brand/clinique",
+			},
+			{
+				brand_id: "06857830-b460-423a-af18-4b743674f4dd",
+				brand_name: "CND",
+				brand_page_link: "https://www.ulta.com/brand/cnd",
+			},
+			{
+				brand_id: "6abc0090-5324-4843-95af-87bcec9c5a8e",
+				brand_name: "Coach",
+				brand_page_link: "https://www.ulta.com/brand/coach",
+			},
+			{
+				brand_id: "518683cf-12cb-46ed-9c0c-af52b186f4fc",
+				brand_name: "Coco & Eve",
+				brand_page_link: "https://www.ulta.com/brand/coco-eve",
+			},
+			{
+				brand_id: "5ebcdf94-a9d8-4a22-a387-3740b5c8af61",
+				brand_name: "cocokind",
+				brand_page_link: "https://www.ulta.com/brand/cocokind",
+			},
+			{
+				brand_id: "ccdd5ac8-60a0-49a8-a951-ec98722d5433",
+				brand_name: "Color Wow",
+				brand_page_link: "https://www.ulta.com/brand/color-wow",
+			},
+			{
+				brand_id: "de3d749e-6f2a-4f25-8e4c-5460bb000419",
+				brand_name: "ColourPop",
+				brand_page_link: "https://www.ulta.com/brand/colourpop",
+			},
+			{
+				brand_id: "98d47eb8-43de-4be3-a951-bb6709041ec6",
+				brand_name: "Conair",
+				brand_page_link: "https://www.ulta.com/brand/conair",
+			},
+			{
+				brand_id: "6034461f-f70b-41c1-97cb-e3dc4c57b3e6",
+				brand_name: "COOLA",
+				brand_page_link: "https://www.ulta.com/brand/coola",
+			},
+			{
+				brand_id: "9bb4398e-8b4c-4d98-bdf5-4125f866a5a7",
+				brand_name: "COSRX",
+				brand_page_link: "https://www.ulta.com/brand/cosrx",
+			},
+			{
+				brand_id: "acc76792-999f-4536-9724-cc216d849a5d",
+				brand_name: "CoTz",
+				brand_page_link: "https://www.ulta.com/brand/cotz",
+			},
+			{
+				brand_id: "07cb23a7-3fff-4eab-84ae-24028c4760c3",
+				brand_name: "CoverGirl",
+				brand_page_link: "https://www.ulta.com/brand/covergirl",
+			},
+			{
+				brand_id: "9cab3b28-e11a-4e5a-8bc4-0669423d0541",
+				brand_name: "Crave",
+				brand_page_link: "https://www.ulta.com/brand/crave",
+			},
+			{
+				brand_id: "87246be3-75d7-41b4-9ff3-4256b00fee48",
+				brand_name: "Crepe Erase",
+				brand_page_link: "https://www.ulta.com/brand/crepe-erase",
+			},
+			{
+				brand_id: "f1871b13-cd78-4ea7-b649-5e1bc8de35ed",
+				brand_name: "Cricket",
+				brand_page_link: "https://www.ulta.com/brand/cricket",
+			},
+			{
+				brand_id: "cb3cdec9-3635-49ff-b732-7d5d98a09896",
+				brand_name: "CROC",
+				brand_page_link: "https://www.ulta.com/brand/croc",
+			},
+			{
+				brand_id: "5f68f5b2-a896-475c-b0d6-d213d845bb66",
+				brand_name: "CurlMix",
+				brand_page_link: "https://www.ulta.com/brand/curlmix",
+			},
+			{
+				brand_id: "51048bae-6fd9-4ae2-b107-53e1ebeff9cc",
+				brand_name: "CURLS",
+				brand_page_link: "https://www.ulta.com/brand/curls",
+			},
+			{
+				brand_id: "5a89d717-e219-45a3-af94-300a67f0b48c",
+				brand_name: "Curlsmith",
+				brand_page_link: "https://www.ulta.com/brand/curlsmith",
+			},
+			{
+				brand_id: "1645bcaf-44ac-46c6-ac48-55fb3e2d109c",
+				brand_name: "Da Bomb",
+				brand_page_link: "https://www.ulta.com/brand/da-bomb",
+			},
+			{
+				brand_id: "d350ba32-8b87-4c63-9223-ae97e93231a9",
+				brand_name: "Daily Concepts",
+				brand_page_link: "https://www.ulta.com/brand/daily-concepts",
+			},
+			{
+				brand_id: "b086fa76-bb61-4449-bde5-8058532544e4",
+				brand_name: "Dashing Diva",
+				brand_page_link: "https://www.ulta.com/brand/dashing-diva",
+			},
+			{
+				brand_id: "13711154-5ca9-4b79-a8ca-8988373db7c2",
+				brand_name: "Denman",
+				brand_page_link: "https://www.ulta.com/brand/denman",
+			},
+			{
+				brand_id: "a8114658-145a-4c4f-95d1-bc7d5842ca14",
+				brand_name: "DERMA E",
+				brand_page_link: "https://www.ulta.com/brand/derma-e",
+			},
+			{
+				brand_id: "5a47a052-1051-428c-8f35-a71ae2c13527",
+				brand_name: "Dermablend",
+				brand_page_link: "https://www.ulta.com/brand/dermablend",
+			},
+			{
+				brand_id: "995315fd-62c4-4327-91df-12f8387724ef",
+				brand_name: "DERMAFLASH",
+				brand_page_link: "https://www.ulta.com/brand/dermaflash",
+			},
+			{
+				brand_id: "0a5dad77-a9b8-490b-8628-74862164c824",
+				brand_name: "Dermalogica",
+				brand_page_link: "https://www.ulta.com/brand/dermalogica",
+			},
+			{
+				brand_id: "4aabb517-54a0-4e0a-b59e-43d2655cbe9d",
+				brand_name: "Design Essentials",
+				brand_page_link: "https://www.ulta.com/brand/design-essentials",
+			},
+			{
+				brand_id: "9e3ae2e3-a1bf-4089-a2c7-b32e98d59aa9",
+				brand_name: "DevaCurl",
+				brand_page_link: "https://www.ulta.com/brand/devacurl",
+			},
+			{
+				brand_id: "7fdd3a8b-df46-43a1-976d-956d8ccbbb20",
+				brand_name: "DHC",
+				brand_page_link: "https://www.ulta.com/brand/dhc",
+			},
+			{
+				brand_id: "8db7c671-858f-4a88-9bfe-513b5bb730a0",
+				brand_name: "Diane",
+				brand_page_link: "https://www.ulta.com/brand/diane",
+			},
+			{
+				brand_id: "05e69433-c5b3-41f9-ae42-f3cbd2f40660",
+				brand_name: "Differin",
+				brand_page_link: "https://www.ulta.com/brand/differin",
+			},
+			{
+				brand_id: "c9238dfa-e034-422f-8df5-a996d0827dfc",
+				brand_name: "DIME",
+				brand_page_link: "https://www.ulta.com/brand/dime",
+			},
+			{
+				brand_id: "97be69b4-79ba-451a-b646-2e690ecca8e8",
+				brand_name: "Dionis",
+				brand_page_link: "https://www.ulta.com/brand/dionis",
+			},
+			{
+				brand_id: "e10dc721-9e08-48e9-a9da-54d0989b1d8f",
+				brand_name: "Dior",
+				brand_page_link: "https://www.ulta.com/brand/dior",
+			},
+			{
+				brand_id: "a6410005-3a44-4aba-ac9c-ff00b24f32b8",
+				brand_name: "Divi",
+				brand_page_link: "https://www.ulta.com/brand/divi",
+			},
+			{
+				brand_id: "b3bb688c-c8c6-4567-9f19-f4cc6eaa0372",
+				brand_name: "DKNY",
+				brand_page_link: "https://www.ulta.com/brand/dkny",
+			},
+			{
+				brand_id: "55a7294a-2bb0-4f9b-ae98-a8bf56657c62",
+				brand_name: "Dolce Glow",
+				brand_page_link: "https://www.ulta.com/brand/dolce-glow",
+			},
+			{
+				brand_id: "41cc16fc-5724-473d-989a-74f952577716",
+				brand_name: "Dolce&Gabbana",
+				brand_page_link: "https://www.ulta.com/brand/dolce-gabbana",
+			},
+			{
+				brand_id: "5756f24e-2b5c-4fcf-b978-9a2c9e380db3",
+				brand_name: "Donna Karan",
+				brand_page_link: "https://www.ulta.com/brand/donna-karan",
+			},
+			{
+				brand_id: "5d6be9d0-565b-427e-b795-9bbd7d05e76f",
+				brand_name: "DONNA'S RECIPE",
+				brand_page_link: "https://www.ulta.com/brand/donnas-recipe",
+			},
+			{
+				brand_id: "b35ac0af-b3ea-4073-b9fd-7d738907d645",
+				brand_name: "dpHUE",
+				brand_page_link: "https://www.ulta.com/brand/dphue",
+			},
+			{
+				brand_id: "96c8711c-64b3-4449-86dd-18d78eace857",
+				brand_name: "Dr Teal's",
+				brand_page_link: "https://www.ulta.com/brand/dr-teals",
+			},
+			{
+				brand_id: "4e23ab02-fbea-446c-85eb-771175239c88",
+				brand_name: "Dr. Brandt",
+				brand_page_link: "https://www.ulta.com/brand/dr-brandt",
+			},
+			{
+				brand_id: "0ba84b69-5511-48fc-bc4e-9d84aecdde6d",
+				brand_name: "Dr. PAWPAW",
+				brand_page_link: "https://www.ulta.com/brand/dr-pawpaw",
+			},
+			{
+				brand_id: "445e7658-ef19-416f-93fa-7b9733c739b5",
+				brand_name: "Drunk Elephant",
+				brand_page_link: "https://www.ulta.com/brand/drunk-elephant",
+			},
+			{
+				brand_id: "e7535318-8bc8-4007-bbb3-b94c3c0c34be",
+				brand_name: "Drybar",
+				brand_page_link: "https://www.ulta.com/brand/drybar",
+			},
+			{
+				brand_id: "d473be0d-6d1a-4d65-b99b-e677daa74053",
+				brand_name: "Duke Cannon Supply Co",
+				brand_page_link:
+					"https://www.ulta.com/brand/duke-cannon-supply-co",
+			},
+			{
+				brand_id: "bf507a04-b156-4dbb-9e50-bea953f10feb",
+				brand_name: "DUNE SUNCARE",
+				brand_page_link: "https://www.ulta.com/brand/dune-suncare",
+			},
+			{
+				brand_id: "5826e917-32ba-463d-85b1-93f70c874817",
+				brand_name: "Dyson",
+				brand_page_link: "https://www.ulta.com/brand/dyson",
+			},
+			{
+				brand_id: "c0eeeb3a-db41-4c98-9c0b-3e1595e038a2",
+				brand_name: "e.l.f. Cosmetics",
+				brand_page_link: "https://www.ulta.com/brand/elf-cosmetics",
+			},
+			{
+				brand_id: "4491c288-daa6-4501-aa16-9f1065c57d1c",
+				brand_name: "Each & Every",
+				brand_page_link: "https://www.ulta.com/brand/each-every",
+			},
+			{
+				brand_id: "4b73052a-f09d-4da2-8beb-df69b3f7bc41",
+				brand_name: "Earth Harbor",
+				brand_page_link: "https://www.ulta.com/brand/earth-harbor",
+			},
+			{
+				brand_id: "1ae12a33-e647-4478-8439-e34ccd0f9d08",
+				brand_name: "Earth Therapeutics",
+				brand_page_link:
+					"https://www.ulta.com/brand/earth-therapeutics",
+			},
+			{
+				brand_id: "4e3663ad-e3e8-4e39-9f18-e82d5e180df6",
+				brand_name: "Eau de Juice",
+				brand_page_link: "https://www.ulta.com/brand/eau-de-juice",
+			},
+			{
+				brand_id: "d374117a-a947-45f6-902c-919e1f6a0c7c",
+				brand_name: "Eco Style",
+				brand_page_link: "https://www.ulta.com/brand/eco-style",
+			},
+			{
+				brand_id: "645c70f5-9f94-43c3-8395-44e8852fb97d",
+				brand_name: "EcoTools",
+				brand_page_link: "https://www.ulta.com/brand/ecotools",
+			},
+			{
+				brand_id: "dbec7354-121c-4402-b240-a63395b57eb7",
+				brand_name: "Eczema Honey",
+				brand_page_link: "https://www.ulta.com/brand/eczema-honey",
+			},
+			{
+				brand_id: "8190479d-3941-4a8a-a805-da2626fac963",
+				brand_name: "ELEMIS",
+				brand_page_link: "https://www.ulta.com/brand/elemis",
+			},
+			{
+				brand_id: "ea5890f0-8fbc-499a-b207-d18bb7497e33",
+				brand_name: "EleVen by Venus Williams",
+				brand_page_link:
+					"https://www.ulta.com/brand/eleven-by-venus-williams",
+			},
+			{
+				brand_id: "7f9210f2-6189-435f-b713-8e4699df7ffe",
+				brand_name: "Elizabeth Arden",
+				brand_page_link: "https://www.ulta.com/brand/elizabeth-arden",
+			},
+			{
+				brand_id: "f4daaf5e-cd18-4008-9429-b897c4a7831b",
+				brand_name: "Ellis Brooklyn",
+				brand_page_link: "https://www.ulta.com/brand/ellis-brooklyn",
+			},
+			{
+				brand_id: "aa3da9f0-648e-454b-aae9-a6fbaac43ae9",
+				brand_name: "Eos",
+				brand_page_link: "https://www.ulta.com/brand/eos",
+			},
+			{
+				brand_id: "cc31ebed-0072-4dd7-854c-3e324fb9c4f2",
+				brand_name: "Erborian",
+				brand_page_link: "https://www.ulta.com/brand/erborian",
+			},
+			{
+				brand_id: "d060232c-77ee-4a18-8a15-6d61f337b38b",
+				brand_name: "Ere Perez",
+				brand_page_link: "https://www.ulta.com/brand/ere-perez",
+			},
+			{
+				brand_id: "2ca3c0ae-c33c-4e5f-8a4a-4c63eed94f52",
+				brand_name: "Escada",
+				brand_page_link: "https://www.ulta.com/brand/escada",
+			},
+			{
+				brand_id: "dbbd6166-ac45-4b00-a3f2-026007431e53",
+				brand_name: "Essence",
+				brand_page_link: "https://www.ulta.com/brand/essence",
+			},
+			{
+				brand_id: "fb21f79d-fc11-48ed-bbb8-55b8d72d1c3d",
+				brand_name: "Essie",
+				brand_page_link: "https://www.ulta.com/brand/essie",
+			},
+			{
+				brand_id: "9477aec7-241e-468c-8328-05ef1e9f2e06",
+				brand_name: "Estée Lauder",
+				brand_page_link: "https://www.ulta.com/brand/estee-lauder",
+			},
+			{
+				brand_id: "f362c3ea-01b9-4de8-9746-d3ef03f2740e",
+				brand_name: "Eva Nyc",
+				brand_page_link: "https://www.ulta.com/brand/eva-nyc",
+			},
+			{
+				brand_id: "1ea36dff-0b83-4076-b7ad-31e1aa6806f7",
+				brand_name: "Everpro",
+				brand_page_link: "https://www.ulta.com/brand/everpro",
+			},
+			{
+				brand_id: "018fe828-f239-4d8b-9a06-7ddf0b1ded36",
+				brand_name: "Every Man Jack",
+				brand_page_link: "https://www.ulta.com/brand/every-man-jack",
+			},
+			{
+				brand_id: "e9ea9eaf-33f1-41d2-bf76-7816cb379d6f",
+				brand_name: "Evian Mineral Spray",
+				brand_page_link:
+					"https://www.ulta.com/brand/evian-mineral-spray",
+			},
+			{
+				brand_id: "8ed2cec9-bbc5-4ab7-bbe5-eb11d8fb2f9a",
+				brand_name: "Exa",
+				brand_page_link: "https://www.ulta.com/brand/exa",
+			},
+			{
+				brand_id: "4836687c-a9db-4b3b-bd73-dd6192e0ab7a",
+				brand_name: "Exuviance",
+				brand_page_link: "https://www.ulta.com/brand/exuviance",
+			},
+			{
+				brand_id: "47e07445-1b46-4cac-aba0-e6f086e177e6",
+				brand_name: "Eyeko",
+				brand_page_link: "https://www.ulta.com/brand/eyeko",
+			},
+			{
+				brand_id: "cbe08dc0-a22e-458b-989a-fe934864be7d",
+				brand_name: "Eylure",
+				brand_page_link: "https://www.ulta.com/brand/eylure",
+			},
+			{
+				brand_id: "6d354930-947e-439f-a766-d343eb2e47af",
+				brand_name: "Fairy Tales",
+				brand_page_link: "https://www.ulta.com/brand/fairy-tales",
+			},
+			{
+				brand_id: "e514246c-7487-4ae3-abb2-6e795a679b29",
+				brand_name: "FEKKAI",
+				brand_page_link: "https://www.ulta.com/brand/fekkai",
+			},
+			{
+				brand_id: "60a4bb37-6901-4c84-a1b8-cc08a20537c6",
+				brand_name: "FENTY BEAUTY by Rihanna",
+				brand_page_link:
+					"https://www.ulta.com/brand/fenty-beauty-by-rihanna",
+			},
+			{
+				brand_id: "15c2c37d-0c34-4cb9-9362-e25369e4efe0",
+				brand_name: "First Aid Beauty",
+				brand_page_link: "https://www.ulta.com/brand/first-aid-beauty",
+			},
+			{
+				brand_id: "0865a784-b45f-49a0-a760-55bfdf29cdda",
+				brand_name: "Flawless by Finishing Touch",
+				brand_page_link:
+					"https://www.ulta.com/brand/flawless-by-finishing-touch",
+			},
+			{
+				brand_id: "4ffe257f-0a13-4826-bdd3-1e7b7d127946",
+				brand_name: "Flora & Noor",
+				brand_page_link: "https://www.ulta.com/brand/flora-noor",
+			},
+			{
+				brand_id: "c6302d32-1208-4726-87eb-ffb426b07ea7",
+				brand_name: "florence by mills",
+				brand_page_link: "https://www.ulta.com/brand/florence-by-mills",
+			},
+			{
+				brand_id: "b0072705-82ec-4a78-93fc-651c3f19c398",
+				brand_name: "FLOWER Beauty",
+				brand_page_link: "https://www.ulta.com/brand/flower-beauty",
+			},
+			{
+				brand_id: "794bfa1f-4e52-4170-b5d6-45dcaa02ca61",
+				brand_name: "Flowery",
+				brand_page_link: "https://www.ulta.com/brand/flowery",
+			},
+			{
+				brand_id: "3bde200d-b5a5-47d3-9373-968122071f65",
+				brand_name: "FOREO",
+				brand_page_link: "https://www.ulta.com/brand/foreo",
+			},
+			{
+				brand_id: "b509321d-2d0a-4b73-b08d-e71f06aaa615",
+				brand_name: "Foria",
+				brand_page_link: "https://www.ulta.com/brand/foria",
+			},
+			{
+				brand_id: "18cafc62-bda3-45b4-846f-bcc7df4e2bd2",
+				brand_name: "Fourth Ray Beauty",
+				brand_page_link: "https://www.ulta.com/brand/fourth-ray-beauty",
+			},
+			{
+				brand_id: "4ff92c6d-548d-4d19-9bfe-f7bb344e17ad",
+				brand_name: "frank body",
+				brand_page_link: "https://www.ulta.com/brand/frank-body",
+			},
+			{
+				brand_id: "5d0d4c0c-4df5-4f43-bc41-73c91e46bc03",
+				brand_name: "Freeman",
+				brand_page_link: "https://www.ulta.com/brand/freeman",
+			},
+			{
+				brand_id: "d4d32413-2aac-44bc-aacb-4735bf0276e2",
+				brand_name: "fresh",
+				brand_page_link: "https://www.ulta.com/brand/fresh",
+			},
+			{
+				brand_id: "7b7a43be-dc01-42b3-bffc-c3bde287a1a5",
+				brand_name: "Fromm",
+				brand_page_link: "https://www.ulta.com/brand/fromm",
+			},
+			{
+				brand_id: "ca88f5c6-d152-44dd-980f-6f896b82d3f5",
+				brand_name: "Fur",
+				brand_page_link: "https://www.ulta.com/brand/fur",
+			},
+			{
+				brand_id: "d2138c37-bd70-4342-baf0-98cb71baacbe",
+				brand_name: "Ga.Ma Italy Professional",
+				brand_page_link:
+					"https://www.ulta.com/brand/gama-italy-professional",
+			},
+			{
+				brand_id: "e719f5b8-c357-40ba-94a4-4c17ee25341f",
+				brand_name: "Garnier",
+				brand_page_link: "https://www.ulta.com/brand/garnier",
+			},
+			{
+				brand_id: "85c5037f-4981-4c5b-a4db-24973476fff7",
+				brand_name: "Ghd",
+				brand_page_link: "https://www.ulta.com/brand/ghd",
+			},
+			{
+				brand_id: "ea2b2db5-4dfa-4623-bb6d-e044616945eb",
+				brand_name: "Gigi",
+				brand_page_link: "https://www.ulta.com/brand/gigi",
+			},
+			{
+				brand_id: "3fa73670-897f-4ca2-8d82-09636fd0f6b2",
+				brand_name: "Gillette",
+				brand_page_link: "https://www.ulta.com/brand/gillette",
+			},
+			{
+				brand_id: "e2c7c508-574b-43de-a295-25e708fea3aa",
+				brand_name: "GIMME beauty",
+				brand_page_link: "https://www.ulta.com/brand/gimme-beauty",
+			},
+			{
+				brand_id: "e9d2185e-70fe-4e9c-bf08-9033bba19446",
+				brand_name: "Givenchy",
+				brand_page_link: "https://www.ulta.com/brand/givenchy",
+			},
+			{
+				brand_id: "abfdfa18-8145-4720-ac19-60252b8780ee",
+				brand_name: "GLAMGLOW",
+				brand_page_link: "https://www.ulta.com/brand/glamglow",
+			},
+			{
+				brand_id: "f3516422-2498-472d-ac8b-7c006ef5a551",
+				brand_name: "Glamnetic",
+				brand_page_link: "https://www.ulta.com/brand/glamnetic",
+			},
+			{
+				brand_id: "cd288e58-46f7-4278-8553-87d2682a8562",
+				brand_name: "GOLDE",
+				brand_page_link: "https://www.ulta.com/brand/golde",
+			},
+			{
+				brand_id: "ad2b2eb9-da10-4b66-8d21-31e30c9dc796",
+				brand_name: "Goli Nutrition",
+				brand_page_link: "https://www.ulta.com/brand/goli-nutrition",
+			},
+			{
+				brand_id: "72967773-bb48-4601-89c5-77ec399746c3",
+				brand_name: "Good Dye Young",
+				brand_page_link: "https://www.ulta.com/brand/good-dye-young",
+			},
+			{
+				brand_id: "2f5261a0-2e4c-41d5-9f65-4bc7d57db1a8",
+				brand_name: "good light",
+				brand_page_link: "https://www.ulta.com/brand/good-light",
+			},
+			{
+				brand_id: "3f5b97ca-b09a-4d22-906f-7c5d8b2cb365",
+				brand_name: "Good Molecules",
+				brand_page_link: "https://www.ulta.com/brand/good-molecules",
+			},
+			{
+				brand_id: "903c4ff4-7441-4990-8fe6-a028662537df",
+				brand_name: "Got 2b",
+				brand_page_link: "https://www.ulta.com/brand/got-2b",
+			},
+			{
+				brand_id: "17a2d4d6-c3ff-4e0e-8810-0028d80e2e04",
+				brand_name: "Grace Eleyae",
+				brand_page_link: "https://www.ulta.com/brand/grace-eleyae",
+			},
+			{
+				brand_id: "27f86232-5464-4edc-b07e-30d683fc17ee",
+				brand_name: "Grande Cosmetics",
+				brand_page_link: "https://www.ulta.com/brand/grande-cosmetics",
+			},
+			{
+				brand_id: "dd508dbb-488a-4ab1-b0d5-2fadc96dfaa4",
+				brand_name: "Groovi Beauty",
+				brand_page_link: "https://www.ulta.com/brand/groovi-beauty",
+			},
+			{
+				brand_id: "c7f8928c-b1aa-47f7-9038-2c7217351ff9",
+				brand_name: "Grow Gorgeous",
+				brand_page_link: "https://www.ulta.com/brand/grow-gorgeous",
+			},
+			{
+				brand_id: "a4bc31d5-16b3-436d-b1bc-517e688822cd",
+				brand_name: "Gucci",
+				brand_page_link: "https://www.ulta.com/brand/gucci",
+			},
+			{
+				brand_id: "634f0b7a-f620-43fa-9bb9-2965f7a70ad7",
+				brand_name: "Guerlain",
+				brand_page_link: "https://www.ulta.com/brand/guerlain",
+			},
+			{
+				brand_id: "abc7917d-bd0c-4185-ba08-c221abb30665",
+				brand_name: "HAIRtamin",
+				brand_page_link: "https://www.ulta.com/brand/hairtamin",
+			},
+			{
+				brand_id: "ca85a275-8bce-494f-a47c-435597353bdd",
+				brand_name: "HALF MAGIC",
+				brand_page_link: "https://www.ulta.com/brand/half-magic",
+			},
+			{
+				brand_id: "2773733c-aebf-4794-b60f-f478a112ef5f",
+				brand_name: "HALLY",
+				brand_page_link: "https://www.ulta.com/brand/hally",
+			},
+			{
+				brand_id: "56dd82f7-ada4-4283-a82c-159bbfd5b26b",
+				brand_name: "HAN Skincare Cosmetics",
+				brand_page_link:
+					"https://www.ulta.com/brand/han-skincare-cosmetics",
+			},
+			{
+				brand_id: "079f2607-20e8-4629-9532-70354ca6705f",
+				brand_name: "hanahana beauty",
+				brand_page_link: "https://www.ulta.com/brand/hanahana-beauty",
+			},
+			{
+				brand_id: "be03899e-d8cc-4b85-b49b-7849fa955638",
+				brand_name: "Hanskin",
+				brand_page_link: "https://www.ulta.com/brand/hanskin",
+			},
+			{
+				brand_id: "844c1c59-211c-48e5-aeef-0cfaab704121",
+				brand_name: "Hask",
+				brand_page_link: "https://www.ulta.com/brand/hask",
+			},
+			{
+				brand_id: "f66828e6-8e77-4c3b-b8ec-1e065452c95f",
+				brand_name: "Hempz",
+				brand_page_link: "https://www.ulta.com/brand/hempz",
+			},
+			{
+				brand_id: "87e98ec1-66bd-40ea-98a7-e876ba53961c",
+				brand_name: "Heritage Store",
+				brand_page_link: "https://www.ulta.com/brand/heritage-store",
+			},
+			{
+				brand_id: "c112e13d-2427-4bf7-963f-9a1d5b8e6256",
+				brand_name: "Hero Cosmetics",
+				brand_page_link: "https://www.ulta.com/brand/hero-cosmetics",
+			},
+			{
+				brand_id: "ab873e36-4abc-4fc6-bb53-d714f86c5a13",
+				brand_name: "Hey Honey",
+				brand_page_link: "https://www.ulta.com/brand/hey-honey",
+			},
+			{
+				brand_id: "8f04ff55-be22-4298-9150-515bd7a0b8b1",
+				brand_name: "HipDot",
+				brand_page_link: "https://www.ulta.com/brand/hipdot",
+			},
+			{
+				brand_id: "7f523f24-e8e9-47d2-ac28-1c67f0a3d80e",
+				brand_name: "Hollywood Fashion Secrets",
+				brand_page_link:
+					"https://www.ulta.com/brand/hollywood-fashion-secrets",
+			},
+			{
+				brand_id: "36b22437-abb2-4d00-ab8e-4fe9cddb0b0b",
+				brand_name: "Homebody",
+				brand_page_link: "https://www.ulta.com/brand/homebody",
+			},
+			{
+				brand_id: "0ee7c13c-0eb0-4043-ad7e-ba0f95f57ec4",
+				brand_name: "HomeWorx",
+				brand_page_link: "https://www.ulta.com/brand/homeworx",
+			},
+			{
+				brand_id: "34b246cb-4da1-48bf-857c-ca4d48b223c9",
+				brand_name: "Honest Beauty",
+				brand_page_link: "https://www.ulta.com/brand/honest-beauty",
+			},
+			{
+				brand_id: "b927b7d4-328d-48d2-9181-420ba8525991",
+				brand_name: "Hot Tools",
+				brand_page_link: "https://www.ulta.com/brand/hot-tools",
+			},
+			{
+				brand_id: "0dcf8cfd-44d2-423d-aa45-b1461968cbfb",
+				brand_name: "HOURGLASS",
+				brand_page_link: "https://www.ulta.com/brand/hourglass",
+			},
+			{
+				brand_id: "3a5090eb-0dc7-4755-a971-d9015cc529aa",
+				brand_name: "House of Lashes",
+				brand_page_link: "https://www.ulta.com/brand/house-of-lashes",
+			},
+			{
+				brand_id: "5ff35e0a-0e9f-4d4c-99f8-1ba275757531",
+				brand_name: "Hustle Butter",
+				brand_page_link: "https://www.ulta.com/brand/hustle-butter",
+			},
+			{
+				brand_id: "05445f04-5097-4c9d-8d3d-2c36d98b8bfe",
+				brand_name: "Hynt Beauty",
+				brand_page_link: "https://www.ulta.com/brand/hynt-beauty",
+			},
+			{
+				brand_id: "d633a79b-21a8-4766-8c82-7fa3cbf989ed",
+				brand_name: "I Dew Care",
+				brand_page_link: "https://www.ulta.com/brand/i-dew-care",
+			},
+			{
+				brand_id: "948940cf-9c57-42e2-ba79-053a81f1e9cc",
+				brand_name: "ICONIC LONDON",
+				brand_page_link: "https://www.ulta.com/brand/iconic-london",
+			},
+			{
+				brand_id: "e9f57e50-dbfc-4c53-9ff0-e4c73fe4d929",
+				brand_name: "iDesign",
+				brand_page_link: "https://www.ulta.com/brand/idesign",
+			},
+			{
+				brand_id: "4431267b-d57b-42d3-9e1d-ef06a82f768e",
+				brand_name: "IGK",
+				brand_page_link: "https://www.ulta.com/brand/igk",
+			},
+			{
+				brand_id: "c72047da-afa2-4bf0-8caf-a1d83fe2d1de",
+				brand_name: "iHome",
+				brand_page_link: "https://www.ulta.com/brand/ihome",
+			},
+			{
+				brand_id: "7bf58bc8-8003-4747-b9c8-2c02e3de1b73",
+				brand_name: "Impressions Vanity",
+				brand_page_link:
+					"https://www.ulta.com/brand/impressions-vanity",
+			},
+			{
+				brand_id: "faae80a6-fcb3-4fdb-ae32-032644157e1c",
+				brand_name: "Indeed Labs",
+				brand_page_link: "https://www.ulta.com/brand/indeed-labs",
+			},
+			{
+				brand_id: "b9c6afdf-e2cf-48ea-b785-47c78d5d5113",
+				brand_name: "INDIE LEE",
+				brand_page_link: "https://www.ulta.com/brand/indie-lee",
+			},
+			{
+				brand_id: "d1c1b35a-79ed-45f3-af6a-907c14edccff",
+				brand_name: "Innersense Organic Beauty",
+				brand_page_link:
+					"https://www.ulta.com/brand/innersense-organic-beauty",
+			},
+			{
+				brand_id: "36a1cb8c-1c1f-4ada-a43f-bc78c362351a",
+				brand_name: "INSERT NAME HERE",
+				brand_page_link: "https://www.ulta.com/brand/insert-name-here",
+			},
+			{
+				brand_id: "d0a0359d-1e78-4bff-8613-390f9d3925a7",
+				brand_name: "Invisibobble",
+				brand_page_link: "https://www.ulta.com/brand/invisibobble",
+			},
+			{
+				brand_id: "551a2eff-1df8-4755-822b-6c616573e8f8",
+				brand_name: "IT Brushes For ULTA",
+				brand_page_link: "https://www.ulta.com/brand/it-brushes-ulta",
+			},
+			{
+				brand_id: "5b7794b1-7dcb-409e-8288-adcec218bc58",
+				brand_name: "IT Cosmetics",
+				brand_page_link: "https://www.ulta.com/brand/it-cosmetics",
+			},
+			{
+				brand_id: "01d8049c-89c4-4ae1-870d-200888b02070",
+				brand_name: "It's A 10",
+				brand_page_link: "https://www.ulta.com/brand/its-a-10",
+			},
+			{
+				brand_id: "b3e8f6fa-4995-4fed-8052-a9c0029e8636",
+				brand_name: "J.Cat Beauty",
+				brand_page_link: "https://www.ulta.com/brand/jcat-beauty",
+			},
+			{
+				brand_id: "d1c2662d-096e-48d3-b213-ca7f47b94efb",
+				brand_name: "Jack Black",
+				brand_page_link: "https://www.ulta.com/brand/jack-black",
+			},
+			{
+				brand_id: "3bde9507-cc89-4266-a9de-0d1eb4ed3185",
+				brand_name: "jane iredale",
+				brand_page_link: "https://www.ulta.com/brand/jane-iredale",
+			},
+			{
+				brand_id: "d8d45369-34dc-4bd9-8b43-d168c5c75ff9",
+				brand_name: "Jean Paul Gaultier",
+				brand_page_link:
+					"https://www.ulta.com/brand/jean-paul-gaultier",
+			},
+			{
+				brand_id: "58e4545e-018a-4da9-bc6e-98ddaffcb334",
+				brand_name: "Jimmy Choo",
+				brand_page_link: "https://www.ulta.com/brand/jimmy-choo",
+			},
+			{
+				brand_id: "3cfa709b-1f01-46c7-8756-f254b6a88942",
+				brand_name: "John Varvatos",
+				brand_page_link: "https://www.ulta.com/brand/john-varvatos",
+			},
+			{
+				brand_id: "c4f98209-7122-4c92-b021-f38f720683c5",
+				brand_name: "Joico",
+				brand_page_link: "https://www.ulta.com/brand/joico",
+			},
+			{
+				brand_id: "0736e934-ca78-4390-9f6f-772a6ca92be3",
+				brand_name: "Juice Beauty",
+				brand_page_link: "https://www.ulta.com/brand/juice-beauty",
+			},
+			{
+				brand_id: "5e9e2943-27f1-4897-8f65-ff7fc5da3208",
+				brand_name: "Juicy Couture",
+				brand_page_link: "https://www.ulta.com/brand/juicy-couture",
+			},
+			{
+				brand_id: "3ab2142f-3e27-4110-90ce-0c028fcb9c86",
+				brand_name: "Juvia's Place",
+				brand_page_link: "https://www.ulta.com/brand/juvias-place",
+			},
+			{
+				brand_id: "9c392bef-aeb2-4497-860c-6a180d87ca26",
+				brand_name: "kaia naturals",
+				brand_page_link: "https://www.ulta.com/brand/kaia-naturals",
+			},
+			{
+				brand_id: "fc074cad-b9e1-4dac-ab86-92df98e4b4ae",
+				brand_name: "Kate Somerville",
+				brand_page_link: "https://www.ulta.com/brand/kate-somerville",
+			},
+			{
+				brand_id: "cd7f5aea-83ce-4da4-aa30-92862ea0017c",
+				brand_name: "Kate Spade New York",
+				brand_page_link:
+					"https://www.ulta.com/brand/kate-spade-new-york",
+			},
+			{
+				brand_id: "39438f8b-2056-4e43-9301-e09ce9648cd9",
+				brand_name: "Kenneth Cole New York",
+				brand_page_link:
+					"https://www.ulta.com/brand/kenneth-cole-new-york",
+			},
+			{
+				brand_id: "374f2247-12e8-4a22-8b82-5e9b436d7e79",
+				brand_name: "Kenra Professional",
+				brand_page_link:
+					"https://www.ulta.com/brand/kenra-professional",
+			},
+			{
+				brand_id: "ab587a68-b01d-4849-9a67-c5290e82b8a1",
+				brand_name: "Keracolor",
+				brand_page_link: "https://www.ulta.com/brand/keracolor",
+			},
+			{
+				brand_id: "bdc8cd54-566c-41c0-90da-1c81479f4e48",
+				brand_name: "Keranique",
+				brand_page_link: "https://www.ulta.com/brand/keranique",
+			},
+			{
+				brand_id: "b2a538f6-6e3f-4285-b5e9-0a0372858892",
+				brand_name: "Keratin Complex",
+				brand_page_link: "https://www.ulta.com/brand/keratin-complex",
+			},
+			{
+				brand_id: "4cbe1f63-8ca7-4225-a1d8-dfcd163a11da",
+				brand_name: "Kiehl's Since 1851",
+				brand_page_link: "https://www.ulta.com/brand/kiehls-since-1851",
+			},
+			{
+				brand_id: "20ca4895-366e-4335-b035-1cf88a8ab0aa",
+				brand_name: "KIKO Milano",
+				brand_page_link: "https://www.ulta.com/brand/kiko-milano",
+			},
+			{
+				brand_id: "b9251ce7-f61d-424f-b244-6da43e781a47",
+				brand_name: "Kinship",
+				brand_page_link: "https://www.ulta.com/brand/kinship",
+			},
+			{
+				brand_id: "e278c474-4eac-4c58-8300-b79da24eb1f8",
+				brand_name: "Kiss",
+				brand_page_link: "https://www.ulta.com/brand/kiss",
+			},
+			{
+				brand_id: "3b9900d2-77eb-415b-8756-ccf9684dc484",
+				brand_name: "Kitsch",
+				brand_page_link: "https://www.ulta.com/brand/kitsch",
+			},
+			{
+				brand_id: "c1f46cf9-864a-4b35-8732-1fc07c6c34b3",
+				brand_name: "Klairs",
+				brand_page_link: "https://www.ulta.com/brand/klairs",
+			},
+			{
+				brand_id: "f454c033-daed-48e8-ae6c-c0ca4a298ef6",
+				brand_name: "Klorane",
+				brand_page_link: "https://www.ulta.com/brand/klorane",
+			},
+			{
+				brand_id: "93383cdd-58f1-413d-b777-d2d80f19ad0b",
+				brand_name: "Kopari Beauty",
+				brand_page_link: "https://www.ulta.com/brand/kopari-beauty",
+			},
+			{
+				brand_id: "d2dd3867-a37c-4f71-b23b-6a6a75e80c2d",
+				brand_name: "KORRES",
+				brand_page_link: "https://www.ulta.com/brand/korres",
+			},
+			{
+				brand_id: "db507432-0d75-46a2-913f-3275263131a9",
+				brand_name: "Kreyòl Essence",
+				brand_page_link: "https://www.ulta.com/brand/kreyol-essence",
+			},
+			{
+				brand_id: "73938365-868a-4f33-8e51-58ae4ae7fd1d",
+				brand_name: "KRISTIN ESS HAIR",
+				brand_page_link: "https://www.ulta.com/brand/kristin-ess-hair",
+			},
+			{
+				brand_id: "03bea069-c45f-42ac-867e-9b85aabe0ec2",
+				brand_name: "KVD Beauty",
+				brand_page_link: "https://www.ulta.com/brand/kvd-beauty",
+			},
+			{
+				brand_id: "09fc9f89-0dbf-46b7-8dcc-10911d22ef5d",
+				brand_name: "KYLIE COSMETICS",
+				brand_page_link: "https://www.ulta.com/brand/kylie-cosmetics",
+			},
+			{
+				brand_id: "3575c4e6-8940-4fca-a982-39d1bc0eeee6",
+				brand_name: "KYLIE JENNER FRAGRANCES",
+				brand_page_link:
+					"https://www.ulta.com/brand/kylie-jenner-fragrances",
+			},
+			{
+				brand_id: "0ae9d6ed-c2bf-4ef1-969a-9b964b8d98ba",
+				brand_name: "KYLIE SKIN",
+				brand_page_link: "https://www.ulta.com/brand/kylie-skin",
+			},
+			{
+				brand_id: "0121b47d-90ee-44ab-bb39-02b770d28188",
+				brand_name: "L.A. Girl",
+				brand_page_link: "https://www.ulta.com/brand/la-girl",
+			},
+			{
+				brand_id: "96ca897f-23c6-4a3e-a773-e1522b092cc9",
+				brand_name: "L'ange",
+				brand_page_link: "https://www.ulta.com/brand/lange",
+			},
+			{
+				brand_id: "96fc7b82-0f28-437c-853b-995b16d69a22",
+				brand_name: "L'anza",
+				brand_page_link: "https://www.ulta.com/brand/lanza",
+			},
+			{
+				brand_id: "82e6e133-e246-493a-86e2-cb88be68949f",
+				brand_name: "L'Occitane",
+				brand_page_link: "https://www.ulta.com/brand/loccitane",
+			},
+			{
+				brand_id: "45c47f97-3d69-4920-b3ad-a35ae624ad16",
+				brand_name: "L'Oréal",
+				brand_page_link: "https://www.ulta.com/brand/loreal",
+			},
+			{
+				brand_id: "4b302444-bb14-44a2-b338-18117e9ec760",
+				brand_name: "La Roche-Posay",
+				brand_page_link: "https://www.ulta.com/brand/la-roche-posay",
+			},
+			{
+				brand_id: "718b15bd-0d72-4415-a825-dc0eacaa6ab5",
+				brand_name: "Lake & Skye",
+				brand_page_link: "https://www.ulta.com/brand/lake-skye",
+			},
+			{
+				brand_id: "7b81b716-2999-4b6c-a08d-c83901fb515b",
+				brand_name: "LAMIK Beauty",
+				brand_page_link: "https://www.ulta.com/brand/lamik-beauty",
+			},
+			{
+				brand_id: "2cdbd26f-5ec6-4ef9-8522-9ed870900c6e",
+				brand_name: "Lancôme",
+				brand_page_link: "https://www.ulta.com/brand/lancome",
+			},
+			{
+				brand_id: "fd3c5c5b-69be-4e59-89c8-c3f14376928d",
+				brand_name: "Lanolips",
+				brand_page_link: "https://www.ulta.com/brand/lanolips",
+			},
+			{
+				brand_id: "8a1117be-4f38-4175-b506-1e96380dfa98",
+				brand_name: "Laura Mercier",
+				brand_page_link: "https://www.ulta.com/brand/laura-mercier",
+			},
+			{
+				brand_id: "b835c76c-3d0e-494b-aba9-dd56d5dfc69f",
+				brand_name: "LAVANILA",
+				brand_page_link: "https://www.ulta.com/brand/lavanila",
+			},
+			{
+				brand_id: "576b487c-d95b-402c-b4b8-245cf3ad2460",
+				brand_name: "Le Mini Macaron",
+				brand_page_link: "https://www.ulta.com/brand/le-mini-macaron",
+			},
+			{
+				brand_id: "a9317b3d-c702-4c3a-bf71-6baf73e81c03",
+				brand_name: "LE MONDE GOURMAND",
+				brand_page_link: "https://www.ulta.com/brand/le-monde-gourmand",
+			},
+			{
+				brand_id: "e973dd36-a88b-4cfa-a5c0-8aa99904410e",
+				brand_name: "Lemme",
+				brand_page_link: "https://www.ulta.com/brand/lemme",
+			},
+			{
+				brand_id: "ccbb68cf-d85b-4cc2-a6b6-da8a89a59930",
+				brand_name: "Lilly Lashes",
+				brand_page_link: "https://www.ulta.com/brand/lilly-lashes",
+			},
+			{
+				brand_id: "48e90f7c-0045-438a-8074-dfb3aa490201",
+				brand_name: "Lime Crime",
+				brand_page_link: "https://www.ulta.com/brand/lime-crime",
+			},
+			{
+				brand_id: "1c84ad27-96d6-4549-a3f1-9b56ce06d61f",
+				brand_name: "Lip Smacker",
+				brand_page_link: "https://www.ulta.com/brand/lip-smacker",
+			},
+			{
+				brand_id: "f3971bb8-14a9-4467-85b6-c460e9f6cf86",
+				brand_name: "LIQUID I.V.",
+				brand_page_link: "https://www.ulta.com/brand/liquid-iv",
+			},
+			{
+				brand_id: "4daee50c-544f-4b48-b1a3-3730005735dd",
+				brand_name: "Live Tinted",
+				brand_page_link: "https://www.ulta.com/brand/live-tinted",
+			},
+			{
+				brand_id: "c04798f1-bcb7-40b1-9786-c721e70942dd",
+				brand_name: "Living Proof",
+				brand_page_link: "https://www.ulta.com/brand/living-proof",
+			},
+			{
+				brand_id: "4f99ffc9-458f-4c8d-ad8d-fdcf226c519d",
+				brand_name: "Locks & Mane",
+				brand_page_link: "https://www.ulta.com/brand/locks-mane",
+			},
+			{
+				brand_id: "ad9bb8ad-8f87-4e4a-8b9b-0ba3498fbacb",
+				brand_name: "LolaVie",
+				brand_page_link: "https://www.ulta.com/brand/lolavie",
+			},
+			{
+				brand_id: "818adb56-1886-4a98-b2ec-7d4dba8ee127",
+				brand_name: "Londontown",
+				brand_page_link: "https://www.ulta.com/brand/londontown",
+			},
+			{
+				brand_id: "b24b5edb-5eb4-4711-9dc2-a1d7580a1d8e",
+				brand_name: "LOOPS",
+				brand_page_link: "https://www.ulta.com/brand/loops",
+			},
+			{
+				brand_id: "7c31f3a9-a7c4-4cc4-90fe-c64ff4f7aeb1",
+				brand_name: "LORAC",
+				brand_page_link: "https://www.ulta.com/brand/lorac",
+			},
+			{
+				brand_id: "d589f2a7-762b-4a72-82d6-07e1b1612f6c",
+				brand_name: "Lottie London",
+				brand_page_link: "https://www.ulta.com/brand/lottie-london",
+			},
+			{
+				brand_id: "77363686-81a8-4fb5-b668-12a408caf3e8",
+				brand_name: "Love Wellness",
+				brand_page_link: "https://www.ulta.com/brand/love-wellness",
+			},
+			{
+				brand_id: "63689d85-efbe-477d-ad0d-223d53bfc873",
+				brand_name: "Loving Tan",
+				brand_page_link: "https://www.ulta.com/brand/loving-tan",
+			},
+			{
+				brand_id: "b36bce28-8a6a-484a-909a-5e6d45f7291b",
+				brand_name: "LUSH",
+				brand_page_link: "https://www.ulta.com/brand/lush",
+			},
+			{
+				brand_id: "89616813-ddd0-42f3-b5be-d277f917a527",
+				brand_name: "LUV SCRUB",
+				brand_page_link: "https://www.ulta.com/brand/luv-scrub",
+			},
+			{
+				brand_id: "fe6000a1-3c9f-486e-a9b6-7c6b355d14f6",
+				brand_name: "MAC",
+				brand_page_link: "https://www.ulta.com/brand/mac",
+			},
+			{
+				brand_id: "ce5c3bd4-8153-4b73-8041-05d0c12be0ae",
+				brand_name: "Mad Hippie",
+				brand_page_link: "https://www.ulta.com/brand/mad-hippie",
+			},
+			{
+				brand_id: "cfbd3c4c-aa2d-4620-ba15-d47615bfbb87",
+				brand_name: "Made By Dentists",
+				brand_page_link: "https://www.ulta.com/brand/made-by-dentists",
+			},
+			{
+				brand_id: "61ef9525-f749-4683-a83d-028ec25aaaa3",
+				brand_name: "Madison Reed",
+				brand_page_link: "https://www.ulta.com/brand/madison-reed",
+			},
+			{
+				brand_id: "54251b4d-108c-4b07-b802-96869323e67c",
+				brand_name: "MAËLYS Cosmetics",
+				brand_page_link: "https://www.ulta.com/brand/maelys-cosmetics",
+			},
+			{
+				brand_id: "ba3208d1-7315-4f03-85cf-5242bbdad7a6",
+				brand_name: "Makeup Revolution",
+				brand_page_link: "https://www.ulta.com/brand/makeup-revolution",
+			},
+			{
+				brand_id: "4815ed52-9dbd-4fc2-bf2f-4e0083c6bef1",
+				brand_name: "Manic Panic",
+				brand_page_link: "https://www.ulta.com/brand/manic-panic",
+			},
+			{
+				brand_id: "aed507b5-89e1-459f-b954-ec0f2d6aea56",
+				brand_name: "MANNA KADAR BEAUTY",
+				brand_page_link:
+					"https://www.ulta.com/brand/manna-kadar-beauty",
+			},
+			{
+				brand_id: "b7c8067b-17c0-40b7-a7ac-7131382afc4a",
+				brand_name: "Marc Jacobs",
+				brand_page_link: "https://www.ulta.com/brand/marc-jacobs",
+			},
+			{
+				brand_id: "8efa8dbf-a31e-41f6-a774-05e8a8426bdf",
+				brand_name: "Mario Badescu",
+				brand_page_link: "https://www.ulta.com/brand/mario-badescu",
+			},
+			{
+				brand_id: "7f48b2cf-04f0-4816-8cbf-14f63c0d1219",
+				brand_name: "MASON MAN",
+				brand_page_link: "https://www.ulta.com/brand/mason-man",
+			},
+			{
+				brand_id: "ce48a75d-1c9f-4912-a611-3a8c8f36ac38",
+				brand_name: "Matrix",
+				brand_page_link: "https://www.ulta.com/brand/matrix",
+			},
+			{
+				brand_id: "768dbec4-4296-4f0b-98a9-36ec29eea7da",
+				brand_name: "Maui Babe",
+				brand_page_link: "https://www.ulta.com/brand/maui-babe",
+			},
+			{
+				brand_id: "53a2f0d6-2028-4f05-8472-9987b2ac09b3",
+				brand_name: "Maui Moisture",
+				brand_page_link: "https://www.ulta.com/brand/maui-moisture",
+			},
+			{
+				brand_id: "fab09526-c88c-4f73-8374-8f1145945519",
+				brand_name: "Maybelline",
+				brand_page_link: "https://www.ulta.com/brand/maybelline",
+			},
+			{
+				brand_id: "fafb979f-4683-49a4-a089-04558218acae",
+				brand_name: "megababe",
+				brand_page_link: "https://www.ulta.com/brand/megababe",
+			},
+			{
+				brand_id: "ac2f502f-754f-4ef9-acac-427881fe25e9",
+				brand_name: "Melanin Haircare",
+				brand_page_link: "https://www.ulta.com/brand/melanin-haircare",
+			},
+			{
+				brand_id: "2afa67b6-6a23-4c8f-b104-37bf76111a59",
+				brand_name: "mented cosmetics",
+				brand_page_link: "https://www.ulta.com/brand/mented-cosmetics",
+			},
+			{
+				brand_id: "68fe469d-788e-450c-bb8b-3c4b7296af29",
+				brand_name: "Michael Kors",
+				brand_page_link: "https://www.ulta.com/brand/michael-kors",
+			},
+			{
+				brand_id: "994e2734-ffb1-4a9a-8a2b-075998b875dd",
+				brand_name: "Michael Todd Beauty",
+				brand_page_link:
+					"https://www.ulta.com/brand/michael-todd-beauty",
+			},
+			{
+				brand_id: "5c494416-3a02-4547-a901-7b5d4c95b52e",
+				brand_name: "Mielle",
+				brand_page_link: "https://www.ulta.com/brand/mielle",
+			},
+			{
+				brand_id: "2b09e86f-92cc-41e3-9284-edcc3884bc34",
+				brand_name: "Milani",
+				brand_page_link: "https://www.ulta.com/brand/milani",
+			},
+			{
+				brand_id: "af8e2a47-1b40-4394-8f1f-146c8c218e6c",
+				brand_name: "Milk + Honey",
+				brand_page_link: "https://www.ulta.com/brand/milk-honey",
+			},
+			{
+				brand_id: "9eab9aaf-3f69-4821-a8ae-69e2368d0321",
+				brand_name: "Mixed Chicks",
+				brand_page_link: "https://www.ulta.com/brand/mixed-chicks",
+			},
+			{
+				brand_id: "390bc522-b86b-4e3b-85ab-1cf3f574fdc1",
+				brand_name: "MONDAY Haircare",
+				brand_page_link: "https://www.ulta.com/brand/monday-haircare",
+			},
+			{
+				brand_id: "16f4eff3-9b7c-416c-922d-0be944897c11",
+				brand_name: "Montblanc",
+				brand_page_link: "https://www.ulta.com/brand/montblanc",
+			},
+			{
+				brand_id: "78ed5444-db6c-492c-8dc0-73342cd2f5ff",
+				brand_name: "Moon",
+				brand_page_link: "https://www.ulta.com/brand/moon",
+			},
+			{
+				brand_id: "2f473d79-9813-426b-8427-7bfe53c11224",
+				brand_name: "Moon Juice",
+				brand_page_link: "https://www.ulta.com/brand/moon-juice",
+			},
+			{
+				brand_id: "f1456334-3af6-4f1b-8f41-9aee46edc078",
+				brand_name: "Morphe",
+				brand_page_link: "https://www.ulta.com/brand/morphe",
+			},
+			{
+				brand_id: "37fdb672-6c04-421d-8e39-2a2992d3b194",
+				brand_name: "Morphe 2",
+				brand_page_link: "https://www.ulta.com/brand/morphe-2",
+			},
+			{
+				brand_id: "cc5d4713-7f78-4cbc-b2f3-66c773d0af19",
+				brand_name: "Moschino",
+				brand_page_link: "https://www.ulta.com/brand/moschino",
+			},
+			{
+				brand_id: "d84e48af-466f-4085-8c6f-800da0695c2d",
+				brand_name: "MUGLER",
+				brand_page_link: "https://www.ulta.com/brand/mugler",
+			},
+			{
+				brand_id: "767c61d8-9075-405f-a1b8-a47462b8bb24",
+				brand_name: "Murad",
+				brand_page_link: "https://www.ulta.com/brand/murad",
+			},
+			{
+				brand_id: "22291c06-1444-4b66-9b35-6d861d0b0303",
+				brand_name: "My Clarins",
+				brand_page_link: "https://www.ulta.com/brand/my-clarins",
+			},
+			{
+				brand_id: "8f9ae5d0-bc09-4266-b21b-ed7007c3cdc5",
+				brand_name: "NABLA",
+				brand_page_link: "https://www.ulta.com/brand/nabla",
+			},
+			{
+				brand_id: "1f03f5bf-307d-4c0e-a8d7-82df70046729",
+				brand_name: "Nads Natural",
+				brand_page_link: "https://www.ulta.com/brand/nads-natural",
+			},
+			{
+				brand_id: "2e4fbc36-92eb-4427-98a2-932d5e48f134",
+				brand_name: "Nail Tek",
+				brand_page_link: "https://www.ulta.com/brand/nail-tek",
+			},
+			{
+				brand_id: "32a365dd-4444-4338-b3b1-6bb0a764427a",
+				brand_name: "Nailtopia",
+				brand_page_link: "https://www.ulta.com/brand/nailtopia",
+			},
+			{
+				brand_id: "28b95e0d-cf55-4fb4-b996-39862edbf350",
+				brand_name: "Nair",
+				brand_page_link: "https://www.ulta.com/brand/nair",
+			},
+			{
+				brand_id: "73b3b63e-4aa7-45a8-81d7-c26e62f2ebdd",
+				brand_name: "NARS",
+				brand_page_link: "https://www.ulta.com/brand/nars",
+			},
+			{
+				brand_id: "6c5dbeb0-0e3f-46c2-9c50-b1d6ff52e99e",
+				brand_name: "NATASHA DENONA",
+				brand_page_link: "https://www.ulta.com/brand/natasha-denona",
+			},
+			{
+				brand_id: "d6266521-c1e1-46c1-bb88-2ba0d09eddb2",
+				brand_name: "Naturalicious",
+				brand_page_link: "https://www.ulta.com/brand/naturalicious",
+			},
+			{
+				brand_id: "5cbfb4bc-aa6f-423d-83ed-37aac1fe2a4f",
+				brand_name: "NatureLab. Tokyo",
+				brand_page_link: "https://www.ulta.com/brand/naturelab-tokyo",
+			},
+			{
+				brand_id: "94d5b0e7-56a1-496b-a295-7cfbca945bfc",
+				brand_name: "Nemat",
+				brand_page_link: "https://www.ulta.com/brand/nemat",
+			},
+			{
+				brand_id: "8b6e3d7d-3bec-4803-b3ef-740470850e93",
+				brand_name: "NEST New York",
+				brand_page_link: "https://www.ulta.com/brand/nest-new-york",
+			},
+			{
+				brand_id: "bc69600c-c1d7-4a88-94e7-4d999d60042d",
+				brand_name: "Neutrogena",
+				brand_page_link: "https://www.ulta.com/brand/neutrogena",
+			},
+			{
+				brand_id: "a877bf1e-cdad-4298-8dba-cbe461ea3cee",
+				brand_name: "Nexxus",
+				brand_page_link: "https://www.ulta.com/brand/nexxus",
+			},
+			{
+				brand_id: "14cc4b01-cda7-48ba-b37a-4e7c060f527d",
+				brand_name: "Nick Stenson Beauty",
+				brand_page_link:
+					"https://www.ulta.com/brand/nick-stenson-beauty",
+			},
+			{
+				brand_id: "e58cb16e-e163-4126-a4c0-1006d85fbe7c",
+				brand_name: "Nioxin",
+				brand_page_link: "https://www.ulta.com/brand/nioxin",
+			},
+			{
+				brand_id: "cd796d0c-8224-429c-9f1a-5f82d6cb7251",
+				brand_name: "Nivea",
+				brand_page_link: "https://www.ulta.com/brand/nivea",
+			},
+			{
+				brand_id: "2b56b1dc-8d39-437d-a65a-e92ca9b535f7",
+				brand_name: "No7",
+				brand_page_link: "https://www.ulta.com/brand/no7",
+			},
+			{
+				brand_id: "110af3fd-9717-4aa7-a6b9-022928afae87",
+				brand_name: "Not Your Mother's",
+				brand_page_link: "https://www.ulta.com/brand/not-your-mothers",
+			},
+			{
+				brand_id: "c27ff7ff-e00c-43bf-a14c-144104ec870f",
+				brand_name: "NUDESTIX",
+				brand_page_link: "https://www.ulta.com/brand/nudestix",
+			},
+			{
+				brand_id: "4d044ba5-8ca1-4f4f-a50f-3dca8f2d22ea",
+				brand_name: "NuFACE",
+				brand_page_link: "https://www.ulta.com/brand/nuface",
+			},
+			{
+				brand_id: "1de758a5-8b86-4d06-bf32-84f069d42fcd",
+				brand_name: "NYX Professional Makeup",
+				brand_page_link:
+					"https://www.ulta.com/brand/nyx-professional-makeup",
+			},
+			{
+				brand_id: "75db3385-1153-42f4-a073-5b9b6b428468",
+				brand_name: "Odele",
+				brand_page_link: "https://www.ulta.com/brand/odele",
+			},
+			{
+				brand_id: "fe608d00-ccd3-49d0-9658-91df8eb6d071",
+				brand_name: "Ofra Cosmetics",
+				brand_page_link: "https://www.ulta.com/brand/ofra-cosmetics",
+			},
+			{
+				brand_id: "c5824608-b269-443c-9a1e-0974cd2a6673",
+				brand_name: "OGX",
+				brand_page_link: "https://www.ulta.com/brand/ogx",
+			},
+			{
+				brand_id: "69f69d5e-531c-428a-a954-23f95f8a0714",
+				brand_name: "Oh K!",
+				brand_page_link: "https://www.ulta.com/brand/oh-k",
+			},
+			{
+				brand_id: "38224e09-b2e2-492a-a393-adffcb56dba4",
+				brand_name: "OLAPLEX",
+				brand_page_link: "https://www.ulta.com/brand/olaplex",
+			},
+			{
+				brand_id: "56b9b6de-b49c-48ea-a0c8-20807b60361c",
+				brand_name: "Olay",
+				brand_page_link: "https://www.ulta.com/brand/olay",
+			},
+			{
+				brand_id: "fbde56ec-cb4a-4d89-94ab-c215f8c4ccbd",
+				brand_name: "OLEHENRIKSEN",
+				brand_page_link: "https://www.ulta.com/brand/olehenriksen",
+			},
+			{
+				brand_id: "d91b6e0f-c405-4575-aec1-aec5154efe2f",
+				brand_name: "Olivia Garden",
+				brand_page_link: "https://www.ulta.com/brand/olivia-garden",
+			},
+			{
+				brand_id: "82592905-31c5-4ce1-83d8-e0f1f68e3036",
+				brand_name: "OLLY",
+				brand_page_link: "https://www.ulta.com/brand/olly",
+			},
+			{
+				brand_id: "23f4c567-8581-4009-ade7-08476aa479de",
+				brand_name: "One Love Organics",
+				brand_page_link: "https://www.ulta.com/brand/one-love-organics",
+			},
+			{
+				brand_id: "82bce784-d468-4e08-9d5f-d3f1a6da6632",
+				brand_name: "OPI",
+				brand_page_link: "https://www.ulta.com/brand/opi",
+			},
+			{
+				brand_id: "29dc15f3-9c2a-4704-91be-614a1d096e21",
+				brand_name: "ORA",
+				brand_page_link: "https://www.ulta.com/brand/ora",
+			},
+			{
+				brand_id: "eef6032b-5056-40e0-80ec-2f15e42b4588",
+				brand_name: "Oral-B",
+				brand_page_link: "https://www.ulta.com/brand/oral-b",
+			},
+			{
+				brand_id: "ba25f8a7-1de8-44c6-8846-313903798fa9",
+				brand_name: "Origins",
+				brand_page_link: "https://www.ulta.com/brand/origins",
+			},
+			{
+				brand_id: "706fbcf4-8ca8-4d43-ab36-c37cce7a7395",
+				brand_name: "Orly",
+				brand_page_link: "https://www.ulta.com/brand/orly",
+			},
+			{
+				brand_id: "fee31d3c-b4ef-4fc5-9a48-8084c6ffd4db",
+				brand_name: "OSEA",
+				brand_page_link: "https://www.ulta.com/brand/osea",
+			},
+			{
+				brand_id: "58c99576-ee48-4045-ba9b-1b589591e848",
+				brand_name: "OUAI",
+				brand_page_link: "https://www.ulta.com/brand/ouai",
+			},
+			{
+				brand_id: "fa62d3cf-37b3-4a75-887e-ec3d7b73e3c1",
+				brand_name: "Ouidad",
+				brand_page_link: "https://www.ulta.com/brand/ouidad",
+			},
+			{
+				brand_id: "f0ca6494-c911-4a14-8f19-71dfaa19c517",
+				brand_name: "Pacifica",
+				brand_page_link: "https://www.ulta.com/brand/pacifica",
+			},
+			{
+				brand_id: "0e64bc4c-ae00-4bc3-88b8-ea4dffae8fa7",
+				brand_name: "PanOxyl",
+				brand_page_link: "https://www.ulta.com/brand/panoxyl",
+			},
+			{
+				brand_id: "e1b2c0e8-c780-4e5c-b534-9da3a2e0ecfe",
+				brand_name: "PAT McGRATH LABS",
+				brand_page_link: "https://www.ulta.com/brand/pat-mcgrath-labs",
+			},
+			{
+				brand_id: "91e08587-581b-4531-b60b-fbd7e355f49b",
+				brand_name: "Patchology",
+				brand_page_link: "https://www.ulta.com/brand/patchology",
+			},
+			{
+				brand_id: "fb5fdc16-7467-450b-ad90-f59b2cf04278",
+				brand_name: "Patisserie Beauty",
+				brand_page_link: "https://www.ulta.com/brand/patisserie-beauty",
+			},
+			{
+				brand_id: "205a70ac-e94d-42e5-a229-cb14fd8bb5bf",
+				brand_name: "PATTERN",
+				brand_page_link: "https://www.ulta.com/brand/pattern",
+			},
+			{
+				brand_id: "d2287ea9-192b-4185-9b19-eebb3e0c10a0",
+				brand_name: "Paul Mitchell",
+				brand_page_link: "https://www.ulta.com/brand/paul-mitchell",
+			},
+			{
+				brand_id: "cea43866-67ba-4f15-bd03-678a765d301e",
+				brand_name: "Peace Out",
+				brand_page_link: "https://www.ulta.com/brand/peace-out",
+			},
+			{
+				brand_id: "25d1e22f-d269-485a-ae79-826e074b5c76",
+				brand_name: "PEACH & LILY",
+				brand_page_link: "https://www.ulta.com/brand/peach-lily",
+			},
+			{
+				brand_id: "d0d470d2-fb30-4dbc-b806-5ee44cf10cc6",
+				brand_name: "Peach Slices",
+				brand_page_link: "https://www.ulta.com/brand/peach-slices",
+			},
+			{
+				brand_id: "80a063ea-e2ba-4c65-b885-26ec983e3103",
+				brand_name: "Perricone MD",
+				brand_page_link: "https://www.ulta.com/brand/perricone-md",
+			},
+			{
+				brand_id: "11d7fcb0-df15-4e79-95d6-141e6dc8fa43",
+				brand_name: "Persona",
+				brand_page_link: "https://www.ulta.com/brand/persona",
+			},
+			{
+				brand_id: "ba6565f0-3f0b-47d7-aa0c-f68bd8de5e3c",
+				brand_name: "Peter Thomas Roth",
+				brand_page_link: "https://www.ulta.com/brand/peter-thomas-roth",
+			},
+			{
+				brand_id: "eddc8cd5-9480-44cd-9b12-fa793a4da9aa",
+				brand_name: "Petite n Pretty",
+				brand_page_link: "https://www.ulta.com/brand/petite-n-pretty",
+			},
+			{
+				brand_id: "ca17a8b5-0ada-4320-800a-575734343760",
+				brand_name: "Philosophy",
+				brand_page_link: "https://www.ulta.com/brand/philosophy",
+			},
+			{
+				brand_id: "1844d69c-7879-496b-9afc-276d524dc2b2",
+				brand_name: "Physicians Formula",
+				brand_page_link:
+					"https://www.ulta.com/brand/physicians-formula",
+			},
+			{
+				brand_id: "20e9d4eb-7ae1-42a0-89e3-a9a5912cc29f",
+				brand_name: "Pinrose",
+				brand_page_link: "https://www.ulta.com/brand/pinrose",
+			},
+			{
+				brand_id: "1a0b68c6-1215-4e53-9300-35f683b5ae83",
+				brand_name: "Pipette",
+				brand_page_link: "https://www.ulta.com/brand/pipette",
+			},
+			{
+				brand_id: "98262f3d-0242-438b-9687-85aaeb0f9bba",
+				brand_name: "Pirette",
+				brand_page_link: "https://www.ulta.com/brand/pirette",
+			},
+			{
+				brand_id: "4d221987-378c-4484-a028-6cdde28dfc58",
+				brand_name: "Pixi",
+				brand_page_link: "https://www.ulta.com/brand/pixi",
+			},
+			{
+				brand_id: "50416aae-e224-4268-af88-870bf10cc835",
+				brand_name: "PMD",
+				brand_page_link: "https://www.ulta.com/brand/pmd",
+			},
+			{
+				brand_id: "db825942-4473-4401-8ae3-51db5179921c",
+				brand_name: "Polder",
+				brand_page_link: "https://www.ulta.com/brand/polder",
+			},
+			{
+				brand_id: "1f7a6ded-eda6-4cdb-8293-f972734b216c",
+				brand_name: "Polite Society",
+				brand_page_link: "https://www.ulta.com/brand/polite-society",
+			},
+			{
+				brand_id: "c84342af-951f-4700-a259-19f40f51d63a",
+				brand_name: "Poo~Pourri",
+				brand_page_link: "https://www.ulta.com/brand/poopourri",
+			},
+			{
+				brand_id: "bbddd959-cd50-4b5e-85b8-44c318a1b7f9",
+				brand_name: "Poppy & Pout",
+				brand_page_link: "https://www.ulta.com/brand/poppy-pout",
+			},
+			{
+				brand_id: "5626dcbb-739a-4b3f-8d3c-eacecea1037f",
+				brand_name: "POUND CAKE",
+				brand_page_link: "https://www.ulta.com/brand/pound-cake",
+			},
+			{
+				brand_id: "da5e5a59-f057-4d6b-a49a-46e2c7a65204",
+				brand_name: "Prada",
+				brand_page_link: "https://www.ulta.com/brand/prada",
+			},
+			{
+				brand_id: "5163a38a-e640-4a53-8d3c-79d1c3a436c5",
+				brand_name: "Pravana",
+				brand_page_link: "https://www.ulta.com/brand/pravana",
+			},
+			{
+				brand_id: "914eff57-3eaf-4b94-a1c7-661168f596f4",
+				brand_name: "Proactiv",
+				brand_page_link: "https://www.ulta.com/brand/proactiv",
+			},
+			{
+				brand_id: "d4872561-848c-4636-95f8-8cefda6d8e2b",
+				brand_name: "PROVENCE Beauty",
+				brand_page_link: "https://www.ulta.com/brand/provence-beauty",
+			},
+			{
+				brand_id: "bcc6eea5-5989-40e4-99f9-2c9a206b323e",
+				brand_name: "PÜR",
+				brand_page_link: "https://www.ulta.com/brand/pur",
+			},
+			{
+				brand_id: "ebb8ac9b-453c-48bf-9762-d31e5a80942f",
+				brand_name: "Pura",
+				brand_page_link: "https://www.ulta.com/brand/pura",
+			},
+			{
+				brand_id: "8defa450-9af6-419a-8d11-d447be75009e",
+				brand_name: "Pura d'or",
+				brand_page_link: "https://www.ulta.com/brand/pura-dor",
+			},
+			{
+				brand_id: "b07cff7f-05d1-4ba9-97d4-2f4891829d17",
+				brand_name: "Pureology",
+				brand_page_link: "https://www.ulta.com/brand/pureology",
+			},
+			{
+				brand_id: "9c5290d8-f0ed-435c-aca6-f43f25883465",
+				brand_name: "PYT Beauty",
+				brand_page_link: "https://www.ulta.com/brand/pyt-beauty",
+			},
+			{
+				brand_id: "a61330b1-189e-45e3-bfd2-d6010633c599",
+				brand_name: "Qhemet Biologics",
+				brand_page_link: "https://www.ulta.com/brand/qhemet-biologics",
+			},
+			{
+				brand_id: "7311387d-7bdb-496f-873c-7c0636ee7a47",
+				brand_name: "r.e.m. beauty",
+				brand_page_link: "https://www.ulta.com/brand/rem-beauty",
+			},
+			{
+				brand_id: "cf071d46-e40a-4262-8121-2cbcc3650717",
+				brand_name: "Rabanne",
+				brand_page_link: "https://www.ulta.com/brand/rabanne",
+			},
+			{
+				brand_id: "f325834a-b1ac-4329-8fa1-ed8a0b8a41b3",
+				brand_name: "Ralph Lauren",
+				brand_page_link: "https://www.ulta.com/brand/ralph-lauren",
+			},
+			{
+				brand_id: "e7a0e554-80f7-4699-b752-de99b47389e7",
+				brand_name: "Rapidlash",
+				brand_page_link: "https://www.ulta.com/brand/rapidlash",
+			},
+			{
+				brand_id: "71030365-b427-426c-bfbb-8287cc61c231",
+				brand_name: "Real Techniques",
+				brand_page_link: "https://www.ulta.com/brand/real-techniques",
+			},
+			{
+				brand_id: "624aa76c-868e-4ea5-8d32-bb3ae1a60e8c",
+				brand_name: "Red Carpet Manicure",
+				brand_page_link:
+					"https://www.ulta.com/brand/red-carpet-manicure",
+			},
+			{
+				brand_id: "a02f2297-e720-4094-bcdb-12534974267b",
+				brand_name: "Redken",
+				brand_page_link: "https://www.ulta.com/brand/redken",
+			},
+			{
+				brand_id: "2ebc6e7c-64ae-4246-9ac6-2b00d9def913",
+				brand_name: "Remington",
+				brand_page_link: "https://www.ulta.com/brand/remington",
+			},
+			{
+				brand_id: "5fd78070-2427-4ad6-9f77-ad8427d319f5",
+				brand_name: "Revlon",
+				brand_page_link: "https://www.ulta.com/brand/revlon",
+			},
+			{
+				brand_id: "db904f46-f975-411e-8387-7ef097015f86",
+				brand_name: "RITUALS",
+				brand_page_link: "https://www.ulta.com/brand/rituals",
+			},
+			{
+				brand_id: "2bdac256-74d2-4b5b-b374-9e6797d327a9",
+				brand_name: "Rituel de Fille",
+				brand_page_link: "https://www.ulta.com/brand/rituel-de-fille",
+			},
+			{
+				brand_id: "909abcc7-02b0-4c72-9847-e8b8d8f36d91",
+				brand_name: "Rizos Curls",
+				brand_page_link: "https://www.ulta.com/brand/rizos-curls",
+			},
+			{
+				brand_id: "3660874d-ddb0-4beb-ac4f-353f2bbc6c67",
+				brand_name: "RoC",
+				brand_page_link: "https://www.ulta.com/brand/roc",
+			},
+			{
+				brand_id: "eee4cd63-22fe-4b3f-af98-2a28b5889f41",
+				brand_name: "Rosebud Perfume Co.",
+				brand_page_link:
+					"https://www.ulta.com/brand/rosebud-perfume-co",
+			},
+			{
+				brand_id: "0175a8bf-13a2-42de-9ea1-899c4265962a",
+				brand_name: "ROSEN",
+				brand_page_link: "https://www.ulta.com/brand/rosen",
+			},
+			{
+				brand_id: "ba10a296-9ba8-4cd4-accc-43f05d88a0e4",
+				brand_name: "Rusk",
+				brand_page_link: "https://www.ulta.com/brand/rusk",
+			},
+			{
+				brand_id: "332b5212-6b03-4f27-b867-c3e77b6a9822",
+				brand_name: "SABON",
+				brand_page_link: "https://www.ulta.com/brand/sabon",
+			},
+			{
+				brand_id: "3fffc5fa-3376-403c-a620-c1073d76f322",
+				brand_name: "Sacheu",
+				brand_page_link: "https://www.ulta.com/brand/sacheu",
+			},
+			{
+				brand_id: "07f4b8bf-4610-416a-9430-9e2b7e92f44f",
+				brand_name: "Sally Hansen",
+				brand_page_link: "https://www.ulta.com/brand/sally-hansen",
+			},
+			{
+				brand_id: "de3ca52b-759d-4984-9c99-e1b13a3d6334",
+				brand_name: "Schick",
+				brand_page_link: "https://www.ulta.com/brand/schick",
+			},
+			{
+				brand_id: "5cef4d6e-9973-4d56-8333-d363274d3806",
+				brand_name: "SCRATCH",
+				brand_page_link: "https://www.ulta.com/brand/scratch",
+			},
+			{
+				brand_id: "0029c3cd-8e44-4243-a2b7-3d70d098e081",
+				brand_name: "Scünci",
+				brand_page_link: "https://www.ulta.com/brand/scunci",
+			},
+			{
+				brand_id: "3face78f-9c80-4e72-9acc-b237ce9cb498",
+				brand_name: "Sebastian",
+				brand_page_link: "https://www.ulta.com/brand/sebastian",
+			},
+			{
+				brand_id: "70ec81b2-fc85-4335-8247-aa19f6383a99",
+				brand_name: "Seche",
+				brand_page_link: "https://www.ulta.com/brand/seche",
+			},
+			{
+				brand_id: "096849f9-92d5-451f-ba96-d658624cf91e",
+				brand_name: "SEEN",
+				brand_page_link: "https://www.ulta.com/brand/seen",
+			},
+			{
+				brand_id: "d26b4eac-b33c-488b-8bca-809644f2d481",
+				brand_name: "SeroVital",
+				brand_page_link: "https://www.ulta.com/brand/serovital",
+			},
+			{
+				brand_id: "29daac80-795d-41e5-9816-91e49175da11",
+				brand_name: "Sexy Hair",
+				brand_page_link: "https://www.ulta.com/brand/sexy-hair",
+			},
+			{
+				brand_id: "fbd61b55-40a6-43c8-a675-de73670d78ad",
+				brand_name: "Shark Beauty",
+				brand_page_link: "https://www.ulta.com/brand/shark-beauty",
+			},
+			{
+				brand_id: "e56fbef4-078a-44c1-aedc-02531decabc1",
+				brand_name: "SheaMoisture",
+				brand_page_link: "https://www.ulta.com/brand/sheamoisture",
+			},
+			{
+				brand_id: "45283a56-cca6-4477-9262-097b9720b9a4",
+				brand_name: "Shimmer Lights",
+				brand_page_link: "https://www.ulta.com/brand/shimmer-lights",
+			},
+			{
+				brand_id: "a20829b0-2f31-4ac1-a40a-1bc82f43de0f",
+				brand_name: "Shiseido",
+				brand_page_link: "https://www.ulta.com/brand/shiseido",
+			},
+			{
+				brand_id: "97a74185-b6cc-4fd6-943c-68b67eaf2f57",
+				brand_name: "Silk'n",
+				brand_page_link: "https://www.ulta.com/brand/silkn",
+			},
+			{
+				brand_id: "33679946-a7e2-49ff-9b28-645f6c86af0e",
+				brand_name: "sk*p",
+				brand_page_link: "https://www.ulta.com/brand/skp",
+			},
+			{
+				brand_id: "5ccff292-5fa1-4440-bf9e-9f63b706d0f3",
+				brand_name: "Skin Gym",
+				brand_page_link: "https://www.ulta.com/brand/skin-gym",
+			},
+			{
+				brand_id: "776bebf6-6ebb-479e-9d36-b680ec22433d",
+				brand_name: "Skinfood",
+				brand_page_link: "https://www.ulta.com/brand/skinfood",
+			},
+			{
+				brand_id: "897e871b-6ca6-4dc9-b13e-36d9ce44a451",
+				brand_name: "Skinnydip",
+				brand_page_link: "https://www.ulta.com/brand/skinnydip",
+			},
+			{
+				brand_id: "14b6c856-2188-4e92-9bf0-d1b7881ec9d6",
+				brand_name: "Slip",
+				brand_page_link: "https://www.ulta.com/brand/slip",
+			},
+			{
+				brand_id: "7a231f78-d3dd-48da-a1fc-564ac01ea138",
+				brand_name: "Smashbox",
+				brand_page_link: "https://www.ulta.com/brand/smashbox",
+			},
+			{
+				brand_id: "befd7c63-f1fe-4747-b6e0-ea968a7daaf4",
+				brand_name: "Smile Makers",
+				brand_page_link: "https://www.ulta.com/brand/smile-makers",
+			},
+			{
+				brand_id: "91d6cce5-3096-4cda-b83b-62430a3c8893",
+				brand_name: "Snif",
+				brand_page_link: "https://www.ulta.com/brand/snif",
+			},
+			{
+				brand_id: "b559174d-0349-4835-93a7-f968ac2d9dfa",
+				brand_name: "Soap & Glory",
+				brand_page_link: "https://www.ulta.com/brand/soap-glory",
+			},
+			{
+				brand_id: "49665565-9862-4b71-8d3a-a2dcd19543b1",
+				brand_name: "SoCozy",
+				brand_page_link: "https://www.ulta.com/brand/socozy",
+			},
+			{
+				brand_id: "75f361d2-d272-4188-803d-f895f27f2313",
+				brand_name: "Sol de Janeiro",
+				brand_page_link: "https://www.ulta.com/brand/sol-de-janeiro",
+			},
+			{
+				brand_id: "6d26fd27-2d76-4471-9917-5abddce2bf75",
+				brand_name: "Solawave",
+				brand_page_link: "https://www.ulta.com/brand/solawave",
+			},
+			{
+				brand_id: "1b9cfa84-d47e-4423-a404-15617ed8ada7",
+				brand_name: "Spectrum",
+				brand_page_link: "https://www.ulta.com/brand/spectrum",
+			},
+			{
+				brand_id: "53bb3bcb-4c2d-49b1-a58b-8753f92d91dd",
+				brand_name: "Spongeables",
+				brand_page_link: "https://www.ulta.com/brand/spongeables",
+			},
+			{
+				brand_id: "c9c8f8bb-e605-4768-9bb7-cbdb6a17aa58",
+				brand_name: "Spotlight Oral Care",
+				brand_page_link:
+					"https://www.ulta.com/brand/spotlight-oral-care",
+			},
+			{
+				brand_id: "68cb95d4-47bf-4fed-8b26-94b127d87121",
+				brand_name: "St. Moriz",
+				brand_page_link: "https://www.ulta.com/brand/st-moriz",
+			},
+			{
+				brand_id: "97d4b5ac-6eb4-47e9-b999-eec68ba67669",
+				brand_name: "St. Tropez",
+				brand_page_link: "https://www.ulta.com/brand/st-tropez",
+			},
+			{
+				brand_id: "d1fa7de6-697a-4667-96f6-1cc11ef12366",
+				brand_name: "Static Nails",
+				brand_page_link: "https://www.ulta.com/brand/static-nails",
+			},
+			{
+				brand_id: "e1fd266c-aaf6-4db0-bc0b-ac740a6c4e29",
+				brand_name: "Stila",
+				brand_page_link: "https://www.ulta.com/brand/stila",
+			},
+			{
+				brand_id: "90913c5a-4335-4d4d-9a74-9881e3ca6639",
+				brand_name: "StriVectin",
+				brand_page_link: "https://www.ulta.com/brand/strivectin",
+			},
+			{
+				brand_id: "8179c4fd-d7ff-46aa-96b8-12c9ba1b7403",
+				brand_name: "Sugarbear",
+				brand_page_link: "https://www.ulta.com/brand/sugarbear",
+			},
+			{
+				brand_id: "25f46fbd-3e72-4716-9611-1d7f42029485",
+				brand_name: "sugardoh",
+				brand_page_link: "https://www.ulta.com/brand/sugardoh",
+			},
+			{
+				brand_id: "279dc0be-0ced-4304-ad2e-ecd7ad044882",
+				brand_name: "Sun Bum",
+				brand_page_link: "https://www.ulta.com/brand/sun-bum",
+			},
+			{
+				brand_id: "f10e5142-ee80-4989-bd86-e9433d0194c0",
+				brand_name: "Sunday || Sunday",
+				brand_page_link: "https://www.ulta.com/brand/sunday-sunday",
+			},
+			{
+				brand_id: "bbeeba9c-69b5-4be6-bb95-f061e1777c2a",
+				brand_name: "SUNDAY RILEY",
+				brand_page_link: "https://www.ulta.com/brand/sunday-riley",
+			},
+			{
+				brand_id: "d92720f4-8862-4ee7-a11c-9616fe01bf71",
+				brand_name: "Supergoop!",
+				brand_page_link: "https://www.ulta.com/brand/supergoop",
+			},
+			{
+				brand_id: "d6b2ada0-5127-4576-bfab-a8ea724cbe3e",
+				brand_name: "Supersmile",
+				brand_page_link: "https://www.ulta.com/brand/supersmile",
+			},
+			{
+				brand_id: "d49b6282-2ab3-40cb-92aa-bc8aef2120fd",
+				brand_name: "SweetSpot Labs",
+				brand_page_link: "https://www.ulta.com/brand/sweetspot-labs",
+			},
+			{
+				brand_id: "54d52541-1fe1-4bf4-82f1-518f4592aa20",
+				brand_name: "T3",
+				brand_page_link: "https://www.ulta.com/brand/t3",
+			},
+			{
+				brand_id: "41386fee-bf10-40cd-88cd-c291fbc7fd09",
+				brand_name: "TAN-LUXE",
+				brand_page_link: "https://www.ulta.com/brand/tan-luxe",
+			},
+			{
+				brand_id: "9b00a823-f4b7-4931-9a3b-b75e88f8d0e2",
+				brand_name: "Tangle Teezer",
+				brand_page_link: "https://www.ulta.com/brand/tangle-teezer",
+			},
+			{
+				brand_id: "7016692e-6a81-4e22-83ea-fc5a393bb9a6",
+				brand_name: "Tanologist",
+				brand_page_link: "https://www.ulta.com/brand/tanologist",
+			},
+			{
+				brand_id: "371765c4-5b1b-4759-8729-7f7ac0988bc2",
+				brand_name: "Tartan + Twine",
+				brand_page_link: "https://www.ulta.com/brand/tartan-twine",
+			},
+			{
+				brand_id: "5819d7d3-ca60-4e05-b316-3640beb06581",
+				brand_name: "Tarte",
+				brand_page_link: "https://www.ulta.com/brand/tarte",
+			},
+			{
+				brand_id: "98a4d886-fdae-4a93-b138-f3129f4bf269",
+				brand_name: "tgin",
+				brand_page_link: "https://www.ulta.com/brand/tgin",
+			},
+			{
+				brand_id: "4907fc5c-60f1-4585-afce-0d666de7679b",
+				brand_name: "Thayers",
+				brand_page_link: "https://www.ulta.com/brand/thayers",
+			},
+			{
+				brand_id: "8d3799cd-4887-437c-805a-782d35015807",
+				brand_name: "The Body Shop",
+				brand_page_link: "https://www.ulta.com/brand/body-shop",
+			},
+			{
+				brand_id: "49c9ff4a-71f8-4da6-afaf-7c83f2ea6113",
+				brand_name: "The Crème Shop",
+				brand_page_link: "https://www.ulta.com/brand/creme-shop",
+			},
+			{
+				brand_id: "bbf1d2f7-bc1e-427b-81e7-185a57e3ab3c",
+				brand_name: "The Good Patch",
+				brand_page_link: "https://www.ulta.com/brand/good-patch",
+			},
+			{
+				brand_id: "db0c8896-269e-41c1-9f29-bf15e8d121a1",
+				brand_name: "The Hair Edit",
+				brand_page_link: "https://www.ulta.com/brand/hair-edit",
+			},
+			{
+				brand_id: "1f86a606-29d6-46d5-95c4-cd55a799be03",
+				brand_name: "The Handmade Soap Co.",
+				brand_page_link: "https://www.ulta.com/brand/handmade-soap-co",
+			},
+			{
+				brand_id: "654aaefd-2284-4b28-8278-6577977c21e3",
+				brand_name: "The Mane Choice",
+				brand_page_link: "https://www.ulta.com/brand/mane-choice",
+			},
+			{
+				brand_id: "62453634-b06b-4dcb-be0f-ee89b9377541",
+				brand_name: "The Ordinary",
+				brand_page_link: "https://www.ulta.com/brand/ordinary",
+			},
+			{
+				brand_id: "4359ef8a-d86f-48be-bef5-83158a09d24b",
+				brand_name: "The Original MakeUp Eraser",
+				brand_page_link:
+					"https://www.ulta.com/brand/original-makeup-eraser",
+			},
+			{
+				brand_id: "93219421-8f10-45a0-ab34-7992fb709114",
+				brand_name: "THE ROUTE",
+				brand_page_link: "https://www.ulta.com/brand/route",
+			},
+			{
+				brand_id: "bc63b7ef-94a5-45ee-bd40-6e8f33f59ad7",
+				brand_name: "The Vintage Cosmetic Company",
+				brand_page_link:
+					"https://www.ulta.com/brand/vintage-cosmetic-company",
+			},
+			{
+				brand_id: "49f18123-baef-4d6f-a01e-735586682b92",
+				brand_name: "TheraBreath",
+				brand_page_link: "https://www.ulta.com/brand/therabreath",
+			},
+			{
+				brand_id: "104a0790-afd3-4af4-abac-8418d2fd9483",
+				brand_name: "Thick Head",
+				brand_page_link: "https://www.ulta.com/brand/thick-head",
+			},
+			{
+				brand_id: "974edc39-1de3-4ea5-9a8f-58897057cb56",
+				brand_name: "Tiffany & Co.",
+				brand_page_link: "https://www.ulta.com/brand/tiffany-co",
+			},
+			{
+				brand_id: "9307c163-2d7e-4aab-9c7a-b59a584057ac",
+				brand_name: "TOCCA",
+				brand_page_link: "https://www.ulta.com/brand/tocca",
+			},
+			{
+				brand_id: "df153697-50f1-4386-96ea-3d3c9841818c",
+				brand_name: "TOM FORD",
+				brand_page_link: "https://www.ulta.com/brand/tom-ford",
+			},
+			{
+				brand_id: "1dde1958-d599-4a8e-846f-6598290046d1",
+				brand_name: "TONYMOLY",
+				brand_page_link: "https://www.ulta.com/brand/tonymoly",
+			},
+			{
+				brand_id: "f57ce423-2fa9-4ab2-a3a8-82d5090ac89c",
+				brand_name: "Too Faced",
+				brand_page_link: "https://www.ulta.com/brand/too-faced",
+			},
+			{
+				brand_id: "02be2674-8ec6-4a55-8b69-a1c3f3559fc0",
+				brand_name: "Toppik",
+				brand_page_link: "https://www.ulta.com/brand/toppik",
+			},
+			{
+				brand_id: "cafde247-3455-4f03-b47a-e381b0ce5494",
+				brand_name: "Tory Burch",
+				brand_page_link: "https://www.ulta.com/brand/tory-burch",
+			},
+			{
+				brand_id: "43b06194-ce0a-4c9c-8368-e1b9d62f4974",
+				brand_name: "Touchland",
+				brand_page_link: "https://www.ulta.com/brand/touchland",
+			},
+			{
+				brand_id: "32a1034d-d63e-466a-b98c-c1378b79a09b",
+				brand_name: "Tree Hut",
+				brand_page_link: "https://www.ulta.com/brand/tree-hut",
+			},
+			{
+				brand_id: "13911f1c-6c0d-4595-84ec-ea5fb7128cf2",
+				brand_name: "Treslúce Beauty",
+				brand_page_link: "https://www.ulta.com/brand/tresluce-beauty",
+			},
+			{
+				brand_id: "c358976b-a2aa-4dbb-9854-e1f82e81ee10",
+				brand_name: "Truly",
+				brand_page_link: "https://www.ulta.com/brand/truly",
+			},
+			{
+				brand_id: "ec7d5aa7-7ac3-4674-9981-9764188a9b15",
+				brand_name: "TULA",
+				brand_page_link: "https://www.ulta.com/brand/tula",
+			},
+			{
+				brand_id: "00bd2af8-05d6-4176-8d4e-1cbe7cd10fe1",
+				brand_name: "Turbie Twist",
+				brand_page_link: "https://www.ulta.com/brand/turbie-twist",
+			},
+			{
+				brand_id: "1d76a8fe-9144-4928-b72c-4011cfbc736f",
+				brand_name: "Tweezerman",
+				brand_page_link: "https://www.ulta.com/brand/tweezerman",
+			},
+			{
+				brand_id: "afd08e3e-2658-48d5-a8f0-282044347b1b",
+				brand_name: "ULTA Beauty Collection",
+				brand_page_link:
+					"https://www.ulta.com/brand/ulta-beauty-collection",
+			},
+			{
+				brand_id: "a13abbc2-295d-4fe5-ba85-ddabefb18b7d",
+				brand_name: "Unbound",
+				brand_page_link: "https://www.ulta.com/brand/unbound",
+			},
+			{
+				brand_id: "899eb784-2851-4479-b2a3-8f8b66fb44ab",
+				brand_name: "Undefined Beauty",
+				brand_page_link: "https://www.ulta.com/brand/undefined-beauty",
+			},
+			{
+				brand_id: "e3efb2b1-efa6-4b9e-85b5-9dc6e7fde0f0",
+				brand_name: "Undone Beauty",
+				brand_page_link: "https://www.ulta.com/brand/undone-beauty",
+			},
+			{
+				brand_id: "fbc270e8-9bc9-45b8-b89b-714776b60755",
+				brand_name: "UNITE Hair",
+				brand_page_link: "https://www.ulta.com/brand/unite-hair",
+			},
+			{
+				brand_id: "9deeb9b2-fdfc-48d1-87bc-82c56e359ed6",
+				brand_name: "UOMA Beauty",
+				brand_page_link: "https://www.ulta.com/brand/uoma-beauty",
+			},
+			{
+				brand_id: "de82a3e4-1bf3-43e5-a30f-282b5ee59d9b",
+				brand_name: "Urban Decay Cosmetics",
+				brand_page_link:
+					"https://www.ulta.com/brand/urban-decay-cosmetics",
+			},
+			{
+				brand_id: "c68532e9-25ab-4087-b458-09a48f73f413",
+				brand_name: "Urban Hydration",
+				brand_page_link: "https://www.ulta.com/brand/urban-hydration",
+			},
+			{
+				brand_id: "067c9088-d4d3-46a1-beea-638581dca2fc",
+				brand_name: "Urban Skin Rx",
+				brand_page_link: "https://www.ulta.com/brand/urban-skin-rx",
+			},
+			{
+				brand_id: "51fd3627-618b-48d7-a4cc-3d178898834f",
+				brand_name: "Urban Veda",
+				brand_page_link: "https://www.ulta.com/brand/urban-veda",
+			},
+			{
+				brand_id: "cd8efd53-7658-42d5-964c-daaa09d229e9",
+				brand_name: "Vacation",
+				brand_page_link: "https://www.ulta.com/brand/vacation",
+			},
+			{
+				brand_id: "ac412245-37a8-406e-be6a-724e30ebcd76",
+				brand_name: "Valentino",
+				brand_page_link: "https://www.ulta.com/brand/valentino",
+			},
+			{
+				brand_id: "481d23f8-3897-4102-a96f-229f3b5d5a46",
+				brand_name: "VANICREAM",
+				brand_page_link: "https://www.ulta.com/brand/vanicream",
+			},
+			{
+				brand_id: "a002873e-06e1-4280-83b3-8324a15dba20",
+				brand_name: "VDL",
+				brand_page_link: "https://www.ulta.com/brand/vdl",
+			},
+			{
+				brand_id: "062c5969-fabd-4920-bf20-40d67b7de90c",
+				brand_name: "Velour Lashes",
+				brand_page_link: "https://www.ulta.com/brand/velour-lashes",
+			},
+			{
+				brand_id: "fb914914-0655-4621-bee8-f2bae47a40e6",
+				brand_name: "Verb",
+				brand_page_link: "https://www.ulta.com/brand/verb",
+			},
+			{
+				brand_id: "c4bb4799-6ce4-4fa1-b278-e1ae413efb72",
+				brand_name: "Versace",
+				brand_page_link: "https://www.ulta.com/brand/versace",
+			},
+			{
+				brand_id: "eaa0b82e-75b4-41af-bad8-baf5e1403c87",
+				brand_name: "Vichy",
+				brand_page_link: "https://www.ulta.com/brand/vichy",
+			},
+			{
+				brand_id: "e30943a3-ad7b-449e-b307-ded7decc5ea4",
+				brand_name: "Viktor&Rolf",
+				brand_page_link: "https://www.ulta.com/brand/viktor-rolf",
+			},
+			{
+				brand_id: "700ab3d9-c0da-478b-9cea-a9c32d8bbc3a",
+				brand_name: "Virtue",
+				brand_page_link: "https://www.ulta.com/brand/virtue",
+			},
+			{
+				brand_id: "03f7d535-dc3a-440d-b83e-e7ca96899e15",
+				brand_name: "Vitamins and Sea beauty",
+				brand_page_link:
+					"https://www.ulta.com/brand/vitamins-sea-beauty",
+			},
+			{
+				brand_id: "63ca6ae4-4f42-4de5-9bdf-42eb3c14c249",
+				brand_name: "Viviscal",
+				brand_page_link: "https://www.ulta.com/brand/viviscal",
+			},
+			{
+				brand_id: "003152a8-20b4-44fb-befc-34410290768b",
+				brand_name: "VOLITION",
+				brand_page_link: "https://www.ulta.com/brand/volition",
+			},
+			{
+				brand_id: "bc4aad67-c15e-4ada-a62b-362383be4ba4",
+				brand_name: "VUSH",
+				brand_page_link: "https://www.ulta.com/brand/vush",
+			},
+			{
+				brand_id: "2650c575-e9b1-48c9-84d8-0af2444405ac",
+				brand_name: "Wahl",
+				brand_page_link: "https://www.ulta.com/brand/wahl",
+			},
+			{
+				brand_id: "7e2c3624-6264-49d7-b4a7-c3f32ad0645a",
+				brand_name: "Wakse",
+				brand_page_link: "https://www.ulta.com/brand/wakse",
+			},
+			{
+				brand_id: "f0e3d67a-0031-4f8c-99b0-f18757ff1cf9",
+				brand_name: "Well People",
+				brand_page_link: "https://www.ulta.com/brand/well-people",
+			},
+			{
+				brand_id: "e3882931-fa5b-43ad-bc04-02b964748418",
+				brand_name: "Wella",
+				brand_page_link: "https://www.ulta.com/brand/wella",
+			},
+			{
+				brand_id: "045e117b-1514-44ca-a420-fd41f77627ee",
+				brand_name: "Wet Brush",
+				brand_page_link: "https://www.ulta.com/brand/wet-brush",
+			},
+			{
+				brand_id: "e2f4cb14-a233-432d-92f9-6c89bd223b70",
+				brand_name: "Wet n Wild",
+				brand_page_link: "https://www.ulta.com/brand/wet-n-wild",
+			},
+			{
+				brand_id: "1fa75d7f-7969-4132-85e3-4d2a07549e3b",
+				brand_name: "Wigo",
+				brand_page_link: "https://www.ulta.com/brand/wigo",
+			},
+			{
+				brand_id: "6cd0e269-b5e4-4369-8736-7c9cf04df9f7",
+				brand_name: "Winky Lux",
+				brand_page_link: "https://www.ulta.com/brand/winky-lux",
+			},
+			{
+				brand_id: "c1535d93-b650-4fc3-9420-182074df6dfd",
+				brand_name: "WLDKAT",
+				brand_page_link: "https://www.ulta.com/brand/wldkat",
+			},
+			{
+				brand_id: "0aef57e9-7a62-4efb-ace9-6eca8d4ec56f",
+				brand_name: "Womaness",
+				brand_page_link: "https://www.ulta.com/brand/womaness",
+			},
+			{
+				brand_id: "4665e17b-6382-490c-86aa-388ff2173a18",
+				brand_name: "Wunder2",
+				brand_page_link: "https://www.ulta.com/brand/wunder2",
+			},
+			{
+				brand_id: "990fc06a-ba31-4b26-9382-19b1ed4b4e23",
+				brand_name: "WYN BEAUTY",
+				brand_page_link: "https://www.ulta.com/brand/wyn-beauty",
+			},
+			{
+				brand_id: "7eb71b96-ff85-4f69-abea-29ec50bee1f1",
+				brand_name: "Youthforia",
+				brand_page_link: "https://www.ulta.com/brand/youthforia",
+			},
+			{
+				brand_id: "693e869d-5b96-404e-b0a4-de5b87f69f5a",
+				brand_name: "Yves Saint Laurent",
+				brand_page_link:
+					"https://www.ulta.com/brand/yves-saint-laurent",
+			},
+			{
+				brand_id: "2463f8f7-650e-4212-af80-2655b15bb9e9",
+				brand_name: "ZitSticka",
+				brand_page_link: "https://www.ulta.com/brand/zitsticka",
+			},
+			{
+				brand_id: "920d83f1-f7da-448a-9733-84c6b61f4ee6",
+				brand_name: "Zoya",
+				brand_page_link: "https://www.ulta.com/brand/zoya",
+			},
+			{
+				brand_id: "70d56a4c-d630-4854-b82a-e6725efc73a2",
+				brand_name: "18.21 Man Made",
+				brand_page_link: "https://www.ulta.com/brand/1821-man-made",
+			},
+		];
 
 		const data = [
 			{
@@ -4050,10 +8441,15 @@ export default function Page() {
 				return self.indexOf(value) === index;
 			});
 
-			console.dir(data.map(item => item.product_name) ,{ maxArrayLength: null });
+			console.dir(
+				data.map((item) => item.sku_id),
+				{ maxArrayLength: null }
+			);
 		}
 
-		log(data);
+		console.log(allSephoraBrands.map(brand => brand.brand_name))
+
+		// log(data);
 		// console.log(data.length);
 		// const newData = data
 		// 	.map((item) => {
@@ -4084,7 +8480,6 @@ export default function Page() {
 		const search = "Woods Trilogy Set";
 		// console.log(data.some((item) => item.product_name === search));
 	}
-
 
 	const text = "4.4 out of 5 stars ; 8 reviews";
 
