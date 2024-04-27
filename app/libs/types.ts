@@ -31,12 +31,10 @@ export type OptionProps = {
 };
 
 export type AllProductsSelectors = {
-	sephoraByBrand?: {
-
-	},
+	sephoraByBrand?: {};
 	sephoraSelectors: {
-		allProductsContSelector: string,
-		productCardContSelector: string,
+		allProductsContSelector: string;
+		productCardContSelector: string;
 		productNameSelector: string;
 		productImageSelector: string;
 		brandNameSelector: string;
@@ -45,8 +43,9 @@ export type AllProductsSelectors = {
 		avgRatingSelector: string;
 		totalReviewsSelector: string;
 		pageLinkSelector: string;
-		loadMoreSelector: string
-	};
+		loadMoreSelector: string;
+	}
+	
 };
 
 export const querySchema = z.object({

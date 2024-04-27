@@ -5,9 +5,9 @@ import { AllProductsSelectors } from "../../types";
 
 import { AllProducts } from "@prisma/client";
 import { loadAllProducts } from "./loadAllProducts";
-import { scrapeAllProducts } from "./scrapeAllProducts";
+import { scrapeAllSephoraProducts } from "./scrapeAllSephoraProducts";
 
-export async function runAllProductsScraper(
+export async function runSephoraAllProductsScraper(
 	url: string,
 	options: AllProductsSelectors
 ): Promise<AllProducts[]> {
@@ -38,7 +38,7 @@ export async function runAllProductsScraper(
 				options.sephoraSelectors.loadMoreSelector
 			);
 		}
-		const data = await scrapeAllProducts(page, options);
+		const data = await scrapeAllSephoraProducts(page, options);
 
 		await browser.close();
 

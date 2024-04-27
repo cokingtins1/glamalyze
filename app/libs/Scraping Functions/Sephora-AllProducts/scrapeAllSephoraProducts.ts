@@ -2,7 +2,7 @@ import { AllProductsSelectors } from "../../types";
 import { Page } from "puppeteer";
 import { AllProducts } from "@prisma/client";
 
-export async function scrapeAllProducts(
+export async function scrapeAllSephoraProducts(
 	page: Page,
 	options: AllProductsSelectors
 ) {

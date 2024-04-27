@@ -1,7 +1,6 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { getAllProducts } from "../actions/getAllProducts";
+import { getAllSephoraProducts } from "../actions/getAllSephoraProducts";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -10,9 +9,10 @@ export default function Page() {
 		"use server";
 
 		const url = formData.get("url");
-		if (typeof url !== "string" || !url.includes("sephora.com/brand")) return;
+		if (typeof url !== "string" || !url.includes("sephora.com/brand"))
+			return;
 
-		const allProducts = await getAllProducts(url);
+		const allProducts = await getAllSephoraProducts(url);
 
 		if (allProducts.length > 0) {
 			const uniqueSkuIds: { [key: string]: boolean } = {};
