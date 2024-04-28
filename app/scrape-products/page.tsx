@@ -53,8 +53,8 @@ export default function Page() {
 			sharedBrandNames.length /
 			(ultaBrandNames.length + sephoraBrandNames.length);
 
-		// console.dir(sharedBrandNames, { maxArrayLength: null });
-		console.log(sharedPercent)
+
+		console.dir(sharedBrandNames.length, { maxArrayLength: null });
 
 		// }
 	}
