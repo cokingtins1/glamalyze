@@ -28,6 +28,7 @@ model Retailer {
   Reviewer       Reviewer[]
   SephoraProduct SephoraProduct[]
   UltaProduct    UltaProduct[]
+  AllProducts    AllProducts[]
 }
 
 model Query {
@@ -122,7 +123,8 @@ model AllProducts {
   product_id        String   @id @default(uuid())
   product_name      String?
   product_image_url String[]
-  retailer_id       String?
+  retailer          Retailer @relation(fields: [retailer_id], references: [retailer_id])
+  retailer_id       String
   brand_id          String?
   brand_name        String?
   product_price     Float[]
@@ -133,13 +135,24 @@ model AllProducts {
 }
 
 model UltaBrand {
-  brand_id        String  @id @default(uuid())
+  brand_id        String   @id @default(uuid())
   brand_name      String?
   brand_page_link String?
+  created_at      DateTime @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime @updatedAt @db.Timestamptz(6)
 }
 
 model SephoraBrand {
-  brand_id        String  @id @default(uuid())
+  brand_id        String   @id @default(uuid())
   brand_name      String?
   brand_page_link String?
+  created_at      DateTime @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime @updatedAt @db.Timestamptz(6)
+}
+
+model ScrapLog {
+  scrape_id   String   @id @default(uuid())
+  scrape_date DateTime @default(now()) @db.Timestamptz(6)
+  target      String?
+  status      Json?
 }

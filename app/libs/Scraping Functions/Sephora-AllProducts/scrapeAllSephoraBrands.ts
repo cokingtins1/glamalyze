@@ -38,6 +38,8 @@ export async function scrapeAllSephoraBrands(page: Page) {
 					brand_id: crypto.randomUUID(),
 					brand_name: brandName,
 					brand_page_link: `https://www.sephora.com${brandPageLink}`,
+					created_at: new Date(),
+					updated_at: new Date(),
 				});
 			});
 		});

@@ -43,6 +43,8 @@ export async function scrapeAllUltaBrands(page: Page) {
 						brand_id: crypto.randomUUID(),
 						brand_name: brandName,
 						brand_page_link: brandPageLink,
+						created_at: new Date(),
+						updated_at: new Date()
 					});
 				});
 			});

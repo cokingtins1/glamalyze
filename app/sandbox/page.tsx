@@ -1626,7 +1626,7 @@ export default function Page() {
 			},
 		];
 
-		const allBrands = [
+		const allUltaBrands = [
 			{
 				brand_id: "0d52ac78-072f-4105-b320-e71215dc81ff",
 				brand_name: "about-face",

@@ -107,6 +107,7 @@ export default function GetProductForm() {
 				<SubmitForm
 					disabled={!form.formState.isDirty}
 					pending={form.formState.isSubmitting}
+					pendingText={["Getting Reviews...", "Get Reviews"]}
 				/>
 			</form>
 		</Form>

@@ -1,18 +1,28 @@
 "use client";
 
-import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
+import { ButtonProps } from "@/components/ui/button";
 
-type SubmitFormProps = {
-	disabled: boolean;
-	pending: boolean
-};
+type SubmitFormProps = ButtonProps & {
+	pending: boolean;
+	pendingText: string[];
+	disabled? :boolean
+}
 
-export default function SubmitForm({ disabled, pending }: SubmitFormProps) {
-
+export default function SubmitForm({
+	pending,
+	pendingText,
+	disabled,
+	...props
+}: SubmitFormProps) {
 	return (
-		<Button type="submit" disabled={disabled}>
-			{pending ? "Fetching reviews..." : "Get reviews"}
+		<Button
+			type="submit"
+			disabled={pending || disabled}
+			{...props}
+			className="justify-self-stretch"
+		>
+			{pending ? pendingText[0] : pendingText[1]}
 		</Button>
 	);
 }
