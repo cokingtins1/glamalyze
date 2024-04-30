@@ -157,8 +157,6 @@ export async function scrapeAllUltaProducts(
 
 			result.push({
 				product_id: crypto.randomUUID(),
-				created_at: new Date(),
-				updated_at: new Date(),
 				product_name: productName,
 				product_image_url: [productImageUrl],
 				retailer_id: "Ulta123",
@@ -169,11 +167,20 @@ export async function scrapeAllUltaProducts(
 				avg_rating: avgRating,
 				total_reviews: totalReviews,
 				page_link: pageLink,
+				created_at: new Date(),
+				updated_at: new Date(),
 			});
 		});
 
 		return result;
 	}, options.sephoraSelectors);
+
+	if (productData.length > 0) {
+		productData.forEach((p) => {
+			p.created_at = new Date();
+			p.updated_at = new Date();
+		});
+	}
 
 	return productData;
 }

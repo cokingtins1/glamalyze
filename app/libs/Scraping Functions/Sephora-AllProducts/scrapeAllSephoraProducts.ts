@@ -6,6 +6,8 @@ export async function scrapeAllSephoraProducts(
 	page: Page,
 	options: AllProductsSelectors
 ) {
+	// page.on("console", (msg) => console.log("PAGE LOG:", msg.text()));
+
 	const productData = await page.evaluate((options) => {
 		function getNumber(text: string | null): number | null {
 			if (!text) return 0;
@@ -55,11 +57,11 @@ export async function scrapeAllSephoraProducts(
 			allProductsContSelector,
 			productCardContSelector,
 			productNameSelector,
-			productImageSelector, // get srcset
+			productImageSelector,
 			brandNameSelector,
 			productPriceSelector,
 			skuIdSelector,
-			avgRatingSelector, // get style width
+			avgRatingSelector,
 			totalReviewsSelector,
 			pageLinkSelector,
 
@@ -99,6 +101,8 @@ export async function scrapeAllSephoraProducts(
 			if (!productCard) return [];
 			const productNameEl =
 				productCard.querySelector(productNameSelector);
+
+			console.log("PRODUCT NAME EL:", !!productNameEl);
 
 			const productName = productNameEl
 				? productNameEl.textContent
@@ -165,8 +169,6 @@ export async function scrapeAllSephoraProducts(
 
 			result.push({
 				product_id: crypto.randomUUID(),
-				created_at: new Date(),
-				updated_at: new Date(),
 				product_name: productName,
 				product_image_url: productImageUrl,
 				retailer_id: "Sephora123",
@@ -177,11 +179,20 @@ export async function scrapeAllSephoraProducts(
 				avg_rating: getNumber(avgRating),
 				total_reviews: getNumber(totalReviews),
 				page_link: pageLink,
+				created_at: new Date(),
+				updated_at: new Date(),
 			});
 		});
 
 		return result;
 	}, options.sephoraSelectors);
+
+	if (productData.length > 0) {
+		productData.forEach((p) => {
+			p.created_at = new Date();
+			p.updated_at = new Date();
+		});
+	}
 
 	return productData;
 }

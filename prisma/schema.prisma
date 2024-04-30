@@ -120,12 +120,12 @@ model Reviewer {
 }
 
 model AllProducts {
-  product_id        String   @id @default(uuid())
-  created_at        DateTime @default(now()) @db.Timestamptz(6)
-  updated_at        DateTime @updatedAt @db.Timestamptz(6)
+  product_id        String    @id @default(uuid())
+  created_at        DateTime? @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime? @updatedAt @db.Timestamptz(6)
   product_name      String?
   product_image_url String[]
-  retailer          Retailer @relation(fields: [retailer_id], references: [retailer_id])
+  retailer          Retailer  @relation(fields: [retailer_id], references: [retailer_id])
   retailer_id       String
   brand_id          String?
   brand_name        String?
@@ -153,10 +153,11 @@ model SephoraBrand {
 }
 
 model ScrapeLog {
-  scrape_id   String   @id @default(uuid())
-  scrape_date DateTime @default(now()) @db.Timestamptz(6)
-  retailer    String?
-  target      String?
-  scrapeRange String[]
-  failedOn    String?
+  scrape_id     String   @id @default(uuid())
+  scrape_date   DateTime @default(now()) @db.Timestamptz(6)
+  retailer      String?
+  target        String?
+  scrapeRange   String[]
+  failedOn      String?
+  executionTime Int?
 }

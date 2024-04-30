@@ -1,0 +1,556 @@
+brand_id,brand_name,brand_page_link,created_at,updated_at
+0d52ac78-072f-4105-b320-e71215dc81ff,about-face,https://www.ulta.com/brand/about-face,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a28265e1-4577-44a8-b0d7-fb40beda804e,ACURE,https://www.ulta.com/brand/acure,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c8efdb74-6558-4e17-a3fd-03576078b7d1,af94,https://www.ulta.com/brand/af94,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1b8d9fa3-e7c0-4bbd-8a31-122e7c2c2f77,AG Care,https://www.ulta.com/brand/ag-care,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+da63cfbe-8b85-44ef-9cf9-4f5896492352,Ahava,https://www.ulta.com/brand/ahava,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+dc9380de-182e-453d-8674-1401192bcb07,Alterna,https://www.ulta.com/brand/alterna,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9355a7ec-a34d-4171-8286-fdbe41343c14,American Crew,https://www.ulta.com/brand/american-crew,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+db88c2df-ac8e-449a-86a8-2691b70f5568,AmLactin,https://www.ulta.com/brand/amlactin,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+67037db1-a134-41cc-a61b-f3613eff9e48,Anastasia Beverly Hills,https://www.ulta.com/brand/anastasia-beverly-hills,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a454cb91-af9c-4732-898d-440095623b5d,Andalou Naturals,https://www.ulta.com/brand/andalou-naturals,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+511b6145-aee0-4cd5-8791-2a3d5df2dfa2,Andrew Fitzsimons,https://www.ulta.com/brand/andrew-fitzsimons,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2dd377a9-ce13-487d-a7b1-e6cfa9b1b930,Aquage,https://www.ulta.com/brand/aquage,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c9cd5c0b-9449-4ab2-833f-a58c80bfb1b9,Aquaphor,https://www.ulta.com/brand/aquaphor,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+29cb7524-4095-4025-9a30-66735f8046b4,Aquis,https://www.ulta.com/brand/aquis,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+302cddc6-75c8-4769-a7f5-7898a4ac0b5c,Arctic Fox,https://www.ulta.com/brand/arctic-fox,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c1a7dc79-a00e-4890-ad23-0f47ec347a7f,Ardell,https://www.ulta.com/brand/ardell,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c0099e47-0f1f-47a1-8cfe-c2b591d738b2,Ariana Grande,https://www.ulta.com/brand/ariana-grande,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+64e465f7-8a09-48ae-b75f-130936e7c783,ARMANI,https://www.ulta.com/brand/armani,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e26c6e29-1784-4a79-8be5-0770b4840629,Australian Gold,https://www.ulta.com/brand/australian-gold,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+382b2c27-e437-4fcc-b318-1dfed06943c3,Aveeno,https://www.ulta.com/brand/aveeno,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0c1db790-c072-49d5-a36f-a68e10934b7f,Avène,https://www.ulta.com/brand/avene,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+192e0e29-3002-463e-8336-780846648154,Azzaro,https://www.ulta.com/brand/azzaro,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+eee44850-87b6-4c3b-9612-14736cf367a8,b.tan,https://www.ulta.com/brand/btan,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+6ff03175-ab58-42d1-b7b1-ceb608614d20,Baby Foot,https://www.ulta.com/brand/baby-foot,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+671dca83-f6b7-4ff0-bdd1-e7da609ecf6b,BaBylissPRO,https://www.ulta.com/brand/babylisspro,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+60e2b3dc-b220-4468-aa9b-8de56fe61f5b,Bali Body,https://www.ulta.com/brand/bali-body,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0a1186dd-8f06-416b-914f-e4772ee43e2b,Banila Co,https://www.ulta.com/brand/banila-co,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fec09a4e-1e67-4079-bf65-383996281177,bareMinerals,https://www.ulta.com/brand/bareminerals,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+50b58250-c11b-4bd8-b067-e3a371223504,Batiste,https://www.ulta.com/brand/batiste,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0e2d1fb8-beae-4f60-addb-9c71c6626cc5,Beachwaver Co.,https://www.ulta.com/brand/beachwaver-co,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+77045a4f-f60f-4eac-a1a3-9e17c1c4c676,Beast,https://www.ulta.com/brand/beast,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b9ec988d-aafa-47e2-a63a-b84d8074e1b6,Beauty Bakerie,https://www.ulta.com/brand/beauty-bakerie,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+dee83676-e930-418c-8bbd-b4432544913d,Beauty Finds by ULTA Beauty,https://www.ulta.com/brand/beauty-finds-by-ulta-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5008f160-fef4-4cde-8ab3-01592613cb2c,BeautyBio,https://www.ulta.com/brand/beautybio,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+62a0cd8b-04fd-4d50-bf42-331b3b1e4490,beautyblender,https://www.ulta.com/brand/beautyblender,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+bd8f4cc5-61f6-451a-8cdc-b7563da67cda,Beautycounter,https://www.ulta.com/brand/beautycounter,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+098e4402-0e41-4488-952f-3cfe4cf3d68f,BeautyStat Cosmetics,https://www.ulta.com/brand/beautystat-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4b8eef9b-52e4-4f96-a513-89f139bc8ec6,Bed Head,https://www.ulta.com/brand/bed-head,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+37edb8bb-2cc2-4636-8412-580d93f1a7fd,Beekman 1802,https://www.ulta.com/brand/beekman-1802,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f35ef7e5-20ad-4763-b640-d339a14cbe18,belif,https://www.ulta.com/brand/belif,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+82f4563d-6145-4183-a9cb-fea7eca9214f,Benefit Cosmetics,https://www.ulta.com/brand/benefit-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7febe5c8-4c67-460a-b6d2-135d2b7251e5,Better Not Younger,https://www.ulta.com/brand/better-not-younger,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+883fe46f-f69d-4c67-b57e-b5aee072f809,BETTER WORLD FRAGRANCE HOUSE,https://www.ulta.com/brand/better-world-fragrance-house,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+14c22681-2fd4-473f-b728-4c3d1813c245,BEVEL,https://www.ulta.com/brand/bevel,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9ddbf850-b7d8-4878-a287-557997880714,billie,https://www.ulta.com/brand/billie,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+dc439cca-e274-43c6-9013-bf3f90b2387b,Billie Eilish,https://www.ulta.com/brand/billie-eilish,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b5d73ba9-7860-483d-9c93-9313b53b854f,Billy Jealousy,https://www.ulta.com/brand/billy-jealousy,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ef4c4b30-70be-4e36-8491-265d32c607e5,Bio Ionic,https://www.ulta.com/brand/bio-ionic,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7d585ecf-5f6d-4bf2-b3e1-2b03abc1f3e6,Bio-Oil,https://www.ulta.com/brand/bio-oil,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3b48a3ad-6fd6-4aa9-acec-3125b90efbfe,Biolage,https://www.ulta.com/brand/biolage,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b5199292-3671-49fd-939f-c2e1cef480ed,Bioré,https://www.ulta.com/brand/biore,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d9f96012-678b-4ee6-a988-382f442c8355,Biosilk,https://www.ulta.com/brand/biosilk,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9edc96ad-1e9e-4c14-870a-f004b71bd8e2,Black Girl Sunscreen,https://www.ulta.com/brand/black-girl-sunscreen,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e68f1b13-a3ec-4d78-a310-8aa0fef6d107,Blind Barber,https://www.ulta.com/brand/blind-barber,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8eb623f2-7096-4c56-beba-71b48b52ad0a,Bliss,https://www.ulta.com/brand/bliss,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9ead5fbe-10c7-4181-a5ca-95bf79e2439d,BLK/OPL,https://www.ulta.com/brand/blkopl,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2a61b772-2ff2-45d7-aeb9-3ef173f5e8c5,BLONDME,https://www.ulta.com/brand/blondme,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9e1851b6-acee-45cb-af19-39fe023de7f3,BLOSSOM,https://www.ulta.com/brand/blossom,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a322e847-2a16-4166-87d7-f1488a7921a7,BLUE LIZARD AUSTRALIAN SUNSCREEN,https://www.ulta.com/brand/blue-lizard-australian-sunscreen,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3ae721f1-ffef-45ce-8365-57e8375b1301,BLUME,https://www.ulta.com/brand/blume,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d646c2ec-f7d4-47a7-8083-763575cadea7,BOBBI BROWN,https://www.ulta.com/brand/bobbi-brown,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e8d8f0e6-2bd1-4223-8971-7dd621a3c5d7,BOKA,https://www.ulta.com/brand/boka,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+89faf3da-ebd9-45b7-a79b-0067ce7c3d04,Bondi Boost,https://www.ulta.com/brand/bondi-boost,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e6ce069c-6b91-4e79-b677-a1437717821e,Bondi Sands,https://www.ulta.com/brand/bondi-sands,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+676c85b4-6f27-42ed-aea6-a0a24f88a382,boscia,https://www.ulta.com/brand/boscia,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+003683c1-542d-45fe-a6ee-ad85a88f1a84,BosleyMD,https://www.ulta.com/brand/bosleymd,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3de304d3-99d6-49cb-832e-132a597a32f0,Braun,https://www.ulta.com/brand/braun,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+65457516-f85e-41c2-b88d-042eb176e447,BREAD BEAUTY SUPPLY,https://www.ulta.com/brand/bread-beauty-supply,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9f19731a-1eb9-4fca-a690-1aa4929d4126,BREEZE BALM,https://www.ulta.com/brand/breeze-balm,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a964a063-75d8-4a75-853c-7c5a21934388,Briogeo,https://www.ulta.com/brand/briogeo,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2c79beda-fdb7-4bba-9053-8b59bb5498fe,Bubble,https://www.ulta.com/brand/bubble,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+015f5cbc-92c3-4346-8cf2-ddaea6bf2172,Bumble and bumble,https://www.ulta.com/brand/bumble-bumble,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b5433b49-52cb-4250-a26e-665d3c225698,Burberry,https://www.ulta.com/brand/burberry,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5a9ddca5-0c98-4cd9-b879-90c3d589b98f,Burt's Bees,https://www.ulta.com/brand/burts-bees,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7a8e66aa-9ce5-40ed-b5a7-c35348f900bb,Bushbalm,https://www.ulta.com/brand/bushbalm,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4bee1b67-dfee-45c7-acaa-d9f23ad1c988,Buttah Skin,https://www.ulta.com/brand/buttah-skin,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8aa2dae4-b159-491e-9e9b-b1075b90ffc6,Buxom,https://www.ulta.com/brand/buxom,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2b6eb208-67e2-4b8e-a74c-5358cebd27fd,BYOMA,https://www.ulta.com/brand/byoma,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+6d6c3f4c-1fc0-4c76-ac18-0037e94982c7,Caboodles,https://www.ulta.com/brand/caboodles,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ca39adc0-fb30-45f4-be23-e2755acb471b,Calvin Klein,https://www.ulta.com/brand/calvin-klein,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4b052d20-f459-4b25-8ad6-71f5f0feaa5b,Camille Rose,https://www.ulta.com/brand/camille-rose,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+616209e0-1272-463f-9ec1-adf78152cd62,Candier,https://www.ulta.com/brand/candier,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3a0fa4ac-352c-4f61-9061-9a9322d6f23b,Capelli New York,https://www.ulta.com/brand/capelli-new-york,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b0a25a23-25e3-4d18-801a-0564ac0826f9,Carbon Theory.,https://www.ulta.com/brand/carbon-theory,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+298068eb-87a9-4834-a35a-00797abf9c02,Carol's Daughter,https://www.ulta.com/brand/carols-daughter,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+15ff4c51-9d71-4686-8e90-894840726965,Carolina Herrera,https://www.ulta.com/brand/carolina-herrera,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d0d942ab-3883-47bb-96ff-74925f956dd3,Céla,https://www.ulta.com/brand/cela,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4552b51f-09b8-4136-8b80-c51ce0d94c15,CeraVe,https://www.ulta.com/brand/cerave,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+bb4862f4-6404-44c2-9191-3cdb6a0d50a9,Cetaphil,https://www.ulta.com/brand/cetaphil,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fdc63af9-1c77-43a5-9c6b-715d7eb1a04c,CHANEL,https://www.ulta.com/brand/chanel,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+909d4b44-6b79-47c2-bde2-11c6f0f2f6c7,Charlotte Tilbury,https://www.ulta.com/brand/charlotte-tilbury,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3bdf41c8-2744-49b1-bfbc-79c8f1609ad1,Chi,https://www.ulta.com/brand/chi,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1f920b3f-0cb5-4bdc-9c79-f893aaac68b1,China Glaze,https://www.ulta.com/brand/china-glaze,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+92ce175b-f499-44db-8656-9698f7767ccc,Chloé,https://www.ulta.com/brand/chloe,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fe8c6652-6894-48c9-9e97-5ffd9db15ba3,Clairol,https://www.ulta.com/brand/clairol,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2cfb2be1-8ced-4631-80b1-ce8631453b44,Clarins,https://www.ulta.com/brand/clarins,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cedb1efa-aeb3-4651-bfb3-70f10dcf6ef7,Clean,https://www.ulta.com/brand/clean,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+85db35d7-cd15-4738-9a91-0a45e0fac0ec,Clinique,https://www.ulta.com/brand/clinique,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+06857830-b460-423a-af18-4b743674f4dd,CND,https://www.ulta.com/brand/cnd,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+6abc0090-5324-4843-95af-87bcec9c5a8e,Coach,https://www.ulta.com/brand/coach,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+518683cf-12cb-46ed-9c0c-af52b186f4fc,Coco & Eve,https://www.ulta.com/brand/coco-eve,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5ebcdf94-a9d8-4a22-a387-3740b5c8af61,cocokind,https://www.ulta.com/brand/cocokind,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ccdd5ac8-60a0-49a8-a951-ec98722d5433,Color Wow,https://www.ulta.com/brand/color-wow,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+de3d749e-6f2a-4f25-8e4c-5460bb000419,ColourPop,https://www.ulta.com/brand/colourpop,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+98d47eb8-43de-4be3-a951-bb6709041ec6,Conair,https://www.ulta.com/brand/conair,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+6034461f-f70b-41c1-97cb-e3dc4c57b3e6,COOLA,https://www.ulta.com/brand/coola,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9bb4398e-8b4c-4d98-bdf5-4125f866a5a7,COSRX,https://www.ulta.com/brand/cosrx,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+acc76792-999f-4536-9724-cc216d849a5d,CoTz,https://www.ulta.com/brand/cotz,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+07cb23a7-3fff-4eab-84ae-24028c4760c3,CoverGirl,https://www.ulta.com/brand/covergirl,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9cab3b28-e11a-4e5a-8bc4-0669423d0541,Crave,https://www.ulta.com/brand/crave,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+87246be3-75d7-41b4-9ff3-4256b00fee48,Crepe Erase,https://www.ulta.com/brand/crepe-erase,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f1871b13-cd78-4ea7-b649-5e1bc8de35ed,Cricket,https://www.ulta.com/brand/cricket,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cb3cdec9-3635-49ff-b732-7d5d98a09896,CROC,https://www.ulta.com/brand/croc,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5f68f5b2-a896-475c-b0d6-d213d845bb66,CurlMix,https://www.ulta.com/brand/curlmix,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+51048bae-6fd9-4ae2-b107-53e1ebeff9cc,CURLS,https://www.ulta.com/brand/curls,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5a89d717-e219-45a3-af94-300a67f0b48c,Curlsmith,https://www.ulta.com/brand/curlsmith,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1645bcaf-44ac-46c6-ac48-55fb3e2d109c,Da Bomb,https://www.ulta.com/brand/da-bomb,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d350ba32-8b87-4c63-9223-ae97e93231a9,Daily Concepts,https://www.ulta.com/brand/daily-concepts,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b086fa76-bb61-4449-bde5-8058532544e4,Dashing Diva,https://www.ulta.com/brand/dashing-diva,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+13711154-5ca9-4b79-a8ca-8988373db7c2,Denman,https://www.ulta.com/brand/denman,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a8114658-145a-4c4f-95d1-bc7d5842ca14,DERMA E,https://www.ulta.com/brand/derma-e,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5a47a052-1051-428c-8f35-a71ae2c13527,Dermablend,https://www.ulta.com/brand/dermablend,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+995315fd-62c4-4327-91df-12f8387724ef,DERMAFLASH,https://www.ulta.com/brand/dermaflash,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0a5dad77-a9b8-490b-8628-74862164c824,Dermalogica,https://www.ulta.com/brand/dermalogica,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4aabb517-54a0-4e0a-b59e-43d2655cbe9d,Design Essentials,https://www.ulta.com/brand/design-essentials,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9e3ae2e3-a1bf-4089-a2c7-b32e98d59aa9,DevaCurl,https://www.ulta.com/brand/devacurl,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7fdd3a8b-df46-43a1-976d-956d8ccbbb20,DHC,https://www.ulta.com/brand/dhc,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8db7c671-858f-4a88-9bfe-513b5bb730a0,Diane,https://www.ulta.com/brand/diane,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+05e69433-c5b3-41f9-ae42-f3cbd2f40660,Differin,https://www.ulta.com/brand/differin,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c9238dfa-e034-422f-8df5-a996d0827dfc,DIME,https://www.ulta.com/brand/dime,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+97be69b4-79ba-451a-b646-2e690ecca8e8,Dionis,https://www.ulta.com/brand/dionis,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e10dc721-9e08-48e9-a9da-54d0989b1d8f,Dior,https://www.ulta.com/brand/dior,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a6410005-3a44-4aba-ac9c-ff00b24f32b8,Divi,https://www.ulta.com/brand/divi,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b3bb688c-c8c6-4567-9f19-f4cc6eaa0372,DKNY,https://www.ulta.com/brand/dkny,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+55a7294a-2bb0-4f9b-ae98-a8bf56657c62,Dolce Glow,https://www.ulta.com/brand/dolce-glow,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+41cc16fc-5724-473d-989a-74f952577716,Dolce&Gabbana,https://www.ulta.com/brand/dolce-gabbana,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5756f24e-2b5c-4fcf-b978-9a2c9e380db3,Donna Karan,https://www.ulta.com/brand/donna-karan,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5d6be9d0-565b-427e-b795-9bbd7d05e76f,DONNA'S RECIPE,https://www.ulta.com/brand/donnas-recipe,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b35ac0af-b3ea-4073-b9fd-7d738907d645,dpHUE,https://www.ulta.com/brand/dphue,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+96c8711c-64b3-4449-86dd-18d78eace857,Dr Teal's,https://www.ulta.com/brand/dr-teals,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4e23ab02-fbea-446c-85eb-771175239c88,Dr. Brandt,https://www.ulta.com/brand/dr-brandt,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0ba84b69-5511-48fc-bc4e-9d84aecdde6d,Dr. PAWPAW,https://www.ulta.com/brand/dr-pawpaw,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+445e7658-ef19-416f-93fa-7b9733c739b5,Drunk Elephant,https://www.ulta.com/brand/drunk-elephant,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e7535318-8bc8-4007-bbb3-b94c3c0c34be,Drybar,https://www.ulta.com/brand/drybar,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d473be0d-6d1a-4d65-b99b-e677daa74053,Duke Cannon Supply Co,https://www.ulta.com/brand/duke-cannon-supply-co,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+bf507a04-b156-4dbb-9e50-bea953f10feb,DUNE SUNCARE,https://www.ulta.com/brand/dune-suncare,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5826e917-32ba-463d-85b1-93f70c874817,Dyson,https://www.ulta.com/brand/dyson,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c0eeeb3a-db41-4c98-9c0b-3e1595e038a2,e.l.f. Cosmetics,https://www.ulta.com/brand/elf-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4491c288-daa6-4501-aa16-9f1065c57d1c,Each & Every,https://www.ulta.com/brand/each-every,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4b73052a-f09d-4da2-8beb-df69b3f7bc41,Earth Harbor,https://www.ulta.com/brand/earth-harbor,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1ae12a33-e647-4478-8439-e34ccd0f9d08,Earth Therapeutics,https://www.ulta.com/brand/earth-therapeutics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4e3663ad-e3e8-4e39-9f18-e82d5e180df6,Eau de Juice,https://www.ulta.com/brand/eau-de-juice,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d374117a-a947-45f6-902c-919e1f6a0c7c,Eco Style,https://www.ulta.com/brand/eco-style,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+645c70f5-9f94-43c3-8395-44e8852fb97d,EcoTools,https://www.ulta.com/brand/ecotools,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+dbec7354-121c-4402-b240-a63395b57eb7,Eczema Honey,https://www.ulta.com/brand/eczema-honey,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8190479d-3941-4a8a-a805-da2626fac963,ELEMIS,https://www.ulta.com/brand/elemis,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ea5890f0-8fbc-499a-b207-d18bb7497e33,EleVen by Venus Williams,https://www.ulta.com/brand/eleven-by-venus-williams,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7f9210f2-6189-435f-b713-8e4699df7ffe,Elizabeth Arden,https://www.ulta.com/brand/elizabeth-arden,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f4daaf5e-cd18-4008-9429-b897c4a7831b,Ellis Brooklyn,https://www.ulta.com/brand/ellis-brooklyn,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+aa3da9f0-648e-454b-aae9-a6fbaac43ae9,Eos,https://www.ulta.com/brand/eos,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cc31ebed-0072-4dd7-854c-3e324fb9c4f2,Erborian,https://www.ulta.com/brand/erborian,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d060232c-77ee-4a18-8a15-6d61f337b38b,Ere Perez,https://www.ulta.com/brand/ere-perez,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2ca3c0ae-c33c-4e5f-8a4a-4c63eed94f52,Escada,https://www.ulta.com/brand/escada,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+dbbd6166-ac45-4b00-a3f2-026007431e53,Essence,https://www.ulta.com/brand/essence,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fb21f79d-fc11-48ed-bbb8-55b8d72d1c3d,Essie,https://www.ulta.com/brand/essie,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9477aec7-241e-468c-8328-05ef1e9f2e06,Estée Lauder,https://www.ulta.com/brand/estee-lauder,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f362c3ea-01b9-4de8-9746-d3ef03f2740e,Eva Nyc,https://www.ulta.com/brand/eva-nyc,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1ea36dff-0b83-4076-b7ad-31e1aa6806f7,Everpro,https://www.ulta.com/brand/everpro,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+018fe828-f239-4d8b-9a06-7ddf0b1ded36,Every Man Jack,https://www.ulta.com/brand/every-man-jack,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e9ea9eaf-33f1-41d2-bf76-7816cb379d6f,Evian Mineral Spray,https://www.ulta.com/brand/evian-mineral-spray,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8ed2cec9-bbc5-4ab7-bbe5-eb11d8fb2f9a,Exa,https://www.ulta.com/brand/exa,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4836687c-a9db-4b3b-bd73-dd6192e0ab7a,Exuviance,https://www.ulta.com/brand/exuviance,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+47e07445-1b46-4cac-aba0-e6f086e177e6,Eyeko,https://www.ulta.com/brand/eyeko,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cbe08dc0-a22e-458b-989a-fe934864be7d,Eylure,https://www.ulta.com/brand/eylure,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+6d354930-947e-439f-a766-d343eb2e47af,Fairy Tales,https://www.ulta.com/brand/fairy-tales,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e514246c-7487-4ae3-abb2-6e795a679b29,FEKKAI,https://www.ulta.com/brand/fekkai,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+60a4bb37-6901-4c84-a1b8-cc08a20537c6,FENTY BEAUTY by Rihanna,https://www.ulta.com/brand/fenty-beauty-by-rihanna,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+15c2c37d-0c34-4cb9-9362-e25369e4efe0,First Aid Beauty,https://www.ulta.com/brand/first-aid-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0865a784-b45f-49a0-a760-55bfdf29cdda,Flawless by Finishing Touch,https://www.ulta.com/brand/flawless-by-finishing-touch,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4ffe257f-0a13-4826-bdd3-1e7b7d127946,Flora & Noor,https://www.ulta.com/brand/flora-noor,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c6302d32-1208-4726-87eb-ffb426b07ea7,florence by mills,https://www.ulta.com/brand/florence-by-mills,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b0072705-82ec-4a78-93fc-651c3f19c398,FLOWER Beauty,https://www.ulta.com/brand/flower-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+794bfa1f-4e52-4170-b5d6-45dcaa02ca61,Flowery,https://www.ulta.com/brand/flowery,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3bde200d-b5a5-47d3-9373-968122071f65,FOREO,https://www.ulta.com/brand/foreo,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b509321d-2d0a-4b73-b08d-e71f06aaa615,Foria,https://www.ulta.com/brand/foria,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+18cafc62-bda3-45b4-846f-bcc7df4e2bd2,Fourth Ray Beauty,https://www.ulta.com/brand/fourth-ray-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4ff92c6d-548d-4d19-9bfe-f7bb344e17ad,frank body,https://www.ulta.com/brand/frank-body,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5d0d4c0c-4df5-4f43-bc41-73c91e46bc03,Freeman,https://www.ulta.com/brand/freeman,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d4d32413-2aac-44bc-aacb-4735bf0276e2,fresh,https://www.ulta.com/brand/fresh,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7b7a43be-dc01-42b3-bffc-c3bde287a1a5,Fromm,https://www.ulta.com/brand/fromm,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ca88f5c6-d152-44dd-980f-6f896b82d3f5,Fur,https://www.ulta.com/brand/fur,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d2138c37-bd70-4342-baf0-98cb71baacbe,Ga.Ma Italy Professional,https://www.ulta.com/brand/gama-italy-professional,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e719f5b8-c357-40ba-94a4-4c17ee25341f,Garnier,https://www.ulta.com/brand/garnier,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+85c5037f-4981-4c5b-a4db-24973476fff7,Ghd,https://www.ulta.com/brand/ghd,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ea2b2db5-4dfa-4623-bb6d-e044616945eb,Gigi,https://www.ulta.com/brand/gigi,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3fa73670-897f-4ca2-8d82-09636fd0f6b2,Gillette,https://www.ulta.com/brand/gillette,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e2c7c508-574b-43de-a295-25e708fea3aa,GIMME beauty,https://www.ulta.com/brand/gimme-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e9d2185e-70fe-4e9c-bf08-9033bba19446,Givenchy,https://www.ulta.com/brand/givenchy,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+abfdfa18-8145-4720-ac19-60252b8780ee,GLAMGLOW,https://www.ulta.com/brand/glamglow,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f3516422-2498-472d-ac8b-7c006ef5a551,Glamnetic,https://www.ulta.com/brand/glamnetic,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cd288e58-46f7-4278-8553-87d2682a8562,GOLDE,https://www.ulta.com/brand/golde,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ad2b2eb9-da10-4b66-8d21-31e30c9dc796,Goli Nutrition,https://www.ulta.com/brand/goli-nutrition,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+72967773-bb48-4601-89c5-77ec399746c3,Good Dye Young,https://www.ulta.com/brand/good-dye-young,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2f5261a0-2e4c-41d5-9f65-4bc7d57db1a8,good light,https://www.ulta.com/brand/good-light,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3f5b97ca-b09a-4d22-906f-7c5d8b2cb365,Good Molecules,https://www.ulta.com/brand/good-molecules,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+903c4ff4-7441-4990-8fe6-a028662537df,Got 2b,https://www.ulta.com/brand/got-2b,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+17a2d4d6-c3ff-4e0e-8810-0028d80e2e04,Grace Eleyae,https://www.ulta.com/brand/grace-eleyae,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+27f86232-5464-4edc-b07e-30d683fc17ee,Grande Cosmetics,https://www.ulta.com/brand/grande-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+dd508dbb-488a-4ab1-b0d5-2fadc96dfaa4,Groovi Beauty,https://www.ulta.com/brand/groovi-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c7f8928c-b1aa-47f7-9038-2c7217351ff9,Grow Gorgeous,https://www.ulta.com/brand/grow-gorgeous,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a4bc31d5-16b3-436d-b1bc-517e688822cd,Gucci,https://www.ulta.com/brand/gucci,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+634f0b7a-f620-43fa-9bb9-2965f7a70ad7,Guerlain,https://www.ulta.com/brand/guerlain,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+abc7917d-bd0c-4185-ba08-c221abb30665,HAIRtamin,https://www.ulta.com/brand/hairtamin,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ca85a275-8bce-494f-a47c-435597353bdd,HALF MAGIC,https://www.ulta.com/brand/half-magic,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2773733c-aebf-4794-b60f-f478a112ef5f,HALLY,https://www.ulta.com/brand/hally,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+56dd82f7-ada4-4283-a82c-159bbfd5b26b,HAN Skincare Cosmetics,https://www.ulta.com/brand/han-skincare-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+079f2607-20e8-4629-9532-70354ca6705f,hanahana beauty,https://www.ulta.com/brand/hanahana-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+be03899e-d8cc-4b85-b49b-7849fa955638,Hanskin,https://www.ulta.com/brand/hanskin,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+844c1c59-211c-48e5-aeef-0cfaab704121,Hask,https://www.ulta.com/brand/hask,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f66828e6-8e77-4c3b-b8ec-1e065452c95f,Hempz,https://www.ulta.com/brand/hempz,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+87e98ec1-66bd-40ea-98a7-e876ba53961c,Heritage Store,https://www.ulta.com/brand/heritage-store,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c112e13d-2427-4bf7-963f-9a1d5b8e6256,Hero Cosmetics,https://www.ulta.com/brand/hero-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ab873e36-4abc-4fc6-bb53-d714f86c5a13,Hey Honey,https://www.ulta.com/brand/hey-honey,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8f04ff55-be22-4298-9150-515bd7a0b8b1,HipDot,https://www.ulta.com/brand/hipdot,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7f523f24-e8e9-47d2-ac28-1c67f0a3d80e,Hollywood Fashion Secrets,https://www.ulta.com/brand/hollywood-fashion-secrets,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+36b22437-abb2-4d00-ab8e-4fe9cddb0b0b,Homebody,https://www.ulta.com/brand/homebody,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0ee7c13c-0eb0-4043-ad7e-ba0f95f57ec4,HomeWorx,https://www.ulta.com/brand/homeworx,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+34b246cb-4da1-48bf-857c-ca4d48b223c9,Honest Beauty,https://www.ulta.com/brand/honest-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b927b7d4-328d-48d2-9181-420ba8525991,Hot Tools,https://www.ulta.com/brand/hot-tools,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0dcf8cfd-44d2-423d-aa45-b1461968cbfb,HOURGLASS,https://www.ulta.com/brand/hourglass,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3a5090eb-0dc7-4755-a971-d9015cc529aa,House of Lashes,https://www.ulta.com/brand/house-of-lashes,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5ff35e0a-0e9f-4d4c-99f8-1ba275757531,Hustle Butter,https://www.ulta.com/brand/hustle-butter,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+05445f04-5097-4c9d-8d3d-2c36d98b8bfe,Hynt Beauty,https://www.ulta.com/brand/hynt-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d633a79b-21a8-4766-8c82-7fa3cbf989ed,I Dew Care,https://www.ulta.com/brand/i-dew-care,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+948940cf-9c57-42e2-ba79-053a81f1e9cc,ICONIC LONDON,https://www.ulta.com/brand/iconic-london,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e9f57e50-dbfc-4c53-9ff0-e4c73fe4d929,iDesign,https://www.ulta.com/brand/idesign,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4431267b-d57b-42d3-9e1d-ef06a82f768e,IGK,https://www.ulta.com/brand/igk,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c72047da-afa2-4bf0-8caf-a1d83fe2d1de,iHome,https://www.ulta.com/brand/ihome,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7bf58bc8-8003-4747-b9c8-2c02e3de1b73,Impressions Vanity,https://www.ulta.com/brand/impressions-vanity,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+faae80a6-fcb3-4fdb-ae32-032644157e1c,Indeed Labs,https://www.ulta.com/brand/indeed-labs,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b9c6afdf-e2cf-48ea-b785-47c78d5d5113,INDIE LEE,https://www.ulta.com/brand/indie-lee,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d1c1b35a-79ed-45f3-af6a-907c14edccff,Innersense Organic Beauty,https://www.ulta.com/brand/innersense-organic-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+36a1cb8c-1c1f-4ada-a43f-bc78c362351a,INSERT NAME HERE,https://www.ulta.com/brand/insert-name-here,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+818adb56-1886-4a98-b2ec-7d4dba8ee127,Londontown,https://www.ulta.com/brand/londontown,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d0a0359d-1e78-4bff-8613-390f9d3925a7,Invisibobble,https://www.ulta.com/brand/invisibobble,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+551a2eff-1df8-4755-822b-6c616573e8f8,IT Brushes For ULTA,https://www.ulta.com/brand/it-brushes-ulta,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5b7794b1-7dcb-409e-8288-adcec218bc58,IT Cosmetics,https://www.ulta.com/brand/it-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+01d8049c-89c4-4ae1-870d-200888b02070,It's A 10,https://www.ulta.com/brand/its-a-10,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b3e8f6fa-4995-4fed-8052-a9c0029e8636,J.Cat Beauty,https://www.ulta.com/brand/jcat-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d1c2662d-096e-48d3-b213-ca7f47b94efb,Jack Black,https://www.ulta.com/brand/jack-black,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3bde9507-cc89-4266-a9de-0d1eb4ed3185,jane iredale,https://www.ulta.com/brand/jane-iredale,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d8d45369-34dc-4bd9-8b43-d168c5c75ff9,Jean Paul Gaultier,https://www.ulta.com/brand/jean-paul-gaultier,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+58e4545e-018a-4da9-bc6e-98ddaffcb334,Jimmy Choo,https://www.ulta.com/brand/jimmy-choo,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3cfa709b-1f01-46c7-8756-f254b6a88942,John Varvatos,https://www.ulta.com/brand/john-varvatos,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c4f98209-7122-4c92-b021-f38f720683c5,Joico,https://www.ulta.com/brand/joico,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0736e934-ca78-4390-9f6f-772a6ca92be3,Juice Beauty,https://www.ulta.com/brand/juice-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5e9e2943-27f1-4897-8f65-ff7fc5da3208,Juicy Couture,https://www.ulta.com/brand/juicy-couture,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3ab2142f-3e27-4110-90ce-0c028fcb9c86,Juvia's Place,https://www.ulta.com/brand/juvias-place,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9c392bef-aeb2-4497-860c-6a180d87ca26,kaia naturals,https://www.ulta.com/brand/kaia-naturals,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fc074cad-b9e1-4dac-ab86-92df98e4b4ae,Kate Somerville,https://www.ulta.com/brand/kate-somerville,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cd7f5aea-83ce-4da4-aa30-92862ea0017c,Kate Spade New York,https://www.ulta.com/brand/kate-spade-new-york,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+39438f8b-2056-4e43-9301-e09ce9648cd9,Kenneth Cole New York,https://www.ulta.com/brand/kenneth-cole-new-york,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+374f2247-12e8-4a22-8b82-5e9b436d7e79,Kenra Professional,https://www.ulta.com/brand/kenra-professional,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ab587a68-b01d-4849-9a67-c5290e82b8a1,Keracolor,https://www.ulta.com/brand/keracolor,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+bdc8cd54-566c-41c0-90da-1c81479f4e48,Keranique,https://www.ulta.com/brand/keranique,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b2a538f6-6e3f-4285-b5e9-0a0372858892,Keratin Complex,https://www.ulta.com/brand/keratin-complex,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4cbe1f63-8ca7-4225-a1d8-dfcd163a11da,Kiehl's Since 1851,https://www.ulta.com/brand/kiehls-since-1851,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+20ca4895-366e-4335-b035-1cf88a8ab0aa,KIKO Milano,https://www.ulta.com/brand/kiko-milano,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b9251ce7-f61d-424f-b244-6da43e781a47,Kinship,https://www.ulta.com/brand/kinship,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e278c474-4eac-4c58-8300-b79da24eb1f8,Kiss,https://www.ulta.com/brand/kiss,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3b9900d2-77eb-415b-8756-ccf9684dc484,Kitsch,https://www.ulta.com/brand/kitsch,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c1f46cf9-864a-4b35-8732-1fc07c6c34b3,Klairs,https://www.ulta.com/brand/klairs,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f454c033-daed-48e8-ae6c-c0ca4a298ef6,Klorane,https://www.ulta.com/brand/klorane,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+93383cdd-58f1-413d-b777-d2d80f19ad0b,Kopari Beauty,https://www.ulta.com/brand/kopari-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d2dd3867-a37c-4f71-b23b-6a6a75e80c2d,KORRES,https://www.ulta.com/brand/korres,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+db507432-0d75-46a2-913f-3275263131a9,Kreyòl Essence,https://www.ulta.com/brand/kreyol-essence,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+73938365-868a-4f33-8e51-58ae4ae7fd1d,KRISTIN ESS HAIR,https://www.ulta.com/brand/kristin-ess-hair,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+03bea069-c45f-42ac-867e-9b85aabe0ec2,KVD Beauty,https://www.ulta.com/brand/kvd-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+09fc9f89-0dbf-46b7-8dcc-10911d22ef5d,KYLIE COSMETICS,https://www.ulta.com/brand/kylie-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3575c4e6-8940-4fca-a982-39d1bc0eeee6,KYLIE JENNER FRAGRANCES,https://www.ulta.com/brand/kylie-jenner-fragrances,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0ae9d6ed-c2bf-4ef1-969a-9b964b8d98ba,KYLIE SKIN,https://www.ulta.com/brand/kylie-skin,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0121b47d-90ee-44ab-bb39-02b770d28188,L.A. Girl,https://www.ulta.com/brand/la-girl,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+96ca897f-23c6-4a3e-a773-e1522b092cc9,L'ange,https://www.ulta.com/brand/lange,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+96fc7b82-0f28-437c-853b-995b16d69a22,L'anza,https://www.ulta.com/brand/lanza,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+82e6e133-e246-493a-86e2-cb88be68949f,L'Occitane,https://www.ulta.com/brand/loccitane,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+45c47f97-3d69-4920-b3ad-a35ae624ad16,L'Oréal,https://www.ulta.com/brand/loreal,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4b302444-bb14-44a2-b338-18117e9ec760,La Roche-Posay,https://www.ulta.com/brand/la-roche-posay,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+718b15bd-0d72-4415-a825-dc0eacaa6ab5,Lake & Skye,https://www.ulta.com/brand/lake-skye,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7b81b716-2999-4b6c-a08d-c83901fb515b,LAMIK Beauty,https://www.ulta.com/brand/lamik-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2cdbd26f-5ec6-4ef9-8522-9ed870900c6e,Lancôme,https://www.ulta.com/brand/lancome,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fd3c5c5b-69be-4e59-89c8-c3f14376928d,Lanolips,https://www.ulta.com/brand/lanolips,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8a1117be-4f38-4175-b506-1e96380dfa98,Laura Mercier,https://www.ulta.com/brand/laura-mercier,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b835c76c-3d0e-494b-aba9-dd56d5dfc69f,LAVANILA,https://www.ulta.com/brand/lavanila,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+576b487c-d95b-402c-b4b8-245cf3ad2460,Le Mini Macaron,https://www.ulta.com/brand/le-mini-macaron,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a9317b3d-c702-4c3a-bf71-6baf73e81c03,LE MONDE GOURMAND,https://www.ulta.com/brand/le-monde-gourmand,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e973dd36-a88b-4cfa-a5c0-8aa99904410e,Lemme,https://www.ulta.com/brand/lemme,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ccbb68cf-d85b-4cc2-a6b6-da8a89a59930,Lilly Lashes,https://www.ulta.com/brand/lilly-lashes,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+48e90f7c-0045-438a-8074-dfb3aa490201,Lime Crime,https://www.ulta.com/brand/lime-crime,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1c84ad27-96d6-4549-a3f1-9b56ce06d61f,Lip Smacker,https://www.ulta.com/brand/lip-smacker,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f3971bb8-14a9-4467-85b6-c460e9f6cf86,LIQUID I.V.,https://www.ulta.com/brand/liquid-iv,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4daee50c-544f-4b48-b1a3-3730005735dd,Live Tinted,https://www.ulta.com/brand/live-tinted,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c04798f1-bcb7-40b1-9786-c721e70942dd,Living Proof,https://www.ulta.com/brand/living-proof,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4f99ffc9-458f-4c8d-ad8d-fdcf226c519d,Locks & Mane,https://www.ulta.com/brand/locks-mane,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ad9bb8ad-8f87-4e4a-8b9b-0ba3498fbacb,LolaVie,https://www.ulta.com/brand/lolavie,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b24b5edb-5eb4-4711-9dc2-a1d7580a1d8e,LOOPS,https://www.ulta.com/brand/loops,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7c31f3a9-a7c4-4cc4-90fe-c64ff4f7aeb1,LORAC,https://www.ulta.com/brand/lorac,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d589f2a7-762b-4a72-82d6-07e1b1612f6c,Lottie London,https://www.ulta.com/brand/lottie-london,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+77363686-81a8-4fb5-b668-12a408caf3e8,Love Wellness,https://www.ulta.com/brand/love-wellness,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+63689d85-efbe-477d-ad0d-223d53bfc873,Loving Tan,https://www.ulta.com/brand/loving-tan,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b36bce28-8a6a-484a-909a-5e6d45f7291b,LUSH,https://www.ulta.com/brand/lush,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+89616813-ddd0-42f3-b5be-d277f917a527,LUV SCRUB,https://www.ulta.com/brand/luv-scrub,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fe6000a1-3c9f-486e-a9b6-7c6b355d14f6,MAC,https://www.ulta.com/brand/mac,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ce5c3bd4-8153-4b73-8041-05d0c12be0ae,Mad Hippie,https://www.ulta.com/brand/mad-hippie,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cfbd3c4c-aa2d-4620-ba15-d47615bfbb87,Made By Dentists,https://www.ulta.com/brand/made-by-dentists,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+61ef9525-f749-4683-a83d-028ec25aaaa3,Madison Reed,https://www.ulta.com/brand/madison-reed,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+54251b4d-108c-4b07-b802-96869323e67c,MAËLYS Cosmetics,https://www.ulta.com/brand/maelys-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ba3208d1-7315-4f03-85cf-5242bbdad7a6,Makeup Revolution,https://www.ulta.com/brand/makeup-revolution,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4815ed52-9dbd-4fc2-bf2f-4e0083c6bef1,Manic Panic,https://www.ulta.com/brand/manic-panic,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+aed507b5-89e1-459f-b954-ec0f2d6aea56,MANNA KADAR BEAUTY,https://www.ulta.com/brand/manna-kadar-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b7c8067b-17c0-40b7-a7ac-7131382afc4a,Marc Jacobs,https://www.ulta.com/brand/marc-jacobs,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8efa8dbf-a31e-41f6-a774-05e8a8426bdf,Mario Badescu,https://www.ulta.com/brand/mario-badescu,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7f48b2cf-04f0-4816-8cbf-14f63c0d1219,MASON MAN,https://www.ulta.com/brand/mason-man,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ce48a75d-1c9f-4912-a611-3a8c8f36ac38,Matrix,https://www.ulta.com/brand/matrix,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+768dbec4-4296-4f0b-98a9-36ec29eea7da,Maui Babe,https://www.ulta.com/brand/maui-babe,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+53a2f0d6-2028-4f05-8472-9987b2ac09b3,Maui Moisture,https://www.ulta.com/brand/maui-moisture,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fab09526-c88c-4f73-8374-8f1145945519,Maybelline,https://www.ulta.com/brand/maybelline,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fafb979f-4683-49a4-a089-04558218acae,megababe,https://www.ulta.com/brand/megababe,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ac2f502f-754f-4ef9-acac-427881fe25e9,Melanin Haircare,https://www.ulta.com/brand/melanin-haircare,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2afa67b6-6a23-4c8f-b104-37bf76111a59,mented cosmetics,https://www.ulta.com/brand/mented-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+68fe469d-788e-450c-bb8b-3c4b7296af29,Michael Kors,https://www.ulta.com/brand/michael-kors,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+994e2734-ffb1-4a9a-8a2b-075998b875dd,Michael Todd Beauty,https://www.ulta.com/brand/michael-todd-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5c494416-3a02-4547-a901-7b5d4c95b52e,Mielle,https://www.ulta.com/brand/mielle,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2b09e86f-92cc-41e3-9284-edcc3884bc34,Milani,https://www.ulta.com/brand/milani,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+af8e2a47-1b40-4394-8f1f-146c8c218e6c,Milk + Honey,https://www.ulta.com/brand/milk-honey,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9eab9aaf-3f69-4821-a8ae-69e2368d0321,Mixed Chicks,https://www.ulta.com/brand/mixed-chicks,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+390bc522-b86b-4e3b-85ab-1cf3f574fdc1,MONDAY Haircare,https://www.ulta.com/brand/monday-haircare,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+16f4eff3-9b7c-416c-922d-0be944897c11,Montblanc,https://www.ulta.com/brand/montblanc,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+78ed5444-db6c-492c-8dc0-73342cd2f5ff,Moon,https://www.ulta.com/brand/moon,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2f473d79-9813-426b-8427-7bfe53c11224,Moon Juice,https://www.ulta.com/brand/moon-juice,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f1456334-3af6-4f1b-8f41-9aee46edc078,Morphe,https://www.ulta.com/brand/morphe,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+37fdb672-6c04-421d-8e39-2a2992d3b194,Morphe 2,https://www.ulta.com/brand/morphe-2,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cc5d4713-7f78-4cbc-b2f3-66c773d0af19,Moschino,https://www.ulta.com/brand/moschino,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d84e48af-466f-4085-8c6f-800da0695c2d,MUGLER,https://www.ulta.com/brand/mugler,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+767c61d8-9075-405f-a1b8-a47462b8bb24,Murad,https://www.ulta.com/brand/murad,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+22291c06-1444-4b66-9b35-6d861d0b0303,My Clarins,https://www.ulta.com/brand/my-clarins,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8f9ae5d0-bc09-4266-b21b-ed7007c3cdc5,NABLA,https://www.ulta.com/brand/nabla,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1f03f5bf-307d-4c0e-a8d7-82df70046729,Nads Natural,https://www.ulta.com/brand/nads-natural,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2e4fbc36-92eb-4427-98a2-932d5e48f134,Nail Tek,https://www.ulta.com/brand/nail-tek,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+32a365dd-4444-4338-b3b1-6bb0a764427a,Nailtopia,https://www.ulta.com/brand/nailtopia,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+28b95e0d-cf55-4fb4-b996-39862edbf350,Nair,https://www.ulta.com/brand/nair,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+73b3b63e-4aa7-45a8-81d7-c26e62f2ebdd,NARS,https://www.ulta.com/brand/nars,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+6c5dbeb0-0e3f-46c2-9c50-b1d6ff52e99e,NATASHA DENONA,https://www.ulta.com/brand/natasha-denona,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d6266521-c1e1-46c1-bb88-2ba0d09eddb2,Naturalicious,https://www.ulta.com/brand/naturalicious,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5cbfb4bc-aa6f-423d-83ed-37aac1fe2a4f,NatureLab. Tokyo,https://www.ulta.com/brand/naturelab-tokyo,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+94d5b0e7-56a1-496b-a295-7cfbca945bfc,Nemat,https://www.ulta.com/brand/nemat,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8b6e3d7d-3bec-4803-b3ef-740470850e93,NEST New York,https://www.ulta.com/brand/nest-new-york,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+bc69600c-c1d7-4a88-94e7-4d999d60042d,Neutrogena,https://www.ulta.com/brand/neutrogena,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a877bf1e-cdad-4298-8dba-cbe461ea3cee,Nexxus,https://www.ulta.com/brand/nexxus,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+14cc4b01-cda7-48ba-b37a-4e7c060f527d,Nick Stenson Beauty,https://www.ulta.com/brand/nick-stenson-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e58cb16e-e163-4126-a4c0-1006d85fbe7c,Nioxin,https://www.ulta.com/brand/nioxin,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cd796d0c-8224-429c-9f1a-5f82d6cb7251,Nivea,https://www.ulta.com/brand/nivea,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2b56b1dc-8d39-437d-a65a-e92ca9b535f7,No7,https://www.ulta.com/brand/no7,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+110af3fd-9717-4aa7-a6b9-022928afae87,Not Your Mother's,https://www.ulta.com/brand/not-your-mothers,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c27ff7ff-e00c-43bf-a14c-144104ec870f,NUDESTIX,https://www.ulta.com/brand/nudestix,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4d044ba5-8ca1-4f4f-a50f-3dca8f2d22ea,NuFACE,https://www.ulta.com/brand/nuface,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1de758a5-8b86-4d06-bf32-84f069d42fcd,NYX Professional Makeup,https://www.ulta.com/brand/nyx-professional-makeup,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+75db3385-1153-42f4-a073-5b9b6b428468,Odele,https://www.ulta.com/brand/odele,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fe608d00-ccd3-49d0-9658-91df8eb6d071,Ofra Cosmetics,https://www.ulta.com/brand/ofra-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c5824608-b269-443c-9a1e-0974cd2a6673,OGX,https://www.ulta.com/brand/ogx,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+69f69d5e-531c-428a-a954-23f95f8a0714,Oh K!,https://www.ulta.com/brand/oh-k,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+38224e09-b2e2-492a-a393-adffcb56dba4,OLAPLEX,https://www.ulta.com/brand/olaplex,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+56b9b6de-b49c-48ea-a0c8-20807b60361c,Olay,https://www.ulta.com/brand/olay,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fbde56ec-cb4a-4d89-94ab-c215f8c4ccbd,OLEHENRIKSEN,https://www.ulta.com/brand/olehenriksen,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d91b6e0f-c405-4575-aec1-aec5154efe2f,Olivia Garden,https://www.ulta.com/brand/olivia-garden,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+82592905-31c5-4ce1-83d8-e0f1f68e3036,OLLY,https://www.ulta.com/brand/olly,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+23f4c567-8581-4009-ade7-08476aa479de,One Love Organics,https://www.ulta.com/brand/one-love-organics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+82bce784-d468-4e08-9d5f-d3f1a6da6632,OPI,https://www.ulta.com/brand/opi,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+29dc15f3-9c2a-4704-91be-614a1d096e21,ORA,https://www.ulta.com/brand/ora,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+eef6032b-5056-40e0-80ec-2f15e42b4588,Oral-B,https://www.ulta.com/brand/oral-b,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ba25f8a7-1de8-44c6-8846-313903798fa9,Origins,https://www.ulta.com/brand/origins,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+706fbcf4-8ca8-4d43-ab36-c37cce7a7395,Orly,https://www.ulta.com/brand/orly,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fee31d3c-b4ef-4fc5-9a48-8084c6ffd4db,OSEA,https://www.ulta.com/brand/osea,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+58c99576-ee48-4045-ba9b-1b589591e848,OUAI,https://www.ulta.com/brand/ouai,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fa62d3cf-37b3-4a75-887e-ec3d7b73e3c1,Ouidad,https://www.ulta.com/brand/ouidad,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f0ca6494-c911-4a14-8f19-71dfaa19c517,Pacifica,https://www.ulta.com/brand/pacifica,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0e64bc4c-ae00-4bc3-88b8-ea4dffae8fa7,PanOxyl,https://www.ulta.com/brand/panoxyl,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e1b2c0e8-c780-4e5c-b534-9da3a2e0ecfe,PAT McGRATH LABS,https://www.ulta.com/brand/pat-mcgrath-labs,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+91e08587-581b-4531-b60b-fbd7e355f49b,Patchology,https://www.ulta.com/brand/patchology,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fb5fdc16-7467-450b-ad90-f59b2cf04278,Patisserie Beauty,https://www.ulta.com/brand/patisserie-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+205a70ac-e94d-42e5-a229-cb14fd8bb5bf,PATTERN,https://www.ulta.com/brand/pattern,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d2287ea9-192b-4185-9b19-eebb3e0c10a0,Paul Mitchell,https://www.ulta.com/brand/paul-mitchell,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cea43866-67ba-4f15-bd03-678a765d301e,Peace Out,https://www.ulta.com/brand/peace-out,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+25d1e22f-d269-485a-ae79-826e074b5c76,PEACH & LILY,https://www.ulta.com/brand/peach-lily,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d0d470d2-fb30-4dbc-b806-5ee44cf10cc6,Peach Slices,https://www.ulta.com/brand/peach-slices,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+80a063ea-e2ba-4c65-b885-26ec983e3103,Perricone MD,https://www.ulta.com/brand/perricone-md,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+11d7fcb0-df15-4e79-95d6-141e6dc8fa43,Persona,https://www.ulta.com/brand/persona,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ba6565f0-3f0b-47d7-aa0c-f68bd8de5e3c,Peter Thomas Roth,https://www.ulta.com/brand/peter-thomas-roth,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+eddc8cd5-9480-44cd-9b12-fa793a4da9aa,Petite n Pretty,https://www.ulta.com/brand/petite-n-pretty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ca17a8b5-0ada-4320-800a-575734343760,Philosophy,https://www.ulta.com/brand/philosophy,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1844d69c-7879-496b-9afc-276d524dc2b2,Physicians Formula,https://www.ulta.com/brand/physicians-formula,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+20e9d4eb-7ae1-42a0-89e3-a9a5912cc29f,Pinrose,https://www.ulta.com/brand/pinrose,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1a0b68c6-1215-4e53-9300-35f683b5ae83,Pipette,https://www.ulta.com/brand/pipette,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+98262f3d-0242-438b-9687-85aaeb0f9bba,Pirette,https://www.ulta.com/brand/pirette,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4d221987-378c-4484-a028-6cdde28dfc58,Pixi,https://www.ulta.com/brand/pixi,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+50416aae-e224-4268-af88-870bf10cc835,PMD,https://www.ulta.com/brand/pmd,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+db825942-4473-4401-8ae3-51db5179921c,Polder,https://www.ulta.com/brand/polder,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1f7a6ded-eda6-4cdb-8293-f972734b216c,Polite Society,https://www.ulta.com/brand/polite-society,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c84342af-951f-4700-a259-19f40f51d63a,Poo~Pourri,https://www.ulta.com/brand/poopourri,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+bbddd959-cd50-4b5e-85b8-44c318a1b7f9,Poppy & Pout,https://www.ulta.com/brand/poppy-pout,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5626dcbb-739a-4b3f-8d3c-eacecea1037f,POUND CAKE,https://www.ulta.com/brand/pound-cake,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+da5e5a59-f057-4d6b-a49a-46e2c7a65204,Prada,https://www.ulta.com/brand/prada,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5163a38a-e640-4a53-8d3c-79d1c3a436c5,Pravana,https://www.ulta.com/brand/pravana,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+914eff57-3eaf-4b94-a1c7-661168f596f4,Proactiv,https://www.ulta.com/brand/proactiv,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d4872561-848c-4636-95f8-8cefda6d8e2b,PROVENCE Beauty,https://www.ulta.com/brand/provence-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+bcc6eea5-5989-40e4-99f9-2c9a206b323e,PÜR,https://www.ulta.com/brand/pur,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ebb8ac9b-453c-48bf-9762-d31e5a80942f,Pura,https://www.ulta.com/brand/pura,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8defa450-9af6-419a-8d11-d447be75009e,Pura d'or,https://www.ulta.com/brand/pura-dor,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b07cff7f-05d1-4ba9-97d4-2f4891829d17,Pureology,https://www.ulta.com/brand/pureology,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9c5290d8-f0ed-435c-aca6-f43f25883465,PYT Beauty,https://www.ulta.com/brand/pyt-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a61330b1-189e-45e3-bfd2-d6010633c599,Qhemet Biologics,https://www.ulta.com/brand/qhemet-biologics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7311387d-7bdb-496f-873c-7c0636ee7a47,r.e.m. beauty,https://www.ulta.com/brand/rem-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cf071d46-e40a-4262-8121-2cbcc3650717,Rabanne,https://www.ulta.com/brand/rabanne,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f325834a-b1ac-4329-8fa1-ed8a0b8a41b3,Ralph Lauren,https://www.ulta.com/brand/ralph-lauren,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e7a0e554-80f7-4699-b752-de99b47389e7,Rapidlash,https://www.ulta.com/brand/rapidlash,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+71030365-b427-426c-bfbb-8287cc61c231,Real Techniques,https://www.ulta.com/brand/real-techniques,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+624aa76c-868e-4ea5-8d32-bb3ae1a60e8c,Red Carpet Manicure,https://www.ulta.com/brand/red-carpet-manicure,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a02f2297-e720-4094-bcdb-12534974267b,Redken,https://www.ulta.com/brand/redken,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2ebc6e7c-64ae-4246-9ac6-2b00d9def913,Remington,https://www.ulta.com/brand/remington,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5fd78070-2427-4ad6-9f77-ad8427d319f5,Revlon,https://www.ulta.com/brand/revlon,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+db904f46-f975-411e-8387-7ef097015f86,RITUALS,https://www.ulta.com/brand/rituals,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2bdac256-74d2-4b5b-b374-9e6797d327a9,Rituel de Fille,https://www.ulta.com/brand/rituel-de-fille,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+909abcc7-02b0-4c72-9847-e8b8d8f36d91,Rizos Curls,https://www.ulta.com/brand/rizos-curls,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3660874d-ddb0-4beb-ac4f-353f2bbc6c67,RoC,https://www.ulta.com/brand/roc,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+eee4cd63-22fe-4b3f-af98-2a28b5889f41,Rosebud Perfume Co.,https://www.ulta.com/brand/rosebud-perfume-co,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0175a8bf-13a2-42de-9ea1-899c4265962a,ROSEN,https://www.ulta.com/brand/rosen,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ba10a296-9ba8-4cd4-accc-43f05d88a0e4,Rusk,https://www.ulta.com/brand/rusk,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+332b5212-6b03-4f27-b867-c3e77b6a9822,SABON,https://www.ulta.com/brand/sabon,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3fffc5fa-3376-403c-a620-c1073d76f322,Sacheu,https://www.ulta.com/brand/sacheu,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+07f4b8bf-4610-416a-9430-9e2b7e92f44f,Sally Hansen,https://www.ulta.com/brand/sally-hansen,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+de3ca52b-759d-4984-9c99-e1b13a3d6334,Schick,https://www.ulta.com/brand/schick,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5cef4d6e-9973-4d56-8333-d363274d3806,SCRATCH,https://www.ulta.com/brand/scratch,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0029c3cd-8e44-4243-a2b7-3d70d098e081,Scünci,https://www.ulta.com/brand/scunci,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+3face78f-9c80-4e72-9acc-b237ce9cb498,Sebastian,https://www.ulta.com/brand/sebastian,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+70ec81b2-fc85-4335-8247-aa19f6383a99,Seche,https://www.ulta.com/brand/seche,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+096849f9-92d5-451f-ba96-d658624cf91e,SEEN,https://www.ulta.com/brand/seen,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d26b4eac-b33c-488b-8bca-809644f2d481,SeroVital,https://www.ulta.com/brand/serovital,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+29daac80-795d-41e5-9816-91e49175da11,Sexy Hair,https://www.ulta.com/brand/sexy-hair,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fbd61b55-40a6-43c8-a675-de73670d78ad,Shark Beauty,https://www.ulta.com/brand/shark-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e56fbef4-078a-44c1-aedc-02531decabc1,SheaMoisture,https://www.ulta.com/brand/sheamoisture,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+45283a56-cca6-4477-9262-097b9720b9a4,Shimmer Lights,https://www.ulta.com/brand/shimmer-lights,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a20829b0-2f31-4ac1-a40a-1bc82f43de0f,Shiseido,https://www.ulta.com/brand/shiseido,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+97a74185-b6cc-4fd6-943c-68b67eaf2f57,Silk'n,https://www.ulta.com/brand/silkn,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+33679946-a7e2-49ff-9b28-645f6c86af0e,sk*p,https://www.ulta.com/brand/skp,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5ccff292-5fa1-4440-bf9e-9f63b706d0f3,Skin Gym,https://www.ulta.com/brand/skin-gym,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+776bebf6-6ebb-479e-9d36-b680ec22433d,Skinfood,https://www.ulta.com/brand/skinfood,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+897e871b-6ca6-4dc9-b13e-36d9ce44a451,Skinnydip,https://www.ulta.com/brand/skinnydip,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+14b6c856-2188-4e92-9bf0-d1b7881ec9d6,Slip,https://www.ulta.com/brand/slip,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7a231f78-d3dd-48da-a1fc-564ac01ea138,Smashbox,https://www.ulta.com/brand/smashbox,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+befd7c63-f1fe-4747-b6e0-ea968a7daaf4,Smile Makers,https://www.ulta.com/brand/smile-makers,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+91d6cce5-3096-4cda-b83b-62430a3c8893,Snif,https://www.ulta.com/brand/snif,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+b559174d-0349-4835-93a7-f968ac2d9dfa,Soap & Glory,https://www.ulta.com/brand/soap-glory,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+49665565-9862-4b71-8d3a-a2dcd19543b1,SoCozy,https://www.ulta.com/brand/socozy,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+75f361d2-d272-4188-803d-f895f27f2313,Sol de Janeiro,https://www.ulta.com/brand/sol-de-janeiro,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+6d26fd27-2d76-4471-9917-5abddce2bf75,Solawave,https://www.ulta.com/brand/solawave,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1b9cfa84-d47e-4423-a404-15617ed8ada7,Spectrum,https://www.ulta.com/brand/spectrum,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+53bb3bcb-4c2d-49b1-a58b-8753f92d91dd,Spongeables,https://www.ulta.com/brand/spongeables,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c9c8f8bb-e605-4768-9bb7-cbdb6a17aa58,Spotlight Oral Care,https://www.ulta.com/brand/spotlight-oral-care,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+68cb95d4-47bf-4fed-8b26-94b127d87121,St. Moriz,https://www.ulta.com/brand/st-moriz,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+97d4b5ac-6eb4-47e9-b999-eec68ba67669,St. Tropez,https://www.ulta.com/brand/st-tropez,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d1fa7de6-697a-4667-96f6-1cc11ef12366,Static Nails,https://www.ulta.com/brand/static-nails,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e1fd266c-aaf6-4db0-bc0b-ac740a6c4e29,Stila,https://www.ulta.com/brand/stila,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+90913c5a-4335-4d4d-9a74-9881e3ca6639,StriVectin,https://www.ulta.com/brand/strivectin,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8179c4fd-d7ff-46aa-96b8-12c9ba1b7403,Sugarbear,https://www.ulta.com/brand/sugarbear,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+25f46fbd-3e72-4716-9611-1d7f42029485,sugardoh,https://www.ulta.com/brand/sugardoh,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+279dc0be-0ced-4304-ad2e-ecd7ad044882,Sun Bum,https://www.ulta.com/brand/sun-bum,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f10e5142-ee80-4989-bd86-e9433d0194c0,Sunday || Sunday,https://www.ulta.com/brand/sunday-sunday,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+bbeeba9c-69b5-4be6-bb95-f061e1777c2a,SUNDAY RILEY,https://www.ulta.com/brand/sunday-riley,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d92720f4-8862-4ee7-a11c-9616fe01bf71,Supergoop!,https://www.ulta.com/brand/supergoop,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d6b2ada0-5127-4576-bfab-a8ea724cbe3e,Supersmile,https://www.ulta.com/brand/supersmile,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+d49b6282-2ab3-40cb-92aa-bc8aef2120fd,SweetSpot Labs,https://www.ulta.com/brand/sweetspot-labs,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+54d52541-1fe1-4bf4-82f1-518f4592aa20,T3,https://www.ulta.com/brand/t3,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+41386fee-bf10-40cd-88cd-c291fbc7fd09,TAN-LUXE,https://www.ulta.com/brand/tan-luxe,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9b00a823-f4b7-4931-9a3b-b75e88f8d0e2,Tangle Teezer,https://www.ulta.com/brand/tangle-teezer,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7016692e-6a81-4e22-83ea-fc5a393bb9a6,Tanologist,https://www.ulta.com/brand/tanologist,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+371765c4-5b1b-4759-8729-7f7ac0988bc2,Tartan + Twine,https://www.ulta.com/brand/tartan-twine,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+5819d7d3-ca60-4e05-b316-3640beb06581,Tarte,https://www.ulta.com/brand/tarte,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+98a4d886-fdae-4a93-b138-f3129f4bf269,tgin,https://www.ulta.com/brand/tgin,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4907fc5c-60f1-4585-afce-0d666de7679b,Thayers,https://www.ulta.com/brand/thayers,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+8d3799cd-4887-437c-805a-782d35015807,The Body Shop,https://www.ulta.com/brand/body-shop,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+49c9ff4a-71f8-4da6-afaf-7c83f2ea6113,The Crème Shop,https://www.ulta.com/brand/creme-shop,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+bbf1d2f7-bc1e-427b-81e7-185a57e3ab3c,The Good Patch,https://www.ulta.com/brand/good-patch,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+db0c8896-269e-41c1-9f29-bf15e8d121a1,The Hair Edit,https://www.ulta.com/brand/hair-edit,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1f86a606-29d6-46d5-95c4-cd55a799be03,The Handmade Soap Co.,https://www.ulta.com/brand/handmade-soap-co,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+654aaefd-2284-4b28-8278-6577977c21e3,The Mane Choice,https://www.ulta.com/brand/mane-choice,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+62453634-b06b-4dcb-be0f-ee89b9377541,The Ordinary,https://www.ulta.com/brand/ordinary,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4359ef8a-d86f-48be-bef5-83158a09d24b,The Original MakeUp Eraser,https://www.ulta.com/brand/original-makeup-eraser,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+93219421-8f10-45a0-ab34-7992fb709114,THE ROUTE,https://www.ulta.com/brand/route,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+bc63b7ef-94a5-45ee-bd40-6e8f33f59ad7,The Vintage Cosmetic Company,https://www.ulta.com/brand/vintage-cosmetic-company,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+49f18123-baef-4d6f-a01e-735586682b92,TheraBreath,https://www.ulta.com/brand/therabreath,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+104a0790-afd3-4af4-abac-8418d2fd9483,Thick Head,https://www.ulta.com/brand/thick-head,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+974edc39-1de3-4ea5-9a8f-58897057cb56,Tiffany & Co.,https://www.ulta.com/brand/tiffany-co,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9307c163-2d7e-4aab-9c7a-b59a584057ac,TOCCA,https://www.ulta.com/brand/tocca,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+df153697-50f1-4386-96ea-3d3c9841818c,TOM FORD,https://www.ulta.com/brand/tom-ford,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1dde1958-d599-4a8e-846f-6598290046d1,TONYMOLY,https://www.ulta.com/brand/tonymoly,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f57ce423-2fa9-4ab2-a3a8-82d5090ac89c,Too Faced,https://www.ulta.com/brand/too-faced,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+02be2674-8ec6-4a55-8b69-a1c3f3559fc0,Toppik,https://www.ulta.com/brand/toppik,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cafde247-3455-4f03-b47a-e381b0ce5494,Tory Burch,https://www.ulta.com/brand/tory-burch,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+43b06194-ce0a-4c9c-8368-e1b9d62f4974,Touchland,https://www.ulta.com/brand/touchland,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+32a1034d-d63e-466a-b98c-c1378b79a09b,Tree Hut,https://www.ulta.com/brand/tree-hut,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+13911f1c-6c0d-4595-84ec-ea5fb7128cf2,Treslúce Beauty,https://www.ulta.com/brand/tresluce-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c358976b-a2aa-4dbb-9854-e1f82e81ee10,Truly,https://www.ulta.com/brand/truly,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ec7d5aa7-7ac3-4674-9981-9764188a9b15,TULA,https://www.ulta.com/brand/tula,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+00bd2af8-05d6-4176-8d4e-1cbe7cd10fe1,Turbie Twist,https://www.ulta.com/brand/turbie-twist,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1d76a8fe-9144-4928-b72c-4011cfbc736f,Tweezerman,https://www.ulta.com/brand/tweezerman,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+afd08e3e-2658-48d5-a8f0-282044347b1b,ULTA Beauty Collection,https://www.ulta.com/brand/ulta-beauty-collection,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a13abbc2-295d-4fe5-ba85-ddabefb18b7d,Unbound,https://www.ulta.com/brand/unbound,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+899eb784-2851-4479-b2a3-8f8b66fb44ab,Undefined Beauty,https://www.ulta.com/brand/undefined-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e3efb2b1-efa6-4b9e-85b5-9dc6e7fde0f0,Undone Beauty,https://www.ulta.com/brand/undone-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fbc270e8-9bc9-45b8-b89b-714776b60755,UNITE Hair,https://www.ulta.com/brand/unite-hair,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+9deeb9b2-fdfc-48d1-87bc-82c56e359ed6,UOMA Beauty,https://www.ulta.com/brand/uoma-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+de82a3e4-1bf3-43e5-a30f-282b5ee59d9b,Urban Decay Cosmetics,https://www.ulta.com/brand/urban-decay-cosmetics,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c68532e9-25ab-4087-b458-09a48f73f413,Urban Hydration,https://www.ulta.com/brand/urban-hydration,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+067c9088-d4d3-46a1-beea-638581dca2fc,Urban Skin Rx,https://www.ulta.com/brand/urban-skin-rx,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+51fd3627-618b-48d7-a4cc-3d178898834f,Urban Veda,https://www.ulta.com/brand/urban-veda,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+cd8efd53-7658-42d5-964c-daaa09d229e9,Vacation,https://www.ulta.com/brand/vacation,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+ac412245-37a8-406e-be6a-724e30ebcd76,Valentino,https://www.ulta.com/brand/valentino,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+481d23f8-3897-4102-a96f-229f3b5d5a46,VANICREAM,https://www.ulta.com/brand/vanicream,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+a002873e-06e1-4280-83b3-8324a15dba20,VDL,https://www.ulta.com/brand/vdl,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+062c5969-fabd-4920-bf20-40d67b7de90c,Velour Lashes,https://www.ulta.com/brand/velour-lashes,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+fb914914-0655-4621-bee8-f2bae47a40e6,Verb,https://www.ulta.com/brand/verb,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c4bb4799-6ce4-4fa1-b278-e1ae413efb72,Versace,https://www.ulta.com/brand/versace,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+eaa0b82e-75b4-41af-bad8-baf5e1403c87,Vichy,https://www.ulta.com/brand/vichy,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e30943a3-ad7b-449e-b307-ded7decc5ea4,Viktor&Rolf,https://www.ulta.com/brand/viktor-rolf,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+700ab3d9-c0da-478b-9cea-a9c32d8bbc3a,Virtue,https://www.ulta.com/brand/virtue,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+03f7d535-dc3a-440d-b83e-e7ca96899e15,Vitamins and Sea beauty,https://www.ulta.com/brand/vitamins-sea-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+63ca6ae4-4f42-4de5-9bdf-42eb3c14c249,Viviscal,https://www.ulta.com/brand/viviscal,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+003152a8-20b4-44fb-befc-34410290768b,VOLITION,https://www.ulta.com/brand/volition,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+bc4aad67-c15e-4ada-a62b-362383be4ba4,VUSH,https://www.ulta.com/brand/vush,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2650c575-e9b1-48c9-84d8-0af2444405ac,Wahl,https://www.ulta.com/brand/wahl,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7e2c3624-6264-49d7-b4a7-c3f32ad0645a,Wakse,https://www.ulta.com/brand/wakse,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+f0e3d67a-0031-4f8c-99b0-f18757ff1cf9,Well People,https://www.ulta.com/brand/well-people,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e3882931-fa5b-43ad-bc04-02b964748418,Wella,https://www.ulta.com/brand/wella,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+045e117b-1514-44ca-a420-fd41f77627ee,Wet Brush,https://www.ulta.com/brand/wet-brush,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+e2f4cb14-a233-432d-92f9-6c89bd223b70,Wet n Wild,https://www.ulta.com/brand/wet-n-wild,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+1fa75d7f-7969-4132-85e3-4d2a07549e3b,Wigo,https://www.ulta.com/brand/wigo,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+6cd0e269-b5e4-4369-8736-7c9cf04df9f7,Winky Lux,https://www.ulta.com/brand/winky-lux,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+c1535d93-b650-4fc3-9420-182074df6dfd,WLDKAT,https://www.ulta.com/brand/wldkat,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+0aef57e9-7a62-4efb-ace9-6eca8d4ec56f,Womaness,https://www.ulta.com/brand/womaness,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+4665e17b-6382-490c-86aa-388ff2173a18,Wunder2,https://www.ulta.com/brand/wunder2,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+990fc06a-ba31-4b26-9382-19b1ed4b4e23,WYN BEAUTY,https://www.ulta.com/brand/wyn-beauty,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+7eb71b96-ff85-4f69-abea-29ec50bee1f1,Youthforia,https://www.ulta.com/brand/youthforia,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+693e869d-5b96-404e-b0a4-de5b87f69f5a,Yves Saint Laurent,https://www.ulta.com/brand/yves-saint-laurent,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+2463f8f7-650e-4212-af80-2655b15bb9e9,ZitSticka,https://www.ulta.com/brand/zitsticka,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+920d83f1-f7da-448a-9733-84c6b61f4ee6,Zoya,https://www.ulta.com/brand/zoya,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00
+70d56a4c-d630-4854-b82a-e6725efc73a2,18.21 Man Made,https://www.ulta.com/brand/1821-man-made,2024-04-29 14:52:43.107+00,2024-04-29 14:52:43.107+00

@@ -28,6 +28,7 @@ export async function runSephoraAllProductsScraper(
 		let loadMoreButton = await page.$(
 			options.sephoraSelectors.loadMoreSelector
 		);
+		await loadAllProducts(page, true)
 
 		while (loadMoreButton) {
 			await loadAllProducts(page, false);

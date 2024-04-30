@@ -44,8 +44,7 @@ export type AllProductsSelectors = {
 		totalReviewsSelector: string;
 		pageLinkSelector: string;
 		loadMoreSelector: string;
-	}
-	
+	};
 };
 
 export const querySchema = z.object({
@@ -59,9 +58,7 @@ export const scrapeSchema = z.object({
 	retailer: z.string(),
 	target: z.string(),
 	startIndex: z.string().max(1),
-	endIndex: z.string().max(1)
-	
-})
+	endIndex: z.string().max(1),
+});
 
 export type TScrapeSchema = z.infer<typeof scrapeSchema>;
-

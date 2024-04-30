@@ -4,9 +4,11 @@ import { AllProducts } from "@prisma/client";
 
 import { runUltaAllProductsScraper } from "../libs/Scraping Functions/Ulta-AllProducts/runUltaAllProductsScraper";
 
-export async function getAllUltaProducts(url: string | null): Promise<AllProducts[]> {
-	if(!url) return []
-	
+export async function getAllUltaProducts(
+	url: string | null
+): Promise<AllProducts[]> {
+	if (!url) return [];
+
 	try {
 		const allProducts = await runUltaAllProductsScraper(url as string, {
 			sephoraSelectors: {
@@ -24,7 +26,8 @@ export async function getAllUltaProducts(url: string | null): Promise<AllProduct
 				totalReviewsSelector: '[data-at="review_count"]',
 				pageLinkSelector: ".Link_Huge.Link_Huge--secondary",
 
-				loadMoreSelector: ".Button-ds.LoadContent__button.Button-ds--compact.Button-ds--withHover.Button-ds--secondary",
+				loadMoreSelector:
+					".Button-ds.LoadContent__button.Button-ds--compact.Button-ds--withHover.Button-ds--secondary",
 			},
 		});
 

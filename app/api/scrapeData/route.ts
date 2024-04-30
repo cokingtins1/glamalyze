@@ -86,8 +86,6 @@ export async function POST(req: Request) {
 			}
 
 			if (data) {
-                console.log(data.map(p => p.created_at))
-                console.log(data.map(p => p.updated_at))
 				const results = await validateResult(
 					data,
 					url,
@@ -105,7 +103,8 @@ export async function POST(req: Request) {
 		scrapeIndex = `${brands[0].brand_name} to
 			${brands[brands.length - 1].brand_name}`;
 
-		console.log("scrape index", scrapeIndex);
+		end = new Date().getTime();
+
 		await prisma.scrapeLog.create({
 			data: {
 				scrape_id: crypto.randomUUID(),
@@ -117,6 +116,7 @@ export async function POST(req: Request) {
 					`${brands[brands.length - 1].brand_name}`,
 				],
 				failedOn: null,
+				executionTime: (end - start) / 1000,
 			},
 		});
 	}
@@ -128,25 +128,28 @@ export async function POST(req: Request) {
 		index: number,
 		scrapeLength: number
 	) {
-		const nullArray = data.filter(
-			(product) =>
-				product.product_name == null || product.brand_name == null
-		);
+		// const nullArray = data.filter(
+		// 	(product) =>
+		// 		product.product_name == null || product.brand_name == null
+		// );
 
-		if (nullArray.length > 0) {
-			const scrapeLogEntries: ScrapeLog[] = nullArray.map((p) => {
-				return {
-					scrape_id: crypto.randomUUID(),
-					scrape_date: new Date(),
-					retailer: p.retailer_id,
-					target: target,
-					scrapeRange: [`${index} / ${scrapeLength}`],
-					failedOn: `${brandIndex}: ${url} `,
-				};
-			});
+		// if (nullArray.length > 0) {
+		// 	end = new Date().getTime();
 
-			await prisma.scrapeLog.createMany({ data: scrapeLogEntries });
-		}
+		// 	const scrapeLogEntries: ScrapeLog[] = nullArray.map((p) => {
+		// 		return {
+		// 			scrape_id: crypto.randomUUID(),
+		// 			scrape_date: new Date(),
+		// 			retailer: p.retailer_id,
+		// 			target: target,
+		// 			scrapeRange: [`${index} / ${scrapeLength}`],
+		// 			failedOn: `${brandIndex}: ${url} `,
+		// 			executionTime: (end - start) / 1000,
+		// 		};
+		// 	});
+
+		// 	await prisma.scrapeLog.createMany({ data: scrapeLogEntries });
+		// }
 
 		const filteredArray = data.filter(
 			(product) =>
