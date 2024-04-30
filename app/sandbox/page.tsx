@@ -13,7 +13,9 @@ import { getAllUltaProducts } from "../actions/getAllUltaProducts";
 import { getAllUltaBrands } from "../actions/getAllUltaBrands";
 import { getAllSephoraBrands } from "../actions/getAllSephoraBrands";
 
-export default function Page() {
+const prisma = new PrismaClient();
+
+export default async function Page() {
 	async function handleSubmit() {
 		"use server";
 
@@ -8436,18 +8438,24 @@ export default function Page() {
 			},
 		];
 		function log(data: AllProducts[]) {
-			const productNames = data.map((item) => item.product_name);
+			const productNames = data.map((item) => item.sku_id);
 			const uniqueArray = productNames.filter((value, index, self) => {
 				return self.indexOf(value) === index;
 			});
 
-			console.dir(
-				data.map((item) => item.sku_id),
-				{ maxArrayLength: null }
-			);
+			console.log("unique length:", uniqueArray.length);
+			// console.dir(uniqueArray, { maxArrayLength: null });
 		}
 
-		console.log(allSephoraBrands.map(brand => brand.brand_name))
+		const allProducts = await prisma.allProducts.findMany({});
+		const alpha = await prisma.allProducts.findMany({
+			where: { brand_name: { startsWith: "b", mode: "insensitive" } },
+		});
+
+		// console.log("all products:", log(allProducts));
+		// console.log(alpha);
+		log(alpha);
+		console.log("raw length", alpha.length);
 
 		// log(data);
 		// console.log(data.length);
@@ -8483,7 +8491,7 @@ export default function Page() {
 
 	const text = "4.4 out of 5 stars ; 8 reviews";
 
-	// console.log(text.split(" "))
+	console.log(new Date())
 
 	return (
 		<form action={handleSubmit}>

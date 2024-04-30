@@ -83,7 +83,7 @@ export async function scrapeAllSephoraProducts(
 			totalResultsText.split(" ")[0].replace(/\D/g, "")
 		);
 
-		if(Number.isNaN(resultsNum)) return []
+		if (Number.isNaN(resultsNum)) return [];
 
 		const result: AllProducts[] = [];
 		Array.from({ length: resultsNum }).forEach((order, index) => {
@@ -165,6 +165,8 @@ export async function scrapeAllSephoraProducts(
 
 			result.push({
 				product_id: crypto.randomUUID(),
+				created_at: new Date(),
+				updated_at: new Date(),
 				product_name: productName,
 				product_image_url: productImageUrl,
 				retailer_id: "Sephora123",

@@ -13,7 +13,7 @@ export async function runUltaAllProductsScraper(
 ): Promise<AllProducts[]> {
 	puppeteer.use(StealthPlugin());
 
-	if(!options) return []
+	if (!options) return [];
 
 	try {
 		const browser = await puppeteer.launch({
@@ -32,7 +32,6 @@ export async function runUltaAllProductsScraper(
 		);
 
 		while (loadMoreButton) {
-			console.log("load more button found")
 			await loadAllProducts(page, false);
 			await page.click(options.sephoraSelectors.loadMoreSelector);
 			await loadAllProducts(page, true);

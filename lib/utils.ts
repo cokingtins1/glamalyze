@@ -155,3 +155,33 @@ export function parseReviewTimeStamp(timestamp: string | null): string | null {
 		return `${day} ${monthNames[monthIndex]} ${year}`;
 	}
 }
+
+export function nextLetter(s: string) {
+	return s.replace(/([a-zA-Z])[^a-zA-Z]*$/, function (a) {
+		var c = a.charCodeAt(0);
+		switch (c) {
+			case 90:
+				return "A";
+			case 122:
+				return "a";
+			default:
+				return String.fromCharCode(++c);
+		}
+	});
+}
+
+export function alphaPos(letter: string): number {
+	const position = parseInt(letter.toLowerCase(), 36) - 9;
+	return position >= 1 && position <= 26 ? position : 999;
+}
+
+export function formatTime(time: string | null) {
+	if (!time) return "00h:00m:00s";
+	const seconds = parseFloat(time);
+	const hours = Math.floor(seconds / 3600);
+	const minutes = Math.floor((seconds % 3600) / 60);
+	const remainingSeconds = Math.floor(seconds % 60);
+	return `${hours}h:${minutes.toString().padStart(2, "0")}m:${remainingSeconds
+		.toString()
+		.padStart(2, "0")}s`;
+}

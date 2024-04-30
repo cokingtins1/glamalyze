@@ -4,8 +4,10 @@ import { AllProducts } from "@prisma/client";
 import { runSephoraAllProductsScraper } from "../libs/Scraping Functions/Sephora-AllProducts/runSephoraAllProductsScraper";
 
 export async function getAllSephoraProducts(
-	url: string
+	url: string | null
 ): Promise<AllProducts[]> {
+	if (!url) return [];
+
 	try {
 		const allProducts = await runSephoraAllProductsScraper(url as string, {
 			sephoraSelectors: {

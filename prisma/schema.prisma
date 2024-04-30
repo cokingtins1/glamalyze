@@ -121,6 +121,8 @@ model Reviewer {
 
 model AllProducts {
   product_id        String   @id @default(uuid())
+  created_at        DateTime @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime @updatedAt @db.Timestamptz(6)
   product_name      String?
   product_image_url String[]
   retailer          Retailer @relation(fields: [retailer_id], references: [retailer_id])
@@ -150,9 +152,11 @@ model SephoraBrand {
   updated_at      DateTime @updatedAt @db.Timestamptz(6)
 }
 
-model ScrapLog {
+model ScrapeLog {
   scrape_id   String   @id @default(uuid())
   scrape_date DateTime @default(now()) @db.Timestamptz(6)
+  retailer    String?
   target      String?
-  status      Json?
+  scrapeRange String[]
+  failedOn    String?
 }

@@ -1,16 +1,22 @@
+import { getAllSephoraProducts } from "@/app/actions/getAllSephoraProducts";
 import { getAllUltaProducts } from "@/app/actions/getAllUltaProducts";
-import { scrapeSchema, TScrapeSchema } from "@/app/libs/types";
+import { getBrands } from "@/app/libs/DashboardFunctions/getBrands";
+import { scrapeSchema } from "@/app/libs/types";
 import {
 	AllProducts,
 	PrismaClient,
+	ScrapeLog,
 	SephoraBrand,
 	UltaBrand,
 } from "@prisma/client";
 import { NextResponse } from "next/server";
+import { number } from "zod";
 
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
+	const start = new Date().getTime();
+	let end: number = new Date().getTime();
 	const body = await req.json();
 
 	const result = scrapeSchema.safeParse(body);
@@ -31,40 +37,131 @@ export async function POST(req: Request) {
 	}
 	const { retailer, target, startIndex, endIndex } = result.data;
 
-	let brands: UltaBrand[] | SephoraBrand[] = [];
-	if (retailer === "ulta") {
-		brands = await prisma.ultaBrand.findMany();
-	} else if (retailer === "sephora") {
-		brands = await prisma.sephoraBrand.findMany();
+	console.log(result.data);
+
+	let scrapeIndex = "";
+
+	if (target === "products") {
+		const brands = await getBrands(retailer, startIndex, endIndex);
+		console.dir(
+			brands.map((b) => b.brand_name),
+			{ maxArrayLength: null }
+		);
+
+		if (brands.length === 0) {
+			end = new Date().getTime();
+
+			return NextResponse.json({
+				message: {
+					executionTime: `${(end - start) / 1000}`,
+					scrapeIndex: scrapeIndex,
+				},
+			});
+		}
+
+		await runProductScraper(brands, retailer);
 	}
 
 	async function runProductScraper(
 		brands: UltaBrand[] | SephoraBrand[],
-		retailer: "ulta" | "sephora"
+		retailer: string
 	) {
-		const numBrands = endIndex || brands.length;
+		const numBrands = brands.length;
 
-		let count = startIndex || 0;
-		let data: AllProducts[];
+		let count = 0;
+		let data: AllProducts[] = [];
 		while (count < numBrands) {
+			const url = brands[count].brand_page_link;
+			console.log(
+				"current index:",
+				`${count} of ${numBrands}`,
+				"brand name:",
+				brands[count].brand_name
+			);
+
 			if (retailer === "ulta") {
-				var url = brands[count].brand_page_link;
 				data = await getAllUltaProducts(url);
-				await validateResult(data, url);
+			} else if (retailer === "sephora") {
+				data = await getAllSephoraProducts(url);
+			}
+
+			if (data) {
+                console.log(data.map(p => p.created_at))
+                console.log(data.map(p => p.updated_at))
+				const results = await validateResult(
+					data,
+					url,
+					brands[count].brand_name,
+					count,
+					numBrands
+				);
+				if (results.length > 0) {
+					await prisma.allProducts.createMany({ data: results });
+				}
 			}
 			count++;
 		}
+
+		scrapeIndex = `${brands[0].brand_name} to
+			${brands[brands.length - 1].brand_name}`;
+
+		console.log("scrape index", scrapeIndex);
+		await prisma.scrapeLog.create({
+			data: {
+				scrape_id: crypto.randomUUID(),
+				scrape_date: new Date(),
+				retailer: retailer,
+				target: target,
+				scrapeRange: [
+					`${brands[0].brand_name}`,
+					`${brands[brands.length - 1].brand_name}`,
+				],
+				failedOn: null,
+			},
+		});
 	}
 
-	async function validateResult(data: AllProducts[], url: string | null) {
-		//remove null values -> store them in status object of scrapeLog
+	async function validateResult(
+		data: AllProducts[],
+		url: string | null,
+		brandIndex: string | null,
+		index: number,
+		scrapeLength: number
+	) {
+		const nullArray = data.filter(
+			(product) =>
+				product.product_name == null || product.brand_name == null
+		);
 
-		let nullValues: string[];
+		if (nullArray.length > 0) {
+			const scrapeLogEntries: ScrapeLog[] = nullArray.map((p) => {
+				return {
+					scrape_id: crypto.randomUUID(),
+					scrape_date: new Date(),
+					retailer: p.retailer_id,
+					target: target,
+					scrapeRange: [`${index} / ${scrapeLength}`],
+					failedOn: `${brandIndex}: ${url} `,
+				};
+			});
 
-		//insert non null values into respective table
+			await prisma.scrapeLog.createMany({ data: scrapeLogEntries });
+		}
+
+		const filteredArray = data.filter(
+			(product) =>
+				product.product_name !== null || product.brand_name !== null
+		);
+
+		return filteredArray;
 	}
 
-	console.log(retailer);
+	end = new Date().getTime();
 
-	return NextResponse.json({ success: { data: "data..." } });
+	return NextResponse.json({
+		message: {
+			executionTime: `${(end - start) / 1000}`,
+			scrapeIndex: scrapeIndex,
+		},
+	});
 }

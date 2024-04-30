@@ -58,8 +58,8 @@ export type TQuerySchema = z.infer<typeof querySchema>;
 export const scrapeSchema = z.object({
 	retailer: z.string(),
 	target: z.string(),
-	startIndex: z.number(),
-	endIndex: z.number()
+	startIndex: z.string().max(1),
+	endIndex: z.string().max(1)
 	
 })
 

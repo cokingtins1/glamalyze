@@ -157,6 +157,8 @@ export async function scrapeAllUltaProducts(
 
 			result.push({
 				product_id: crypto.randomUUID(),
+				created_at: new Date(),
+				updated_at: new Date(),
 				product_name: productName,
 				product_image_url: [productImageUrl],
 				retailer_id: "Ulta123",
