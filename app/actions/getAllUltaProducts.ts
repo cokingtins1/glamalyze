@@ -4,7 +4,9 @@ import { AllProducts } from "@prisma/client";
 
 import { runUltaAllProductsScraper } from "../libs/Scraping Functions/Ulta-AllProducts/runUltaAllProductsScraper";
 
-export async function getAllUltaProducts(url: string): Promise<AllProducts[]> {
+export async function getAllUltaProducts(url: string | null): Promise<AllProducts[]> {
+	if(!url) return []
+	
 	try {
 		const allProducts = await runUltaAllProductsScraper(url as string, {
 			sephoraSelectors: {

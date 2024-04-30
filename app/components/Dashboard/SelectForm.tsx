@@ -23,12 +23,15 @@ import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import SubmitForm from "../SubmitForm";
 import { Input } from "@/components/ui/input";
+import { scrapeSchema, TScrapeSchema } from "@/app/libs/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function SelectForm() {
 	const [retailer, setRetailer] = useState("");
 	const [target, setTarget] = useState("");
 
-	const form = useForm({
+	const form = useForm<TScrapeSchema>({
+		resolver: zodResolver(scrapeSchema),
 		defaultValues: {
 			retailer: "",
 			target: "",
@@ -37,7 +40,7 @@ export default function SelectForm() {
 		},
 	});
 
-	const onSubmit = async (data: FieldValues) => {
+	const onSubmit = async (data: TScrapeSchema) => {
 		const res = await fetch("/api/scrapeData", {
 			method: "POST",
 			body: JSON.stringify({
@@ -91,7 +94,7 @@ export default function SelectForm() {
 								id="target"
 								className="w-[180px]  bg-white"
 							>
-								<SelectValue placeholder="Select Retailer" />
+								<SelectValue placeholder="Select Target" />
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>

@@ -7,9 +7,7 @@ export default function Page() {
 	return (
 		<main>
 			<section className="grid grid-rows-2 gap-4">
-				{/* <ScrapeForm callback={scrapeBrands} formType="brand" /> */}
 				<SelectForm/>
-				{/* <ScrapeForm callback={scrapeProducts} formType="products" /> */}
 			</section>
 		</main>
 	);

@@ -54,3 +54,14 @@ export const querySchema = z.object({
 });
 
 export type TQuerySchema = z.infer<typeof querySchema>;
+
+export const scrapeSchema = z.object({
+	retailer: z.string(),
+	target: z.string(),
+	startIndex: z.number(),
+	endIndex: z.number()
+	
+})
+
+export type TScrapeSchema = z.infer<typeof scrapeSchema>;
+
