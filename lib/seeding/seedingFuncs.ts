@@ -74,7 +74,7 @@ export function userSeeds(length: number) {
 }
 
 export function productSeeds(query: Query) {
-	const retailerBank = ["Ulta123", "Sephora123"];
+	const retailerBank = ["Ulta", "Sephora"];
 
 	const retailer: string[] = [];
 	const includeFirst = Math.random() < 0.5;
@@ -129,7 +129,7 @@ export function createProduct(
 			1,
 			200
 		)}/200/300`,
-		retailer_id: [ultaProduct && "Ulta123", sephoraProduct && "Sephora123"],
+		retailer_id: [ultaProduct && "Ulta", sephoraProduct && "Sephora"],
 		brand_id: crypto.randomUUID(),
 		brand_name: ultaProduct.brand_name || sephoraProduct.brand_name,
 		queries: [query.query_id],
@@ -144,7 +144,7 @@ export function reviewerSeeds(length: number): Reviewer[] {
 		return {
 			reviewer_name: randomUserName(),
 			reviewer_id: crypto.randomUUID(),
-			retailer_id: Math.random() < 0.5 ? "Sephora123" : "Ulta123",
+			retailer_id: Math.random() < 0.5 ? "Sephora" : "Ulta",
 		};
 	});
 
@@ -160,7 +160,7 @@ export function querySeeds(allUsers: User[]): Query {
 		user_id: userIds[randomNum(0, userIds.length - 1)],
 		filters: ["None"],
 		product_id: crypto.randomUUID(), // assign placeholder id
-		retailer_id: Math.random() < 0.5 ? "Sephora123" : "Ulta123",
+		retailer_id: Math.random() < 0.5 ? "Sephora" : "Ulta",
 	};
 
 	return queryBank;
@@ -173,7 +173,7 @@ export function createQuery(userId: string) {
 		user_id: userId,
 		filters: ["None"],
 		product_id: crypto.randomUUID(), // assign placeholder id
-		retailer_id: Math.random() < 0.5 ? "Sephora123" : "Ulta123",
+		retailer_id: Math.random() < 0.5 ? "Sephora" : "Ulta",
 	};
 
 	return queryBank;
@@ -185,7 +185,7 @@ export function reviewSeeds(
 	reviewers: Reviewer[],
 	length: number
 ): Review[] {
-	const retailerBank = ["Ulta123", "Sephora123"];
+	const retailerBank = ["Ulta", "Sephora"];
 	let reviews: Review[] = [];
 
 	retailerBank.forEach((retailerId) => {
@@ -222,7 +222,7 @@ export function retailerProductSeeds(
 	query: Query,
 	product: Product
 ): SephoraProduct[] | UltaProduct[] {
-	const retailerBank = ["Ulta123", "Sephora123"];
+	const retailerBank = ["Ulta", "Sephora"];
 	let productData: (SephoraProduct | UltaProduct)[] = [];
 
 	retailerBank.forEach((retailer) => {

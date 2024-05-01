@@ -150,7 +150,7 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 			result.push({
 				review_id: reviewId,
 				product_id: productId,
-				retailer_id: "Sephora123",
+				retailer_id: "Sephora",
 				review_headline: header,
 				review_text: reviewText,
 				review_rating: rating,

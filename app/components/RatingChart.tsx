@@ -79,7 +79,7 @@ export default function RatingChart({ metaData }: DataProps) {
 												<Progress
 													value={
 														metaData.retailer_id ===
-														"Sephora123"
+														"Sephora"
 															? count
 															: (count /
 																	metaData.total_reviews) *
@@ -89,7 +89,7 @@ export default function RatingChart({ metaData }: DataProps) {
 											</>
 										)}
 									<p className="text-sm text-slate-400 ml-2 text-right">
-										{metaData.retailer_id === "Sephora123"
+										{metaData.retailer_id === "Sephora"
 											? SephoraReviewCount(
 													count,
 													metaData.total_reviews

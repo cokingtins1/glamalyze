@@ -6,8 +6,8 @@ import { ButtonProps } from "@/components/ui/button";
 type SubmitFormProps = ButtonProps & {
 	pending: boolean;
 	pendingText: string[];
-	disabled? :boolean
-}
+	disabled?: boolean;
+};
 
 export default function SubmitForm({
 	pending,
@@ -20,7 +20,7 @@ export default function SubmitForm({
 			type="submit"
 			disabled={pending || disabled}
 			{...props}
-			className="justify-self-stretch"
+			className="justify-self-center w-[300px]"
 		>
 			{pending ? pendingText[0] : pendingText[1]}
 		</Button>

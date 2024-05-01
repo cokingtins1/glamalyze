@@ -31,7 +31,6 @@ export type OptionProps = {
 };
 
 export type AllProductsSelectors = {
-	sephoraByBrand?: {};
 	sephoraSelectors: {
 		allProductsContSelector: string;
 		productCardContSelector: string;
@@ -44,6 +43,7 @@ export type AllProductsSelectors = {
 		totalReviewsSelector: string;
 		pageLinkSelector: string;
 		loadMoreSelector: string;
+		brandId: string;
 	};
 };
 
@@ -59,6 +59,7 @@ export const scrapeSchema = z.object({
 	target: z.string(),
 	startIndex: z.string().max(1),
 	endIndex: z.string().max(1),
+	brandUrl: z.string(),
 });
 
 export type TScrapeSchema = z.infer<typeof scrapeSchema>;

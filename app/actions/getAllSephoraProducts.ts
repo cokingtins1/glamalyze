@@ -4,7 +4,8 @@ import { AllProducts } from "@prisma/client";
 import { runSephoraAllProductsScraper } from "../libs/Scraping Functions/Sephora-AllProducts/runSephoraAllProductsScraper";
 
 export async function getAllSephoraProducts(
-	url: string | null
+	url: string | null,
+	brandId: string
 ): Promise<AllProducts[]> {
 	if (!url) return [];
 
@@ -23,6 +24,7 @@ export async function getAllSephoraProducts(
 				pageLinkSelector: ".css-klx76",
 
 				loadMoreSelector: ".css-1p9axos.eanm77i0",
+				brandId: brandId,
 			},
 		});
 

@@ -72,7 +72,7 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 			queries: [""],
 		};
 
-		result.retailer_id = "Sephora123";
+		result.retailer_id = "Sephora";
 		const path = window.location.href;
 
 		result.sku_id = path ? getSku(new URL(path), "Sephora") : null;

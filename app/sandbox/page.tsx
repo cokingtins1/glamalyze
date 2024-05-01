@@ -70,48 +70,80 @@ export default async function Page() {
 		// 	where: {
 		// 		AND: [
 		// 			{
-		// 				retailer_id: "Sephora123",
+		// 				retailer_id: "Sephora",
 		// 				brand_name: "Algenist",
 		// 			},
 		// 		],
 		// 	},
 		// });
 
-		const ultaProducts = await prisma.allProducts.findMany({
-			where: { retailer_id: "Ulta123" },
-		});
+		// const sephoraProducts = await prisma.allProducts.findMany({
+		// 	where: { retailer_id: "Sephora" },
+		// });
 
-		const ultaBrands = await prisma.ultaBrand.findMany();
+		// const sephoraBrands = await prisma.allBrands.findMany({
+		// 	where: { retailer_id: "Sephora" },
+		// });
 
-		const brandsNotFoundInProducts = ultaBrands
-			.filter(
-				(brand) =>
-					!ultaProducts.some(
-						(product) => product.brand_name === brand.brand_name
-					)
-			)
-			.map((brand) => brand.brand_name);
+		// const brandsNotFoundInProducts = sephoraBrands
+		// 	.filter(
+		// 		(brand) =>
+		// 			!sephoraProducts.some(
+		// 				(product) => product.brand_name === brand.brand_name
+		// 			)
+		// 	)
+		// 	.map((brand) => brand.brand_name);
 
 		// console.log("not found:", brandsNotFoundInProducts);
-		let newUlta: AllProducts[] = [];
-		for (const product of ultaProducts) {
-			const matchingBrand = ultaBrands.find(
-				(brand) => brand.brand_name === product.brand_name
-			);
+		// console.log("not found length:", brandsNotFoundInProducts.length);
 
-			if (matchingBrand) {
-				newUlta.push({ ...product, brand_id: matchingBrand.brand_id });
-			}
-		}
+		// let newSephora: AllProducts[] = [];
+		// for (const product of sephoraProducts) {
+		// 	const matchingBrand = sephoraProducts.find(
+		// 		(brand) => brand.brand_name === product.brand_name
+		// 	);
 
-		if (newUlta.length > 0) {
-			console.log(newUlta.length);
-			await prisma.allProducts.deleteMany({
-				where: { retailer_id: "Ulta123" },
-			});
-			await prisma.allProducts.createMany({ data: newUlta });
-			console.log("done");
-		}
+		// 	if (matchingBrand) {
+		// 		newSephora.push({
+		// 			...product,
+		// 			brand_id: matchingBrand.brand_id,
+		// 		});
+		// 	}
+		// }
+
+		const brandId = "51048bae-6fd9-4ae2-b107-53e1ebeff9cc";
+		const dummyProducts = await prisma.allProducts.findMany({
+			where: { brand_id: brandId },
+		});
+
+		const brandSkus = await prisma.allProducts.findMany({
+			where: { brand_id: brandId },
+			select: { sku_id: true },
+		});
+
+		const existingSkus = brandSkus.map((p) => p.sku_id);
+
+		const productsToUpdate = dummyProducts.filter((p) =>
+			existingSkus.includes(p.sku_id)
+		);
+
+		const productsToInsert = dummyProducts.filter(
+			(p) => !existingSkus.includes(p.sku_id)
+		);
+
+		console.log("brandSkus", productsToUpdate.map(p => p.product_id));
+		console.log("update", productsToUpdate.length);
+		console.log("existing", dummyProducts.length);
+
+		// if (newSephora.length > 0) {
+		// 	// console.log(newSephora.length);
+		// 	// log(newSephora);
+		// 	// await prisma.allProducts.deleteMany({
+		// 	// 	where: { retailer_id: "Sephora" },
+		// 	// });
+		// 	// await prisma.allProducts.createMany({ data: newSephora });
+		// 	console.log("done");
+		// }
 
 		// console.log(log(newUlta));
 		// log(newUlta)

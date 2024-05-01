@@ -72,7 +72,7 @@ export async function scrapeUltaMetadata(page: Page, options: OptionProps) {
 			queries: [""],
 		};
 
-		result.retailer_id = "Ulta123";
+		result.retailer_id = "Ulta";
 		const path = window.location.href;
 
 		result.sku_id = path ? getSku(new URL(path), "Ulta") : null;

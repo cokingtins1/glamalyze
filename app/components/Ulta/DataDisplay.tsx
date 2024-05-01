@@ -7,7 +7,7 @@ import { Review, SephoraProduct, UltaProduct } from "@prisma/client";
 
 type DataProps = {
 	data: UltaProduct | SephoraProduct;
-	reviewsData: Review[]
+	reviewsData: Review[];
 };
 
 export default function DataDisplay({ data, reviewsData }: DataProps) {
@@ -16,9 +16,7 @@ export default function DataDisplay({ data, reviewsData }: DataProps) {
 			<div className="h-[100px] w-[200px] relative">
 				<Image
 					src={
-						data.retailer_id === "Sephora123"
-							? SephoraLogo
-							: UltaLogo
+						data.retailer_id === "Sephora" ? SephoraLogo : UltaLogo
 					}
 					fill
 					style={{ objectFit: "contain" }}

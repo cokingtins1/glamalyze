@@ -66,6 +66,7 @@ export async function scrapeAllSephoraProducts(
 			pageLinkSelector,
 
 			loadMoreSelector,
+			brandId,
 		} = options;
 
 		const allProductsCont = document.querySelector(allProductsContSelector);
@@ -171,8 +172,8 @@ export async function scrapeAllSephoraProducts(
 				product_id: crypto.randomUUID(),
 				product_name: productName,
 				product_image_url: productImageUrl,
-				retailer_id: "Sephora123",
-				brand_id: crypto.randomUUID(),
+				retailer_id: "Sephora",
+				brand_id: brandId,
 				brand_name: brandName,
 				product_price: productPrices,
 				sku_id: skuId,

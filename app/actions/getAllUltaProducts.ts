@@ -5,7 +5,8 @@ import { AllProducts } from "@prisma/client";
 import { runUltaAllProductsScraper } from "../libs/Scraping Functions/Ulta-AllProducts/runUltaAllProductsScraper";
 
 export async function getAllUltaProducts(
-	url: string | null
+	url: string | null,
+	brandId: string
 ): Promise<AllProducts[]> {
 	if (!url) return [];
 
@@ -28,6 +29,7 @@ export async function getAllUltaProducts(
 
 				loadMoreSelector:
 					".Button-ds.LoadContent__button.Button-ds--compact.Button-ds--withHover.Button-ds--secondary",
+				brandId: brandId,
 			},
 		});
 

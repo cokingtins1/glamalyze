@@ -38,14 +38,14 @@ export default async function Home() {
 	const ultaReviewsData = await prisma.review.findMany({
 		where: {
 			product_id: selectedProduct,
-			retailer_id: "Ulta123",
+			retailer_id: "Ulta",
 		},
 	});
 
 	const sephoraReviewsData = await prisma.review.findMany({
 		where: {
 			product_id: selectedProduct,
-			retailer_id: "Sephora123",
+			retailer_id: "Sephora",
 		},
 	});
 

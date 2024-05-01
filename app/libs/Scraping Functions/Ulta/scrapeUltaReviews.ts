@@ -4,7 +4,6 @@ import { OptionProps } from "../../types";
 import { Review } from "@prisma/client";
 
 export async function scrapeUltaReviews(page: Page, options: OptionProps) {
-
 	const reviewData = await page.evaluate((options) => {
 		const {
 			reviewListContSelector,
@@ -136,7 +135,7 @@ export async function scrapeUltaReviews(page: Page, options: OptionProps) {
 			result.push({
 				review_id: reviewId,
 				product_id: productId,
-				retailer_id: "Ulta123",
+				retailer_id: "Ulta",
 				review_headline: header,
 				review_text: reviewText,
 				review_rating: rating,

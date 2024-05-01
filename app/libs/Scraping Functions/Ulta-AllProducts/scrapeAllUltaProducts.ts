@@ -64,6 +64,7 @@ export async function scrapeAllUltaProducts(
 			pageLinkSelector,
 
 			loadMoreSelector,
+			brandId,
 		} = options;
 
 		const allProductsCont = document.querySelector(allProductsContSelector);
@@ -159,8 +160,8 @@ export async function scrapeAllUltaProducts(
 				product_id: crypto.randomUUID(),
 				product_name: productName,
 				product_image_url: [productImageUrl],
-				retailer_id: "Ulta123",
-				brand_id: crypto.randomUUID(),
+				retailer_id: "Ulta",
+				brand_id: brandId,
 				brand_name: brandName,
 				product_price: productPrices,
 				sku_id: skuId,

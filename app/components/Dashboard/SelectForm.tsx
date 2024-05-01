@@ -41,6 +41,7 @@ export default function SelectForm() {
 			target: "",
 			startIndex: "A",
 			endIndex: "Z",
+			brandUrl: ""
 		},
 	});
 
@@ -52,6 +53,7 @@ export default function SelectForm() {
 				target: target,
 				startIndex: data.startIndex.toUpperCase(),
 				endIndex: data.endIndex.toUpperCase(),
+				brandUrl: data.brandUrl
 			}),
 			headers: {
 				"Content-Type": "application/json",
@@ -80,13 +82,14 @@ export default function SelectForm() {
 				<CardContent>
 					<form
 						onSubmit={form.handleSubmit(onSubmit)}
-						className="grid grid-cols-2 gap-4 items-center"
+						className="grid grid-cols-auto gap-4 items-center"
 					>
-						<div className="grid grid-cols-4 grid-rows-2 gap-x-2 justify-items-stretch items-center justify-center text-center">
+						<div className="grid grid-cols-5 grid-rows-2 gap-x-2 justify-items-stretch items-center justify-center text-center">
 							<Label>Retailer</Label>
 							<Label>Target</Label>
 							<Label>Start Index</Label>
 							<Label>End Index</Label>
+							<Label>Brand</Label>
 							<Select onValueChange={setRetailer}>
 								<SelectTrigger
 									id="retailer"
@@ -97,10 +100,10 @@ export default function SelectForm() {
 								<SelectContent>
 									<SelectGroup>
 										<SelectLabel>Retailer</SelectLabel>
-										<SelectItem value="ulta">
+										<SelectItem value="Ulta">
 											Ulta
 										</SelectItem>
-										<SelectItem value="sephora">
+										<SelectItem value="Sephora">
 											Sephora
 										</SelectItem>
 									</SelectGroup>
@@ -153,6 +156,14 @@ export default function SelectForm() {
 								id="endIndex"
 								name="endIndex"
 								placeholder="End Index"
+								className="bg-white"
+							/>
+							<Input
+								{...form.register("brandUrl")}
+								type="text"
+								id="brand"
+								name="brand"
+								placeholder="Brand Url"
 								className="bg-white"
 							/>
 						</div>

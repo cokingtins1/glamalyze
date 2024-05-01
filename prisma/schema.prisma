@@ -29,6 +29,7 @@ model Retailer {
   SephoraProduct SephoraProduct[]
   UltaProduct    UltaProduct[]
   AllProducts    AllProducts[]
+  AllBrands      AllBrands[]
 }
 
 model Query {
@@ -43,55 +44,44 @@ model Query {
   Review      Review[]
 }
 
-model Product {
-  product_id        String          @id @default(uuid())
-  product_name      String?
-  product_image_url String?
-  retailer_id       String[]
-  brand_id          String?
-  brand_name        String?
-  queries           String[]        @default([""])
-  Review            Review[]
-  SephoraProducts   SephoraProduct?
-  UltaProducts      UltaProduct?
-  ulta_sku_id       String?
-  sephora_sku_id    String?
-}
-
 model UltaProduct {
-  product_id          String   @id
+  product_id          String      @id
   price               Int?
   avg_rating          Float?
   percent_recommended Int?
   product_name        String?
   review_histogram    Int[]
-  sku_id              String?  @unique
+  sku_id              String?     @unique
   total_reviews       Int?
   brand_name          String?
+  brand               AllBrands   @relation(fields: [brand_id], references: [brand_id])
   retailer_id         String
-  product             Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
-  retailer            Retailer @relation(fields: [retailer_id], references: [retailer_id])
-  queries             String[] @default([""])
+  product             AllProducts @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  retailer            Retailer    @relation(fields: [retailer_id], references: [retailer_id])
+  queries             String[]    @default([""])
+  brand_id            String
 }
 
 model SephoraProduct {
-  product_id          String   @id
+  product_id          String      @id
   price               Int?
   avg_rating          Float?
   percent_recommended Int?
   product_name        String?
   review_histogram    Int[]
-  sku_id              String?  @unique
+  sku_id              String?     @unique
   total_reviews       Int?
   brand_name          String?
+  brand               AllBrands   @relation(fields: [brand_id], references: [brand_id])
   retailer_id         String
-  product             Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
-  retailer            Retailer @relation(fields: [retailer_id], references: [retailer_id])
-  queries             String[] @default([""])
+  product             AllProducts @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  retailer            Retailer    @relation(fields: [retailer_id], references: [retailer_id])
+  queries             String[]    @default([""])
+  brand_id            String
 }
 
 model Review {
-  review_id       String   @id @default(uuid())
+  review_id       String      @id @default(uuid())
   product_id      String
   retailer_id     String
   review_rating   Int?
@@ -102,13 +92,12 @@ model Review {
   review_headline String?
   reviewer_id     String
   reviewer_name   String?
-  // review_date     DateTime? @db.Timestamptz(6)
-  review_date     String?
+  review_date     DateTime?   @db.Timestamptz(6)
   query_id        String
-  product         Product  @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
-  query           Query    @relation(fields: [query_id], references: [query_id])
-  retailer        Retailer @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
-  reviewer        Reviewer @relation(fields: [reviewer_id], references: [reviewer_id])
+  product         AllProducts @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+  query           Query       @relation(fields: [query_id], references: [query_id])
+  retailer        Retailer    @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
+  reviewer        Reviewer    @relation(fields: [reviewer_id], references: [reviewer_id])
 }
 
 model Reviewer {
@@ -120,36 +109,37 @@ model Reviewer {
 }
 
 model AllProducts {
-  product_id        String    @id @default(uuid())
-  created_at        DateTime? @default(now()) @db.Timestamptz(6)
-  updated_at        DateTime? @updatedAt @db.Timestamptz(6)
+  product_id        String           @id @default(uuid())
+  created_at        DateTime?        @default(now()) @db.Timestamptz(6)
+  updated_at        DateTime?        @updatedAt @db.Timestamptz(6)
   product_name      String?
   product_image_url String[]
-  retailer          Retailer  @relation(fields: [retailer_id], references: [retailer_id])
+  retailer          Retailer         @relation(fields: [retailer_id], references: [retailer_id])
   retailer_id       String
-  brand_id          String?
+  brand             AllBrands        @relation(fields: [brand_id], references: [brand_id])
+  brand_id          String
   brand_name        String?
   product_price     Float[]
   sku_id            String?
   avg_rating        Float?
   total_reviews     Float?
   page_link         String?
+  UltaProduct       UltaProduct[]
+  SephoraProduct    SephoraProduct[]
+  Review            Review[]
 }
 
-model UltaBrand {
-  brand_id        String   @id @default(uuid())
+model AllBrands {
+  brand_id        String           @id @default(uuid())
   brand_name      String?
   brand_page_link String?
-  created_at      DateTime @default(now()) @db.Timestamptz(6)
-  updated_at      DateTime @updatedAt @db.Timestamptz(6)
-}
-
-model SephoraBrand {
-  brand_id        String   @id @default(uuid())
-  brand_name      String?
-  brand_page_link String?
-  created_at      DateTime @default(now()) @db.Timestamptz(6)
-  updated_at      DateTime @updatedAt @db.Timestamptz(6)
+  retailer        Retailer         @relation(fields: [retailer_id], references: [retailer_id])
+  retailer_id     String
+  created_at      DateTime         @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime         @updatedAt @db.Timestamptz(6)
+  AllProducts     AllProducts[]
+  UltaProduct     UltaProduct[]
+  SephoraProduct  SephoraProduct[]
 }
 
 model ScrapeLog {

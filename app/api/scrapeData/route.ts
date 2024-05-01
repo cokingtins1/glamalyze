@@ -3,14 +3,12 @@ import { getAllUltaProducts } from "@/app/actions/getAllUltaProducts";
 import { getBrands } from "@/app/libs/DashboardFunctions/getBrands";
 import { scrapeSchema } from "@/app/libs/types";
 import {
+	AllBrands,
 	AllProducts,
 	PrismaClient,
 	ScrapeLog,
-	SephoraBrand,
-	UltaBrand,
 } from "@prisma/client";
 import { NextResponse } from "next/server";
-import { number } from "zod";
 
 const prisma = new PrismaClient();
 
@@ -35,14 +33,19 @@ export async function POST(req: Request) {
 				: { success: { data: "data..." } }
 		);
 	}
-	const { retailer, target, startIndex, endIndex } = result.data;
+	const { retailer, target, startIndex, endIndex, brandUrl } = result.data;
 
 	console.log(result.data);
 
 	let scrapeIndex = "";
 
 	if (target === "products") {
-		const brands = await getBrands(retailer, startIndex, endIndex);
+		let brands: AllBrands[] = [];
+		if (brandUrl) {
+			
+		} else {
+			brands = await getBrands(retailer, startIndex, endIndex);
+		}
 		console.dir(
 			brands.map((b) => b.brand_name),
 			{ maxArrayLength: null }
@@ -59,19 +62,17 @@ export async function POST(req: Request) {
 			});
 		}
 
-		await runProductScraper(brands, retailer);
+		// await runProductScraper(brands, retailer);
 	}
 
-	async function runProductScraper(
-		brands: UltaBrand[] | SephoraBrand[],
-		retailer: string
-	) {
+	async function runProductScraper(brands: AllBrands[], retailer: string) {
 		const numBrands = brands.length;
 
 		let count = 0;
 		let data: AllProducts[] = [];
 		while (count < numBrands) {
 			const url = brands[count].brand_page_link;
+			const brandId = brands[count].brand_id;
 			console.log(
 				"current index:",
 				`${count} of ${numBrands}`,
@@ -79,22 +80,40 @@ export async function POST(req: Request) {
 				brands[count].brand_name
 			);
 
-			if (retailer === "ulta") {
-				data = await getAllUltaProducts(url);
-			} else if (retailer === "sephora") {
-				data = await getAllSephoraProducts(url);
+			if (retailer === "Ulta") {
+				data = await getAllUltaProducts(url, brandId);
+			} else if (retailer === "Sephora") {
+				data = await getAllSephoraProducts(url, brandId);
 			}
 
 			if (data) {
-				const results = await validateResult(
-					data,
-					url,
-					brands[count].brand_name,
-					count,
-					numBrands
-				);
-				if (results.length > 0) {
-					await prisma.allProducts.createMany({ data: results });
+				const { productsToInsert, productsToUpdate } =
+					await validateResult(
+						data,
+						brandId,
+						url,
+						brands[count].brand_name,
+						count,
+						numBrands
+					);
+				if (productsToInsert.length > 0) {
+					await prisma.allProducts.createMany({
+						data: productsToInsert,
+					});
+				}
+				if (productsToUpdate.length > 0) {
+					for (const product of productsToUpdate) {
+						const {
+							sku_id,
+							product_id,
+							created_at,
+							...updateData
+						} = product;
+						await prisma.allProducts.update({
+							where: { product_id: product.product_id },
+							data: updateData,
+						});
+					}
 				}
 			}
 			count++;
@@ -123,6 +142,7 @@ export async function POST(req: Request) {
 
 	async function validateResult(
 		data: AllProducts[],
+		brandId: string,
 		url: string | null,
 		brandIndex: string | null,
 		index: number,
@@ -151,12 +171,32 @@ export async function POST(req: Request) {
 		// 	await prisma.scrapeLog.createMany({ data: scrapeLogEntries });
 		// }
 
+		// check if sku exists on retailer -> upsert
+
+		// gets list of products with sku ids...
+		// for each product, check if sku id exists in AllProducts
+
 		const filteredArray = data.filter(
 			(product) =>
 				product.product_name !== null || product.brand_name !== null
 		);
 
-		return filteredArray;
+		const brandSkus = await prisma.allProducts.findMany({
+			where: { brand_id: brandId },
+			select: { sku_id: true },
+		});
+
+		const existingSkus = brandSkus.map((p) => p.sku_id);
+
+		const productsToUpdate = filteredArray.filter((p) =>
+			existingSkus.includes(p.sku_id)
+		);
+
+		const productsToInsert = filteredArray.filter(
+			(p) => !existingSkus.includes(p.sku_id)
+		);
+
+		return { productsToInsert, productsToUpdate };
 	}
 
 	end = new Date().getTime();
