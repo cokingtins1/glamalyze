@@ -33,6 +33,7 @@ export default function SelectForm() {
 
 	const [executionTime, setExecutionTime] = useState("");
 	const [scrapeIndex, setScrapeIndex] = useState("");
+	const [errorMessage, setErrorMessage] = useState("");
 
 	const form = useForm<TScrapeSchema>({
 		resolver: zodResolver(scrapeSchema),
@@ -41,7 +42,7 @@ export default function SelectForm() {
 			target: "",
 			startIndex: "A",
 			endIndex: "Z",
-			brandUrl: ""
+			brandUrl: "",
 		},
 	});
 
@@ -53,7 +54,7 @@ export default function SelectForm() {
 				target: target,
 				startIndex: data.startIndex.toUpperCase(),
 				endIndex: data.endIndex.toUpperCase(),
-				brandUrl: data.brandUrl
+				brandUrl: data.brandUrl?.toLowerCase(),
 			}),
 			headers: {
 				"Content-Type": "application/json",
@@ -64,9 +65,11 @@ export default function SelectForm() {
 			const responseData = await res.json();
 			const executionTime = responseData.message.executionTime;
 			const scrapeIndex = responseData.message.scrapeIndex;
+			const errorMessage = responseData.message.errorMessage;
 
 			setExecutionTime(executionTime);
 			setScrapeIndex(scrapeIndex);
+			setErrorMessage(errorMessage);
 		}
 	};
 
@@ -84,7 +87,7 @@ export default function SelectForm() {
 						onSubmit={form.handleSubmit(onSubmit)}
 						className="grid grid-cols-auto gap-4 items-center"
 					>
-						<div className="grid grid-cols-5 grid-rows-2 gap-x-2 justify-items-stretch items-center justify-center text-center">
+						<div className="grid grid-cols-5 grid-rows-auto gap-2 justify-items-stretch items-center justify-center text-center">
 							<Label>Retailer</Label>
 							<Label>Target</Label>
 							<Label>Start Index</Label>
@@ -161,11 +164,27 @@ export default function SelectForm() {
 							<Input
 								{...form.register("brandUrl")}
 								type="text"
-								id="brand"
-								name="brand"
+								id="brandUrl"
+								name="brandUrl"
 								placeholder="Brand Url"
 								className="bg-white"
 							/>
+
+							<Label>
+								{form.formState.errors.retailer?.message}
+							</Label>
+							<Label>
+								{form.formState.errors.target?.message}
+							</Label>
+							<Label>
+								{form.formState.errors.startIndex?.message}
+							</Label>
+							<Label>
+								{form.formState.errors.endIndex?.message}
+							</Label>
+							<Label>
+								{form.formState.errors.brandUrl?.message}
+							</Label>
 						</div>
 
 						<SubmitForm
@@ -186,6 +205,11 @@ export default function SelectForm() {
 						{executionTime && formatTime(executionTime)}
 					</p>
 					<p>Scraped Brands: {scrapeIndex && scrapeIndex}</p>
+					{errorMessage && (
+						<p className="text-rose-600 font-bold">
+							Errors: {errorMessage}
+						</p>
+					)}
 				</CardContent>
 			</Card>
 		</>

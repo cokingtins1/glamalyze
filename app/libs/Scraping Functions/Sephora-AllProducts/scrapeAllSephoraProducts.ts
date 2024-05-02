@@ -82,9 +82,13 @@ export async function scrapeAllSephoraProducts(
 		const totalResultsText = resultsEl.textContent?.trim();
 		if (!totalResultsText) return [];
 
+		console.log("totalResultsText:", totalResultsText);
+
 		const resultsNum = parseInt(
 			totalResultsText.split(" ")[0].replace(/\D/g, "")
 		);
+
+		console.log("resultsNum:", resultsNum);
 
 		if (Number.isNaN(resultsNum)) return [];
 
@@ -92,12 +96,16 @@ export async function scrapeAllSephoraProducts(
 		Array.from({ length: resultsNum }).forEach((order, index) => {
 			let selector: string = "";
 			if (index < 60) {
-				selector = `div[style*="order:${index}"]`;
+				console.log("INDEX:", index);
+				selector = `div[style="order:${index}"]`;
+				console.log("SELECTOR:", selector);
 			} else if (index >= 60) {
-				selector = `div[style*="order: ${index};"]`;
+				selector = `div[style="order: ${index};"]`;
 			}
 
 			const productCard = allProductsCont.querySelector(selector);
+
+			console.log("PRODUCTCARD:", !!productCard);
 
 			if (!productCard) return [];
 			const productNameEl =

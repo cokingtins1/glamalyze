@@ -3,13 +3,13 @@
 import { FieldValues } from "react-hook-form";
 import { getAllUltaBrands } from "@/app/actions/getAllUltaBrands";
 import { getAllSephoraBrands } from "@/app/actions/getAllSephoraBrands";
-import { PrismaClient, SephoraBrand, UltaBrand } from "@prisma/client";
+import { AllBrands, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 export async function scrapeBrands(formData: FieldValues) {
 	console.log(formData);
 
-	let data: UltaBrand[] | SephoraBrand[] = [];
+	let data: AllBrands[] = [];
 	if (formData.ulta) {
 		// data = await getAllUltaBrands();
 	} else if (formData.sephora) {

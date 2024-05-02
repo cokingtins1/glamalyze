@@ -13,7 +13,7 @@ export async function loadAllProducts(page: Page, loadAll: boolean) {
 			await new Promise<void>((resolve) => {
 				var totalHeight =
 					scrollDirection === "up" ? document.body.scrollHeight : 0;
-				var distance = 100;
+				var distance = 500;
 				var timer = setInterval(() => {
 					if (scrollDirection === "down") {
 						window.scrollBy(0, distance);
@@ -40,7 +40,7 @@ export async function loadAllProducts(page: Page, loadAll: boolean) {
 	}
 
 	await page.keyboard.down("End");
-	await delay(2000);
+	await delay(1000);
 
 	await page.keyboard.down("PageUp");
 

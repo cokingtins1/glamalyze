@@ -1,9 +1,9 @@
-import { UltaBrand } from "@prisma/client";
+import { AllBrands } from "@prisma/client";
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import { scrapeAllUltaBrands } from "../libs/Scraping Functions/Ulta-AllProducts/scrapeAllUltaBrands";
 
-export async function getAllUltaBrands(): Promise<UltaBrand[]> {
+export async function getAllUltaBrands(): Promise<AllBrands[]> {
 	puppeteer.use(StealthPlugin());
 
 	function delay(time: number) {

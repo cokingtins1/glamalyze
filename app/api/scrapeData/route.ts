@@ -35,17 +35,37 @@ export async function POST(req: Request) {
 	}
 	const { retailer, target, startIndex, endIndex, brandUrl } = result.data;
 
+	if (brandUrl && !brandUrl.includes(retailer.toLowerCase())) {
+		return NextResponse.json({
+			message: {
+				executionTime: `${(end - start) / 1000}`,
+				scrapeIndex: "",
+				errorMessage: "URL must be from the selected retailer",
+			},
+		});
+	}
+
 	console.log(result.data);
 
 	let scrapeIndex = "";
 
 	if (target === "products") {
 		let brands: AllBrands[] = [];
-		if (brandUrl) {
-			
-		} else {
-			brands = await getBrands(retailer, startIndex, endIndex);
+
+		brands = await getBrands(retailer, startIndex, endIndex, brandUrl);
+
+		if (brands.length === 0) {
+			end = new Date().getTime();
+
+			return NextResponse.json({
+				message: {
+					executionTime: `${(end - start) / 1000}`,
+					scrapeIndex: "",
+					errorMessage: "Invalid url",
+				},
+			});
 		}
+
 		console.dir(
 			brands.map((b) => b.brand_name),
 			{ maxArrayLength: null }
@@ -62,7 +82,7 @@ export async function POST(req: Request) {
 			});
 		}
 
-		// await runProductScraper(brands, retailer);
+		await runProductScraper(brands, retailer);
 	}
 
 	async function runProductScraper(brands: AllBrands[], retailer: string) {
@@ -97,11 +117,35 @@ export async function POST(req: Request) {
 						numBrands
 					);
 				if (productsToInsert.length > 0) {
+					console.log(
+						`Adding ${productsToInsert.length} products...`
+					);
 					await prisma.allProducts.createMany({
 						data: productsToInsert,
 					});
+
+					const productNames = productsToInsert
+						.map((p) => p.product_name)
+						.filter((name) => name !== null);
+					end = new Date().getTime();
+
+					await prisma.scrapeLog.create({
+						data: {
+							scrape_id: crypto.randomUUID(),
+							scrape_date: new Date(),
+							retailer: retailer,
+							target: target,
+							scrapeRange: productNames,
+							failedOn: null,
+							executionTime: (end - start) / 1000,
+						},
+					});
 				}
 				if (productsToUpdate.length > 0) {
+					console.log(
+						`Updating ${productsToInsert.length} products...`
+					);
+
 					for (const product of productsToUpdate) {
 						const {
 							sku_id,
@@ -112,6 +156,20 @@ export async function POST(req: Request) {
 						await prisma.allProducts.update({
 							where: { product_id: product.product_id },
 							data: updateData,
+						});
+
+						end = new Date().getTime();
+
+						await prisma.scrapeLog.create({
+							data: {
+								scrape_id: crypto.randomUUID(),
+								scrape_date: new Date(),
+								retailer: retailer,
+								target: target,
+								scrapeRange: [product.product_name || ""],
+								failedOn: null,
+								executionTime: (end - start) / 1000,
+							},
 						});
 					}
 				}
@@ -183,7 +241,7 @@ export async function POST(req: Request) {
 
 		const brandSkus = await prisma.allProducts.findMany({
 			where: { brand_id: brandId },
-			select: { sku_id: true },
+			select: { sku_id: true, product_id: true },
 		});
 
 		const existingSkus = brandSkus.map((p) => p.sku_id);
@@ -191,6 +249,15 @@ export async function POST(req: Request) {
 		const productsToUpdate = filteredArray.filter((p) =>
 			existingSkus.includes(p.sku_id)
 		);
+
+		productsToUpdate.forEach((p) => {
+			const matchingBrandSku = brandSkus.find(
+				(sku) => sku.sku_id === p.sku_id
+			);
+			if (matchingBrandSku) {
+				p.product_id = matchingBrandSku.product_id;
+			}
+		});
 
 		const productsToInsert = filteredArray.filter(
 			(p) => !existingSkus.includes(p.sku_id)

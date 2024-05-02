@@ -21,9 +21,9 @@ export default async function Page() {
 
 		const start = new Date().getTime();
 
-		const url = "https://www.sephora.com/brand/augustinus-bader ";
-		// const allProducts = await getAllSephoraProducts(url);
-		// console.dir(allProducts, { maxArrayLength: null });
+		const url = "https://www.sephora.com/brand/milk-makeup";
+		const allProducts = await getAllSephoraProducts(url, "");
+		console.dir(allProducts, { maxArrayLength: null });
 
 		const end = new Date().getTime();
 
@@ -111,29 +111,7 @@ export default async function Page() {
 		// 	}
 		// }
 
-		const brandId = "51048bae-6fd9-4ae2-b107-53e1ebeff9cc";
-		const dummyProducts = await prisma.allProducts.findMany({
-			where: { brand_id: brandId },
-		});
 
-		const brandSkus = await prisma.allProducts.findMany({
-			where: { brand_id: brandId },
-			select: { sku_id: true },
-		});
-
-		const existingSkus = brandSkus.map((p) => p.sku_id);
-
-		const productsToUpdate = dummyProducts.filter((p) =>
-			existingSkus.includes(p.sku_id)
-		);
-
-		const productsToInsert = dummyProducts.filter(
-			(p) => !existingSkus.includes(p.sku_id)
-		);
-
-		console.log("brandSkus", productsToUpdate.map(p => p.product_id));
-		console.log("update", productsToUpdate.length);
-		console.log("existing", dummyProducts.length);
 
 		// if (newSephora.length > 0) {
 		// 	// console.log(newSephora.length);

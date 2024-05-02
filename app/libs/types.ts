@@ -59,7 +59,18 @@ export const scrapeSchema = z.object({
 	target: z.string(),
 	startIndex: z.string().max(1),
 	endIndex: z.string().max(1),
-	brandUrl: z.string(),
+	brandUrl: z.string()
+	// .refine(
+
+	// 	(value) => {
+			
+	// 		return value === undefined || value.includes("ulta.com") || value.includes("sephora.com");
+	// 	},
+	// 	{
+	// 		message:
+	// 			"Brand URL must contain either 'ulta.com' or 'sephora.com'",
+	// 	}
+	// ),
 });
 
 export type TScrapeSchema = z.infer<typeof scrapeSchema>;
