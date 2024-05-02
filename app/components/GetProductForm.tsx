@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import SubmitForm from "./SubmitForm";
 import { querySchema, TQuerySchema } from "../libs/types";
 import { Input } from "@/components/ui/input";
@@ -17,29 +17,45 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Review, SephoraProduct } from "@prisma/client";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function GetProductForm() {
 	const [loading, setLoading] = useState<Boolean>(false);
 	const [reviews, setReviews] = useState<Review[] | null>(null);
 	const [metaData, setMetaData] = useState<SephoraProduct | null>(null);
 
+	const router = useRouter();
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+
 	const [resData, setResData] = useState("");
 
 	const form = useForm<TQuerySchema>({
 		resolver: zodResolver(querySchema),
 		defaultValues: {
-			ultaUrl: "",
-			sephoraUrl: "",
+			query: "",
 		},
 	});
 
+	const createQueryString = useCallback(
+		(name: string, value: string) => {
+			const params = new URLSearchParams(searchParams.toString());
+			params.set(name, value);
+
+			return params.toString();
+		},
+		[searchParams]
+	);
+
 	const onSubmit = async (data: TQuerySchema) => {
 		const start = new Date().getTime();
+
+		router.push("/" + "?" + createQueryString("search", data.query));
+
 		const res = await fetch("/api/submitQuery", {
 			method: "POST",
 			body: JSON.stringify({
-				ultaUrl: data.ultaUrl,
-				sephoraUrl: data.sephoraUrl,
+				query: data.query,
 			}),
 			headers: {
 				"Content-Type": "application/json",
@@ -58,7 +74,7 @@ export default function GetProductForm() {
 		if (responseData.errors) {
 			const errors = responseData.errors;
 			if (errors.url) {
-				form.setError("ultaUrl", {
+				form.setError("query", {
 					type: "server",
 					message: errors.url,
 				});
@@ -74,40 +90,26 @@ export default function GetProductForm() {
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 				<FormField
 					control={form.control}
-					name="ultaUrl"
+					name="query"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Ulta URL</FormLabel>
 							<FormControl>
 								<Input
-									placeholder="Enter Ulta URL"
+									placeholder="Search for products"
 									{...field}
+									className="bg-white"
 								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
-				<FormField
-					control={form.control}
-					name="sephoraUrl"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Sephora URL</FormLabel>
-							<FormControl>
-								<Input
-									placeholder="Enter Sephora URL"
-									{...field}
-								/>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
+
 				<SubmitForm
 					disabled={!form.formState.isDirty}
 					pending={form.formState.isSubmitting}
-					pendingText={["Getting Reviews...", "Get Reviews"]}
+					pendingText={["Searching for Products...", "Search"]}
 				/>
 			</form>
 		</Form>

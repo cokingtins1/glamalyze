@@ -1,3 +1,4 @@
+import { AllProducts } from "@prisma/client";
 import { z } from "zod";
 
 export type OptionProps = {
@@ -48,8 +49,7 @@ export type AllProductsSelectors = {
 };
 
 export const querySchema = z.object({
-	ultaUrl: z.string().min(2, { message: "Please enter a valid URL" }),
-	sephoraUrl: z.string().min(2, { message: "Please enter a valid URL" }),
+	query: z.string().min(2, { message: "Please enter a valid URL" }),
 });
 
 export type TQuerySchema = z.infer<typeof querySchema>;
@@ -59,11 +59,11 @@ export const scrapeSchema = z.object({
 	target: z.string(),
 	startIndex: z.string().max(1),
 	endIndex: z.string().max(1),
-	brandUrl: z.string()
+	brandUrl: z.string(),
 	// .refine(
 
 	// 	(value) => {
-			
+
 	// 		return value === undefined || value.includes("ulta.com") || value.includes("sephora.com");
 	// 	},
 	// 	{
@@ -74,3 +74,12 @@ export const scrapeSchema = z.object({
 });
 
 export type TScrapeSchema = z.infer<typeof scrapeSchema>;
+
+export type SearchParams = { [key: string]: string | string[] | undefined };
+
+export type SearchResults = {
+	data: AllProducts & {
+		product_name_similarity_score: number | null;
+		product_name_word_similarity_score: number | null;
+	};
+};

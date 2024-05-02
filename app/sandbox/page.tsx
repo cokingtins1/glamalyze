@@ -21,7 +21,7 @@ export default async function Page() {
 
 		const start = new Date().getTime();
 
-		const url = "https://www.sephora.com/brand/milk-makeup";
+		const url = "https://www.sephora.com/brand/gisou";
 		const allProducts = await getAllSephoraProducts(url, "");
 		console.dir(allProducts, { maxArrayLength: null });
 

@@ -1,73 +1,52 @@
-import { PrismaClient } from "@prisma/client";
+import { AllProducts, PrismaClient } from "@prisma/client";
 import NewQueryDrawer from "./components/NewQueryDrawer";
 import DataDisplay from "./components/Ulta/DataDisplay";
 import NextId from "./components/Data Validation/NextId";
 import { Suspense } from "react";
 import DisplaySkeleton from "./components/Loading Skeletons/DisplaySkeleton";
+import { SearchParams, SearchResults } from "./libs/types";
+import Query from "./libs/QueryFunctions/query";
 
-export default async function Home() {
-	//https://www.ulta.com/p/cult-classic-purifying-face-cleanser-xlsImpprod18731041?sku=2532485
-	//https://www.sephora.com/product/tula-skincare-the-cult-classic-purifying-face-cleanser-P475182?skuId=2500684&icid2=products%20grid:p475182:product
+const prisma = new PrismaClient();
+export default async function Home({
+	params,
+	searchParams,
+}: {
+	params: { slug: string };
+	searchParams: SearchParams;
+}) {
+	const ultaData = "";
+	const sephoraData = "";
 
-	const prisma = new PrismaClient();
+	let queryResults: AllProducts[] = [];
 
-	const productIdData = await prisma.product.findMany({
-		select: {
-			product_id: true,
-		},
-	});
-
-	const productIds = productIdData.map((id) => id.product_id);
-	const selectedProduct = productIds[0];
-
-	let ultaData, sephoraData;
-
-	if (selectedProduct) {
-		ultaData = await prisma.ultaProduct.findUnique({
-			where: {
-				product_id: selectedProduct,
-			},
-		});
-
-		sephoraData = await prisma.sephoraProduct.findUnique({
-			where: {
-				product_id: selectedProduct,
-			},
-		});
+	if (searchParams.search) {
+		const query = searchParams.search as string;
+		queryResults = await Query(query);
 	}
-	const ultaReviewsData = await prisma.review.findMany({
-		where: {
-			product_id: selectedProduct,
-			retailer_id: "Ulta",
-		},
-	});
-
-	const sephoraReviewsData = await prisma.review.findMany({
-		where: {
-			product_id: selectedProduct,
-			retailer_id: "Sephora",
-		},
-	});
 
 	return (
 		<main className="flex flex-col items-start justify-center">
-			<NewQueryDrawer />
+			<NewQueryDrawer
+				searchParams={searchParams}
+				queryResults={queryResults}
+			/>
 			{/* <NextId /> */}
 			<section className="grid grid-cols-2 gap-4 w-full mt-12">
 				{ultaData && sephoraData && (
 					<>
 						<Suspense fallback={<DisplaySkeleton />}>
-							<DataDisplay
+							{/* <DataDisplay
 								data={ultaData}
 								reviewsData={ultaReviewsData}
-							/>
+							/> */}
 						</Suspense>
 
 						<Suspense fallback={<DisplaySkeleton />}>
-							<DataDisplay
+							{/* <DataDisplay
 								data={sephoraData}
 								reviewsData={sephoraReviewsData}
-							/>
+							/> */}
 						</Suspense>
 					</>
 				)}
