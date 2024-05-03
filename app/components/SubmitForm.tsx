@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ButtonProps } from "@/components/ui/button";
+import Spinner from "./Loading Skeletons/Spinner";
 
 type SubmitFormProps = ButtonProps & {
 	pending: boolean;
@@ -20,8 +21,9 @@ export default function SubmitForm({
 			type="submit"
 			disabled={pending || disabled}
 			{...props}
-			className="justify-self-center w-[300px]"
+			className="justify-self-center w-full"
 		>
+			{pending && <Spinner />}
 			{pending ? pendingText[0] : pendingText[1]}
 		</Button>
 	);

@@ -3,6 +3,7 @@ import { getSephoraData } from "@/app/actions/getSephoraData";
 import { querySchema } from "@/app/libs/types";
 import { NextResponse } from "next/server";
 import { insertData } from "@/app/actions/prisma/insertData";
+import Query from '@/app/libs/QueryFunctions/query';
 
 export async function POST(req: Request) {
 	const start = new Date().getTime();
@@ -25,6 +26,7 @@ export async function POST(req: Request) {
 	}
 
 	const end = new Date().getTime();
+	// await Query(result.data.query)
 	console.log(`Execution time in route.ts: ${(end - start) / 1000} seconds`);
 
 	return NextResponse.json(

@@ -26,6 +26,7 @@ export default function Stars({
 
 	return (
 		<div className="flex items-center">
+			
 			<div className="whitespace-nowrap flex items-center">
 				{rating &&
 					starIndexes.map((index) =>
@@ -67,3 +68,5 @@ export default function Stars({
 		</div>
 	);
 }
+
+

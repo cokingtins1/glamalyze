@@ -13,16 +13,19 @@ import { SearchParams, SearchResults } from "../libs/types";
 import QueryResultCard from "./QueryResultCard";
 import { AllProducts } from "@prisma/client";
 import { Suspense } from "react";
+import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
+import Query from "../libs/QueryFunctions/query";
+import QueryResults from "./QueryResults";
 
 type NewQueryDrawerProps = {
 	searchParams: SearchParams;
-	queryResults: AllProducts[];
 };
 
 export default async function NewQueryDrawer({
 	searchParams,
-	queryResults,
 }: NewQueryDrawerProps) {
+
+	const keyString = `search${searchParams}`
 	return (
 		<Sheet>
 			<SheetTrigger>New Search</SheetTrigger>
@@ -31,12 +34,9 @@ export default async function NewQueryDrawer({
 					<SheetTitle>New Search</SheetTitle>
 				</SheetHeader>
 				<GetProductForm />
-				<div className="mt-4 space-y-4">
-					{queryResults.length > 0 &&
-						queryResults.map((result, index) => (
-							<QueryResultCard key={index} data={result} />
-						))}
-				</div>
+				<Suspense key={keyString} fallback={<DisplaySkeleton />}>
+					<QueryResults searchParams={searchParams} />
+				</Suspense>
 			</SheetContent>
 		</Sheet>
 	);

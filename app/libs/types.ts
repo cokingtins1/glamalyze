@@ -49,7 +49,7 @@ export type AllProductsSelectors = {
 };
 
 export const querySchema = z.object({
-	query: z.string().min(2, { message: "Please enter a valid URL" }),
+	query: z.string().min(1, { message: "Please enter a valid URL" }),
 });
 
 export type TQuerySchema = z.infer<typeof querySchema>;
