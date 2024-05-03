@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SubmitForm from "./SubmitForm";
 import { querySchema, TQuerySchema } from "../libs/types";
 import { Input } from "@/components/ui/input";
@@ -16,11 +16,15 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { Review, SephoraProduct } from "@prisma/client";
+import { AllProducts, Review, SephoraProduct } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import QueryResultCard from "./QueryResultCard";
+import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
+import QueryResults from "./QueryResults";
+import Query from "../libs/QueryFunctions/query";
 
 export default function GetProductForm() {
-
+	const [data, setData] = useState<AllProducts[]>([]);
 
 	const router = useRouter();
 	const pathname = usePathname();
@@ -55,6 +59,12 @@ export default function GetProductForm() {
 				"Content-Type": "application/json",
 			},
 		});
+
+		if (res.ok) {
+			const responseData = await res.json();
+			console.log("ResponseData", responseData);
+			setData(responseData.success.data);
+		}
 	};
 
 	return (
@@ -89,6 +99,11 @@ export default function GetProductForm() {
 					/>
 				</form>
 			</Form>
+
+			<QueryResults
+				isSubmitting={form.formState.isSubmitting}
+				data={data}
+			/>
 		</>
 	);
 }

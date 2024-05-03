@@ -6,22 +6,28 @@ import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
 import QueryResultCard from "./QueryResultCard";
 
 type Props = {
-	searchParams: SearchParams;
+	isSubmitting: boolean;
+	data: AllProducts[];
 };
 
-export default async function QueryResults({ searchParams }: Props) {
-	let queryResults: AllProducts[] = [];
-
-	if (searchParams.search) {
-		const query = searchParams.search as string;
-		queryResults = await Query(query);
-	}
+export default function QueryResults({ isSubmitting, data }: Props) {
 	return (
-		<div className="mt-4 space-y-4">
-			{queryResults.length > 0 &&
-				queryResults.map((result, index) => (
-					<QueryResultCard key={index} data={result} />
-				))}
-		</div>
+		<>
+			{isSubmitting && (
+				<div className="my-4 space-y-4">
+					{Array.from({ length: 5 }).map((_, index) => (
+						<DisplaySkeleton key={index} />
+					))}
+				</div>
+			)}
+
+			{!isSubmitting && data.length > 0 && (
+				<div className="mt-4 space-y-4">
+					{data.map((result, index) => (
+						<QueryResultCard key={index} data={result} />
+					))}
+				</div>
+			)}
+		</>
 	);
 }

@@ -34,9 +34,9 @@ export default async function NewQueryDrawer({
 					<SheetTitle>New Search</SheetTitle>
 				</SheetHeader>
 				<GetProductForm />
-				<Suspense key={keyString} fallback={<DisplaySkeleton />}>
+				{/* <Suspense key={keyString} fallback={<DisplaySkeleton />}>
 					<QueryResults searchParams={searchParams} />
-				</Suspense>
+				</Suspense> */}
 			</SheetContent>
 		</Sheet>
 	);

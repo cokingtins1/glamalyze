@@ -16,7 +16,7 @@ type QueryResultCardProps = {
 	data: AllProducts;
 };
 
-export default async function QueryResultCard({ data }: QueryResultCardProps) {
+export default function QueryResultCard({ data }: QueryResultCardProps) {
 	function returnImage(src: string, retailer: string) {
 		let imageSrc: string | StaticImageData = "";
 		if (src.includes("ulta.com") || src.includes("sephora.com")) {
