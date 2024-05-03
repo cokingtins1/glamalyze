@@ -15,7 +15,7 @@ type QueryResultCardProps = {
 	data: AllProducts;
 };
 
-export default function QueryResultCard({ data }: QueryResultCardProps) {
+export default async function QueryResultCard({ data }: QueryResultCardProps) {
 	const imageSrc =
 		data.product_image_url[0].includes("ulta.com") ||
 		data.product_image_url[0].includes("sephora.com")

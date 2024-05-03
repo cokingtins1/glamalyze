@@ -17,20 +17,34 @@ import {
 const prisma = new PrismaClient().$extends(withPgTrgm({ logQueries: true }));
 
 export default async function Query(query: string) {
-	// const result =
-	// 	await prisma.$queryRaw`SELECT * FROM "AllProducts" WHERE "product_name" LIKE '%${query}%' `;
+	let threshold = 0.45;
 
-	// const result =
-	// 	await prisma.$queryRaw`SELECT * FROM "AllProducts" WHERE levenshtein("product_name",  ${query})`;
-
-	const result = await prisma.allProducts.similarity({
+	let result = await prisma.allProducts.similarity({
 		query: {
 			product_name: {
 				similarity: { text: query, order: "desc" },
-				word_similarity: { text: query, threshold: { gt: 0.2 } },
+				word_similarity: { text: query, threshold: { gt: threshold } },
 			},
 		},
 	});
+
+	while (result.length < 3 || threshold <= 0) {
+		threshold = threshold - 0.05;
+		result = await prisma.allProducts.similarity({
+			query: {
+				product_name: {
+					similarity: { text: query, order: "desc" },
+					word_similarity: {
+						text: query,
+						threshold: { gt: threshold },
+					},
+				},
+			},
+		});
+	}
+
+	console.log("threshold", threshold);
+	console.log("results.length", result.length);
 
 	const mappedResults = result.map((result) => {
 		const {

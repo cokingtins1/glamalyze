@@ -1,4 +1,4 @@
-import { SephoraBrand } from "@prisma/client";
+import { AllBrands } from "@prisma/client";
 import { Page } from "puppeteer";
 
 export async function scrapeAllSephoraBrands(page: Page) {
@@ -11,7 +11,7 @@ export async function scrapeAllSephoraBrands(page: Page) {
 
 		if (brandSections.length === 0) return [];
 
-		const result: SephoraBrand[] = [];
+		const result: AllBrands[] = [];
 		brandSections.forEach((section) => {
 			const brandSection = section.querySelector("ul");
 			if (!brandSection) return;
@@ -40,6 +40,7 @@ export async function scrapeAllSephoraBrands(page: Page) {
 					brand_page_link: `https://www.sephora.com${brandPageLink}`,
 					created_at: new Date(),
 					updated_at: new Date(),
+					retailer_id: "Sephora"
 				});
 			});
 		});

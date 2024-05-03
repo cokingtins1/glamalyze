@@ -6,10 +6,15 @@ type Rating = {
 	rating: number | null | undefined;
 	reverse?: boolean | undefined;
 	searchResult?: boolean | undefined;
-	reviewNum: number | undefined | null
+	reviewNum: number | undefined | null;
 };
 
-export default function Stars({ rating, reverse, searchResult, reviewNum }: Rating) {
+export default function Stars({
+	rating,
+	reverse,
+	searchResult,
+	reviewNum,
+}: Rating) {
 	if (!rating) return;
 
 	const ratingNum = Math.ceil(rating);
@@ -20,7 +25,7 @@ export default function Stars({ rating, reverse, searchResult, reviewNum }: Rati
 		: Array.from({ length: 5 }, (_, i) => i);
 
 	return (
-		<div className='flex items-center'>
+		<div className="flex items-center">
 			<div className="whitespace-nowrap flex items-center">
 				{rating &&
 					starIndexes.map((index) =>
@@ -46,13 +51,19 @@ export default function Stars({ rating, reverse, searchResult, reviewNum }: Rati
 							)
 						) : (
 							<StarBorderIcon
+								style={{
+									fontSize: `${searchResult ? "1rem" : ""}`,
+								}}
 								className={`${reverse && "opacity-0"}`}
 								key={index}
 							/>
 						)
 					)}
 			</div>
-			<p style={{fontSize: "0.625rem"}} className='pl-1'>{`(${reviewNum})`}</p>
+			<p
+				style={{ fontSize: "0.625rem" }}
+				className="pl-1"
+			>{`(${reviewNum})`}</p>
 		</div>
 	);
 }
