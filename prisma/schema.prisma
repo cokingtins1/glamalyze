@@ -18,115 +18,19 @@ model User {
   billing_period_start DateTime? @default(now()) @db.Timestamptz(6)
   queries_in_period    Int?      @default(0)
   allowedqueries       Int?      @default(0)
-  Query                Query[]
 }
 
 model Retailer {
-  retailer_id    String           @id @default(uuid())
-  Query          Query[]
-  Review         Review[]
-  Reviewer       Reviewer[]
-  SephoraProduct SephoraProduct[]
-  UltaProduct    UltaProduct[]
-  AllProducts    AllProducts[]
-  AllBrands      AllBrands[]
-}
+  retailer_id String      @id @default(uuid())
+  AllBrands   AllBrands[]
 
-model Query {
-  query_id    String   @id @default(uuid())
-  created_at  DateTime @default(now()) @db.Timestamptz(6)
-  user_id     String
-  filters     String[]
-  product_id  String?
-  retailer_id String
-  retailer    Retailer @relation(fields: [retailer_id], references: [retailer_id])
-  queryBy     User     @relation(fields: [user_id], references: [user_id])
-  Review      Review[]
-}
+  UltaProduct  UltaProduct[]
+  UltaReview   UltaReview[]
+  UltaReviewer UltaReviewer[]
 
-model UltaProduct {
-  product_id          String      @id
-  price               Int?
-  avg_rating          Float?
-  percent_recommended Int?
-  product_name        String?
-  review_histogram    Int[]
-  sku_id              String?     @unique
-  total_reviews       Int?
-  brand_name          String?
-  brand               AllBrands   @relation(fields: [brand_id], references: [brand_id])
-  retailer_id         String
-  product             AllProducts @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
-  retailer            Retailer    @relation(fields: [retailer_id], references: [retailer_id])
-  queries             String[]    @default([""])
-  brand_id            String
-}
-
-model SephoraProduct {
-  product_id          String      @id
-  price               Int?
-  avg_rating          Float?
-  percent_recommended Int?
-  product_name        String?
-  review_histogram    Int[]
-  sku_id              String?     @unique
-  total_reviews       Int?
-  brand_name          String?
-  brand               AllBrands   @relation(fields: [brand_id], references: [brand_id])
-  retailer_id         String
-  product             AllProducts @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
-  retailer            Retailer    @relation(fields: [retailer_id], references: [retailer_id])
-  queries             String[]    @default([""])
-  brand_id            String
-}
-
-model Review {
-  review_id       String      @id @default(uuid())
-  product_id      String
-  retailer_id     String
-  review_rating   Int?
-  verified_buyer  Boolean?
-  up_votes        Int?
-  down_votes      Int?
-  review_text     String?
-  review_headline String?
-  reviewer_id     String
-  reviewer_name   String?
-  review_date     DateTime?   @db.Timestamptz(6)
-  query_id        String
-  product         AllProducts @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
-  query           Query       @relation(fields: [query_id], references: [query_id])
-  retailer        Retailer    @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
-  reviewer        Reviewer    @relation(fields: [reviewer_id], references: [reviewer_id])
-}
-
-model Reviewer {
-  reviewer_id   String   @id @default(uuid())
-  reviewer_name String?
-  retailer_id   String
-  Review        Review[]
-  retailer      Retailer @relation(fields: [retailer_id], references: [retailer_id])
-}
-
-model AllProducts {
-  product_id        String           @id @default(uuid())
-  created_at        DateTime?        @default(now()) @db.Timestamptz(6)
-  updated_at        DateTime?        @updatedAt @db.Timestamptz(6)
-  product_name      String?
-  product_image_url String[]
-  retailer          Retailer         @relation(fields: [retailer_id], references: [retailer_id])
-  retailer_id       String
-  brand             AllBrands        @relation(fields: [brand_id], references: [brand_id])
-  brand_id          String
-  brand_name        String?
-  product_price     Float[]
-  sku_id            String?
-  avg_rating        Float?
-  total_reviews     Float?
-  page_link         String?
-  UltaProduct       UltaProduct[]
-  SephoraProduct    SephoraProduct[]
-  Review            Review[]
+  SephoraProduct  SephoraProduct[]
+  SephoraReview   SephoraReview[]
+  SephoraReviewer SephoraReviewer[]
 }
 
 model AllBrands {
@@ -137,9 +41,107 @@ model AllBrands {
   retailer_id     String
   created_at      DateTime         @default(now()) @db.Timestamptz(6)
   updated_at      DateTime         @updatedAt @db.Timestamptz(6)
-  AllProducts     AllProducts[]
   UltaProduct     UltaProduct[]
   SephoraProduct  SephoraProduct[]
+}
+
+model UltaProduct {
+  product_id          String   @id @default(uuid())
+  created_at          DateTime @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime @updatedAt @db.Timestamptz(6)
+  product_name        String
+  product_image_url   String[]
+  retailer_id         String
+  brand_id            String
+  brand_name          String
+  review_histogram    Int[]
+  product_price       Float[]
+  sku_id              String
+  avg_rating          Float
+  total_reviews       Float
+  page_link           String
+  percent_recommended Int?
+
+  retailer   Retailer     @relation(fields: [retailer_id], references: [retailer_id])
+  brand      AllBrands    @relation(fields: [brand_id], references: [brand_id])
+  UltaReview UltaReview[]
+}
+
+model UltaReview {
+  review_id       String      @id @default(uuid())
+  product_id      String
+  product         UltaProduct @relation(fields: [product_id], references: [product_id])
+  retailer_id     String
+  review_rating   Int?
+  verified_buyer  Boolean?
+  up_votes        Int?
+  down_votes      Int?
+  review_text     String?
+  review_headline String?
+  reviewer_id     String
+  reviewer_name   String?
+  review_date     DateTime?   @db.Timestamptz(6)
+
+  retailer Retailer     @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
+  reviewer UltaReviewer @relation(fields: [reviewer_id], references: [reviewer_id])
+}
+
+model UltaReviewer {
+  reviewer_id         String       @id @default(uuid())
+  reviewer_name       String?
+  Review              UltaReview[]
+  Retailer            Retailer?    @relation(fields: [retailerRetailer_id], references: [retailer_id])
+  retailerRetailer_id String?
+}
+
+model SephoraProduct {
+  product_id          String   @id @default(uuid())
+  created_at          DateTime @default(now()) @db.Timestamptz(6)
+  updated_at          DateTime @updatedAt @db.Timestamptz(6)
+  product_name        String
+  product_image_url   String[]
+  retailer_id         String
+  brand_id            String
+  brand_name          String
+  review_histogram    Int[]
+  product_price       Float[]
+  sku_id              String
+  avg_rating          Float
+  total_reviews       Float
+  page_link           String
+  percent_recommended Int?
+
+  retailer      Retailer        @relation(fields: [retailer_id], references: [retailer_id])
+  brand         AllBrands       @relation(fields: [brand_id], references: [brand_id])
+  SephoraReview SephoraReview[]
+}
+
+model SephoraReview {
+  review_id       String         @id @default(uuid())
+  product_id      String
+  product         SephoraProduct @relation(fields: [product_id], references: [product_id])
+  retailer_id     String
+  review_rating   Int?
+  verified_buyer  Boolean?
+  up_votes        Int?
+  down_votes      Int?
+  review_text     String?
+  review_headline String?
+  reviewer_id     String
+  reviewer_name   String?
+  review_date     DateTime?      @db.Timestamptz(6)
+
+  retailer Retailer @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
+
+  SephoraReviewer SephoraReviewer? @relation(fields: [reviewer_id], references: [reviewer_id])
+}
+
+model SephoraReviewer {
+  reviewer_id         String          @id @default(uuid())
+  reviewer_name       String?
+  Review              SephoraReview[]
+  Retailer            Retailer?       @relation(fields: [retailerRetailer_id], references: [retailer_id])
+  retailerRetailer_id String?
 }
 
 model ScrapeLog {
@@ -151,3 +153,54 @@ model ScrapeLog {
   failedOn      String?
   executionTime Int?
 }
+
+// model Query {
+//   query_id    String   @id @default(uuid())
+//   created_at  DateTime @default(now()) @db.Timestamptz(6)
+//   user_id     String
+//   filters     String[]
+//   product_id  String?
+//   retailer_id String
+//   retailer    Retailer @relation(fields: [retailer_id], references: [retailer_id])
+//   queryBy     User     @relation(fields: [user_id], references: [user_id])
+//   Review      Review[]
+// }
+
+// model SephoraProduct {
+//   product_id          String      @id
+//   price               Int?
+//   avg_rating          Float?
+//   percent_recommended Int?
+//   product_name        String?
+//   review_histogram    Int[]
+//   sku_id              String?     @unique
+//   total_reviews       Int?
+//   brand_name          String?
+//   brand               AllBrands   @relation(fields: [brand_id], references: [brand_id])
+//   retailer_id         String
+//   product             AllProducts @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
+//   retailer            Retailer    @relation(fields: [retailer_id], references: [retailer_id])
+//   queries             String[]    @default([""])
+//   brand_id            String
+// }
+
+// model AllProducts {
+//   product_id        String           @id @default(uuid())
+//   created_at        DateTime?        @default(now()) @db.Timestamptz(6)
+//   updated_at        DateTime?        @updatedAt @db.Timestamptz(6)
+//   product_name      String?
+//   product_image_url String[]
+//   retailer          Retailer         @relation(fields: [retailer_id], references: [retailer_id])
+//   retailer_id       String
+//   brand             AllBrands        @relation(fields: [brand_id], references: [brand_id])
+//   brand_id          String
+//   brand_name        String?
+//   product_price     Float[]
+//   sku_id            String?
+//   avg_rating        Float?
+//   total_reviews     Float?
+//   page_link         String?
+//   UltaProduct       UltaProduct[]
+//   SephoraProduct    SephoraProduct[]
+//   Review            Review[]
+// }

@@ -1,35 +1,70 @@
 import { Button } from "@/components/ui/button";
 import { productSeeds } from "@/lib/seeding/seedingFuncs";
 import { randomUserName } from "@/lib/utils";
-import { AllProducts, PrismaClient, Review } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { randomInt } from "crypto";
 import dayjs from "dayjs";
 import { generate } from "random-words";
 import React from "react";
-import { getAllSephoraProducts } from "../actions/getAllSephoraProducts";
+import { getAllSephoraProducts } from "../../actions/getAllSephoraProducts";
 import elements from "@/app/libs/JSON/elemets.json";
-import { AllProductsSelectors } from "../libs/types";
-import { getAllUltaProducts } from "../actions/getAllUltaProducts";
-import { getAllUltaBrands } from "../actions/getAllUltaBrands";
-import { getAllSephoraBrands } from "../actions/getAllSephoraBrands";
+import { AllProducts, AllProductsSelectors } from "../../libs/types";
+import { getAllUltaProducts } from "../../actions/getAllUltaProducts";
+import { getAllUltaBrands } from "../../actions/getAllUltaBrands";
+import { getAllSephoraBrands } from "../../actions/getAllSephoraBrands";
+import { withPgTrgm } from "prisma-extension-pg-trgm";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
+const prisma = new PrismaClient().$extends(withPgTrgm());
 
 export default async function Page() {
 	async function handleSubmit() {
 		"use server";
 
-		const start = new Date().getTime();
+		console.log("running query...");
+		const dupeFromBrand: AllProducts[] = await prisma.$queryRaw`
+		SELECT LOWER(brand_name) AS brand_name, COUNT(*) AS num_duplicates
+		FROM "AllBrands"
+		GROUP BY LOWER(brand_name)
+		HAVING COUNT(*) > 1;
+		`;
 
-		const url = "https://www.sephora.com/brand/gisou";
-		const allProducts = await getAllSephoraProducts(url, "");
-		console.dir(allProducts, { maxArrayLength: null });
+		// const dupeFromProd: AllProducts[] = await prisma.$queryRaw`
+		// 	SELECT DISTINCT ts.brand_name
+		// 	FROM "UltaProduct" tu
+		// 	JOIN "SephoraProduct" ts on LOWER(ts.brand_name) = LOWER(tu.brand_name)
+		// 	ORDER BY ts.brand_name
+		// `;
 
-		const end = new Date().getTime();
+		//common brand name ? => fuzzy search on product_name
 
-		console.log(
-			`Execution time in route.ts: ${(end - start) / 1000} seconds`
-		);
+		const uuidArray = Array.from({ length: 121 })
+			.map(() => {
+				return {
+					id: crypto.randomUUID(),
+				};
+			})
+			.map((val) => val.id);
+
+		console.dir(uuidArray, { maxArrayLength: null });
+		// const brandNames1 = dupeFromBrand?.map((obj) => obj.brand_name);
+
+		// console.dir(brandNames1, { maxArrayLength: null });
+		// console.dir(brandNames2, { maxArrayLength: null });
+
+		// const unique = [...brandNames1, ...brandNames2].filter(
+		// 	(brandName, index, array) => array.indexOf(brandName) === index
+		// );
+
+		// console.log(result);
+		// console.log(result.length)
+
+		// console.dir(same, { maxArrayLength: null });
+		// console.log(same.length);
+
+		// const url = "https://www.sephora.com/brand/gisou";
+		// const allProducts = await getAllSephoraProducts(url, "");
+		// console.dir(allProducts, { maxArrayLength: null });
 
 		// console.dir(allProducts, { maxArrayLength: null });
 
@@ -111,8 +146,6 @@ export default async function Page() {
 		// 	}
 		// }
 
-
-
 		// if (newSephora.length > 0) {
 		// 	// console.log(newSephora.length);
 		// 	// log(newSephora);
@@ -165,6 +198,39 @@ export default async function Page() {
 		// const search = "Woods Trilogy Set";
 		// console.log(data.some((item) => item.product_name === search));
 	}
+
+	// const same: AllProducts[] = await prisma.$queryRaw`
+	// 		SELECT sephora.*, ulta.*, sephora.product_name AS sephora_product, ulta.product_name AS ulta_product
+	// 		FROM "AllProducts" sephora
+	// 		JOIN "AllProducts" ulta ON sephora.product_name LIKE CONCAT('%', ulta.product_name, '%')
+	// 		WHERE sephora.retailer_id = 'Sephora'
+	// 		AND ulta.retailer_id = 'Ulta'
+	// `;
+
+	// 	const same: AllProducts[] = await prisma.$queryRaw`
+	// 		SELECT sephora.*, ulta.*, sephora.product_name AS sephora_product, ulta.product_name AS ulta_product
+	// 		FROM "AllProducts" sephora
+	// 		JOIN "AllProducts" ulta ON similarity(sephora.product_name, ulta.product_name) > 0.45
+	// 		WHERE sephora.retailer_id = 'Sephora'
+	// 		AND ulta.retailer_id = 'Ulta'
+	// `;
+
+	// const same: AllProducts[] = await prisma.$queryRaw`
+	// 		SELECT *
+	// 		FROM "AllProducts" ta
+	// 		JOIN "AllProducts" tb
+	// 			ON ta.product_name = tb.product_name
+	// 			OR similarity(ta.product_name, tb.product_name) > 0.2
+	// 		WHERE ta.retailer_id = 'Sephora'
+	// 		AND tb.retailer_id = 'Ulta'
+	// 		ORDER BY ta.product_name = tb.product_name DESC, similarity(ta.product_name, tb.product_name) DESC
+	// 		LIMIT 3
+	// `;
+
+	// console.log(same.slice(0, 5));
+	// console.log(same.length);
+
+	// console.dir(same, { maxArrayLength: null });
 
 	return (
 		<form action={handleSubmit}>

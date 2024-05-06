@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
-import { SearchParams } from "../libs/types";
+import { AllProducts, SearchParams } from "../libs/types";
 import Query from "../libs/QueryFunctions/query";
-import { AllProducts } from "@prisma/client";
 import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
 import QueryResultCard from "./QueryResultCard";
 

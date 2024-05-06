@@ -1,4 +1,4 @@
-import { AllProducts, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import NewQueryDrawer from "./components/NewQueryDrawer";
 import DataDisplay from "./components/Ulta/DataDisplay";
 import NextId from "./components/Data Validation/NextId";

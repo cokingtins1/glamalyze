@@ -1,14 +1,7 @@
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
-import { AllProducts } from "@prisma/client";
+import { Card } from "@/components/ui/card";
 import Image, { StaticImageData } from "next/image";
 import Stars from "./Review/Stars";
-import { SearchResults } from "../libs/types";
+import { AllProducts } from "../libs/types";
 import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
 
@@ -29,7 +22,7 @@ export default function QueryResultCard({ data }: QueryResultCardProps) {
 	}
 
 	return (
-		<Card>
+		<Card className="hover:shadow hover:shadow-slate-500 hover:cursor-pointer">
 			<div className="flex p-2">
 				<div className="size-[100px] relative">
 					<Image

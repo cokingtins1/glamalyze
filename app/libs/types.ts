@@ -1,4 +1,4 @@
-import { AllProducts } from "@prisma/client";
+import { SephoraProduct, UltaProduct } from "@prisma/client";
 import { z } from "zod";
 
 export type OptionProps = {
@@ -83,3 +83,5 @@ export type SearchResults = {
 		product_name_word_similarity_score: number | null;
 	};
 };
+
+export type AllProducts = UltaProduct | SephoraProduct;

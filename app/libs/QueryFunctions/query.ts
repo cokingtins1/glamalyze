@@ -1,20 +1,7 @@
-import { AllProducts, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { withPgTrgm } from "prisma-extension-pg-trgm";
-import { SearchResults } from "../types";
 
-import {
-	SimilarityQuery,
-	SimilarityResult,
-	isOperation,
-	operations,
-	isComparator,
-	comparators,
-	isOrder,
-	orders,
-	SimilarityArgs,
-} from "@/app/libs/pg_extension_types";
-
-const prisma = new PrismaClient().$extends(withPgTrgm({ logQueries: true }));
+const prisma = new PrismaClient().$extends(withPgTrgm({ logQueries: false }));
 
 export default async function Query(query: string) {
 	let threshold = 0.45;
@@ -119,7 +106,7 @@ export default async function Query(query: string) {
 		},
 	];
 
-	let result = await prisma.allProducts.similarity({
+	let ultaResult = await prisma.ultaProduct.similarity({
 		query: {
 			product_name: {
 				similarity: { text: query, order: "desc" },
@@ -128,20 +115,33 @@ export default async function Query(query: string) {
 		},
 	});
 
-	while (result.length < 3 || threshold <= 0.05) {
-		threshold = threshold - 0.05;
-		result = await prisma.allProducts.similarity({
-			query: {
-				product_name: {
-					similarity: { text: query, order: "desc" },
-					word_similarity: {
-						text: query,
-						threshold: { gt: threshold },
-					},
-				},
+	let sephoraResult = await prisma.sephoraProduct.similarity({
+		query: {
+			product_name: {
+				similarity: { text: query, order: "desc" },
+				word_similarity: { text: query, threshold: { gt: threshold } },
 			},
-		});
-	}
+		},
+	});
+
+	// while (result.length <= 3 || threshold <= 0.05) {
+	// 	threshold = threshold - 0.05;
+	// 	result = await prisma.allProducts.similarity({
+	// 		query: {
+	// 			product_name: {
+	// 				similarity: { text: query, order: "desc" },
+	// 				word_similarity: {
+	// 					text: query,
+	// 					threshold: { gt: threshold },
+	// 				},
+	// 			},
+	// 		},
+	// 	});
+	// }
+
+
+
+	// table of ulta product_names == sephora product_names
 
 	console.log("threshold", threshold);
 	console.log("results.length", result.length);

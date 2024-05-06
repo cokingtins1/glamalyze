@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { getAllSephoraProducts } from "../actions/getAllSephoraProducts";
+import { getAllSephoraProducts } from "../../actions/getAllSephoraProducts";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -28,8 +28,8 @@ export default function Page() {
 		// 		return false;
 		// 	});
 
-		const ultaBrands = await prisma.ultaBrand.findMany();
-		const sephoraBrands = await prisma.sephoraBrand.findMany();
+		const ultaBrands = await prisma.ultaProduct.findMany();
+		const sephoraBrands = await prisma.sephoraProduct.findMany();
 
 		const updatedUltaBrands = ultaBrands.map((brand) => {
 			return { ...brand, brand_name: brand.brand_name?.toLowerCase() };
@@ -49,12 +49,19 @@ export default function Page() {
 			sephoraBrandNames.includes(brandName)
 		);
 
+		// percent of products that share brand_name from U and S
 		const sharedPercent =
 			sharedBrandNames.length /
 			(ultaBrandNames.length + sephoraBrandNames.length);
+		
+		const count = await prisma.$queryRaw`
+		SELECT brand_name
+		FROM "UltaProduct" tu 
+		JOIN "SephoraProduct" ts ON LOWER(ts.brand_name) 
+		`
 
-
-		console.dir(sharedBrandNames.length, { maxArrayLength: null });
+		console.dir(ultaBrandNames.length, { maxArrayLength: null });
+		console.log(sharedPercent);
 
 		// }
 	}

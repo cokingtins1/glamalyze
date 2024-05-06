@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import GetProductForm from "./GetProductForm";
 import { SearchParams, SearchResults } from "../libs/types";
 import QueryResultCard from "./QueryResultCard";
-import { AllProducts } from "@prisma/client";
 import { Suspense } from "react";
 import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
 import Query from "../libs/QueryFunctions/query";

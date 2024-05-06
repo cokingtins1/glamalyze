@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import SubmitForm from "./SubmitForm";
-import { querySchema, TQuerySchema } from "../libs/types";
+import { AllProducts, querySchema, TQuerySchema } from "../libs/types";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,7 +16,6 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { AllProducts, Review, SephoraProduct } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import QueryResultCard from "./QueryResultCard";
 import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
