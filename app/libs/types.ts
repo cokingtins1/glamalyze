@@ -85,3 +85,5 @@ export type SearchResults = {
 };
 
 export type AllProducts = UltaProduct | SephoraProduct;
+
+

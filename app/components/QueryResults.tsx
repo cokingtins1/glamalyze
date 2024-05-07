@@ -1,12 +1,12 @@
 import React, { Suspense } from "react";
-import { AllProducts, SearchParams } from "../libs/types";
 import Query from "../libs/QueryFunctions/query";
 import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
 import QueryResultCard from "./QueryResultCard";
+import { SharedProduct } from '@prisma/client';
 
 type Props = {
 	isSubmitting: boolean;
-	data: AllProducts[];
+	data: SharedProduct[];
 };
 
 export default function QueryResults({ isSubmitting, data }: Props) {

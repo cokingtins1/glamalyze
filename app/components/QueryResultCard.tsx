@@ -4,9 +4,10 @@ import Stars from "./Review/Stars";
 import { AllProducts } from "../libs/types";
 import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
+import { SharedProduct } from "@prisma/client";
 
 type QueryResultCardProps = {
-	data: AllProducts;
+	data: SharedProduct;
 };
 
 export default function QueryResultCard({ data }: QueryResultCardProps) {
@@ -21,28 +22,40 @@ export default function QueryResultCard({ data }: QueryResultCardProps) {
 		return imageSrc;
 	}
 
+	function getImage(ultaSrc: string, sephoraSrc: string) {
+		let imageSrc: string | StaticImageData = "";
+
+		if (ultaSrc.includes("ulta.com")) {
+			imageSrc = ultaSrc;
+		} else if (sephoraSrc.includes("sephora.com")) {
+			imageSrc = sephoraSrc;
+		}
+
+		return imageSrc;
+	}
+
 	return (
 		<Card className="hover:shadow hover:shadow-slate-500 hover:cursor-pointer">
 			<div className="flex p-2">
 				<div className="size-[100px] relative">
 					<Image
-						src={returnImage(
-							data.product_image_url[0],
-							data.retailer_id
+						src={getImage(
+							data.ulta_product_image_url[0],
+							data.sephora_product_image_url[0]
 						)}
-						alt={`${data.product_name} image`}
+						alt="product image"
 						fill
 						style={{ objectFit: "contain" }}
 					/>
 				</div>
 				<div className="flex flex-col p-2">
-					<h1 className="text-sm font-bold">{data.product_name}</h1>
+					<h1 className="text-sm font-bold">{data.ulta_product_name}</h1>
 					<h2 className="text-xs">{data.brand_name}</h2>
-					<Stars
+					{/* <Stars
 						rating={data.avg_rating}
 						searchResult={true}
 						reviewNum={data.total_reviews}
-					/>
+					/> */}
 				</div>
 			</div>
 		</Card>

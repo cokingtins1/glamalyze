@@ -21,9 +21,10 @@ import QueryResultCard from "./QueryResultCard";
 import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
 import QueryResults from "./QueryResults";
 import Query from "../libs/QueryFunctions/query";
+import { SharedProduct } from '@prisma/client';
 
 export default function GetProductForm() {
-	const [data, setData] = useState<AllProducts[]>([]);
+	const [data, setData] = useState<SharedProduct[]>([]);
 
 	const router = useRouter();
 	const pathname = usePathname();

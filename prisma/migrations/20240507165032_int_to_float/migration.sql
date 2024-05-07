@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "SharedProduct" ALTER COLUMN "sephora_avg_rating" SET DATA TYPE DOUBLE PRECISION,
+ALTER COLUMN "ulta_avg_rating" SET DATA TYPE DOUBLE PRECISION;
