@@ -1,10 +1,9 @@
 import { getAllSephoraProducts } from "@/app/actions/getAllSephoraProducts";
 import { getAllUltaProducts } from "@/app/actions/getAllUltaProducts";
 import { getBrands } from "@/app/libs/DashboardFunctions/getBrands";
-import { scrapeSchema } from "@/app/libs/types";
+import { AllProducts, scrapeSchema } from "@/app/libs/types";
 import {
 	AllBrands,
-	AllProducts,
 	PrismaClient,
 	ScrapeLog,
 } from "@prisma/client";
@@ -91,7 +90,7 @@ export async function POST(req: Request) {
 		let count = 0;
 		let data: AllProducts[] = [];
 		while (count < numBrands) {
-			const url = brands[count].brand_page_link;
+			const url = brands[count].brand_id; // fix <- was page_link. no longer on brand
 			const brandId = brands[count].brand_id;
 			console.log(
 				"current index:",

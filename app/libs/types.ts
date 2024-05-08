@@ -1,4 +1,4 @@
-import { SephoraProduct, UltaProduct } from "@prisma/client";
+import { SephoraProduct, SephoraReview, UltaProduct, UltaReview } from "@prisma/client";
 import { z } from "zod";
 
 export type OptionProps = {
@@ -86,4 +86,9 @@ export type SearchResults = {
 
 export type AllProducts = UltaProduct | SephoraProduct;
 
+export type MetaData = Pick<
+	UltaProduct | SephoraProduct,
+	"product_id" | "review_histogram" | "product_price"
+>;
 
+export type Review = UltaReview | SephoraReview

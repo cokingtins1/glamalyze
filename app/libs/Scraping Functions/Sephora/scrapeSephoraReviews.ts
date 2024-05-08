@@ -1,7 +1,6 @@
 import { Page } from "puppeteer";
 
-import { OptionProps } from "../../types";
-import { Review } from "@prisma/client";
+import { OptionProps, Review } from "../../types";
 
 export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 	const reviewData = await page.evaluate((options) => {
@@ -32,7 +31,7 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 			}
 		}
 
-		function getReviewTimeStamp(dateString: string | null): string | null {
+		function getReviewTimeStamp(dateString: string | null): Date | null {
 			// Sephora Formats:
 			// "x h ago"
 			// "x d ago" (1-30 days)
@@ -80,7 +79,7 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 				);
 			}
 
-			return reviewDate instanceof Date ? reviewDate.toISOString() : null;
+			return reviewDate instanceof Date ? reviewDate : null;
 		}
 
 		const reviewListContainer = document.querySelector(
@@ -160,7 +159,6 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 				verified_buyer: verifiedBuyer,
 				up_votes: upVoteText,
 				down_votes: downVoteText,
-				query_id: crypto.randomUUID(),
 			});
 		});
 

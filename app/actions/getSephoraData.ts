@@ -1,15 +1,16 @@
 "use server";
 
-import { Review, SephoraProduct } from "@prisma/client";
+import { SephoraProduct } from "@prisma/client";
 import { runSephoraScraper } from "../libs/Scraping Functions/Sephora/runSephoraScraper";
+import { MetaData, Review } from '../libs/types';
 
 export async function getSephoraData(
-	url: string
-): Promise<{ metaData: SephoraProduct; reviewsData: Review[] }> {
+	url: string | null, productId: string
+): Promise<{ metaData: MetaData; reviewsData: Review[] }> {
 	try {
-		// Sephora Scraper:
 		const { metaData, reviewsData } = await runSephoraScraper(
 			url as string,
+			productId,
 			{
 				reviewSelector: {
 					reviewListContSelector: ".css-1l6ttej.eanm77i0", //Done
@@ -49,18 +50,11 @@ export async function getSephoraData(
 		return { metaData, reviewsData };
 	} catch (error) {
 		console.log(error);
-		const metaData: SephoraProduct = {
-			product_id: "",
-			product_name: null,
-			brand_name: null,
-			price: null,
-			total_reviews: null,
-			avg_rating: null,
-			percent_recommended: null,
+		const metaData: MetaData = {
+			product_id: productId,
 			review_histogram: [],
-			sku_id: null,
-			retailer_id: "",
-			queries: [""]
+			product_price: null
+			
 		};
 		return { metaData, reviewsData: [] };
 	}

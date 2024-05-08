@@ -1,38 +1,29 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
-import { OptionProps } from "../../types";
+import { MetaData, OptionProps, Review } from "../../types";
 import { scrapeSephoraReviews } from "./scrapeSephoraReviews";
 
 import { scrapeSephoraMetadata } from "./scrapeSephoraMetadata";
 
 import { loadSephoraContent } from "./loadSephoraContent";
 
-import { test } from "./test";
-import { Review, SephoraProduct } from "@prisma/client";
+import { SephoraProduct } from "@prisma/client";
 
 export async function runSephoraScraper(
 	url: string,
+	productId: string,
 	options: OptionProps
-): Promise<{ metaData: SephoraProduct; reviewsData: Review[] }> {
+): Promise<{ metaData: MetaData; reviewsData: Review[] }> {
 	if (!url || !options)
 		return {
 			metaData: {
 				product_id: crypto.randomUUID(),
-				sku_id: null,
-				product_name: null,
-				brand_name: null,
-				price: null,
-				total_reviews: null,
-				avg_rating: null,
-				percent_recommended: null,
 				review_histogram: [],
-				retailer_id: "",
-				queries: [""],
+				product_price: 0,
 			},
 			reviewsData: [],
 		};
-	const start = new Date().getTime();
 
 	puppeteer.use(StealthPlugin());
 
@@ -108,25 +99,15 @@ export async function runSephoraScraper(
 			currentPage++;
 		}
 
-		const end = new Date().getTime();
-		// console.log(`Execution time: ${(end - start) / 1000} seconds`);
 		await browser.close();
 		return { metaData, reviewsData };
 	} catch (error) {
 		console.error("Error occurred:", error);
 		return {
 			metaData: {
-				product_id: crypto.randomUUID(),
-				sku_id: null,
-				product_name: null,
-				brand_name: null,
-				price: null,
-				total_reviews: null,
-				avg_rating: null,
-				percent_recommended: null,
+				product_id: "",
 				review_histogram: [],
-				retailer_id: "",
-				queries: [""]
+				product_price: null,
 			},
 			reviewsData: [],
 		};

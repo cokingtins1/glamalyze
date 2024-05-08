@@ -21,7 +21,9 @@ import QueryResultCard from "./QueryResultCard";
 import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
 import QueryResults from "./QueryResults";
 import Query from "../libs/QueryFunctions/query";
-import { SharedProduct } from '@prisma/client';
+import { SharedProduct } from "@prisma/client";
+import scrapeData from "../actions/Compare/compareProducts";
+import { URLPattern } from "next/server";
 
 export default function GetProductForm() {
 	const [data, setData] = useState<SharedProduct[]>([]);
@@ -39,6 +41,7 @@ export default function GetProductForm() {
 
 	const createQueryString = useCallback(
 		(name: string, value: string) => {
+			console.log("searchParams:", searchParams.toString());
 			const params = new URLSearchParams(searchParams.toString());
 			params.set(name, value);
 
@@ -99,11 +102,19 @@ export default function GetProductForm() {
 					/>
 				</form>
 			</Form>
-
-			<QueryResults
-				isSubmitting={form.formState.isSubmitting}
-				data={data}
-			/>
+			<form
+				action={(formData) => {
+					const ultaLink = formData.get("ultaLink");
+					const sephoraLink = formData.get("sephoraLink");
+					const compareString = `u_sku:${ultaLink},s_sku:${sephoraLink}`;
+					router.push(`/compare/${compareString}`);
+				}}
+			>
+				<QueryResults
+					isSubmitting={form.formState.isSubmitting}
+					data={data}
+				/>
+			</form>
 		</>
 	);
 }
