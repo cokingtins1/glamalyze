@@ -1,5 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
   // previewFeatures = ["relationJoins", "fullTextSearch", "fullTextIndex", "postgresqlExtensions"]
 }
 
@@ -110,18 +110,18 @@ model UltaReview {
   review_headline String?
   reviewer_id     String
   reviewer_name   String?
-  review_date     DateTime?   @db.Timestamptz(6)
+  review_date     String?
 
   retailer Retailer     @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
   reviewer UltaReviewer @relation(fields: [reviewer_id], references: [reviewer_id])
 }
 
 model UltaReviewer {
-  reviewer_id         String       @id @default(uuid())
-  reviewer_name       String?
-  Review              UltaReview[]
-  Retailer            Retailer?    @relation(fields: [retailerRetailer_id], references: [retailer_id])
-  retailerRetailer_id String?
+  reviewer_id   String       @id @default(uuid())
+  reviewer_name String?
+  Review        UltaReview[]
+  Retailer      Retailer?    @relation(fields: [retailer_id], references: [retailer_id])
+  retailer_id   String?
 }
 
 model SephoraProduct {
@@ -161,7 +161,7 @@ model SephoraReview {
   review_headline String?
   reviewer_id     String
   reviewer_name   String?
-  review_date     DateTime?      @db.Timestamptz(6)
+  review_date     String?
 
   retailer Retailer @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
 
@@ -169,11 +169,11 @@ model SephoraReview {
 }
 
 model SephoraReviewer {
-  reviewer_id         String          @id @default(uuid())
-  reviewer_name       String?
-  Review              SephoraReview[]
-  Retailer            Retailer?       @relation(fields: [retailerRetailer_id], references: [retailer_id])
-  retailerRetailer_id String?
+  reviewer_id   String          @id @default(uuid())
+  reviewer_name String?
+  Review        SephoraReview[]
+  Retailer      Retailer?       @relation(fields: [retailer_id], references: [retailer_id])
+  retailer_id   String?
 }
 
 model ScrapeLog {

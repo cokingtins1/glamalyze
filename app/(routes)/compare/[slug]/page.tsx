@@ -6,11 +6,44 @@ type Props = {
 };
 
 export default async function Page({ params }: Props) {
-	const { u, s } = await compareProducts(params.slug);
+	// const {
+	// 	ultaMetaData,
+	// 	ultaReviewsData,
+	// 	sephoraMetaData,
+	// 	sephoraReviewsData,
+	// } = await compareProducts(params.slug);
+
+	const data = await compareProducts(params.slug);
+
+	console.log("data:", data);
 
 	return (
 		<>
-			<div>{u}</div>;<div>{s}</div>;
+			<section className="grid grid-cols-2 gap-4 w-full mt-12">
+				{data.length > 0 &&
+					data.map(
+						(result) =>
+							result.productData &&
+							result.reviewsData && (
+								<DataDisplay
+									data={result.productData}
+									reviewsData={result.reviewsData}
+								/>
+							)
+					)}
+
+				{/* <>
+						<DataDisplay
+							data={ultaMetaData}
+							reviewsData={ultaReviewsData}
+						/>
+
+						<DataDisplay
+							data={sephoraMetaData}
+							reviewsData={sephoraReviewsData}
+						/>
+					</> */}
+			</section>
 		</>
 	);
 }

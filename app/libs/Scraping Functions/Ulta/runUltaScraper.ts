@@ -1,34 +1,29 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
-import { OptionProps } from "../../types";
+import { MetaData, OptionProps, Review } from "../../types";
 import { scrapeUltaReviews } from "./scrapeUltaReviews";
 import { loadContent } from "./loadContent";
 import { scrapeUltaMetadata } from "./scrapeUltaMetadata";
-import { Review, UltaProduct } from "@prisma/client";
 
 export async function runUltaScraper(
 	url: string,
+	productId: string,
 	options: OptionProps
-): Promise<{ metaData: UltaProduct; reviewsData: Review[] }> {
+): Promise<{ metaData: MetaData; reviewsData: Review[] }> {
 	if (!url || !options)
 		return {
 			metaData: {
-				product_id: crypto.randomUUID(),
-				sku_id: null,
-				product_name: null,
-				brand_name: null,
-				price: null,
-				total_reviews: null,
+				product_id: productId,
+				review_histogram: [],
+				product_price: null,
+				retailer_id: "Ulta",
 				avg_rating: null,
 				percent_recommended: null,
-				review_histogram: [],
-				retailer_id: "",
-				queries: [""],
+				total_reviews: null,
 			},
 			reviewsData: [],
 		};
-	const start = new Date().getTime();
 
 	puppeteer.use(StealthPlugin());
 
@@ -86,25 +81,19 @@ export async function runUltaScraper(
 			currentPage++;
 		}
 
-		const end = new Date().getTime();
-		console.log(`Execution time: ${(end - start) / 1000} seconds`);
 		await browser.close();
 		return { metaData, reviewsData };
 	} catch (error) {
 		console.error("Error occurred:", error);
 		return {
 			metaData: {
-				product_id: crypto.randomUUID(),
-				sku_id: null,
-				product_name: null,
-				brand_name: null,
-				price: null,
-				total_reviews: null,
+				product_id: productId,
+				review_histogram: [],
+				product_price: null,
+				retailer_id: "Ulta",
 				avg_rating: null,
 				percent_recommended: null,
-				review_histogram: [],
-				retailer_id: "",
-				queries: [""],
+				total_reviews: null,
 			},
 			reviewsData: [],
 		};

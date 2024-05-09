@@ -1,7 +1,6 @@
 import { Page } from "puppeteer";
 
-import { OptionProps } from "../../types";
-import { Review } from "@prisma/client";
+import { OptionProps, Review } from "../../types";
 
 export async function scrapeUltaReviews(page: Page, options: OptionProps) {
 	const reviewData = await page.evaluate((options) => {
@@ -15,6 +14,7 @@ export async function scrapeUltaReviews(page: Page, options: OptionProps) {
 			ratingSelector,
 			verifiedBuyerSelector,
 			upVoteSelector,
+			productId,
 		} = options;
 
 		function getNumber(text: string | null): number | null {
@@ -32,42 +32,6 @@ export async function scrapeUltaReviews(page: Page, options: OptionProps) {
 			}
 		}
 
-		function getReviewTimeStamp(dateString: string | null): string | null {
-			// Ulta Formats:
-			// "x day(s) ago" (1-30 days)
-			// "x month(s) ago" (after 30 days)
-			// "x year(s) ago"
-
-			if (!dateString) return null;
-
-			const currentDate = new Date();
-
-			const dateParts = dateString.trim().split(" ");
-
-			const [count, mdy, trailer] = dateParts;
-
-			let reviewDate: Date | null = null;
-			if (mdy === "day" || mdy === "days") {
-				reviewDate = new Date(
-					currentDate.setDate(currentDate.getDate() - parseInt(count))
-				);
-			} else if (mdy === "month" || mdy === "months") {
-				reviewDate = new Date(
-					currentDate.setMonth(
-						currentDate.getMonth() - parseInt(count)
-					)
-				);
-			} else if (mdy === "year" || mdy === "years") {
-				reviewDate = new Date(
-					currentDate.setFullYear(
-						currentDate.getFullYear() - parseInt(count)
-					)
-				);
-			}
-
-			return reviewDate instanceof Date ? reviewDate.toISOString() : null;
-		}
-
 		const reviewListContainer = document.querySelector(
 			reviewListContSelector
 		);
@@ -81,7 +45,7 @@ export async function scrapeUltaReviews(page: Page, options: OptionProps) {
 
 		reviews?.forEach((review: Element) => {
 			const reviewId = crypto.randomUUID();
-			const productId = crypto.randomUUID();
+			const product_Id = productId;
 
 			const headerEl =
 				review.querySelector<HTMLHeadingElement>(headlineSelector);
@@ -99,7 +63,7 @@ export async function scrapeUltaReviews(page: Page, options: OptionProps) {
 			const reviewDateEl = reviewDateContEl?.querySelectorAll("span")[1];
 
 			const reviewDateText = reviewDateEl
-				? getReviewTimeStamp(reviewDateEl.textContent)
+				? reviewDateEl.textContent
 				: null;
 
 			const reviewNameCont = review.querySelector(reviewerNameSelector);
@@ -134,7 +98,7 @@ export async function scrapeUltaReviews(page: Page, options: OptionProps) {
 
 			result.push({
 				review_id: reviewId,
-				product_id: productId,
+				product_id: product_Id,
 				retailer_id: "Ulta",
 				review_headline: header,
 				review_text: reviewText,
@@ -145,12 +109,51 @@ export async function scrapeUltaReviews(page: Page, options: OptionProps) {
 				verified_buyer: verifiedBuyer,
 				up_votes: upVoteText,
 				down_votes: downVoteText,
-				query_id: crypto.randomUUID(),
 			});
 		});
 
 		return result;
 	}, options.reviewSelector);
+
+	function getReviewTimeStamp(dateString: string | null): string | null {
+		// Ulta Formats:
+		// "x day(s) ago" (1-30 days)
+		// "x month(s) ago" (after 30 days)
+		// "x year(s) ago"
+
+		if (!dateString) return null;
+
+		const currentDate = new Date();
+
+		const dateParts = dateString.trim().split(" ");
+
+		const [count, mdy, trailer] = dateParts;
+
+		let reviewDate: Date | null = null;
+		if (mdy === "day" || mdy === "days") {
+			reviewDate = new Date(
+				currentDate.setDate(currentDate.getDate() - parseInt(count))
+			);
+		} else if (mdy === "month" || mdy === "months") {
+			reviewDate = new Date(
+				currentDate.setMonth(currentDate.getMonth() - parseInt(count))
+			);
+		} else if (mdy === "year" || mdy === "years") {
+			reviewDate = new Date(
+				currentDate.setFullYear(
+					currentDate.getFullYear() - parseInt(count)
+				)
+			);
+		}
+
+		return reviewDate instanceof Date ? reviewDate.toISOString() : null;
+	}
+
+	if (reviewData.length > 0) {
+		reviewData.forEach((p) => {
+			p.review_date = getReviewTimeStamp(p.review_date);
+		});
+	}
 
 	return reviewData;
 }

@@ -3,14 +3,15 @@ import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
 import ReviewCard from "../Review/ReviewCard";
 import RatingChart from "../RatingChart";
-import { Review, SephoraProduct, UltaProduct } from "@prisma/client";
+import { AllProducts, Review } from '@/app/libs/types';
 
 type DataProps = {
-	data: UltaProduct | SephoraProduct;
+	data: AllProducts;
 	reviewsData: Review[];
 };
 
 export default function DataDisplay({ data, reviewsData }: DataProps) {
+	
 	return (
 		<div className="displayContainer flex flex-col justify-start items-center border border-white rounded-lg bg-white p-4">
 			<div className="h-[100px] w-[200px] relative">

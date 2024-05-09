@@ -8,8 +8,6 @@ import { scrapeSephoraMetadata } from "./scrapeSephoraMetadata";
 
 import { loadSephoraContent } from "./loadSephoraContent";
 
-import { SephoraProduct } from "@prisma/client";
-
 export async function runSephoraScraper(
 	url: string,
 	productId: string,
@@ -18,9 +16,13 @@ export async function runSephoraScraper(
 	if (!url || !options)
 		return {
 			metaData: {
-				product_id: crypto.randomUUID(),
+				product_id: productId,
 				review_histogram: [],
-				product_price: 0,
+				product_price: null,
+				retailer_id: "Sephora",
+				avg_rating: null,
+				percent_recommended: null,
+				total_reviews: null,
 			},
 			reviewsData: [],
 		};
@@ -42,8 +44,7 @@ export async function runSephoraScraper(
 
 		// Scrape metadata once
 
-		let metaData: SephoraProduct | null = null;
-		metaData = await scrapeSephoraMetadata(page, options);
+		const metaData = await scrapeSephoraMetadata(page, options);
 
 		while (moreReviewsExist) {
 			pageCount++;
@@ -102,12 +103,17 @@ export async function runSephoraScraper(
 		await browser.close();
 		return { metaData, reviewsData };
 	} catch (error) {
+		console.log("url:", url);
 		console.error("Error occurred:", error);
 		return {
 			metaData: {
-				product_id: "",
+				product_id: productId,
 				review_histogram: [],
 				product_price: null,
+				retailer_id: "Sephora",
+				avg_rating: null,
+				percent_recommended: null,
+				total_reviews: null,
 			},
 			reviewsData: [],
 		};

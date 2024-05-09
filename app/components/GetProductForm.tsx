@@ -106,7 +106,7 @@ export default function GetProductForm() {
 				action={(formData) => {
 					const ultaLink = formData.get("ultaLink");
 					const sephoraLink = formData.get("sephoraLink");
-					const compareString = `u_sku:${ultaLink},s_sku:${sephoraLink}`;
+					const compareString = `u:[${ultaLink}],s:[${sephoraLink}]`;
 					router.push(`/compare/${compareString}`);
 				}}
 			>

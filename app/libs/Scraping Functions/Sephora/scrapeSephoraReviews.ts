@@ -14,6 +14,7 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 			ratingSelector,
 			verifiedBuyerSelector,
 			upVoteSelector,
+			productId,
 		} = options;
 
 		function getNumber(text: string | null): number | null {
@@ -29,57 +30,6 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 			} else {
 				return parseInt(numberString, 10);
 			}
-		}
-
-		function getReviewTimeStamp(dateString: string | null): Date | null {
-			// Sephora Formats:
-			// "x h ago"
-			// "x d ago" (1-30 days)
-			// "20 Mar 2024" (after 30 days)
-
-			if (!dateString) return null;
-
-			const currentDate = new Date();
-			const dateParts = dateString.trim().split(" ");
-
-			const [count, mdh, trailer] = dateParts;
-
-			const monthNames = [
-				"Jan",
-				"Feb",
-				"Mar",
-				"Apr",
-				"May",
-				"Jun",
-				"Jul",
-				"Aug",
-				"Sep",
-				"Oct",
-				"Nov",
-				"Dec",
-			];
-
-			let reviewDate: Date | null = null;
-			if (mdh === "h") {
-				reviewDate = new Date(
-					currentDate.setHours(
-						currentDate.getHours() - parseInt(count)
-					)
-				);
-			} else if (mdh === "d") {
-				reviewDate = new Date(
-					currentDate.setDate(currentDate.getDate() - parseInt(count))
-				);
-			} else if (monthNames.includes(mdh)) {
-				const monthIndex = monthNames.indexOf(mdh);
-				reviewDate = new Date(
-					parseInt(trailer),
-					monthIndex,
-					parseInt(count)
-				);
-			}
-
-			return reviewDate instanceof Date ? reviewDate : null;
 		}
 
 		const reviewListContainer = document.querySelector(
@@ -100,7 +50,7 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 
 		reviews?.forEach((review: Element) => {
 			const reviewId = crypto.randomUUID();
-			const productId = crypto.randomUUID();
+			const product_id = productId;
 
 			const headerEl =
 				review.querySelector<HTMLHeadingElement>(headlineSelector);
@@ -119,7 +69,7 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 			const reviewDateEl =
 				review.querySelector<HTMLSpanElement>(reviewDateSelector);
 			const reviewDateText = reviewDateEl
-				? getReviewTimeStamp(reviewDateEl.textContent)
+				? reviewDateEl.textContent
 				: null;
 
 			const reviewNameEl =
@@ -148,7 +98,7 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 
 			result.push({
 				review_id: reviewId,
-				product_id: productId,
+				product_id: product_id,
 				retailer_id: "Sephora",
 				review_headline: header,
 				review_text: reviewText,
@@ -164,5 +114,61 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 
 		return result;
 	}, options.reviewSelector);
+
+	function getReviewTimeStamp(dateString: string | null): string | null {
+		// Sephora Formats:
+		// "x h ago"
+		// "x d ago" (1-30 days)
+		// "20 Mar 2024" (after 30 days)
+
+		if (!dateString) return null;
+
+		const currentDate = new Date();
+		const dateParts = dateString.trim().split(" ");
+
+		const [count, mdh, trailer] = dateParts;
+
+		const monthNames = [
+			"Jan",
+			"Feb",
+			"Mar",
+			"Apr",
+			"May",
+			"Jun",
+			"Jul",
+			"Aug",
+			"Sep",
+			"Oct",
+			"Nov",
+			"Dec",
+		];
+
+		let reviewDate: Date | null = null;
+		if (mdh === "h") {
+			reviewDate = new Date(
+				currentDate.setHours(currentDate.getHours() - parseInt(count))
+			);
+		} else if (mdh === "d") {
+			reviewDate = new Date(
+				currentDate.setDate(currentDate.getDate() - parseInt(count))
+			);
+		} else if (monthNames.includes(mdh)) {
+			const monthIndex = monthNames.indexOf(mdh);
+			reviewDate = new Date(
+				parseInt(trailer),
+				monthIndex,
+				parseInt(count)
+			);
+		}
+
+		return reviewDate instanceof Date ? reviewDate.toISOString() : null;
+	}
+
+	if (reviewData.length > 0) {
+		reviewData.forEach((p) => {
+			p.review_date = getReviewTimeStamp(p.review_date);
+		});
+	}
+
 	return reviewData;
 }

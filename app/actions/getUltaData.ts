@@ -1,11 +1,12 @@
 "use server";
 
-import { UltaProduct } from "@prisma/client";
 import { runUltaScraper } from "../libs/Scraping Functions/Ulta/runUltaScraper";
+import { MetaData } from '../libs/types';
 
-export async function getUltaData(url: string) {
+export async function getUltaData(url: string | null, productId: string) {
 	try {
-		const { metaData, reviewsData } = await runUltaScraper(url as string, {
+		const { metaData, reviewsData } = await runUltaScraper(url as string,
+			productId, {
 			reviewSelector: {
 				reviewListContSelector: '[data-testid="review-list"]',
 				reviewContSelector: ".pr-review",
@@ -19,6 +20,7 @@ export async function getUltaData(url: string) {
 				upVoteSelector:
 					".pr-helpful-voting.pr-rd-helpful-action-btn-group",
 				downVoteSelector: "",
+				productId: productId
 			},
 			globalSelector: {
 				nextPageSelector:
@@ -30,6 +32,8 @@ export async function getUltaData(url: string) {
 				recommendedSelector: ".pr-reco-value",
 				brandNameSelector: ".Link_Huge.Link_Huge--compact",
 				productNameSelector: ".Text-ds.Text-ds--title-5.Text-ds--left",
+				productId: productId
+
 			},
 			paginationLimit: 3,
 			reviewsLimit: 5,
@@ -48,18 +52,14 @@ export async function getUltaData(url: string) {
 		}
 	} catch (error) {
 		console.log(error);
-		const metaData: UltaProduct = {
-			product_id: "",
-			product_name: null,
-			brand_name: null,
-			price: null,
-			total_reviews: null,
+		const metaData: MetaData = {
+			product_id: productId,
+			review_histogram: [],
+			product_price: null,
+			retailer_id: "Ulta",
 			avg_rating: null,
 			percent_recommended: null,
-			review_histogram: [],
-			sku_id: null,
-			retailer_id: "",
-			queries: [""],
+			total_reviews: null
 		};
 		return { metaData, reviewsData: [] };
 	}

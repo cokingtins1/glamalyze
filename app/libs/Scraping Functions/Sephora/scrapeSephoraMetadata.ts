@@ -1,7 +1,6 @@
-import { OptionProps } from "../../types";
+import { MetaData, OptionProps } from "../../types";
 import { Page } from "puppeteer";
 import { loadSephoraContent } from "./loadSephoraContent";
-import { SephoraProduct } from "@prisma/client";
 
 export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 	await loadSephoraContent(page);
@@ -22,72 +21,35 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 			}
 		}
 
-		type Retailer = "Sephora" | "Ulta";
-		function getSku(url: URL | null, retailer: Retailer) {
-			if (!url) return null;
-
-			let param;
-
-			switch (retailer) {
-				case "Sephora":
-					param = "skuId";
-					break;
-				case "Ulta":
-					param = "sku";
-					break;
-				default:
-					param = "sku";
-			}
-
-			const searchParams = url.searchParams;
-			const skuNum = searchParams.get(param);
-			return skuNum;
-		}
-
 		const {
 			priceSelector,
 			totalReviewsSelector,
 			averageRatingSelector,
 			reviewDistSelector,
 			recommendedSelector,
-			brandNameSelector,
-			productNameSelector,
+			productId,
 		} = options;
 
 		// for (const [key, value] of Object.entries(options)) {
 		// 	console.log(`${key}: ${value}`);
 		// }
 
-		const result: SephoraProduct = {
-			product_id: crypto.randomUUID(),
-			sku_id: null,
-			product_name: null,
-			brand_name: null,
-			price: null,
-			total_reviews: null,
+		const result: MetaData = {
+			product_id: productId,
 			avg_rating: null,
 			percent_recommended: null,
 			review_histogram: [],
-			retailer_id: "",
-			queries: [""],
+			total_reviews: null,
+			retailer_id: "Sephora",
+			product_price: null,
 		};
 
 		result.retailer_id = "Sephora";
-		const path = window.location.href;
-
-		result.sku_id = path ? getSku(new URL(path), "Sephora") : null;
-
-		const brandNameEl = document.querySelector(brandNameSelector);
-		result.brand_name = brandNameEl?.textContent || null;
-
-		const productNameEl = document.querySelector(productNameSelector);
-
-		result.product_name = productNameEl?.textContent || null;
 
 		const priceParent = document.querySelector(priceSelector);
 		const priceText = priceParent?.firstElementChild?.textContent || null;
 
-		result.price = getNumber(priceText);
+		result.product_price = getNumber(priceText);
 
 		const totalReviewsText =
 			document.querySelector(totalReviewsSelector)?.textContent || null;
@@ -133,15 +95,6 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 
 		return result;
 	}, options.globalSelector);
-
-	// if (!metaData) {
-	// 	// Handle case where metaData is an empty array (never[])
-	// 	return null;
-	// }
-	//average rating
-	//rating distribution
-
-	//price
 
 	return metaData;
 }

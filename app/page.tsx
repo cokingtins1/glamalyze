@@ -18,22 +18,6 @@ export default async function Home({ searchParams }: Props) {
 	return (
 		<main className="flex flex-col items-start justify-center">
 			<NewQueryDrawer searchParams={searchParams} />
-
-			<section className="grid grid-cols-2 gap-4 w-full mt-12">
-				{ultaData && sephoraData && (
-					<>
-						{/* <DataDisplay
-								data={ultaData}
-								reviewsData={ultaReviewsData}
-							/> */}
-
-						{/* <DataDisplay
-								data={sephoraData}
-								reviewsData={sephoraReviewsData}
-							/> */}
-					</>
-				)}
-			</section>
 		</main>
 	);
 }

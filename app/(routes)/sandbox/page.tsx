@@ -13,21 +13,113 @@ import { getAllUltaProducts } from "../../actions/getAllUltaProducts";
 import { getAllUltaBrands } from "../../actions/getAllUltaBrands";
 import { getAllSephoraBrands } from "../../actions/getAllSephoraBrands";
 import { withPgTrgm } from "prisma-extension-pg-trgm";
+import Link from "next/link";
+import { getUltaData } from "@/app/actions/getUltaData";
+import { getSephoraData } from "@/app/actions/getSephoraData";
 
-// const prisma = new PrismaClient();
-const prisma = new PrismaClient().$extends(withPgTrgm());
+const prisma = new PrismaClient();
+// const prisma = new PrismaClient().$extends(withPgTrgm());
 
 export default async function Page() {
 	async function handleSubmit() {
 		"use server";
 
-		console.log("running query...");
-		const dupeFromBrand: AllProducts[] = await prisma.$queryRaw`
-		SELECT LOWER(brand_name) AS brand_name, COUNT(*) AS num_duplicates
-		FROM "AllBrands"
-		GROUP BY LOWER(brand_name)
-		HAVING COUNT(*) > 1;
-		`;
+		function getSku(slug: string) {
+			const string = decodeURIComponent(slug);
+
+			const uSkuPattern = /u:\[([\d,]+)\]/;
+			const sSkuPattern = /s:\[([\d,]+)\]/;
+
+			const uSkuMatch = string.match(uSkuPattern);
+			const u_sku = uSkuMatch
+				? uSkuMatch[1]
+						.split(",")
+						.map((sku) => ({ sku, retailer: "Ulta" }))
+				: [];
+
+			const sSkuMatch = string.match(sSkuPattern);
+			const s_sku = sSkuMatch
+				? sSkuMatch[1]
+						.split(",")
+						.map((sku) => ({ sku, retailer: "Sephora" }))
+				: [];
+
+			return [...u_sku, ...s_sku];
+		}
+
+		async function getProductDetails(
+			skuArray: { sku: string; retailer: string }[]
+		) {
+			const result: {
+				product_id: string;
+				page_link: string | null;
+				retailer: string;
+			}[] = [];
+
+			for (const { sku, retailer } of skuArray) {
+				let productData;
+				if (retailer === "Ulta") {
+					productData = await prisma.ultaProduct.findFirst({
+						where: { sku_id: sku },
+						select: { product_id: true, page_link: true },
+					});
+				} else if (retailer === "Sephora") {
+					productData = await prisma.sephoraProduct.findFirst({
+						where: { sku_id: sku },
+						select: { product_id: true, page_link: true },
+					});
+				}
+				if (productData) {
+					result.push({
+						product_id: productData.product_id,
+						page_link: productData.page_link || null,
+						retailer: retailer,
+					});
+				}
+			}
+
+			return result;
+		}
+
+		async function fetchData(
+			products: {
+				product_id: string;
+				page_link: string | null;
+				retailer: string;
+			}[]
+		) {
+			const promises = products.map(async (p) => {
+				if (
+					p.retailer === "Ulta" &&
+					p.page_link !== null &&
+					p.product_id !== null
+				) {
+					return getUltaData(p.page_link, p.product_id);
+				} else if (
+					p.retailer === "Sephora" &&
+					p.page_link !== null &&
+					p.product_id !== null
+				) {
+					return getSephoraData(p.page_link, p.product_id);
+				}
+			});
+			const data = await Promise.all(promises);
+			return data;
+		}
+
+		const slug = "u:[2614776],s:[2641884]";
+
+		const skuArray = getSku(slug);
+		// const productInfo = await getProductDetails(skuArray);
+
+		const url =
+			"https://www.sephora.com/product/papaya-isla-eau-de-parfum-P505624?skuId=2674901&icid2=products%20grid:p505624:product";
+
+		const id = "5cc0424d-94f8-4ff4-810c-12625a767efe";
+		await getSephoraData(url, id);
+
+		// const scrapedData = await fetchData(productInfo);
+		// console.log(scrapedData)
 
 		// const dupeFromProd: AllProducts[] = await prisma.$queryRaw`
 		// 	SELECT DISTINCT ts.brand_name
@@ -72,7 +164,7 @@ export default async function Page() {
 		// 	similarity(p1.product_name, p2.product_name) >= 0.7
 		// ORDER BY
 		// 	similarity_score DESC
-		
+
 		// `;
 
 		// const mappedResults = sim.map((result: any) => {
@@ -247,42 +339,18 @@ export default async function Page() {
 		// console.log(data.some((item) => item.product_name === search));
 	}
 
-	// const same: AllProducts[] = await prisma.$queryRaw`
-	// 		SELECT sephora.*, ulta.*, sephora.product_name AS sephora_product, ulta.product_name AS ulta_product
-	// 		FROM "AllProducts" sephora
-	// 		JOIN "AllProducts" ulta ON sephora.product_name LIKE CONCAT('%', ulta.product_name, '%')
-	// 		WHERE sephora.retailer_id = 'Sephora'
-	// 		AND ulta.retailer_id = 'Ulta'
-	// `;
-
-	// 	const same: AllProducts[] = await prisma.$queryRaw`
-	// 		SELECT sephora.*, ulta.*, sephora.product_name AS sephora_product, ulta.product_name AS ulta_product
-	// 		FROM "AllProducts" sephora
-	// 		JOIN "AllProducts" ulta ON similarity(sephora.product_name, ulta.product_name) > 0.45
-	// 		WHERE sephora.retailer_id = 'Sephora'
-	// 		AND ulta.retailer_id = 'Ulta'
-	// `;
-
-	// const same: AllProducts[] = await prisma.$queryRaw`
-	// 		SELECT *
-	// 		FROM "AllProducts" ta
-	// 		JOIN "AllProducts" tb
-	// 			ON ta.product_name = tb.product_name
-	// 			OR similarity(ta.product_name, tb.product_name) > 0.2
-	// 		WHERE ta.retailer_id = 'Sephora'
-	// 		AND tb.retailer_id = 'Ulta'
-	// 		ORDER BY ta.product_name = tb.product_name DESC, similarity(ta.product_name, tb.product_name) DESC
-	// 		LIMIT 3
-	// `;
-
-	// console.log(same.slice(0, 5));
-	// console.log(same.length);
-
-	// console.dir(same, { maxArrayLength: null });
+	const ref = "https://localhost:3000/compare/u:[2614776],s:[2641884]";
 
 	return (
-		<form action={handleSubmit}>
-			<Button type="submit">Scrape All Products</Button>
-		</form>
+		<>
+			<div className='space-y-8'>
+				<Link href={ref}>
+					<Button type="submit">Test Compare</Button>
+				</Link>
+				<form action={handleSubmit}>
+					<Button type="submit">Scrape All Products</Button>
+				</form>
+			</div>
+		</>
 	);
 }

@@ -1,11 +1,11 @@
 "use server";
 
-import { SephoraProduct } from "@prisma/client";
 import { runSephoraScraper } from "../libs/Scraping Functions/Sephora/runSephoraScraper";
-import { MetaData, Review } from '../libs/types';
+import { MetaData, Review } from "../libs/types";
 
 export async function getSephoraData(
-	url: string | null, productId: string
+	url: string | null,
+	productId: string
 ): Promise<{ metaData: MetaData; reviewsData: Review[] }> {
 	try {
 		const { metaData, reviewsData } = await runSephoraScraper(
@@ -24,6 +24,7 @@ export async function getSephoraData(
 						'[data-at="verified_purchase_badge"]', //Done
 					upVoteSelector: ".css-36ie0l",
 					downVoteSelector: ".css-36ie0l",
+					productId: productId
 				},
 				globalSelector: {
 					nextPageSelector: ".css-140qkrj", // Done
@@ -34,6 +35,7 @@ export async function getSephoraData(
 					recommendedSelector: ".css-1ac1x0l.eanm77i0",
 					brandNameSelector: '[data-at="brand_name"]',
 					productNameSelector: '[data-at="product_name"]',
+					productId: productId,
 				},
 				paginationLimit: 3,
 				reviewsLimit: 5,
@@ -53,8 +55,11 @@ export async function getSephoraData(
 		const metaData: MetaData = {
 			product_id: productId,
 			review_histogram: [],
-			product_price: null
-			
+			product_price: null,
+			retailer_id: "Sephora",
+			avg_rating: null,
+			percent_recommended: null,
+			total_reviews: null
 		};
 		return { metaData, reviewsData: [] };
 	}

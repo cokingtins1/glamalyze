@@ -1,4 +1,9 @@
-import { SephoraProduct, SephoraReview, UltaProduct, UltaReview } from "@prisma/client";
+import {
+	SephoraProduct,
+	SephoraReview,
+	UltaProduct,
+	UltaReview,
+} from "@prisma/client";
 import { z } from "zod";
 
 export type OptionProps = {
@@ -13,6 +18,7 @@ export type OptionProps = {
 		verifiedBuyerSelector: string;
 		upVoteSelector: string;
 		downVoteSelector: string;
+		productId: string;
 	};
 	globalSelector: {
 		nextPageSelector: string;
@@ -23,6 +29,7 @@ export type OptionProps = {
 		recommendedSelector: string;
 		brandNameSelector: string;
 		productNameSelector: string;
+		productId: string;
 	};
 	filters: {
 		mostHelpful: { selector: string; name: string };
@@ -88,7 +95,13 @@ export type AllProducts = UltaProduct | SephoraProduct;
 
 export type MetaData = Pick<
 	UltaProduct | SephoraProduct,
-	"product_id" | "review_histogram" | "product_price"
+	| "product_id"
+	| "review_histogram"
+	| "product_price"
+	| "retailer_id"
+	| "avg_rating"
+	| "percent_recommended"
+	| "total_reviews"
 >;
 
-export type Review = UltaReview | SephoraReview
+export type Review = UltaReview | SephoraReview;
