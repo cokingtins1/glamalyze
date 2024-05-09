@@ -102,10 +102,10 @@ export function randomUserName() {
 	return usernameWords + randomNumber;
 }
 
-export function parseReviewTimeStamp(timestamp: string | null): string | null {
+export function parseReviewTimeStamp(timestamp: Date | null): string | null {
 	if (!timestamp) return null;
 
-	const currentDate = new Date(timestamp);
+	const currentDate = timestamp;
 	const now = new Date();
 
 	// Difference in milliseconds

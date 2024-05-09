@@ -3,6 +3,8 @@ import { Page } from "puppeteer";
 import { OptionProps, Review } from "../../types";
 
 export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
+	// page.on("console", (msg) => console.log("PAGE LOG:", msg.text()));
+
 	const reviewData = await page.evaluate((options) => {
 		const {
 			reviewListContSelector,
@@ -36,15 +38,28 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 			"#ratings-reviews-container"
 		);
 
+		console.log("REVIEW LIST CONTAINER:", !!reviewListContainer);
+
 		if (!reviewListContainer) return [];
 
 		const reviewContChild = reviewListContainer.querySelector(
-			".css-1l6ttej.eanm77i0"
+			reviewListContSelector
 		);
+
+		console.log("REVIEW CONT CHILD:", !!reviewContChild);
 
 		if (!reviewContChild) return [];
 
-		const reviews = reviewContChild?.querySelectorAll(reviewContSelector);
+		const test = '[data-comp="Review StyledComponent BaseComponent "]'
+		const reviews = document.querySelectorAll(
+			'[data-comp="Review StyledComponent BaseComponent "]'
+		);
+		const found1 = document.querySelectorAll(reviewContSelector)
+		const found2 = document.querySelectorAll(test)
+
+		console.log("REVIEWS LENGTH", reviews.length);
+		console.log("test1", found1.length);
+		console.log("test2", found2.length);
 
 		const result: Review[] = [];
 
@@ -55,6 +70,8 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 			const headerEl =
 				review.querySelector<HTMLHeadingElement>(headlineSelector);
 			const header = headerEl ? headerEl.textContent : null;
+
+			console.log("HEADER:", !!header);
 
 			const reviewEl = review.querySelector(reviewTextSelector);
 			const reviewText = reviewEl
@@ -103,19 +120,21 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 				review_headline: header,
 				review_text: reviewText,
 				review_rating: rating,
-				review_date: reviewDateText,
+				review_date: null,
+				review_date_string: reviewDateText,
 				reviewer_name: reviewNameText,
-				reviewer_id: crypto.randomUUID(),
 				verified_buyer: verifiedBuyer,
 				up_votes: upVoteText,
 				down_votes: downVoteText,
+				created_at: null,
+				updated_at: null,
 			});
 		});
 
 		return result;
 	}, options.reviewSelector);
 
-	function getReviewTimeStamp(dateString: string | null): string | null {
+	function getReviewTimeStamp(dateString: string | null): Date | null {
 		// Sephora Formats:
 		// "x h ago"
 		// "x d ago" (1-30 days)
@@ -161,12 +180,13 @@ export async function scrapeSephoraReviews(page: Page, options: OptionProps) {
 			);
 		}
 
-		return reviewDate instanceof Date ? reviewDate.toISOString() : null;
+		return reviewDate instanceof Date ? reviewDate : null;
 	}
 
 	if (reviewData.length > 0) {
 		reviewData.forEach((p) => {
-			p.review_date = getReviewTimeStamp(p.review_date);
+			p.review_date = getReviewTimeStamp(p.review_date_string);
+			(p.created_at = new Date()), (p.updated_at = new Date());
 		});
 	}
 

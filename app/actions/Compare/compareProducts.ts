@@ -33,6 +33,79 @@ export default async function compareProducts(slug: string) {
 		return [...u_sku, ...s_sku];
 	}
 
+	async function checkExisting(
+		products: {
+			product_id: string;
+			page_link: string | null;
+			retailer: string;
+		}[]
+	) {
+		let existingData: {
+			productData: AllProducts | null;
+			reviewsData: Review[];
+		}[] = [];
+		for (const { product_id, retailer } of products) {
+			const expirationThreshold = 7; // days
+			const today = new Date();
+			const expiration = new Date(
+				today.getTime() - expirationThreshold * 24 * 60 * 60 * 1000
+			);
+
+			if (retailer === "Ulta") {
+				const productData = await prisma.ultaProduct.findUnique({
+					where: {
+						updated_at: { gt: expiration },
+						product_id: product_id,
+					},
+				});
+
+				const reviewData = await prisma.ultaReview.findMany({
+					where: {
+						updated_at: { gt: expiration },
+						product_id: product_id,
+					},
+				});
+
+				existingData.push({
+					productData: productData,
+					reviewsData: reviewData,
+				});
+			} else if (retailer === "Sephora") {
+				const productData = await prisma.sephoraProduct.findUnique({
+					where: {
+						updated_at: { gt: expiration },
+						product_id: product_id,
+					},
+				});
+
+				const reviewData = await prisma.sephoraReview.findMany({
+					where: {
+						updated_at: { gt: expiration },
+						product_id: product_id,
+					},
+				});
+
+				existingData.push({
+					productData: productData,
+					reviewsData: reviewData,
+				});
+			}
+		}
+
+		const validData = existingData.filter((item) => {
+			return item.productData !== null && item.reviewsData?.length > 0;
+		});
+		const invalidIndices = existingData
+			.map((item, index) =>
+				item.productData === null || item.reviewsData.length === 0
+					? index
+					: null
+			)
+			.filter((index) => index !== null);
+
+		return { validData, invalidIndices };
+	}
+
 	async function getProductDetails(
 		skuArray: { sku: string; retailer: string }[]
 	) {
@@ -103,7 +176,17 @@ export default async function compareProducts(slug: string) {
 		throw new Error("One or both pages not found.");
 	}
 
-	const scrapedData = await fetchData(productInfo);
+	const { validData, invalidIndices } = await checkExisting(productInfo);
+
+	if (validData.length === productInfo.length) {
+		const end = new Date().getTime();
+		console.log(`Execution time: ${(end - start) / 1000} seconds`);
+		return validData;
+	}
+
+	const scrapedData = await fetchData(
+		invalidIndices.map((index) => productInfo[index])
+	);
 	const filteredData = scrapedData.filter((data) => data !== undefined);
 
 	if (filteredData) {

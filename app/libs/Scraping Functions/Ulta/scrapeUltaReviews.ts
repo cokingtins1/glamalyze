@@ -3,6 +3,8 @@ import { Page } from "puppeteer";
 import { OptionProps, Review } from "../../types";
 
 export async function scrapeUltaReviews(page: Page, options: OptionProps) {
+	// page.on("console", (msg) => console.log("PAGE LOG:", msg.text()));
+
 	const reviewData = await page.evaluate((options) => {
 		const {
 			reviewListContSelector,
@@ -36,10 +38,13 @@ export async function scrapeUltaReviews(page: Page, options: OptionProps) {
 			reviewListContSelector
 		);
 
+		console.log("REVIEW LIST CONTAINER", !!reviewListContainer);
+
 		if (!reviewListContainer) return [];
 
 		const reviews =
 			reviewListContainer.querySelectorAll(reviewContSelector);
+		console.log("REVIEWs LENGTH", reviews.length);
 
 		const result: Review[] = [];
 
@@ -103,19 +108,21 @@ export async function scrapeUltaReviews(page: Page, options: OptionProps) {
 				review_headline: header,
 				review_text: reviewText,
 				review_rating: rating,
-				review_date: reviewDateText,
+				review_date: null,
+				review_date_string: reviewDateText,
 				reviewer_name: reviewNameText,
-				reviewer_id: crypto.randomUUID(),
 				verified_buyer: verifiedBuyer,
 				up_votes: upVoteText,
 				down_votes: downVoteText,
+				created_at: null,
+				updated_at: null,
 			});
 		});
 
 		return result;
 	}, options.reviewSelector);
 
-	function getReviewTimeStamp(dateString: string | null): string | null {
+	function getReviewTimeStamp(dateString: string | null): Date | null {
 		// Ulta Formats:
 		// "x day(s) ago" (1-30 days)
 		// "x month(s) ago" (after 30 days)
@@ -146,12 +153,13 @@ export async function scrapeUltaReviews(page: Page, options: OptionProps) {
 			);
 		}
 
-		return reviewDate instanceof Date ? reviewDate.toISOString() : null;
+		return reviewDate instanceof Date ? reviewDate : null;
 	}
 
 	if (reviewData.length > 0) {
 		reviewData.forEach((p) => {
-			p.review_date = getReviewTimeStamp(p.review_date);
+			p.review_date = getReviewTimeStamp(p.review_date_string);
+			(p.created_at = new Date()), (p.updated_at = new Date());
 		});
 	}
 

@@ -8,7 +8,7 @@ import { generate } from "random-words";
 import React from "react";
 import { getAllSephoraProducts } from "../../actions/getAllSephoraProducts";
 import elements from "@/app/libs/JSON/elemets.json";
-import { AllProducts, AllProductsSelectors } from "../../libs/types";
+import { AllProducts, AllProductsSelectors, Review } from "../../libs/types";
 import { getAllUltaProducts } from "../../actions/getAllUltaProducts";
 import { getAllUltaBrands } from "../../actions/getAllUltaBrands";
 import { getAllSephoraBrands } from "../../actions/getAllSephoraBrands";
@@ -107,129 +107,101 @@ export default async function Page() {
 			return data;
 		}
 
+		async function checkExisting(
+			products: {
+				product_id: string;
+				page_link: string | null;
+				retailer: string;
+			}[]
+		) {
+			let existingData: {
+				productData: AllProducts | null;
+				reviewsData: Review[];
+			}[] = [];
+			for (const { product_id, retailer } of products) {
+				const expirationThreshold = 7; // days
+				const today = new Date();
+				const expiration = new Date(
+					today.getTime() - expirationThreshold * 24 * 60 * 60 * 1000
+				);
+
+				if (retailer === "Ulta") {
+					const productData = await prisma.ultaProduct.findUnique({
+						where: {
+							updated_at: { gt: expiration },
+							product_id: product_id,
+						},
+					});
+
+					const reviewData = await prisma.ultaReview.findMany({
+						where: {
+							updated_at: { gt: expiration },
+							product_id: product_id,
+						},
+					});
+
+					existingData.push({
+						productData: productData,
+						reviewsData: reviewData,
+					});
+				} else if (retailer === "Sephora") {
+					const productData = await prisma.sephoraProduct.findUnique({
+						where: {
+							updated_at: { gt: expiration },
+							product_id: product_id,
+						},
+					});
+
+					const reviewData = await prisma.sephoraReview.findMany({
+						where: {
+							updated_at: { gt: expiration },
+							product_id: product_id,
+						},
+					});
+
+					existingData.push({
+						productData: productData,
+						reviewsData: reviewData,
+					});
+				}
+			}
+
+			const validData = existingData.filter((item) => {
+				return (
+					item.productData !== null && item.reviewsData?.length > 0
+				);
+			});
+			const invalidIndices = existingData
+				.map((item, index) =>
+					item.productData === null || item.reviewsData.length === 0
+						? index
+						: null
+				)
+				.filter((index) => index !== null);
+
+			return { validData, invalidIndices };
+		}
+
 		const slug = "u:[2614776],s:[2641884]";
 
-		const skuArray = getSku(slug);
 		// const productInfo = await getProductDetails(skuArray);
 
 		const url =
-			"https://www.sephora.com/product/papaya-isla-eau-de-parfum-P505624?skuId=2674901&icid2=products%20grid:p505624:product";
+			"https://www.sephora.com/product/dior-rouge-dior-lipstick-P467760?skuId=2750966&icid2=products grid:p467760:product";
 
-		const id = "5cc0424d-94f8-4ff4-810c-12625a767efe";
-		await getSephoraData(url, id);
+		const id = "4f65289a-b720-4c56-883b-3b0ed83a3aa7";
+		console.log("getting data");
+		const data = await getSephoraData(url, id);
+		console.log("done");
 
-		// const scrapedData = await fetchData(productInfo);
-		// console.log(scrapedData)
+		console.log(data);
 
-		// const dupeFromProd: AllProducts[] = await prisma.$queryRaw`
-		// 	SELECT DISTINCT ts.brand_name
-		// 	FROM "UltaProduct" tu
-		// 	JOIN "SephoraProduct" ts on LOWER(ts.brand_name) = LOWER(tu.brand_name)
-		// 	ORDER BY ts.brand_name
-		// `;
+		// const skuArray = getSku(slug);
+		// const productInfo = await getProductDetails(skuArray);
+		// const {validData, invalidIndices} = await checkExisting(productInfo);
 
-		//common brand name ? => fuzzy search on product_name
-
-		// const sim = await prisma.$queryRaw`
-		// SELECT
-		// 	p1.brand_id AS brand_id,
-		// 	p1.brand_name AS brand_name,
-		// 	p1.product_name AS ulta_product_name,
-		// 	p2.product_name AS sephora_product_name,
-		// 	p1.product_id AS ulta_product_id,
-		// 	p2.product_id AS sephora_product_id,
-		// 	p1.avg_rating AS ulta_avg_rating,
-		// 	p2.avg_rating AS sephora_avg_rating,
-		// 	p1.total_reviews AS ulta_total_reviews,
-		// 	p2.total_reviews AS sephora_total_reviews,
-		// 	p1.product_image_url AS ulta_product_image_url,
-		// 	p2.product_image_url AS sephora_product_image_url,
-		// 	p1.sku_id AS ulta_sku_id,
-		// 	p2.sku_id AS sephora_sku_id,
-		// 	p1.page_link AS ulta_page_link,
-		// 	p2.page_link AS sephora_page_link,
-		// 	p1.product_price AS ulta_product_price,
-		// 	p2.product_price AS sephora_product_price,
-		// 	p1.created_at AS created_at,
-		// 	p1.updated_at AS updated_at,
-		// 	similarity(p1.product_name, p2.product_name) AS similarity_score
-		// FROM
-		// 	"UltaProduct" AS p1
-		// JOIN
-		// 	"SephoraProduct" AS p2
-		// ON
-		// 	p1.brand_id = p2.brand_id
-		// 	AND similarity(p1.product_name, p2.product_name) >= 0.7
-		// WHERE
-		// 	similarity(p1.product_name, p2.product_name) >= 0.7
-		// ORDER BY
-		// 	similarity_score DESC
-
-		// `;
-
-		// const mappedResults = sim.map((result: any) => {
-		// 	const {
-		// 		ulta_product_name_similarity_score,
-		// 		ulta_product_name_word_similarity_score,
-		// 		...rest
-		// 	} = result;
-		// 	return {
-		// 		id: crypto.randomUUID(),
-		// 		...rest
-		// 	};
-		// });
-
-		// console.log(mappedResults.slice(0,10))
-
-		// await prisma.sharedProduct.createMany({ data: mappedResults });
-		// console.log("done")
-
-		// console.dir(sim, { maxArrayLength: null });
-		// console.log(sim);
-		// console.log(sim.length);
-		// const brandNames1 = dupeFromBrand?.map((obj) => obj.brand_name);
-
-		// console.dir(brandNames1, { maxArrayLength: null });
-		// console.dir(brandNames2, { maxArrayLength: null });
-
-		// const unique = [...brandNames1, ...brandNames2].filter(
-		// 	(brandName, index, array) => array.indexOf(brandName) === index
-		// );
-
-		// console.log(result);
-		// console.log(result.length)
-
-		// console.dir(same, { maxArrayLength: null });
-		// console.log(same.length);
-
-		// const url = "https://www.sephora.com/brand/gisou";
-		// const allProducts = await getAllSephoraProducts(url, "");
-		// console.dir(allProducts, { maxArrayLength: null });
-
-		// console.dir(allProducts, { maxArrayLength: null });
-
-		// const uniqueSkuIds: { [key: string]: boolean } = {};
-		// const uniqueResults = allProducts.filter((product) => {
-		// 	if (product.sku_id !== null && product.sku_id !== undefined) {
-		// 		if (!uniqueSkuIds[product.sku_id]) {
-		// 			uniqueSkuIds[product.sku_id] = true;
-		// 			return true;
-		// 		}
-		// 	}
-
-		// 	return false;
-		// });
-
-		// console.dir(uniqueResults, { maxArrayLength: null });
-		// console.dir("unique results length", uniqueResults.length);
-
-		// console.log("productData:", allProducts);
-		// console.log("Length:", allProducts.length);
-
-		// console.log(
-		// 	"Filtered Products",
-		// 	allProducts.map((item) => item.product_name)
-		// );
+		// console.log(validData);
+		// console.log(invalidIndices);
 
 		function log(data: AllProducts[]) {
 			const productNames = data.map((item) => item.brand_name);
@@ -240,112 +212,15 @@ export default async function Page() {
 			console.log("unique length:", uniqueArray.length);
 			// console.dir(uniqueArray, { maxArrayLength: null });
 		}
-
-		// const alpha = await prisma.allProducts.findMany({
-		// 	where: {
-		// 		AND: [
-		// 			{
-		// 				retailer_id: "Sephora",
-		// 				brand_name: "Algenist",
-		// 			},
-		// 		],
-		// 	},
-		// });
-
-		// const sephoraProducts = await prisma.allProducts.findMany({
-		// 	where: { retailer_id: "Sephora" },
-		// });
-
-		// const sephoraBrands = await prisma.allBrands.findMany({
-		// 	where: { retailer_id: "Sephora" },
-		// });
-
-		// const brandsNotFoundInProducts = sephoraBrands
-		// 	.filter(
-		// 		(brand) =>
-		// 			!sephoraProducts.some(
-		// 				(product) => product.brand_name === brand.brand_name
-		// 			)
-		// 	)
-		// 	.map((brand) => brand.brand_name);
-
-		// console.log("not found:", brandsNotFoundInProducts);
-		// console.log("not found length:", brandsNotFoundInProducts.length);
-
-		// let newSephora: AllProducts[] = [];
-		// for (const product of sephoraProducts) {
-		// 	const matchingBrand = sephoraProducts.find(
-		// 		(brand) => brand.brand_name === product.brand_name
-		// 	);
-
-		// 	if (matchingBrand) {
-		// 		newSephora.push({
-		// 			...product,
-		// 			brand_id: matchingBrand.brand_id,
-		// 		});
-		// 	}
-		// }
-
-		// if (newSephora.length > 0) {
-		// 	// console.log(newSephora.length);
-		// 	// log(newSephora);
-		// 	// await prisma.allProducts.deleteMany({
-		// 	// 	where: { retailer_id: "Sephora" },
-		// 	// });
-		// 	// await prisma.allProducts.createMany({ data: newSephora });
-		// 	console.log("done");
-		// }
-
-		// console.log(log(newUlta));
-		// log(newUlta)
-
-		// console.log("all products:", log(allProducts));
-		// console.log(alpha);
-		// log(alpha);
-		// console.log(
-		// 	"raw length",
-		// 	alpha.map((p) => p.product_name)
-		// );
-
-		// log(data);
-		// console.log(data.length);
-		// const newData = data
-		// 	.map((item) => {
-		// 		return { ...item, brand_id: brandId };
-		// 	})
-		// 	.filter((item) => item.sku_id !== null);
-		// console.log(newData)
-		// console.log(
-		// 	data.map((item, index) => `${index}: ${item.product_name}`)
-		// );
-		// console.log(data);
-		// console.log(
-		// 	newData
-		// 		.sort((a, b) => {
-		// 			const nameA = a.product_name.toUpperCase();
-		// 			const nameB = b.product_name.toUpperCase();
-		// 			if (nameA < nameB) {
-		// 				return -1;
-		// 			}
-		// 			if (nameA > nameB) {
-		// 				return 1;
-		// 			}
-		// 			return 0;
-		// 		})
-		// 		.map((item) => item.product_name)
-		// );
-
-		// const search = "Woods Trilogy Set";
-		// console.log(data.some((item) => item.product_name === search));
 	}
 
-	const ref = "https://localhost:3000/compare/u:[2614776],s:[2641884]";
+	const ref = "/compare/u:[2614776],s:[2641884]";
 
 	return (
 		<>
-			<div className='space-y-8'>
+			<div className="space-y-8">
 				<Link href={ref}>
-					<Button type="submit">Test Compare</Button>
+					<Button type="button">Test Compare</Button>
 				</Link>
 				<form action={handleSubmit}>
 					<Button type="submit">Scrape All Products</Button>

@@ -95,33 +95,36 @@ model UltaProduct {
   brand         AllBrands       @relation(fields: [brand_id], references: [brand_id])
   UltaReview    UltaReview[]
   SharedProduct SharedProduct[]
+  UltaReviewer  UltaReviewer[]
 }
 
 model UltaReview {
-  review_id       String      @id @default(uuid())
-  product_id      String
-  product         UltaProduct @relation(fields: [product_id], references: [product_id])
-  retailer_id     String
-  review_rating   Int?
-  verified_buyer  Boolean?
-  up_votes        Int?
-  down_votes      Int?
-  review_text     String?
-  review_headline String?
-  reviewer_id     String
-  reviewer_name   String?
-  review_date     String?
+  review_id          String      @id @default(uuid())
+  product_id         String
+  created_at         DateTime?   @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime?   @updatedAt @db.Timestamptz(6)
+  product            UltaProduct @relation(fields: [product_id], references: [product_id])
+  retailer_id        String
+  review_rating      Int?
+  verified_buyer     Boolean?
+  up_votes           Int?
+  down_votes         Int?
+  review_text        String?
+  review_headline    String?
+  reviewer_name      String?
+  review_date        DateTime?
+  review_date_string String?
 
-  retailer Retailer     @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
-  reviewer UltaReviewer @relation(fields: [reviewer_id], references: [reviewer_id])
+  retailer Retailer @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
 }
 
 model UltaReviewer {
-  reviewer_id   String       @id @default(uuid())
+  reviewer_id   String      @id @default(uuid())
   reviewer_name String?
-  Review        UltaReview[]
-  Retailer      Retailer?    @relation(fields: [retailer_id], references: [retailer_id])
+  Retailer      Retailer?   @relation(fields: [retailer_id], references: [retailer_id])
   retailer_id   String?
+  product       UltaProduct @relation(fields: [product_id], references: [product_id])
+  product_id    String
 }
 
 model SephoraProduct {
@@ -142,38 +145,40 @@ model SephoraProduct {
   page_link           String?
   percent_recommended Int?
 
-  retailer      Retailer        @relation(fields: [retailer_id], references: [retailer_id])
-  brand         AllBrands       @relation(fields: [brand_id], references: [brand_id])
-  SephoraReview SephoraReview[]
-  SharedProduct SharedProduct[]
+  retailer        Retailer          @relation(fields: [retailer_id], references: [retailer_id])
+  brand           AllBrands         @relation(fields: [brand_id], references: [brand_id])
+  SephoraReview   SephoraReview[]
+  SharedProduct   SharedProduct[]
+  SephoraReviewer SephoraReviewer[]
 }
 
 model SephoraReview {
-  review_id       String         @id @default(uuid())
-  product_id      String
-  product         SephoraProduct @relation(fields: [product_id], references: [product_id])
-  retailer_id     String
-  review_rating   Int?
-  verified_buyer  Boolean?
-  up_votes        Int?
-  down_votes      Int?
-  review_text     String?
-  review_headline String?
-  reviewer_id     String
-  reviewer_name   String?
-  review_date     String?
+  review_id          String         @id @default(uuid())
+  product_id         String
+  created_at         DateTime?      @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime?      @updatedAt @db.Timestamptz(6)
+  product            SephoraProduct @relation(fields: [product_id], references: [product_id])
+  retailer_id        String
+  review_rating      Int?
+  verified_buyer     Boolean?
+  up_votes           Int?
+  down_votes         Int?
+  review_text        String?
+  review_headline    String?
+  reviewer_name      String?
+  review_date        DateTime?
+  review_date_string String?
 
   retailer Retailer @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
-
-  SephoraReviewer SephoraReviewer? @relation(fields: [reviewer_id], references: [reviewer_id])
 }
 
 model SephoraReviewer {
-  reviewer_id   String          @id @default(uuid())
+  reviewer_id   String         @id @default(uuid())
   reviewer_name String?
-  Review        SephoraReview[]
-  Retailer      Retailer?       @relation(fields: [retailer_id], references: [retailer_id])
+  Retailer      Retailer?      @relation(fields: [retailer_id], references: [retailer_id])
   retailer_id   String?
+  product       SephoraProduct @relation(fields: [product_id], references: [product_id])
+  product_id    String
 }
 
 model ScrapeLog {

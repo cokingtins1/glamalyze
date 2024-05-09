@@ -64,6 +64,14 @@ export async function runUltaScraper(
 				(options?.paginationLimit &&
 					pageCount >= options.paginationLimit)
 			) {
+				const reviewData = await scrapeUltaReviews(page, options);
+				if (reviewData?.length === 0) {
+					moreReviewsExist = false;
+				} else {
+					reviewsData.push(...reviewData);
+
+					await moreReviews?.click();
+				}
 				moreReviewsExist = false;
 			} else {
 				const reviewData = await scrapeUltaReviews(page, options);

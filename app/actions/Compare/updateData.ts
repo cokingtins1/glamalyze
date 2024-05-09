@@ -25,6 +25,7 @@ export default async function updateData(scrapedData: ScrapedData[]) {
 				reviewer_id: crypto.randomUUID(),
 				reviewer_name: reviewer.reviewer_name,
 				retailer_id: reviewer.retailer_id,
+                product_id: reviewer.product_id
 			};
 			reviewers.push(newReviewer);
 		}
@@ -60,15 +61,9 @@ export default async function updateData(scrapedData: ScrapedData[]) {
 			});
 
 			const reviewers = createReviewer(res.reviewsData);
-			await prisma.ultaReviewer.createMany({ data: reviewers });
+			await prisma.sephoraReviewer.createMany({ data: reviewers });
 
 			await prisma.sephoraReview.createMany({ data: res.reviewsData });
 		}
 	}
 }
-
-//fields to update: avg_rating, precent_recommended, review_histogram, total_reviews, product_price
-
-//updating: avg_rating, total_reviews
-
-//if they're null on the backend, dont update...

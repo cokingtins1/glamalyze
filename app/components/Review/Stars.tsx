@@ -6,7 +6,7 @@ type Rating = {
 	rating: number | null | undefined;
 	reverse?: boolean | undefined;
 	searchResult?: boolean | undefined;
-	reviewNum: number | undefined | null;
+	reviewNum?: number | undefined | null;
 };
 
 export default function Stars({
@@ -26,7 +26,6 @@ export default function Stars({
 
 	return (
 		<div className="flex items-center">
-			
 			<div className="whitespace-nowrap flex items-center">
 				{rating &&
 					starIndexes.map((index) =>
@@ -61,12 +60,12 @@ export default function Stars({
 						)
 					)}
 			</div>
-			<p
-				style={{ fontSize: "0.625rem" }}
-				className="pl-1"
-			>{`(${reviewNum})`}</p>
+			{reviewNum && (
+				<p
+					style={{ fontSize: "0.625rem" }}
+					className="pl-1"
+				>{`(${reviewNum})`}</p>
+			)}
 		</div>
 	);
 }
-
-

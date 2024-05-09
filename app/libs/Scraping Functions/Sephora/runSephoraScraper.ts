@@ -29,6 +29,12 @@ export async function runSephoraScraper(
 
 	puppeteer.use(StealthPlugin());
 
+	function delay(time: number) {
+		return new Promise(function (resolve) {
+			setTimeout(resolve, time);
+		});
+	}
+
 	try {
 		const browser = await puppeteer.launch({
 			headless: true,
@@ -49,31 +55,12 @@ export async function runSephoraScraper(
 		while (moreReviewsExist) {
 			pageCount++;
 
-			// Navigation Code:
-
 			// Filter Code:
 			if (pageCount === 1) {
-				// Only select filter on first pagination
-
-				await page.waitForSelector("#custom_sort");
-				await page.click("#custom_sort");
-				// const textContent = await page.evaluate(() => {
-				// 	const element = document.querySelector(
-				// 		"#custom_sort > :first-child"
-				// 	);
-				// 	// if (element) {
-				// 	// 	console.log("clicking button");
-				// 	// 	(element as HTMLButtonElement).click();
-				// 	// }
-				// 	page.click("#custom_sort > :first-child")
-				// 	return element ? element.textContent : null;
-				// });
-				// console.log(textContent);
-
-				// await page.click(`text=${textContent}`);
-
-				// await page.waitForSelector("#css-1aawth6.eanm77i0")
-				// await page.click(".css-1aawth6.eanm77i0");
+				await page.waitForSelector("#custom_sort_trigger");
+				await page.click("#custom_sort_trigger");
+				await page.click("#custom_sort > :first-child");
+				await delay(1000)
 			}
 
 			const nextSelector = options.globalSelector.nextPageSelector;
@@ -84,6 +71,14 @@ export async function runSephoraScraper(
 				(options?.paginationLimit &&
 					pageCount >= options.paginationLimit)
 			) {
+				const reviewData = await scrapeSephoraReviews(page, options);
+				if (reviewData?.length === 0) {
+					moreReviewsExist = false;
+				} else {
+					reviewsData.push(...reviewData);
+					await moreReviews?.click();
+				}
+
 				moreReviewsExist = false;
 			} else {
 				const reviewData = await scrapeSephoraReviews(page, options);

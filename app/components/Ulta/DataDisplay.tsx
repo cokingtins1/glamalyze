@@ -3,7 +3,7 @@ import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
 import ReviewCard from "../Review/ReviewCard";
 import RatingChart from "../RatingChart";
-import { AllProducts, Review } from '@/app/libs/types';
+import { AllProducts, Review } from "@/app/libs/types";
 
 type DataProps = {
 	data: AllProducts;
@@ -11,7 +11,6 @@ type DataProps = {
 };
 
 export default function DataDisplay({ data, reviewsData }: DataProps) {
-	
 	return (
 		<div className="displayContainer flex flex-col justify-start items-center border border-white rounded-lg bg-white p-4">
 			<div className="h-[100px] w-[200px] relative">
@@ -28,9 +27,12 @@ export default function DataDisplay({ data, reviewsData }: DataProps) {
 			{data && (
 				<>
 					<RatingChart metaData={data} />
-					{reviewsData.map((review, index) => (
-						<ReviewCard key={index} reviewData={review} />
-					))}
+					<div className='flex flex-col w-full mt-4'>
+						<p className="text-sm text-slate-500 pl-4 mb-2">{`Reviews (${reviewsData.length})`}</p>
+						{reviewsData.map((review, index) => (
+							<ReviewCard key={index} reviewData={review} />
+						))}
+					</div>
 				</>
 			)}
 		</div>
