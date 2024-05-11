@@ -1,12 +1,12 @@
 "use server";
 
 import { runSephoraScraper } from "../libs/Scraping Functions/Sephora/runSephoraScraper";
-import { MetaData, Review } from "../libs/types";
+import { MetaData, Review, ReviewsScrape } from "../libs/types";
 
-export async function getSephoraData(
+export async function getSephoraReviews(
 	url: string | null,
 	productId: string
-): Promise<{ metaData: MetaData; reviewsData: Review[] }> {
+): Promise<ReviewsScrape> {
 	try {
 		const { metaData, reviewsData } = await runSephoraScraper(
 			url as string,
@@ -24,7 +24,7 @@ export async function getSephoraData(
 						'[data-at="verified_purchase_badge"]', //Done
 					upVoteSelector: ".css-36ie0l",
 					downVoteSelector: ".css-36ie0l",
-					productId: productId
+					productId: productId,
 				},
 				globalSelector: {
 					nextPageSelector: ".css-140qkrj", // Done
@@ -59,7 +59,7 @@ export async function getSephoraData(
 			retailer_id: "Sephora",
 			avg_rating: null,
 			percent_recommended: null,
-			total_reviews: null
+			total_reviews: null,
 		};
 		return { metaData, reviewsData: [] };
 	}

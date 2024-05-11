@@ -1,8 +1,8 @@
 "use server";
 
-import { AllProducts } from "@prisma/client";
 
 import { runUltaAllProductsScraper } from "../libs/Scraping Functions/Ulta-AllProducts/runUltaAllProductsScraper";
+import { AllProducts } from '../libs/types';
 
 export async function getAllUltaProducts(
 	url: string | null,

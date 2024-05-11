@@ -1,5 +1,5 @@
-import { getUltaData } from "@/app/actions/getUltaData";
-import { getSephoraData } from "@/app/actions/getSephoraData";
+import { getUltaReviews } from "@/app/actions/getUltaReviews";
+import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
 import { querySchema } from "@/app/libs/types";
 import { NextResponse } from "next/server";
 import { insertData } from "@/app/actions/prisma/insertData";
@@ -23,7 +23,6 @@ export async function POST(req: Request) {
 				: { success: { data: "data..." } }
 		);
 	}
-
 
 	const test = [
 		{

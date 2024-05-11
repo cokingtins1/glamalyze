@@ -1,7 +1,7 @@
 "use server";
 
-import { AllProducts } from "@prisma/client";
 import { runSephoraAllProductsScraper } from "../libs/Scraping Functions/Sephora-AllProducts/runSephoraAllProductsScraper";
+import { AllProducts } from '../libs/types';
 
 export async function getAllSephoraProducts(
 	url: string | null,

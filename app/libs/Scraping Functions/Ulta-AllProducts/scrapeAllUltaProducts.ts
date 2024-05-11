@@ -1,6 +1,5 @@
-import { AllProductsSelectors } from "../../types";
+import { AllProducts, AllProductsSelectors } from "../../types";
 import { Page } from "puppeteer";
-import { AllProducts } from "@prisma/client";
 
 export async function scrapeAllUltaProducts(
 	page: Page,
@@ -163,13 +162,16 @@ export async function scrapeAllUltaProducts(
 				retailer_id: "Ulta",
 				brand_id: brandId,
 				brand_name: brandName,
-				product_price: productPrices,
+				product_price_range: productPrices,
 				sku_id: skuId,
 				avg_rating: avgRating,
 				total_reviews: totalReviews,
 				page_link: pageLink,
 				created_at: new Date(),
-				updated_at: new Date(),
+				updated_at: null,
+				product_price: null,
+				percent_recommended: null,
+				review_histogram: []
 			});
 		});
 

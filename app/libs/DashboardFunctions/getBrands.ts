@@ -1,26 +1,22 @@
 import { checkBrandExists } from "@/app/actions/checkBrandExists";
-import { scrapeBrands } from "@/app/actions/Dashboard/scrapeBrands";
-import { getAllUltaProducts } from "@/app/actions/getAllUltaProducts";
-import { alphaPos, nextLetter } from "@/lib/utils";
+import { alphaPos } from "@/lib/utils";
 import { AllBrands, PrismaClient } from "@prisma/client";
+import { TScrapeSchema } from "../types";
 
 const prisma = new PrismaClient();
 
-export async function getBrands(
-	retailer: string,
-	startIndex: string,
-	endIndex: string,
-	brandUrl: string
-) {
+export async function getBrands(input: TScrapeSchema) {
+	let { retailer, target, startIndex, endIndex, brandUrl } = input;
+
 	let brands: AllBrands[] = [];
 	let zBrands: AllBrands[] = [];
 
 	if (brandUrl) {
 		const brand = await prisma.allBrands.findFirst({
 			where: {
-				AND: [
-					{ brand_page_link: { contains: brandUrl } },
-					{ retailer_id: retailer },
+				OR: [
+					{ ulta_page_link: { contains: brandUrl } },
+					{ sephora_page_link: { contains: brandUrl } },
 				],
 			},
 		});
@@ -43,18 +39,18 @@ export async function getBrands(
 				data: {
 					brand_id: crypto.randomUUID(),
 					brand_name: brandName,
-					brand_page_link: pageUrl,
+					ulta_page_link: retailer === "Ulta" ? pageUrl : null,
+					sephora_page_link: retailer === "Sephora" ? pageUrl : null,
 					created_at: new Date(),
 					updated_at: new Date(),
-					retailer_id: retailer,
 				},
 				select: {
 					brand_id: true,
 					brand_name: true,
-					brand_page_link: true,
+					ulta_page_link: true,
+					sephora_page_link: true,
 					created_at: true,
 					updated_at: true,
-					retailer_id: true,
 				},
 			});
 			return [newBrand];
@@ -65,7 +61,12 @@ export async function getBrands(
 		endIndex = "*";
 	} else if (endIndex === "*") {
 		brands = await prisma.allBrands.findMany({
-			where: { retailer_id: retailer },
+			where: {
+				OR: [
+					{ ulta_page_link: { contains: retailer } },
+					{ sephora_page_link: { contains: retailer } },
+				],
+			},
 		});
 
 		return brands;
@@ -81,30 +82,20 @@ export async function getBrands(
 	if (startIndex === endIndex) {
 		brands = await prisma.allBrands.findMany({
 			where: {
-				AND: [
-					{ retailer_id: retailer },
-					{
-						brand_name: {
-							startsWith: startIndex,
-							mode: "insensitive",
-						},
-					},
-				],
+				brand_name: {
+					startsWith: startIndex,
+					mode: "insensitive",
+				},
 			},
 		});
 	} else {
 		brands = await prisma.allBrands.findMany({
 			where: {
-				AND: [
-					{ retailer_id: retailer },
-					{
-						brand_name: {
-							gte: startIndex,
-							lte: endIndex,
-							mode: "insensitive",
-						},
-					},
-				],
+				brand_name: {
+					gte: startIndex,
+					lte: endIndex,
+					mode: "insensitive",
+				},
 			},
 		});
 	}

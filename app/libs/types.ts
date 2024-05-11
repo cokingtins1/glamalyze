@@ -62,10 +62,17 @@ export const querySchema = z.object({
 export type TQuerySchema = z.infer<typeof querySchema>;
 
 export const scrapeSchema = z.object({
-	retailer: z.string(),
-	target: z.string(),
-	startIndex: z.string().max(1),
-	endIndex: z.string().max(1),
+	retailer: z.enum(["Ulta", "Sephora", "Shared"], {
+		errorMap: () => ({ message: "Select a Retailer" }),
+	}),
+	target: z.enum(["Reviews", "Products", "Brands"], {
+		errorMap: () => ({ message: "Select a Target" }),
+	}),
+	startIndex: z
+		.string()
+		.max(1)
+		.min(1, { message: "A start index is required" }),
+	endIndex: z.string().max(1).min(1, { message: "An end index is required" }),
 	brandUrl: z.string(),
 	// .refine(
 
@@ -105,3 +112,16 @@ export type MetaData = Pick<
 >;
 
 export type Review = UltaReview | SephoraReview;
+
+export type ScrapeReturnMessage = {
+	message: {
+		executionTime: string;
+		scrapeIndex: string;
+		error: string;
+	};
+};
+
+export type ReviewsScrape = {
+	metaData: MetaData
+	reviewsData: Review[]
+}

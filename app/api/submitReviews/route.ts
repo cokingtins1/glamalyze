@@ -1,5 +1,5 @@
-import { getUltaData } from "@/app/actions/getUltaData";
-import { getSephoraData } from "@/app/actions/getSephoraData";
+import { getUltaReviews } from "@/app/actions/getUltaReviews";
+import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
 import { querySchema } from "@/app/libs/types";
 import { NextResponse } from "next/server";
 import { detectionTest } from "@/app/actions/Detection/detectionTest";
@@ -27,8 +27,8 @@ export async function POST(req: Request) {
 		);
 	}
 	const [ultaData, sephoraData] = await Promise.all([
-		getUltaData(result.data.ultaUrl),
-		getSephoraData(result.data.sephoraUrl),
+		getUltaReviews(result.data.ultaUrl),
+		getSephoraReviews(result.data.sephoraUrl),
 	]);
 
 	const { metaData: ultaProduct, reviewsData: ultaReviews } = ultaData;

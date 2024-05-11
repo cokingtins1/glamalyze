@@ -1,9 +1,8 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
-import { AllProductsSelectors } from "../../types";
+import { AllProducts, AllProductsSelectors } from "../../types";
 
-import { AllProducts } from "@prisma/client";
 import { loadAllProducts } from "./loadAllProducts";
 import { scrapeAllUltaProducts } from "./scrapeAllUltaProducts";
 

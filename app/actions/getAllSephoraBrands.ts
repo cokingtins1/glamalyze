@@ -1,10 +1,10 @@
-import { SephoraBrand } from "@prisma/client";
+import { AllBrands } from "@prisma/client";
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
 import { scrapeAllSephoraBrands } from "../libs/Scraping Functions/Sephora-AllProducts/scrapeAllSephoraBrands";
 
-export async function getAllSephoraBrands(): Promise<SephoraBrand[]> {
+export async function getAllSephoraBrands(): Promise<AllBrands[]> {
 	puppeteer.use(StealthPlugin());
 
 	function delay(time: number) {

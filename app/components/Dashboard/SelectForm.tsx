@@ -38,8 +38,8 @@ export default function SelectForm() {
 	const form = useForm<TScrapeSchema>({
 		resolver: zodResolver(scrapeSchema),
 		defaultValues: {
-			retailer: "",
-			target: "",
+			retailer: "Ulta",
+			target: "Reviews",
 			startIndex: "A",
 			endIndex: "Z",
 			brandUrl: "",
@@ -109,6 +109,9 @@ export default function SelectForm() {
 										<SelectItem value="Sephora">
 											Sephora
 										</SelectItem>
+										<SelectItem value="Shared">
+											Shared
+										</SelectItem>
 									</SelectGroup>
 								</SelectContent>
 							</Select>
@@ -122,11 +125,14 @@ export default function SelectForm() {
 								<SelectContent>
 									<SelectGroup>
 										<SelectLabel>Target</SelectLabel>
-										<SelectItem value="brands">
-											Brands
+										<SelectItem value="Reviews">
+											Reviews
 										</SelectItem>
-										<SelectItem value="products">
+										<SelectItem value="Products">
 											Products
+										</SelectItem>
+										<SelectItem value="Brands">
+											Brands
 										</SelectItem>
 									</SelectGroup>
 								</SelectContent>

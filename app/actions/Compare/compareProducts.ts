@@ -1,8 +1,8 @@
 "use server";
 
 import { PrismaClient } from "@prisma/client";
-import { getUltaData } from "../getUltaData";
-import { getSephoraData } from "../getSephoraData";
+import { getUltaReviews } from "../getUltaReviews";
+import { getSephoraReviews } from "../getSephoraReviews";
 import { ZodNull } from "zod";
 import updateData from "./updateData";
 import { AllProducts, Review } from "@/app/libs/types";
@@ -153,13 +153,13 @@ export default async function compareProducts(slug: string) {
 				p.page_link !== null &&
 				p.product_id !== null
 			) {
-				return getUltaData(p.page_link, p.product_id);
+				return getUltaReviews(p.page_link, p.product_id);
 			} else if (
 				p.retailer === "Sephora" &&
 				p.page_link !== null &&
 				p.product_id !== null
 			) {
-				return getSephoraData(
+				return getSephoraReviews(
 					`https://www.${p.page_link}`,
 					p.product_id
 				);

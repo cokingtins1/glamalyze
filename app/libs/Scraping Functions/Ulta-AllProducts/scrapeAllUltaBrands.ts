@@ -1,4 +1,4 @@
-import { UltaBrand } from "@prisma/client";
+import { AllBrands } from "@prisma/client";
 import { Page } from "puppeteer";
 
 export async function scrapeAllUltaBrands(page: Page) {
@@ -13,7 +13,7 @@ export async function scrapeAllUltaBrands(page: Page) {
 
 		if (brandSections.length === 0) return [];
 
-		const result: UltaBrand[] = [];
+		const result: AllBrands[] = [];
 		brandSections.forEach((section) => {
 			const brandSection = section.querySelector(
 				".BrandListSection__Listing"
@@ -42,9 +42,10 @@ export async function scrapeAllUltaBrands(page: Page) {
 					result.push({
 						brand_id: crypto.randomUUID(),
 						brand_name: brandName,
-						brand_page_link: brandPageLink,
+						ulta_page_link: brandPageLink,
+						sephora_page_link: null,
 						created_at: new Date(),
-						updated_at: new Date()
+						updated_at: new Date(),
 					});
 				});
 			});

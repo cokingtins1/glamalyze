@@ -14,8 +14,8 @@ import { getAllUltaBrands } from "../../actions/getAllUltaBrands";
 import { getAllSephoraBrands } from "../../actions/getAllSephoraBrands";
 import { withPgTrgm } from "prisma-extension-pg-trgm";
 import Link from "next/link";
-import { getUltaData } from "@/app/actions/getUltaData";
-import { getSephoraData } from "@/app/actions/getSephoraData";
+import { getUltaReviews } from "@/app/actions/getUltaReviews";
+import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
 
 const prisma = new PrismaClient();
 // const prisma = new PrismaClient().$extends(withPgTrgm());
@@ -94,13 +94,13 @@ export default async function Page() {
 					p.page_link !== null &&
 					p.product_id !== null
 				) {
-					return getUltaData(p.page_link, p.product_id);
+					return getUltaReviews(p.page_link, p.product_id);
 				} else if (
 					p.retailer === "Sephora" &&
 					p.page_link !== null &&
 					p.product_id !== null
 				) {
-					return getSephoraData(p.page_link, p.product_id);
+					return getSephoraReviews(p.page_link, p.product_id);
 				}
 			});
 			const data = await Promise.all(promises);
@@ -191,27 +191,189 @@ export default async function Page() {
 
 		const id = "4f65289a-b720-4c56-883b-3b0ed83a3aa7";
 		console.log("getting data");
-		const data = await getSephoraData(url, id);
+		// const data = await getSephoraReviews(url, id);
+		// console.log(data);
 		console.log("done");
 
-		console.log(data);
+		const newReviews = [
+			{
+				review_id: "4100a94b-0d43-4892-8520-2255837cee6f",
+				product_id: "4f65289a-b720-4c56-883b-3b0ed83a3aa7",
+				retailer_id: "Sephora",
+				review_headline: "Smooth and light on the lips, stays hydrated",
+				review_text:
+					"This lipstick was very bold and felt light on my lips. I have the velvet 999. I do like the color and feel of it however I would prefer a cooler tone red than a warmer tone. I love the fine detail on the actual lipstick, shows that it is a quality, high-end lipstick. The color lasted well, I’d say about 12 hours. Appeared as a lip stain at the end of the day which I like. After removing the lipstick my lips still felt hydrated and not dried out. I would recommend this lipstick.",
+				review_rating: 5,
+				review_date_string: "1 Mar 2024",
+				reviewer_name: "Jenquag",
+				verified_buyer: false,
+				up_votes: 69,
+				down_votes: 22,
+			},
+			{
+				review_id: "bf793da4-02e6-4815-b2d9-c61cf6a5596c",
+				product_id: "4f65289a-b720-4c56-883b-3b0ed83a3aa7",
+				retailer_id: "Sephora",
+				review_headline: "Good texture",
+				review_text:
+					"Texture is very good. The Color in my picture is 772, to me this color is a bit too vibrant, and I think I won’t use it on a daily basis. It works great with light makeup, though.",
+				review_rating: 4,
+				review_date_string: "23 Mar 2024",
+				reviewer_name: "Wen0218",
+				verified_buyer: false,
+				up_votes: 4,
+				down_votes: 0,
+			},
+			{
+				review_id: "04f3625f-a7b5-400d-b497-f6e6864e56bf",
+				product_id: "4f65289a-b720-4c56-883b-3b0ed83a3aa7",
+				retailer_id: "Sephora",
+				review_headline: null,
+				review_text:
+					"Love this lipstick! Love the color and the texture. It’s long lasting and comfortable to wear. Highly recommended.",
+				review_rating: 5,
+				review_date_string: "15 Feb 2024",
+				reviewer_name: "Wen0218",
+				verified_buyer: true,
+				up_votes: 4,
+				down_votes: 0,
+			},
+			{
+				review_id: "da8a87fa-efec-4069-8db4-61b39432e521",
+				product_id: "4f65289a-b720-4c56-883b-3b0ed83a3aa7",
+				retailer_id: "Sephora",
+				review_headline: "Very disappointing - like a lip balm",
+				review_text:
+					"I am very disappointed in this formula although not surprised as I have never been a huge fan of Dior lipsticks so not sure why I thought this would be different.  It is very hard to find a warm light nude from Dior so when I saw this shade I thought it would be perfect for me which it is in the tube.  You have to go over and over to get any type of pigment, it is more or less like a lip balm and has the same amount of longevity of a lip balm too.  I used a Dior lip liner and after about 5-6 swipes of this lipstick my lips looked ok but about an hour later every trace of the lipstick was gone (no did not eat or drink anything) but lipliner was still there (Dior liners are amazing).  The packaging is nice and sturdy but unfortunately the product was a miss for me so going back....especially at that price!",
+				review_rating: 2,
+				review_date_string: "22 d ago",
+				reviewer_name: "mizeet",
+				verified_buyer: true,
+				up_votes: 3,
+				down_votes: 0,
+			},
+			{
+				review_id: "da8a87fa-efec-4069-8fge4-61b39432e521",
+				product_id: "4f65289a-b720-4c56-883b-3b0ed83a3aa7",
+				retailer_id: "Sephora",
+				review_headline: "Very disappointing - like a lip balm",
+				review_text: "Test new review",
+				review_rating: 2,
+				review_date_string: "22 d ago",
+				reviewer_name: "mizeet",
+				verified_buyer: true,
+				up_votes: 10,
+				down_votes: 0,
+			},
+		];
 
-		// const skuArray = getSku(slug);
-		// const productInfo = await getProductDetails(skuArray);
-		// const {validData, invalidIndices} = await checkExisting(productInfo);
+		const existingReviews = [
+			{
+				review_id: "4100a94b-0d43-4892-8520-2255837cee6f",
+				product_id: "4f65289a-b720-4c56-883b-3b0ed83a3aa7",
+				retailer_id: "Sephora",
+				review_headline: "Smooth and light on the lips, stays hydrated",
+				review_text:
+					"This lipstick was very bold and felt light on my lips. I have the velvet 999. I do like the color and feel of it however I would prefer a cooler tone red than a warmer tone. I love the fine detail on the actual lipstick, shows that it is a quality, high-end lipstick. The color lasted well, I’d say about 12 hours. Appeared as a lip stain at the end of the day which I like. After removing the lipstick my lips still felt hydrated and not dried out. I would recommend this lipstick.",
+				review_rating: 4,
+				review_date_string: "1 Mar 2024",
+				reviewer_name: "Jenquag",
+				verified_buyer: false,
+				up_votes: 9,
+				down_votes: 0,
+			},
+			{
+				review_id: "bf793da4-02e6-4815-b2d9-c61cf6a5596c",
+				product_id: "4f65289a-b720-4c56-883b-3b0ed83a3aa7",
+				retailer_id: "Sephora",
+				review_headline: "Good texture",
+				review_text:
+					"Texture is very good. The Color in my picture is 772, to me this color is a bit too vibrant, and I think I won’t use it on a daily basis. It works great with light makeup, though.",
+				review_rating: 4,
+				review_date_string: "23 Mar 2024",
+				reviewer_name: "Wen0218",
+				verified_buyer: false,
+				up_votes: 4,
+				down_votes: 0,
+			},
+			{
+				review_id: "04f3625f-a7b5-400d-b497-f6e6864e56bf",
+				product_id: "4f65289a-b720-4c56-883b-3b0ed83a3aa7",
+				retailer_id: "Sephora",
+				review_headline: null,
+				review_text:
+					"Love this lipstick! Love the color and the texture. It’s long lasting and comfortable to wear. Highly recommended.",
+				review_rating: 5,
+				review_date_string: "15 Feb 2024",
+				reviewer_name: "Wen0218",
+				verified_buyer: true,
+				up_votes: 4,
+				down_votes: 0,
+			},
+			{
+				review_id: "da8a87fa-efec-4069-8db4-61b39432e521",
+				product_id: "4f65289a-b720-4c56-883b-3b0ed83a3aa7",
+				retailer_id: "Sephora",
+				review_headline: "Very disappointing - like a lip balm",
+				review_text:
+					"I am very disappointed in this formula although not surprised as I have never been a huge fan of Dior lipsticks so not sure why I thought this would be different.  It is very hard to find a warm light nude from Dior so when I saw this shade I thought it would be perfect for me which it is in the tube.  You have to go over and over to get any type of pigment, it is more or less like a lip balm and has the same amount of longevity of a lip balm too.  I used a Dior lip liner and after about 5-6 swipes of this lipstick my lips looked ok but about an hour later every trace of the lipstick was gone (no did not eat or drink anything) but lipliner was still there (Dior liners are amazing).  The packaging is nice and sturdy but unfortunately the product was a miss for me so going back....especially at that price!",
+				review_rating: 2,
+				review_date_string: "22 d ago",
+				reviewer_name: "mizeet",
+				verified_buyer: true,
+				up_votes: 10,
+				down_votes: 0,
+			},
+		];
 
-		// console.log(validData);
-		// console.log(invalidIndices);
+		const revToUpdate = [];
+		const revToAdd = [];
+		const matchedReviewIds: string[] = [];
 
-		function log(data: AllProducts[]) {
-			const productNames = data.map((item) => item.brand_name);
-			const uniqueArray = productNames.filter((value, index, self) => {
-				return self.indexOf(value) === index;
-			});
+		for (const review1 of newReviews) {
+			for (const review2 of existingReviews) {
+				// Check if the specified fields match
+				if (
+					review1.review_text === review2.review_text &&
+					!matchedReviewIds.includes(review1.review_id)
+				) {
+					revToUpdate.push(review1);
+					matchedReviewIds.push(review1.review_id);
 
-			console.log("unique length:", uniqueArray.length);
-			// console.dir(uniqueArray, { maxArrayLength: null });
+					break; // Break inner loop as soon as a match is found
+				} else {
+					revToAdd.push(review2);
+				}
+			}
 		}
+
+		const reviewsNotInExisting = newReviews.filter(
+			(newReview) =>
+				!existingReviews.some(
+					(existingReview) =>
+						existingReview.review_text === newReview.review_text
+				)
+		);
+
+		const updatedReviews = existingReviews.map((existingReview) => {
+			const matchingNewReview = newReviews.find(
+				(newReview) =>
+					newReview.review_text === existingReview.review_text
+			);
+			if (matchingNewReview) {
+				return {
+					...existingReview,
+					review_rating: matchingNewReview.review_rating,
+					up_votes: matchingNewReview.up_votes,
+					down_votes: matchingNewReview.down_votes,
+				};
+			} else {
+				return existingReview;
+			}
+		});
+
+		console.log("Update:", updatedReviews);
+		// console.log("Add:", revToAdd);
 	}
 
 	const ref = "/compare/u:[2614776],s:[2641884]";

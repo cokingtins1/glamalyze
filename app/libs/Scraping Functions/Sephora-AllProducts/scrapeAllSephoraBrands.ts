@@ -37,10 +37,10 @@ export async function scrapeAllSephoraBrands(page: Page) {
 				result.push({
 					brand_id: crypto.randomUUID(),
 					brand_name: brandName,
-					brand_page_link: `https://www.sephora.com${brandPageLink}`,
+					sephora_page_link: `https://www.sephora.com${brandPageLink}`,
+					ulta_page_link: null,
 					created_at: new Date(),
 					updated_at: new Date(),
-					retailer_id: "Sephora"
 				});
 			});
 		});
