@@ -5,12 +5,14 @@ import { MetaData, Review, ReviewsScrape } from "../libs/types";
 
 export async function getSephoraReviews(
 	url: string | null,
-	productId: string
+	productId: string,
+	reviewsPresent: boolean
 ): Promise<ReviewsScrape> {
 	try {
-		const { metaData, reviewsData } = await runSephoraScraper(
+		const { metaData, reviewsData, response } = await runSephoraScraper(
 			url as string,
 			productId,
+			reviewsPresent,
 			{
 				reviewSelector: {
 					reviewListContSelector: ".css-1l6ttej.eanm77i0", //Done
@@ -49,7 +51,7 @@ export async function getSephoraReviews(
 		);
 
 		// console.log("metaData and reviewsData:", metaData, reviewsData);
-		return { metaData, reviewsData };
+		return { metaData, reviewsData, response };
 	} catch (error) {
 		console.log(error);
 		const metaData: MetaData = {
@@ -61,6 +63,10 @@ export async function getSephoraReviews(
 			percent_recommended: null,
 			total_reviews: null,
 		};
-		return { metaData, reviewsData: [] };
+		return {
+			metaData,
+			reviewsData: [],
+			response: { status: { success: false, messasge: "" } },
+		};
 	}
 }

@@ -73,18 +73,8 @@ export const scrapeSchema = z.object({
 		.max(1)
 		.min(1, { message: "A start index is required" }),
 	endIndex: z.string().max(1).min(1, { message: "An end index is required" }),
-	brandUrl: z.string(),
-	// .refine(
-
-	// 	(value) => {
-
-	// 		return value === undefined || value.includes("ulta.com") || value.includes("sephora.com");
-	// 	},
-	// 	{
-	// 		message:
-	// 			"Brand URL must contain either 'ulta.com' or 'sephora.com'",
-	// 	}
-	// ),
+	// productLimit: z.string().transform((v) => Number(v) || Infinity),
+	url: z.string().optional(),
 });
 
 export type TScrapeSchema = z.infer<typeof scrapeSchema>;
@@ -111,6 +101,13 @@ export type MetaData = Pick<
 	| "total_reviews"
 >;
 
+export type ScrapeResponse = {
+	status: {
+		success: boolean;
+		messasge: string;
+	};
+};
+
 export type Review = UltaReview | SephoraReview;
 
 export type ScrapeReturnMessage = {
@@ -122,6 +119,14 @@ export type ScrapeReturnMessage = {
 };
 
 export type ReviewsScrape = {
-	metaData: MetaData
-	reviewsData: Review[]
-}
+	metaData: MetaData;
+	reviewsData: Review[];
+	response: ScrapeResponse;
+};
+
+export type SharedLinks = {
+	id: string[];
+	page_link: (string | null)[];
+	name: (string | null)[];
+	total_reviews: (number | null)[];
+};

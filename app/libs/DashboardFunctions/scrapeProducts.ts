@@ -13,7 +13,7 @@ export default async function scrapeProducts(
 	let end: number = new Date().getTime();
 	let scrapeIndex = "";
 
-	const { retailer, target, startIndex, endIndex, brandUrl } = input;
+	const { retailer, target, startIndex, endIndex, url } = input;
 
 	let brands: AllBrands[] = [];
 

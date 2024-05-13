@@ -42,7 +42,8 @@ export default function SelectForm() {
 			target: "Reviews",
 			startIndex: "A",
 			endIndex: "Z",
-			brandUrl: "",
+			// productLimit: 1000000,
+			url: "",
 		},
 	});
 
@@ -54,7 +55,8 @@ export default function SelectForm() {
 				target: target,
 				startIndex: data.startIndex.toUpperCase(),
 				endIndex: data.endIndex.toUpperCase(),
-				brandUrl: data.brandUrl?.toLowerCase(),
+				// productLimit: data.productLimit,
+				url: data.url?.toLowerCase(),
 			}),
 			headers: {
 				"Content-Type": "application/json",
@@ -92,6 +94,7 @@ export default function SelectForm() {
 							<Label>Target</Label>
 							<Label>Start Index</Label>
 							<Label>End Index</Label>
+							{/* <Label>Product Limit</Label> */}
 							<Label>Brand</Label>
 							<Select onValueChange={setRetailer}>
 								<SelectTrigger
@@ -167,12 +170,20 @@ export default function SelectForm() {
 								placeholder="End Index"
 								className="bg-white"
 							/>
+							{/* <Input
+								{...form.register("productLimit")}
+								type="number"
+								id="productLimit"
+								name="productLimit"
+								placeholder="Product Limit"
+								className="bg-white"
+							/> */}
 							<Input
-								{...form.register("brandUrl")}
+								{...form.register("url")}
 								type="text"
-								id="brandUrl"
-								name="brandUrl"
-								placeholder="Brand Url"
+								id="url"
+								name="url"
+								placeholder="Brand/Product Url"
 								className="bg-white"
 							/>
 
@@ -188,8 +199,11 @@ export default function SelectForm() {
 							<Label>
 								{form.formState.errors.endIndex?.message}
 							</Label>
+							{/* <Label>
+								{form.formState.errors.productLimit?.message}
+							</Label> */}
 							<Label>
-								{form.formState.errors.brandUrl?.message}
+								{form.formState.errors.url?.message}
 							</Label>
 						</div>
 

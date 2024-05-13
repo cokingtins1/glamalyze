@@ -5,12 +5,14 @@ import { MetaData, ReviewsScrape } from "../libs/types";
 
 export async function getUltaReviews(
 	url: string | null,
-	productId: string
+	productId: string,
+	reviewsPresent: boolean
 ): Promise<ReviewsScrape> {
 	try {
-		const { metaData, reviewsData } = await runUltaScraper(
+		const { metaData, reviewsData, response } = await runUltaScraper(
 			url as string,
 			productId,
+			reviewsPresent,
 			{
 				reviewSelector: {
 					reviewListContSelector: '[data-testid="review-list"]',
@@ -54,7 +56,7 @@ export async function getUltaReviews(
 		);
 
 		if (Array.isArray(reviewsData)) {
-			return { metaData, reviewsData };
+			return { metaData, reviewsData, response };
 		} else {
 			throw new Error("No reviews data found");
 		}
@@ -69,6 +71,11 @@ export async function getUltaReviews(
 			percent_recommended: null,
 			total_reviews: null,
 		};
-		return { metaData, reviewsData: [] };
+
+		return {
+			metaData,
+			reviewsData: [],
+			response: { status: { success: false, messasge: "" } },
+		};
 	}
 }

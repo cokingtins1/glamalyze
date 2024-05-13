@@ -23,6 +23,7 @@ export async function POST(req: Request) {
 
 	if (!result.success) {
 		result.error.issues.forEach((issue) => {
+			console.log(issue.message);
 			zodErrors = { ...zodErrors, [issue.path[0]]: issue.message };
 		});
 	}
@@ -34,9 +35,9 @@ export async function POST(req: Request) {
 				: { success: { data: "data..." } }
 		);
 	}
-	const { retailer, target, startIndex, endIndex, brandUrl } = result.data;
+	const { retailer, target, startIndex, endIndex, url } = result.data;
 
-	if (brandUrl && !brandUrl.includes(retailer.toLowerCase())) {
+	if (url && !url.includes("ulta.com") && !url.includes("sephora.com")) {
 		return NextResponse.json({
 			message: {
 				executionTime: `${(end - start) / 1000}`,
@@ -46,16 +47,10 @@ export async function POST(req: Request) {
 		});
 	}
 
-	console.log(result.data);
-
 	if (result.data.target === "Products") {
 		returnMessage = await scrapeProducts(result.data);
 	} else if (result.data.target === "Reviews") {
-		//scrapeSharedReviews
-		//scrapeReviews
-		if (result.data.retailer === "Shared") {
-			returnMessage = await scrapeSharedReviews(result.data);
-		}
+		returnMessage = await scrapeSharedReviews(result.data);
 	}
 
 	return NextResponse.json({

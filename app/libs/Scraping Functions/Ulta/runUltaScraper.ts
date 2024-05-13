@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
-import { MetaData, OptionProps, Review } from "../../types";
+import { MetaData, OptionProps, Review, ScrapeResponse } from "../../types";
 import { scrapeUltaReviews } from "./scrapeUltaReviews";
 import { loadContent } from "./loadContent";
 import { scrapeUltaMetadata } from "./scrapeUltaMetadata";
@@ -9,21 +9,36 @@ import { scrapeUltaMetadata } from "./scrapeUltaMetadata";
 export async function runUltaScraper(
 	url: string,
 	productId: string,
+	reviewsPresent: boolean,
 	options: OptionProps
-): Promise<{ metaData: MetaData; reviewsData: Review[] }> {
-	if (!url || !options)
-		return {
-			metaData: {
-				product_id: productId,
-				review_histogram: [],
-				product_price: null,
-				retailer_id: "Ulta",
-				avg_rating: null,
-				percent_recommended: null,
-				total_reviews: null,
-			},
-			reviewsData: [],
-		};
+): Promise<{
+	metaData: MetaData;
+	reviewsData: Review[];
+	response: ScrapeResponse;
+}> {
+	let metaData: MetaData = {
+		product_id: productId,
+		review_histogram: [],
+		product_price: null,
+		retailer_id: "Ulta",
+		avg_rating: null,
+		percent_recommended: null,
+		total_reviews: null,
+	};
+	let reviewsData: Review[] = [];
+
+	let response: ScrapeResponse = {
+		status: {
+			success: false,
+			messasge: "",
+		},
+	};
+
+	if (!url || !options) {
+		response.status.success = false;
+		response.status.messasge = "No Url provided, or error with options";
+		return { metaData, reviewsData, response };
+	}
 
 	puppeteer.use(StealthPlugin());
 
@@ -37,9 +52,50 @@ export async function runUltaScraper(
 		let pageCount = 0;
 		let currentPage = 1;
 
+		// Check for for "Page can't load"
+
+		const pageCantLoad = await page.evaluate(() => {
+			let result = false;
+			const msgEl = document.querySelector(
+				".Text-ds.Text-ds--title-2.Text-ds--center"
+			);
+			const msgText = msgEl ? msgEl.textContent : "";
+
+			if (msgText?.includes("beauty rest")) {
+				result = true;
+			}
+			return result;
+		});
+
+		if (pageCantLoad) {
+			return {
+				metaData,
+				reviewsData,
+				response: {
+					status: {
+						success: true,
+						messasge: "Page can't be loaded",
+					},
+				},
+			};
+		}
+
 		// Scrape metadata once
 
-		const metaData = await scrapeUltaMetadata(page, options);
+		metaData = await scrapeUltaMetadata(page, options);
+
+		if (!reviewsPresent) {
+			return {
+				metaData,
+				reviewsData,
+				response: {
+					status: {
+						success: true,
+						messasge: "No Reviews per product table",
+					},
+				},
+			};
+		}
 
 		while (moreReviewsExist) {
 			pageCount++;
@@ -48,11 +104,23 @@ export async function runUltaScraper(
 
 			await loadContent(page);
 
+			let reviewsPresent = await page.evaluate(() => {
+				let el = document.querySelector(".pr-rd-no-reviews");
+				return el ? true : false;
+			});
+
+			if (reviewsPresent) {
+				response.status.success = false;
+				response.status.messasge = "No Reviews Found";
+
+				return { metaData, reviewsData, response };
+			}
+
 			// Filter Code:
-			const { selector, name } = options.filters.mostHelpful;
 
 			if (pageCount === 1) {
-				// Only select filter on first pagination
+				const { selector, name } = options.filters.mostHelpful;
+
 				await page.select(selector, name);
 			}
 
@@ -90,20 +158,13 @@ export async function runUltaScraper(
 		}
 
 		await browser.close();
-		return { metaData, reviewsData };
+		response.status.success = true;
+		response.status.messasge = `${reviewsData.length} reviews found `;
+		return { metaData, reviewsData, response };
 	} catch (error) {
+		response.status.success = false;
+		response.status.messasge = "";
 		console.error("Error occurred:", error);
-		return {
-			metaData: {
-				product_id: productId,
-				review_histogram: [],
-				product_price: null,
-				retailer_id: "Ulta",
-				avg_rating: null,
-				percent_recommended: null,
-				total_reviews: null,
-			},
-			reviewsData: [],
-		};
+		return { metaData, reviewsData, response };
 	}
 }

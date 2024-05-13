@@ -9,6 +9,7 @@ import {
 	Review,
 	ReviewsScrape,
 	ScrapeReturnMessage,
+	SharedLinks,
 	TScrapeSchema,
 } from "../types";
 import { getSharedProducts } from "./getSharedProducts";
@@ -27,90 +28,92 @@ export default async function scrapeSharedReviews(
 
 	console.log("input:", input);
 
-	// let products: AllProducts[] | SharedProduct[] = [];
+	const allLinks: SharedLinks[] = await getSharedProducts(input);
 
-	const products: SharedProduct[] = await getSharedProducts(input);
+	console.log(allLinks)
 
-	const ultaLinks = products
-		.filter((p) => p.ulta_page_link !== null)
-		.map((p) => ({
-			id: p.ulta_product_id,
-			page_link: p.ulta_page_link,
-			name: p.ulta_product_name,
-		}));
+	if (allLinks.length > 0) {
+		const failedScrapes = await runReviewScraper(allLinks);
 
-	const sephoraLinks = products
-		.filter((p) => p.sephora_page_link !== null)
-		.map((p) => ({
-			id: p.sephora_product_id,
-			page_link: p.sephora_page_link,
-			name: p.sephora_product_name,
-		}));
-
-	const allLinks = [...ultaLinks, ...sephoraLinks];
-
-	console.log(allLinks.length);
-	console.log(ultaLinks.length);
-	console.log(sephoraLinks.length);
-
-	console.log(ultaLinks.slice(0, 5));
-	console.log(sephoraLinks.slice(0, 5));
-
-	if (products.length > 0) {
-		await runReviewScraper(allLinks);
+		if(failedScrapes.length > 0){
+			console.log(`Running ${failedScrapes.length} failed scrapes`)
+			await runReviewScraper(failedScrapes)
+		}
 	}
 
-	// Shared:
-	// scrape review at each product where ulta/sephora_page_link !== null
-
-	type AllLinks = {
-		id: string;
-		page_link: string | null;
-		name: string | null;
-	};
-	async function runReviewScraper(allProducts: AllLinks[]) {
-		let ultaIndex = 0;
-		let sephoraIndex = allProducts.length / 2 - 1;
+	async function runReviewScraper(allProducts: SharedLinks[]) {
+		let count = 108;
 		const numProducts = allProducts.length;
-		let allIndex = 0;
 
-		let data: SharedProduct[] = [];
-		while (allIndex < numProducts) {
-			const ultaUrl = allProducts[ultaIndex].page_link;
-			const sephoraUrl = allProducts[sephoraIndex].page_link;
+		let failedScrapes: SharedLinks[] = [];
 
-			const ultaBrandId = allProducts[ultaIndex].id;
-			const sephoraBrandId = allProducts[sephoraIndex].id;
+		while (count < allProducts.length) {
+			const [ultaUrl, sephoraUrl] = allProducts[count].page_link;
+			const [ultaProductId, sephoraProductId] = allProducts[count].id;
+			const [ultaReviews, sephoraReviews] = allProducts[
+				count
+			].total_reviews?.map(Boolean) ?? [false, false];
+
 
 			console.log(
 				"current index:",
-				`${allIndex} of ${numProducts}`,
+				`${count}/ ${allProducts.length} of ${numProducts}`,
 				"brand name:",
-				allProducts[ultaIndex].name
+				`${allProducts[count].name[0]}/${allProducts[count].name[1]}`
 			);
+
 			const [ultaData, sephoraData] = await Promise.all([
-				getUltaReviews(ultaUrl, ultaBrandId),
-				getSephoraReviews(sephoraUrl, sephoraBrandId),
+				getUltaReviews(ultaUrl, ultaProductId, ultaReviews),
+				getSephoraReviews(sephoraUrl, sephoraProductId, sephoraReviews),
 			]);
 
-			if (ultaData || sephoraData) {
-				await upsertData(ultaData, "Ulta", allProducts[ultaIndex].id);
+			if (!ultaData.response.status.success) {
+				failedScrapes.push({
+					id: [ultaProductId, ""],
+					page_link: [ultaUrl, ""],
+					name: allProducts[0].name,
+					total_reviews: allProducts[count].total_reviews,
+				});
+				console.log(`${ultaData.response.status.messasge}: ${ultaUrl}`);
+			}
+			if (!sephoraData.response.status.success) {
+				failedScrapes.push({
+					id: ["", sephoraProductId],
+					page_link: ["", sephoraUrl],
+					name: allProducts[0].name,
+					total_reviews: allProducts[count].total_reviews,
+				});
+				console.log(
+					`${sephoraData.response.status.messasge}: ${sephoraUrl}`
+				);
+			}
+
+			if (ultaData) {
+				await upsertData(
+					ultaData,
+					"Ulta",
+					allProducts[count].id[0],
+					ultaReviews
+				);
+			}
+			if (sephoraData) {
 				await upsertData(
 					sephoraData,
 					"Sephora",
-					allProducts[sephoraIndex].id
+					allProducts[count].id[1],
+					sephoraReviews
 				);
 			}
-			ultaIndex++;
-			sephoraIndex++;
-			allIndex++;
+			count++;
 		}
+		return failedScrapes
 	}
 
 	async function upsertData(
 		data: ReviewsScrape,
 		retailer: "Ulta" | "Sephora",
-		productId: string
+		productId: string,
+		reviewsPresent: boolean
 	) {
 		const scrubbedProductData = Object.fromEntries(
 			Object.entries(data.metaData).filter(
@@ -127,23 +130,16 @@ export default async function scrapeSharedReviews(
 				where: { product_id: productId },
 				data: scrubbedProductData,
 			});
-
-			if (data.reviewsData.length > 0) {
-				await prisma.ultaReview.createMany({
-					data: data.reviewsData,
-				});
-			}
 		} else if (retailer === "Sephora") {
 			await prisma.sephoraProduct.update({
 				where: { product_id: productId },
 				data: scrubbedProductData,
 			});
+		}
 
-			if (data.reviewsData.length > 0) {
-				await prisma.sephoraReview.createMany({
-					data: data.reviewsData,
-				});
-			}
+		if (!reviewsPresent) {
+			console.log(data.response.status.messasge);
+			return;
 		}
 
 		let existingReviews: Review[] = [];

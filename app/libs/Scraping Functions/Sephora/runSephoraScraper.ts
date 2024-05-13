@@ -1,31 +1,47 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
-import { MetaData, OptionProps, Review } from "../../types";
+import { MetaData, OptionProps, Review, ScrapeResponse } from "../../types";
 import { scrapeSephoraReviews } from "./scrapeSephoraReviews";
 
 import { scrapeSephoraMetadata } from "./scrapeSephoraMetadata";
 
 import { loadSephoraContent } from "./loadSephoraContent";
+import { loadContent } from "../Ulta/loadContent";
 
 export async function runSephoraScraper(
 	url: string,
 	productId: string,
+	reviewsPresent: boolean,
 	options: OptionProps
-): Promise<{ metaData: MetaData; reviewsData: Review[] }> {
-	if (!url || !options)
-		return {
-			metaData: {
-				product_id: productId,
-				review_histogram: [],
-				product_price: null,
-				retailer_id: "Sephora",
-				avg_rating: null,
-				percent_recommended: null,
-				total_reviews: null,
-			},
-			reviewsData: [],
-		};
+): Promise<{
+	metaData: MetaData;
+	reviewsData: Review[];
+	response: ScrapeResponse;
+}> {
+	let metaData: MetaData = {
+		product_id: productId,
+		review_histogram: [],
+		product_price: null,
+		retailer_id: "Ulta",
+		avg_rating: null,
+		percent_recommended: null,
+		total_reviews: null,
+	};
+	let reviewsData: Review[] = [];
+
+	let response: ScrapeResponse = {
+		status: {
+			success: false,
+			messasge: "",
+		},
+	};
+
+	if (!url || !options) {
+		response.status.success = false;
+		response.status.messasge = "No Url provided, or error with options";
+		return { metaData, reviewsData, response };
+	}
 
 	puppeteer.use(StealthPlugin());
 
@@ -52,15 +68,52 @@ export async function runSephoraScraper(
 
 		const metaData = await scrapeSephoraMetadata(page, options);
 
+		if (!reviewsPresent) {
+			return {
+				metaData,
+				reviewsData,
+				response: {
+					status: {
+						success: true,
+						messasge: "No Reviews per product table",
+					},
+				},
+			};
+		}
+
 		while (moreReviewsExist) {
 			pageCount++;
 
 			// Filter Code:
 			if (pageCount === 1) {
-				await page.waitForSelector("#custom_sort_trigger");
+				let reviewsPresent = await page.evaluate(() => {
+					let cont = document.querySelector(".css-1g8klpm.eanm77i0");
+					if (!cont) return false;
+					let el = cont.querySelector(".css-s2d5ab");
+					return el ? true : false;
+				});
+				if (reviewsPresent) {
+					response.status.success = false;
+					response.status.messasge = "No Reviews Found";
+
+					return { metaData, reviewsData, response };
+				}
+
+				let sortButton = await page.evaluate(() => {
+					let el = document.querySelector("#custom_sort_trigger");
+					return el ? true : false;
+				});
+
+				if (!sortButton) {
+					response.status.success = false;
+					response.status.messasge = "Sort button not found";
+
+					return { metaData, reviewsData, response };
+				}
+
 				await page.click("#custom_sort_trigger");
 				await page.click("#custom_sort > :first-child");
-				await delay(1000)
+				await delay(1000);
 			}
 
 			const nextSelector = options.globalSelector.nextPageSelector;
@@ -96,21 +149,13 @@ export async function runSephoraScraper(
 		}
 
 		await browser.close();
-		return { metaData, reviewsData };
+		response.status.success = true;
+		response.status.messasge = `${reviewsData.length} reviews found `;
+		return { metaData, reviewsData, response };
 	} catch (error) {
-		console.log("url:", url);
+		response.status.success = false;
+		response.status.messasge = "";
 		console.error("Error occurred:", error);
-		return {
-			metaData: {
-				product_id: productId,
-				review_histogram: [],
-				product_price: null,
-				retailer_id: "Sephora",
-				avg_rating: null,
-				percent_recommended: null,
-				total_reviews: null,
-			},
-			reviewsData: [],
-		};
+		return { metaData, reviewsData, response };
 	}
 }

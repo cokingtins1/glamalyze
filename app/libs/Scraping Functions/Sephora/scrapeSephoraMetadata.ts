@@ -1,9 +1,9 @@
 import { MetaData, OptionProps } from "../../types";
 import { Page } from "puppeteer";
-import { loadSephoraContent } from "./loadSephoraContent";
+import { loadContent } from '../Ulta/loadContent';
 
 export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
-	await loadSephoraContent(page);
+	await loadContent(page)
 
 	const metaData = await page.evaluate((options) => {
 		function getNumber(text: string | null): number | null {

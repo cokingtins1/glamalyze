@@ -187,13 +187,27 @@ export default async function Page() {
 		// const productInfo = await getProductDetails(skuArray);
 
 		const url =
-			"https://www.sephora.com/product/dior-rouge-dior-lipstick-P467760?skuId=2750966&icid2=products grid:p467760:product";
-
+			"https://www.ulta.com/p/water-drench-hyaluronic-cloud-makeup-removing-gel-cleanser-pimprod2024512?sku=2579756";
 		const id = "4f65289a-b720-4c56-883b-3b0ed83a3aa7";
 		console.log("getting data");
-		// const data = await getSephoraReviews(url, id);
+		// const data = await getSephoraReviews(url, id, true);
+		// const data = await getUltaReviews(url, id, true);
 		// console.log(data);
+
 		console.log("done");
+
+		const testUrl = "https://www.sephora.com/product/mario-badescu-witch-hazel-lavender-toner-P462379?skuId=2387967&icid2=products"
+
+		const specificProduct = await prisma.sharedProduct.findFirst({
+			where: {
+				OR: [
+					{ ulta_page_link: { contains: testUrl } },
+					{ sephora_page_link: { contains: testUrl } },
+				],
+			},
+		});
+
+		console.log(specificProduct)
 
 		const newReviews = [
 			{
@@ -372,7 +386,6 @@ export default async function Page() {
 			}
 		});
 
-		console.log("Update:", updatedReviews);
 		// console.log("Add:", revToAdd);
 	}
 

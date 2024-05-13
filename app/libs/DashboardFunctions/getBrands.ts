@@ -6,17 +6,17 @@ import { TScrapeSchema } from "../types";
 const prisma = new PrismaClient();
 
 export async function getBrands(input: TScrapeSchema) {
-	let { retailer, target, startIndex, endIndex, brandUrl } = input;
+	let { retailer, target, startIndex, endIndex, url } = input;
 
 	let brands: AllBrands[] = [];
 	let zBrands: AllBrands[] = [];
 
-	if (brandUrl) {
+	if (url) {
 		const brand = await prisma.allBrands.findFirst({
 			where: {
 				OR: [
-					{ ulta_page_link: { contains: brandUrl } },
-					{ sephora_page_link: { contains: brandUrl } },
+					{ ulta_page_link: { contains: url } },
+					{ sephora_page_link: { contains: url } },
 				],
 			},
 		});
@@ -29,7 +29,7 @@ export async function getBrands(input: TScrapeSchema) {
 				exists: brandPageExists,
 				brandName,
 				pageUrl,
-			} = await checkBrandExists(brandUrl, retailer);
+			} = await checkBrandExists(url, retailer);
 
 			console.log("brandName:", brandName);
 
