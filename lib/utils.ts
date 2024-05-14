@@ -185,3 +185,13 @@ export function formatTime(time: string | null) {
 		.toString()
 		.padStart(2, "0")}s`;
 }
+
+export const formatPrice = (price: number | null): string => {
+
+	if(!price) return ""
+
+	return new Intl.NumberFormat("en-US", {
+	  style: "currency",
+	  currency: "USD",
+	}).format(price);
+  };

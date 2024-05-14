@@ -153,7 +153,7 @@ export default async function compareProducts(slug: string) {
 				p.page_link !== null &&
 				p.product_id !== null
 			) {
-				return getUltaReviews(p.page_link, p.product_id);
+				return getUltaReviews(p.page_link, p.product_id, true);
 			} else if (
 				p.retailer === "Sephora" &&
 				p.page_link !== null &&
@@ -161,7 +161,8 @@ export default async function compareProducts(slug: string) {
 			) {
 				return getSephoraReviews(
 					`https://www.${p.page_link}`,
-					p.product_id
+					p.product_id,
+					true
 				);
 			}
 		});
@@ -180,7 +181,7 @@ export default async function compareProducts(slug: string) {
 
 	if (validData.length === productInfo.length) {
 		const end = new Date().getTime();
-		console.log(`Execution time: ${(end - start) / 1000} seconds`);
+		// console.log(`Execution time: ${(end - start) / 1000} seconds`);
 		return validData;
 	}
 
@@ -219,20 +220,7 @@ export default async function compareProducts(slug: string) {
 	}
 
 	const end = new Date().getTime();
-	console.log(`Execution time: ${(end - start) / 1000} seconds`);
+	// console.log(`Execution time: ${(end - start) / 1000} seconds`);
 
 	return data;
-
-	// const { metaData: ultaMetaData, reviewsData: ultaReviewsData } = ultaResult;
-	// const { metaData: sephoraMetaData, reviewsData: sephoraReviewsData } =
-	// 	sephoraResult;
-
-	// // await new Promise((resolve) => setTimeout(resolve, 3000));
-
-	// return {
-	// 	ultaMetaData,
-	// 	ultaReviewsData,
-	// 	sephoraMetaData,
-	// 	sephoraReviewsData,
-	// };
 }

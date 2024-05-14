@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import NewQueryDrawer from "./components/NewQueryDrawer";
-import DataDisplay from "./components/Ulta/DataDisplay";
+import DataDisplay from "./components/DataDisplay";
 import NextId from "./components/Data Validation/NextId";
 import { Suspense } from "react";
 import DisplaySkeleton from "./components/Loading Skeletons/DisplaySkeleton";

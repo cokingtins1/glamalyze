@@ -3,7 +3,6 @@ import Image, { StaticImageData } from "next/image";
 import CombinedLogo from "@/public/CombinedLogo.png";
 import { SharedProduct } from "@prisma/client";
 import { SheetClose } from "@/components/ui/sheet";
-import { useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 
 type QueryResultCardProps = {
@@ -24,16 +23,6 @@ export default function QueryResultCard({ data }: QueryResultCardProps) {
 
 		return imageSrc;
 	}
-
-	// const createQueryString = useCallback(
-	// 	(name: string, value: string) => {
-	// 		const params = new URLSearchParams(searchParams.toString());
-	// 		params.set(name, value);
-
-	// 		return params.toString();
-	// 	},
-	// 	[searchParams]
-	// );
 
 	return (
 		<SheetClose asChild>

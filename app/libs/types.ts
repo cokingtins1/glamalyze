@@ -61,6 +61,13 @@ export const querySchema = z.object({
 
 export type TQuerySchema = z.infer<typeof querySchema>;
 
+export const chatSchema = z.object({
+	reviewsText: z.string().optional(),
+	prompt: z.string().optional(),
+});
+
+export type TChatSchema = z.infer<typeof chatSchema>;
+
 export const scrapeSchema = z.object({
 	retailer: z.enum(["Ulta", "Sephora", "Shared"], {
 		errorMap: () => ({ message: "Select a Retailer" }),
