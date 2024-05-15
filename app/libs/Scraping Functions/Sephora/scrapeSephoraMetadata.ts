@@ -1,9 +1,9 @@
 import { MetaData, OptionProps } from "../../types";
 import { Page } from "puppeteer";
-import { loadContent } from '../Ulta/loadContent';
+import { loadContent } from "../Ulta/loadContent";
 
 export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
-	await loadContent(page)
+	await loadContent(page);
 
 	const metaData = await page.evaluate((options) => {
 		function getNumber(text: string | null): number | null {
@@ -42,6 +42,7 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 			total_reviews: null,
 			retailer_id: "Sephora",
 			product_price: null,
+			product_image_url: [],
 		};
 
 		result.retailer_id = "Sephora";
@@ -55,7 +56,7 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 			document.querySelector(totalReviewsSelector)?.textContent || null;
 
 		result.total_reviews = totalReviewsText
-			? parseInt(totalReviewsText)
+			? getNumber(totalReviewsText)
 			: 0;
 
 		const averageRatingText =
@@ -75,6 +76,11 @@ export async function scrapeSephoraMetadata(page: Page, options: OptionProps) {
 		);
 		const reviewHistItems =
 			reviewHistogram?.querySelectorAll(reviewDistSelector);
+
+		// let imageCont = document.querySelector(".MediaWrapper__Image");
+		// const imageEl = imageCont ? imageCont.querySelector("img") : null;
+		// const imageSrc = imageEl ? imageEl.getAttribute("src") : "";
+		// result.product_image_url.push(imageSrc as string);
 
 		if (reviewHistItems && reviewHistItems.length > 0) {
 			result.review_histogram = Array.from(reviewHistItems)

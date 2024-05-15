@@ -37,7 +37,6 @@ export default function ProductMetaData({ data }: ProductMetaDataProps) {
 						alt={`${data.product_name} image`}
 					/>
 				</div>
-				<GoToPage pageLink={data.page_link} />
 			</div>
 			<div className="flex flex-col items-end">
 				<p className="text-lg font-semibold">{data.product_name}</p>

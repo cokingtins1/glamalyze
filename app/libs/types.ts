@@ -1,6 +1,7 @@
 import {
 	SephoraProduct,
 	SephoraReview,
+	SharedProduct,
 	UltaProduct,
 	UltaReview,
 } from "@prisma/client";
@@ -106,6 +107,7 @@ export type MetaData = Pick<
 	| "avg_rating"
 	| "percent_recommended"
 	| "total_reviews"
+	| "product_image_url"
 >;
 
 export type ScrapeResponse = {
@@ -136,4 +138,10 @@ export type SharedLinks = {
 	page_link: (string | null)[];
 	name: (string | null)[];
 	total_reviews: (number | null)[];
+};
+
+export type QueryResult = {
+	filteredShared: SharedProduct[];
+	filteredUlta: AllProducts[];
+	filteredSephora: AllProducts[];
 };

@@ -27,6 +27,7 @@ export async function runSephoraScraper(
 		avg_rating: null,
 		percent_recommended: null,
 		total_reviews: null,
+		product_image_url: []
 	};
 	let reviewsData: Review[] = [];
 

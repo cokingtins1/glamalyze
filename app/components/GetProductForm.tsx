@@ -2,7 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import SubmitForm from "./SubmitForm";
-import { AllProducts, querySchema, TQuerySchema } from "../libs/types";
+import {
+	AllProducts,
+	QueryResult,
+	querySchema,
+	TQuerySchema,
+} from "../libs/types";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,7 +31,7 @@ import scrapeData from "../actions/Compare/compareProducts";
 import { URLPattern } from "next/server";
 
 export default function GetProductForm() {
-	const [data, setData] = useState<SharedProduct[]>([]);
+	const [data, setData] = useState<QueryResult | null>(null);
 
 	const router = useRouter();
 	const pathname = usePathname();
@@ -65,7 +70,6 @@ export default function GetProductForm() {
 
 		if (res.ok) {
 			const responseData = await res.json();
-			console.log("ResponseData", responseData);
 			setData(responseData.success.data);
 		}
 	};
@@ -110,10 +114,12 @@ export default function GetProductForm() {
 					router.push(`/compare/${compareString}`);
 				}}
 			>
-				<QueryResults
-					isSubmitting={form.formState.isSubmitting}
-					data={data}
-				/>
+				{data && (
+					<QueryResults
+						isSubmitting={form.formState.isSubmitting}
+						data={data}
+					/>
+				)}
 			</form>
 		</>
 	);

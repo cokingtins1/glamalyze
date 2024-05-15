@@ -30,14 +30,14 @@ export default async function scrapeSharedReviews(
 
 	const allLinks: SharedLinks[] = await getSharedProducts(input);
 
-	console.log(allLinks)
+	console.log(allLinks);
 
 	if (allLinks.length > 0) {
 		const failedScrapes = await runReviewScraper(allLinks);
 
-		if(failedScrapes.length > 0){
-			console.log(`Running ${failedScrapes.length} failed scrapes`)
-			await runReviewScraper(failedScrapes)
+		if (failedScrapes.length > 0) {
+			console.log(`Running ${failedScrapes.length} failed scrapes`);
+			await runReviewScraper(failedScrapes);
 		}
 	}
 
@@ -48,18 +48,18 @@ export default async function scrapeSharedReviews(
 		let failedScrapes: SharedLinks[] = [];
 
 		while (count < allProducts.length) {
-			const [ultaUrl, sephoraUrl] = allProducts[count].page_link;
 			const [ultaProductId, sephoraProductId] = allProducts[count].id;
+			const [ultaUrl, sephoraUrl] = allProducts[count].page_link;
+			const [ultaProductName, sephoraProductName] = allProducts[count].name;
 			const [ultaReviews, sephoraReviews] = allProducts[
 				count
 			].total_reviews?.map(Boolean) ?? [false, false];
-
 
 			console.log(
 				"current index:",
 				`${count}/ ${allProducts.length} of ${numProducts}`,
 				"brand name:",
-				`${allProducts[count].name[0]}/${allProducts[count].name[1]}`
+				`${ultaProductName}/${sephoraProductName}`
 			);
 
 			const [ultaData, sephoraData] = await Promise.all([
@@ -89,24 +89,19 @@ export default async function scrapeSharedReviews(
 			}
 
 			if (ultaData) {
-				await upsertData(
-					ultaData,
-					"Ulta",
-					allProducts[count].id[0],
-					ultaReviews
-				);
+				await upsertData(ultaData, "Ulta", ultaProductId, ultaReviews);
 			}
 			if (sephoraData) {
 				await upsertData(
 					sephoraData,
 					"Sephora",
-					allProducts[count].id[1],
+					sephoraProductId,
 					sephoraReviews
 				);
 			}
 			count++;
 		}
-		return failedScrapes
+		return failedScrapes;
 	}
 
 	async function upsertData(
@@ -124,6 +119,8 @@ export default async function scrapeSharedReviews(
 					!(Array.isArray(v) && v.length === 0)
 			)
 		);
+
+		// await prisma.sharedProduct.update({where: {AND: [{ulta_product_id: }]}})
 
 		if (retailer === "Ulta") {
 			await prisma.ultaProduct.update({

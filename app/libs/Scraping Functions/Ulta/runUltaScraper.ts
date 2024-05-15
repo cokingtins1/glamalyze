@@ -24,6 +24,7 @@ export async function runUltaScraper(
 		avg_rating: null,
 		percent_recommended: null,
 		total_reviews: null,
+		product_image_url: [],
 	};
 	let reviewsData: Review[] = [];
 

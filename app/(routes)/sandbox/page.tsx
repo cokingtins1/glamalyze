@@ -187,27 +187,22 @@ export default async function Page() {
 		// const productInfo = await getProductDetails(skuArray);
 
 		const url =
-			"https://www.ulta.com/p/water-drench-hyaluronic-cloud-makeup-removing-gel-cleanser-pimprod2024512?sku=2579756";
-		const id = "4f65289a-b720-4c56-883b-3b0ed83a3aa7";
+			"https://www.sephora.com/product/korres-wild-rose-night-brightening-sleeping-facial-P456418?skuId=2338424&icid2=products%20grid:p456418:product";
 		console.log("getting data");
-		// const data = await getSephoraReviews(url, id, true);
+		// const data = await getSephoraReviews(url, "696969696", true);
 		// const data = await getUltaReviews(url, id, true);
 		// console.log(data);
 
+		const query = "Industrial Strength Hand Healer";
+
+		const queryRes = await prisma.$queryRaw`
+			SELECT * FROM "SharedProduct" 
+			WHERE "ulta_product_name" LIKE ${query}
+			AND "similarity_score" = 1
+			`;
+		console.log(queryRes);
+
 		console.log("done");
-
-		const testUrl = "https://www.sephora.com/product/mario-badescu-witch-hazel-lavender-toner-P462379?skuId=2387967&icid2=products"
-
-		const specificProduct = await prisma.sharedProduct.findFirst({
-			where: {
-				OR: [
-					{ ulta_page_link: { contains: testUrl } },
-					{ sephora_page_link: { contains: testUrl } },
-				],
-			},
-		});
-
-		console.log(specificProduct)
 
 		const newReviews = [
 			{

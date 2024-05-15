@@ -6,6 +6,9 @@ import RatingChart from "./RatingChart";
 import ProductMetaData from "./ProductMetaData";
 import { AllProducts, Review } from "../libs/types";
 import OpenAIAnalysis from "./OpenAIAnalysis";
+import GoToPage from "./GoToPage";
+import { Card } from "@/components/ui/card";
+
 
 type DataDisplayProps = {
 	data: AllProducts;
@@ -16,7 +19,7 @@ export default function DataDisplay({ data, reviewsData }: DataDisplayProps) {
 	if (!data) return null;
 
 	return (
-		<div className="flex flex-col justify-start items-center border border-white rounded-lg bg-white p-4">
+		<Card className="flex flex-col justify-start items-center bg-white p-4">
 			<div className="h-[100px] w-[200px] relative">
 				<Image
 					src={
@@ -29,21 +32,21 @@ export default function DataDisplay({ data, reviewsData }: DataDisplayProps) {
 				/>
 			</div>
 
-			<ProductMetaData data={data} />
 			{data && (
 				<div className="flex flex-col items-center gap-2">
+					<GoToPage pageLink={data.page_link} />
+
 					<RatingChart metaData={data} />
-					<OpenAIAnalysis reviews={reviewsData} />
 
 					<div className="flex flex-col w-full mt-4">
-						<p className="text-sm text-slate-500 pl-4 mb-2">{`Reviews (${reviewsData.length})`}</p>
+						<p className="text-sm text-slate-500 pl-4 mb-2">{`Reviews (${reviewsData.length}) - Most Helpful`}</p>
 						{reviewsData.map((review, index) => (
 							<ReviewCard key={index} reviewData={review} />
 						))}
 					</div>
 				</div>
 			)}
-		</div>
+		</Card>
 	);
 }
 

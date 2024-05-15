@@ -186,12 +186,17 @@ export function formatTime(time: string | null) {
 		.padStart(2, "0")}s`;
 }
 
-export const formatPrice = (price: number | null): string => {
-
-	if(!price) return ""
+export const formatPrice = (price: number | null | undefined): string => {
+	if (!price) return "";
 
 	return new Intl.NumberFormat("en-US", {
-	  style: "currency",
-	  currency: "USD",
+		style: "currency",
+		currency: "USD",
 	}).format(price);
-  };
+};
+
+export const formatPercent = (percent: number | null | undefined): string => {
+	if (!percent) return "N/A";
+
+	return `${percent}%`;
+};

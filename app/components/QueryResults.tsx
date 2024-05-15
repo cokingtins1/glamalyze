@@ -2,14 +2,17 @@ import React, { Suspense } from "react";
 import Query from "../libs/QueryFunctions/query";
 import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
 import QueryResultCard from "./QueryResultCard";
-import { SharedProduct } from '@prisma/client';
+import { SharedProduct } from "@prisma/client";
+import { QueryResult } from '../libs/types';
+import RetailerQueryResultCard from './RetailerQueryResultCard';
 
 type Props = {
 	isSubmitting: boolean;
-	data: SharedProduct[];
+	data: QueryResult;
 };
 
 export default function QueryResults({ isSubmitting, data }: Props) {
+	console.log(data)
 	return (
 		<>
 			{isSubmitting && (
@@ -20,13 +23,25 @@ export default function QueryResults({ isSubmitting, data }: Props) {
 				</div>
 			)}
 
-			{!isSubmitting && data.length > 0 && (
+			{!isSubmitting && (
 				<div className="mt-4 space-y-4">
-					{data.map((result, index) => (
+					<p>Shared Products</p>
+					{data.filteredShared.map((result, index) => (
 						<QueryResultCard key={index} data={result} />
+					))}
+					<p>Ulta Products</p>
+					{data.filteredUlta.map((result, index) => (
+						<RetailerQueryResultCard key={index} data={result} />
+					))}
+					<p>Sephora Products</p>
+					{data.filteredSephora.map((result, index) => (
+						<RetailerQueryResultCard key={index} data={result} />
 					))}
 				</div>
 			)}
 		</>
 	);
 }
+
+
+//Rocky1!

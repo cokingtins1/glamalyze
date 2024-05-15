@@ -42,11 +42,15 @@ export default function RatingChart({ metaData }: DataProps) {
 						</p>
 					</div>
 					<p className="text-xs text-slate-400 pb-1">
-						{metaData.total_reviews} Reviews
+						{metaData.total_reviews?.toLocaleString()} Reviews
 					</p>
 				</div>
 				<div className="flex flex-col items-center">
-					<p className="font-bold">{metaData.percent_recommended}%</p>
+					<p className="font-bold">
+						{metaData.percent_recommended
+							? metaData.percent_recommended + "%"
+							: "N/A"}
+					</p>
 					<p className="text-xs">Recommended</p>
 				</div>
 			</div>

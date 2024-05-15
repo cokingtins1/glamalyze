@@ -12,10 +12,10 @@ export default async function Page({ params }: Props) {
 	return (
 		<>
 			<main>
-				<section>
-					<SharedComparison/>
+				<section className=''>
+					<SharedComparison data={data}/>
 				</section>
-				<section className="grid grid-cols-2 gap-4 w-full mt-12">
+				<section className="grid grid-cols-2 gap-4 w-full mt-4">
 					{data.length > 0 &&
 						data.map(
 							(result, index) =>

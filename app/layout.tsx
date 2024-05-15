@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { NextUIProvider } from "@nextui-org/react";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,7 +18,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<main className="mx-auto max-w-[1440px] mt-[80px] mb-[100px]">{children}</main>
+				<main className="mx-auto max-w-[1440px] h-dvh pt-[80px] pb-[100px]">
+					<NextUIProvider>{children}</NextUIProvider>
+				</main>
 			</body>
 		</html>
 	);

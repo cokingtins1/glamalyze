@@ -12,11 +12,8 @@ type Props = {
 };
 
 export default async function Home({ searchParams }: Props) {
-	const ultaData = "";
-	const sephoraData = "";
-
 	return (
-		<main className="flex flex-col items-start justify-center">
+		<main className="flex flex-col items-start justify-center h-full">
 			<NewQueryDrawer searchParams={searchParams} />
 		</main>
 	);

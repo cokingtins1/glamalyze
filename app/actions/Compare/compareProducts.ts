@@ -45,7 +45,7 @@ export default async function compareProducts(slug: string) {
 			reviewsData: Review[];
 		}[] = [];
 		for (const { product_id, retailer } of products) {
-			const expirationThreshold = 7; // days
+			const expirationThreshold = 365; // days
 			const today = new Date();
 			const expiration = new Date(
 				today.getTime() - expirationThreshold * 24 * 60 * 60 * 1000
@@ -63,6 +63,9 @@ export default async function compareProducts(slug: string) {
 					where: {
 						updated_at: { gt: expiration },
 						product_id: product_id,
+					},
+					orderBy: {
+						up_votes: "desc",
 					},
 				});
 
@@ -82,6 +85,9 @@ export default async function compareProducts(slug: string) {
 					where: {
 						updated_at: { gt: expiration },
 						product_id: product_id,
+					},
+					orderBy: {
+						up_votes: "desc",
 					},
 				});
 
