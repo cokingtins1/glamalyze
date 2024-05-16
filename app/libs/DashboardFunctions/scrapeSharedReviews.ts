@@ -1,4 +1,5 @@
 import {
+	FailedScrapes,
 	PrismaClient,
 	SephoraReviewer,
 	SharedProduct,
@@ -16,6 +17,7 @@ import { getSharedProducts } from "./getSharedProducts";
 
 import { getUltaReviews } from "@/app/actions/getUltaReviews";
 import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
+import { getSharedUpdate } from "@/lib/badUtils";
 
 const prisma = new PrismaClient();
 
@@ -23,43 +25,49 @@ export default async function scrapeSharedReviews(
 	input: TScrapeSchema
 ): Promise<ScrapeReturnMessage> {
 	let start = new Date().getTime();
-	let end: number = new Date().getTime();
 	let scrapeIndex = "";
 
 	console.log("input:", input);
 
 	const allLinks: SharedLinks[] = await getSharedProducts(input);
 
-	console.log(allLinks);
+	console.log(allLinks.length);
 
 	if (allLinks.length > 0) {
 		const failedScrapes = await runReviewScraper(allLinks);
 
 		if (failedScrapes.length > 0) {
+			console.log("failed scrapes:", failedScrapes);
 			console.log(`Running ${failedScrapes.length} failed scrapes`);
-			await runReviewScraper(failedScrapes);
+			const failedScrapesTwice = await runReviewScraper(failedScrapes);
+			await prisma.failedScrapes.createMany({ data: failedScrapesTwice });
 		}
 	}
 
-	async function runReviewScraper(allProducts: SharedLinks[]) {
-		let count = 108;
+	async function runReviewScraper(
+		allProducts: SharedLinks[]
+	): Promise<FailedScrapes[]> {
+		let count = 0;
+		let forceStop = Infinity;
 		const numProducts = allProducts.length;
 
-		let failedScrapes: SharedLinks[] = [];
+		let failedScrapes: FailedScrapes[] = [];
 
-		while (count < allProducts.length) {
+		while (count < allProducts.length && count < forceStop) {
+			const sharedId = allProducts[count].sharedId[0];
 			const [ultaProductId, sephoraProductId] = allProducts[count].id;
 			const [ultaUrl, sephoraUrl] = allProducts[count].page_link;
-			const [ultaProductName, sephoraProductName] = allProducts[count].name;
+			const [ultaProductName, sephoraProductName] =
+				allProducts[count].name;
 			const [ultaReviews, sephoraReviews] = allProducts[
 				count
 			].total_reviews?.map(Boolean) ?? [false, false];
 
 			console.log(
 				"current index:",
-				`${count}/ ${allProducts.length} of ${numProducts}`,
-				"brand name:",
-				`${ultaProductName}/${sephoraProductName}`
+				`${count + 1}/ ${allProducts.length} of ${numProducts}`,
+				"product name:",
+				`${ultaProductName}`
 			);
 
 			const [ultaData, sephoraData] = await Promise.all([
@@ -69,7 +77,9 @@ export default async function scrapeSharedReviews(
 
 			if (!ultaData.response.status.success) {
 				failedScrapes.push({
+					scrape_id: crypto.randomUUID(),
 					id: [ultaProductId, ""],
+					sharedId: [sharedId],
 					page_link: [ultaUrl, ""],
 					name: allProducts[0].name,
 					total_reviews: allProducts[count].total_reviews,
@@ -78,7 +88,9 @@ export default async function scrapeSharedReviews(
 			}
 			if (!sephoraData.response.status.success) {
 				failedScrapes.push({
+					scrape_id: crypto.randomUUID(),
 					id: ["", sephoraProductId],
+					sharedId: [sharedId],
 					page_link: ["", sephoraUrl],
 					name: allProducts[0].name,
 					total_reviews: allProducts[count].total_reviews,
@@ -88,15 +100,22 @@ export default async function scrapeSharedReviews(
 				);
 			}
 
-			if (ultaData) {
-				await upsertData(ultaData, "Ulta", ultaProductId, ultaReviews);
+			if (ultaData.response.status.success) {
+				await upsertData(
+					ultaData,
+					"Ulta",
+					ultaProductId,
+					ultaReviews,
+					sharedId
+				);
 			}
-			if (sephoraData) {
+			if (sephoraData.response.status.success) {
 				await upsertData(
 					sephoraData,
 					"Sephora",
 					sephoraProductId,
-					sephoraReviews
+					sephoraReviews,
+					sharedId
 				);
 			}
 			count++;
@@ -108,7 +127,8 @@ export default async function scrapeSharedReviews(
 		data: ReviewsScrape,
 		retailer: "Ulta" | "Sephora",
 		productId: string,
-		reviewsPresent: boolean
+		reviewsPresent: boolean,
+		sharedId: string
 	) {
 		const scrubbedProductData = Object.fromEntries(
 			Object.entries(data.metaData).filter(
@@ -119,8 +139,6 @@ export default async function scrapeSharedReviews(
 					!(Array.isArray(v) && v.length === 0)
 			)
 		);
-
-		// await prisma.sharedProduct.update({where: {AND: [{ulta_product_id: }]}})
 
 		if (retailer === "Ulta") {
 			await prisma.ultaProduct.update({
@@ -133,6 +151,12 @@ export default async function scrapeSharedReviews(
 				data: scrubbedProductData,
 			});
 		}
+
+		const sharedData = getSharedUpdate(data.metaData, retailer);
+		await prisma.sharedProduct.update({
+			where: { id: sharedId },
+			data: sharedData,
+		});
 
 		if (!reviewsPresent) {
 			console.log(data.response.status.messasge);
@@ -235,6 +259,9 @@ export default async function scrapeSharedReviews(
 		}
 	}
 
+	let end: number = new Date().getTime();
+
+	console.log(`Done: ${start - end / 1000} seconds`);
 	return {
 		message: {
 			executionTime: `${(end - start) / 1000}`,

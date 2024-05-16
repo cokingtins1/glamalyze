@@ -70,6 +70,7 @@ export async function getUltaReviews(
 			avg_rating: null,
 			percent_recommended: null,
 			total_reviews: null,
+			product_image_url: [""],
 		};
 
 		return {

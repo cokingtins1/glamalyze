@@ -1,9 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import SubmitForm from "./SubmitForm";
 import {
-	AllProducts,
 	QueryResult,
 	querySchema,
 	TQuerySchema,
@@ -15,20 +14,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import QueryResultCard from "./QueryResultCard";
-import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
+
 import QueryResults from "./QueryResults";
-import Query from "../libs/QueryFunctions/query";
-import { SharedProduct } from "@prisma/client";
-import scrapeData from "../actions/Compare/compareProducts";
-import { URLPattern } from "next/server";
+
 
 export default function GetProductForm() {
 	const [data, setData] = useState<QueryResult | null>(null);
@@ -79,14 +73,15 @@ export default function GetProductForm() {
 			<Form {...form}>
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}
-					className="space-y-8"
+					className="flex flex-col gap-4 w-full lg:flex-row items-center"
 				>
 					<FormField
+					
 						control={form.control}
 						name="query"
 						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Search Products</FormLabel>
+							<FormItem className='grow'>
+								<FormLabel className='lg:hidden'>Search Products</FormLabel>
 								<FormControl>
 									<Input
 										placeholder="Search for products"

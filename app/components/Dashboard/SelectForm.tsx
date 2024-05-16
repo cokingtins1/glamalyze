@@ -145,7 +145,7 @@ export default function SelectForm() {
 								{...form.register("startIndex")}
 								type="text"
 								onKeyDown={(event) => {
-									if (!/[a-z*]/i.test(event.key)) {
+									if (!/[a-z*#]/i.test(event.key)) {
 										event.preventDefault();
 									}
 								}}
@@ -160,7 +160,7 @@ export default function SelectForm() {
 								{...form.register("endIndex")}
 								type="text"
 								onKeyDown={(event) => {
-									if (!/[a-z*]/i.test(event.key)) {
+									if (!/[a-z*#]/i.test(event.key)) {
 										event.preventDefault();
 									}
 								}}

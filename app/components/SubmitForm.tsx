@@ -21,7 +21,7 @@ export default function SubmitForm({
 			type="submit"
 			disabled={pending || disabled}
 			{...props}
-			className="justify-self-center w-full"
+			className="justify-self-center w-full lg:w-1/5 mt-[6px]"
 		>
 			{pending && <Spinner />}
 			{pending ? pendingText[0] : pendingText[1]}

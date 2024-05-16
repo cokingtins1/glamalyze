@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["relationJoins", "fullTextSearch", "fullTextIndex", "postgresqlExtensions"]
+  // previewFeatures = ["relationJoins", "fullTextSearch", "fullTextIndex", "postgresqlExtensions"]
 }
 
 datasource db {
@@ -193,14 +193,11 @@ model ScrapeLog {
   executionTime Int?
 }
 
-// model Query {
-//   query_id    String   @id @default(uuid())
-//   created_at  DateTime @default(now()) @db.Timestamptz(6)
-//   user_id     String
-//   filters     String[]
-//   product_id  String?
-//   retailer_id String
-//   retailer    Retailer @relation(fields: [retailer_id], references: [retailer_id])
-//   queryBy     User     @relation(fields: [user_id], references: [user_id])
-//   Review      Review[]
-// }
+model FailedScrapes {
+  scrape_id     String   @id @default(uuid())
+  id            String[]
+  sharedId      String[]
+  page_link     String[]
+  name          String[]
+  total_reviews Int[]
+}

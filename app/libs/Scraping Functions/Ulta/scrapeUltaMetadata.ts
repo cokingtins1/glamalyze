@@ -5,6 +5,8 @@ import { Page } from "puppeteer";
 export async function scrapeUltaMetadata(page: Page, options: OptionProps) {
 	await loadContent(page);
 
+	// page.on("console", (msg) => console.log("PAGE LOG:", msg.text()));
+
 	const metaData = await page.evaluate((options) => {
 		function getNumber(text: string | null): number | null {
 			if (!text) return null;
@@ -43,7 +45,7 @@ export async function scrapeUltaMetadata(page: Page, options: OptionProps) {
 			total_reviews: null,
 			retailer_id: "Ulta",
 			product_price: null,
-			product_image_url: []
+			product_image_url: [],
 		};
 
 		result.retailer_id = "Ulta";
@@ -76,10 +78,13 @@ export async function scrapeUltaMetadata(page: Page, options: OptionProps) {
 
 		let reviewHistData: number[] = [];
 
-		let imageCont = document.querySelector(".MediaWrapper__Image")
-		const imageEl = imageCont ? imageCont.querySelector("img") : null
-		const imageSrc = imageEl ? imageEl.getAttribute("src") : ""
-		result.product_image_url.push(imageSrc as string)
+		let imageParent = document.querySelector(".CarouselMobile--Image");
+		let imageCont = imageParent
+			? imageParent.querySelector(".Image")
+			: null;
+		const imageEl = imageCont ? imageCont.querySelector("img") : null;
+		const imageSrc = imageEl ? imageEl.getAttribute("src") : "";
+		result.product_image_url.push(imageSrc as string);
 
 		if (reviewHistItems && reviewHistItems.length > 0) {
 			reviewHistData = Array.from(reviewHistItems).map((item) => {

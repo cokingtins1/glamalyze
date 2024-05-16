@@ -135,9 +135,10 @@ export type ReviewsScrape = {
 
 export type SharedLinks = {
 	id: string[];
-	page_link: (string | null)[];
-	name: (string | null)[];
-	total_reviews: (number | null)[];
+	sharedId: string[];
+	page_link: string[];
+	name: string[];
+	total_reviews: number[];
 };
 
 export type QueryResult = {

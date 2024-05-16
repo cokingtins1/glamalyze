@@ -42,9 +42,11 @@ export async function runUltaScraper(
 	}
 
 	puppeteer.use(StealthPlugin());
+	const browser = await puppeteer.launch({
+		headless: true,
+	});
 
 	try {
-		const browser = await puppeteer.launch({ headless: true });
 		const page = await browser.newPage();
 		await page.goto(url);
 
@@ -158,7 +160,7 @@ export async function runUltaScraper(
 			currentPage++;
 		}
 
-		await browser.close();
+		// await browser.close();
 		response.status.success = true;
 		response.status.messasge = `${reviewsData.length} reviews found `;
 		return { metaData, reviewsData, response };
@@ -167,5 +169,10 @@ export async function runUltaScraper(
 		response.status.messasge = "";
 		console.error("Error occurred:", error);
 		return { metaData, reviewsData, response };
+	} finally {
+		const pages = await browser.pages();
+
+		for (const page of pages) await page.close();
+		await browser.close()
 	}
 }

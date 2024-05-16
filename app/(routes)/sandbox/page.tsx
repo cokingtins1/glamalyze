@@ -16,6 +16,7 @@ import { withPgTrgm } from "prisma-extension-pg-trgm";
 import Link from "next/link";
 import { getUltaReviews } from "@/app/actions/getUltaReviews";
 import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
+import { getSharedUpdate } from "@/lib/badUtils";
 
 const prisma = new PrismaClient();
 // const prisma = new PrismaClient().$extends(withPgTrgm());
@@ -187,20 +188,11 @@ export default async function Page() {
 		// const productInfo = await getProductDetails(skuArray);
 
 		const url =
-			"https://www.sephora.com/product/korres-wild-rose-night-brightening-sleeping-facial-P456418?skuId=2338424&icid2=products%20grid:p456418:product";
+			"https://www.ulta.com/p/y-eau-de-parfum-travel-spray-pimprod2045044?sku=2623981";
 		console.log("getting data");
 		// const data = await getSephoraReviews(url, "696969696", true);
-		// const data = await getUltaReviews(url, id, true);
-		// console.log(data);
-
-		const query = "Industrial Strength Hand Healer";
-
-		const queryRes = await prisma.$queryRaw`
-			SELECT * FROM "SharedProduct" 
-			WHERE "ulta_product_name" LIKE ${query}
-			AND "similarity_score" = 1
-			`;
-		console.log(queryRes);
+		const data = await getUltaReviews(url, "69", true);
+		console.log(data);
 
 		console.log("done");
 

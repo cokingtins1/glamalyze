@@ -25,40 +25,38 @@ export default function QueryResultCard({ data }: QueryResultCardProps) {
 	}
 
 	return (
-		<SheetClose asChild>
-			<Card className="hover:shadow hover:shadow-slate-500">
-				<button type="submit" className="flex p-2">
-					<div className="size-[100px] relative">
-						<Image
-							src={getImage(
-								data.ulta_product_image_url[0],
-								data.sephora_product_image_url[0]
-							)}
-							alt="product image"
-							fill
-							style={{ objectFit: "contain" }}
-						/>
-					</div>
-					<div className="flex flex-col p-2">
-						<h1 className="text-sm font-bold">
-							{data.ulta_product_name}
-						</h1>
-						<h2 className="text-xs">{data.brand_name}</h2>
-						<input
-							readOnly={true}
-							className="hidden"
-							name="ultaLink"
-							value={`${data.ulta_sku_id}`}
-						/>
-						<input
-							readOnly={true}
-							className="hidden"
-							name="sephoraLink"
-							value={`${data.sephora_sku_id}`}
-						/>
-					</div>
-				</button>
-			</Card>
-		</SheetClose>
+		<Card className="hover:shadow hover:shadow-slate-500">
+			<button type="submit" className="flex p-2">
+				<div className="size-[100px] relative">
+					<Image
+						src={getImage(
+							data.ulta_product_image_url[0],
+							data.sephora_product_image_url[0]
+						)}
+						alt="product image"
+						fill
+						style={{ objectFit: "contain" }}
+					/>
+				</div>
+				<div className="flex flex-col p-2">
+					<h1 className="text-sm font-bold">
+						{data.ulta_product_name}
+					</h1>
+					<h2 className="text-xs">{data.brand_name}</h2>
+					<input
+						readOnly={true}
+						className="hidden"
+						name="ultaLink"
+						value={`${data.ulta_sku_id}`}
+					/>
+					<input
+						readOnly={true}
+						className="hidden"
+						name="sephoraLink"
+						value={`${data.sephora_sku_id}`}
+					/>
+				</div>
+			</button>
+		</Card>
 	);
 }
