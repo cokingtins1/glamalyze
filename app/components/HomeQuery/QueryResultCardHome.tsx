@@ -2,16 +2,12 @@ import { Card } from "@/components/ui/card";
 import Image, { StaticImageData } from "next/image";
 import CombinedLogo from "@/public/CombinedLogo.png";
 import { SharedProduct } from "@prisma/client";
-import { SheetClose } from "@/components/ui/sheet";
-import { useSearchParams } from "next/navigation";
 
 type QueryResultCardProps = {
 	data: SharedProduct;
 };
 
-export default function QueryResultCard({ data }: QueryResultCardProps) {
-	const searchParams = useSearchParams();
-
+export default function QueryResultCardHome({ data }: QueryResultCardProps) {
 	function getImage(ultaSrc: string, sephoraSrc: string) {
 		let imageSrc: string | StaticImageData = CombinedLogo;
 
@@ -26,7 +22,7 @@ export default function QueryResultCard({ data }: QueryResultCardProps) {
 
 	return (
 		<Card className="hover:shadow hover:shadow-slate-500">
-			<button type="submit" className="flex p-2">
+			<button type="submit" className="flex w-full p-2">
 				<div className="size-[100px] relative">
 					<Image
 						src={getImage(

@@ -1,7 +1,7 @@
 "use client";
 
 import { formatPercent, formatPrice } from "@/lib/utils";
-import { AllProducts, Review } from "../libs/types";
+import { AllProducts, Review } from "../../../../libs/types";
 
 import {
 	Table,
@@ -21,14 +21,15 @@ type Props = {
 
 export default function ComparisonTable({ data }: Props) {
 	return (
-		<Table className="w-fit text-center">
-			<TableHeader>
+		<Table className="lg:w-fit text-center">
+			<TableHeader className='text-xs'>
 				<TableColumn className="text-left">RETAILER</TableColumn>
 				<TableColumn>PRICE</TableColumn>
 				<TableColumn>RATING</TableColumn>
 				<TableColumn>REVIEWS</TableColumn>
-				<TableColumn>% RECOMMENDED</TableColumn>
+				<TableColumn>% REC.</TableColumn>
 			</TableHeader>
+
 			<TableBody>
 				{data.map((item, index) => {
 					const minPrice = Math.min(

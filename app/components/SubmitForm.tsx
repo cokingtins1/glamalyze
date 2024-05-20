@@ -3,17 +3,20 @@
 import { Button } from "@/components/ui/button";
 import { ButtonProps } from "@/components/ui/button";
 import Spinner from "./Loading Skeletons/Spinner";
+import { cn } from "@/lib/utils";
 
 type SubmitFormProps = ButtonProps & {
 	pending: boolean;
 	pendingText: string[];
 	disabled?: boolean;
+	sheet: boolean;
 };
 
 export default function SubmitForm({
 	pending,
 	pendingText,
 	disabled,
+	sheet,
 	...props
 }: SubmitFormProps) {
 	return (
@@ -21,9 +24,12 @@ export default function SubmitForm({
 			type="submit"
 			disabled={pending || disabled}
 			{...props}
-			className="justify-self-center w-full lg:w-1/5 mt-[6px]"
+			className={cn("px-8", {
+				"w-full": sheet,
+				"w-1/4": !sheet,
+			})}
 		>
-			{pending && <Spinner />}
+			{pending && !sheet && <Spinner />}
 			{pending ? pendingText[0] : pendingText[1]}
 		</Button>
 	);

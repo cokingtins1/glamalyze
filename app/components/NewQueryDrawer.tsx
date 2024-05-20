@@ -6,7 +6,7 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 
-import GetProductForm from "./GetProductForm";
+import GetProductForm from "./GetProductForm/GetProductForm";
 
 export default async function NewQueryDrawer() {
 	return (
@@ -14,9 +14,9 @@ export default async function NewQueryDrawer() {
 			<SheetTrigger>New Search</SheetTrigger>
 			<SheetContent side={"left"} className="bg-white">
 				<SheetHeader>
-					<SheetTitle>New Search</SheetTitle>
+					<SheetTitle className="pl-3 mb-4">New Search</SheetTitle>
 				</SheetHeader>
-				<GetProductForm />
+				<GetProductForm sheet={true} />
 			</SheetContent>
 		</Sheet>
 	);

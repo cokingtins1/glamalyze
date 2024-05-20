@@ -1,14 +1,13 @@
 import Image from "next/image";
 import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
-import ReviewCard from "./Review/ReviewCard";
+import ReviewCard from "../../../../components/Review/ReviewCard";
 import RatingChart from "./RatingChart";
 import ProductMetaData from "./ProductMetaData";
-import { AllProducts, Review } from "../libs/types";
+import { AllProducts, Review } from "../../../../libs/types";
 import OpenAIAnalysis from "./OpenAIAnalysis";
 import GoToPage from "./GoToPage";
 import { Card } from "@/components/ui/card";
-
 
 type DataDisplayProps = {
 	data: AllProducts;
@@ -49,7 +48,3 @@ export default function DataDisplay({ data, reviewsData }: DataDisplayProps) {
 		</Card>
 	);
 }
-
-//lean data structures and algorithims
-//const foo = array.shift()!
-// city scape - be good with arrays

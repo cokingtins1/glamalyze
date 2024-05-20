@@ -25,40 +25,37 @@ export default function Stars({
 		: Array.from({ length: 5 }, (_, i) => i);
 
 	return (
-		<div className="flex items-center">
+		<div className="hidden lg:flex items-center">
 			<div className="whitespace-nowrap flex items-center">
-				{rating &&
-					starIndexes.map((index) =>
-						index < ratingNum ? (
-							halfStar && index + 1 === ratingNum ? (
-								<StarHalfIcon
-									style={{
-										fontSize: `${
-											searchResult ? "1rem" : ""
-										}`,
-									}}
-									key={index}
-								/>
-							) : (
-								<StarIcon
-									style={{
-										fontSize: `${
-											searchResult ? "1rem" : ""
-										}`,
-									}}
-									key={index}
-								/>
-							)
-						) : (
-							<StarBorderIcon
+				{starIndexes.map((index) =>
+					index < ratingNum ? (
+						halfStar && index + 1 === ratingNum ? (
+							<StarHalfIcon
+								className="text-[1.25rem] lg:text-base"
 								style={{
 									fontSize: `${searchResult ? "1rem" : ""}`,
 								}}
-								className={`${reverse && "opacity-0"}`}
+								key={index}
+							/>
+						) : (
+							<StarIcon
+								className="text-[1.25rem] lg:text-base"
+								style={{
+									fontSize: `${searchResult ? "1rem" : ""}`,
+								}}
 								key={index}
 							/>
 						)
-					)}
+					) : (
+						<StarBorderIcon
+							style={{
+								fontSize: `${searchResult ? "1rem" : ""}`,
+							}}
+							className={`hidden ${reverse && "lg:opacity-0"}`}
+							key={index}
+						/>
+					)
+				)}
 			</div>
 			{reviewNum && (
 				<p

@@ -11,7 +11,7 @@ export default function GoToPage({ pageLink }: Props) {
 		<Link
 			target="_blank"
 			href={pageLink || `https://www.${retailerLink}`}
-			className="flex items-center gap-2 mb-2 "
+			className="flex items-center gap-2 mt-2 "
 			rel="noopener noreferrer"
 		>
 			<p className="text-xs">Go to page</p>

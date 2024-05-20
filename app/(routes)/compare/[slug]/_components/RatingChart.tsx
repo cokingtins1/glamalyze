@@ -1,18 +1,13 @@
 "use client";
 
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import StarIcon from "@mui/icons-material/Star";
 
 import { Progress } from "@/components/ui/progress";
-import Stars from "./Review/Stars";
+import Stars from "../../../../components/Review/Stars";
 import { formatRating, SephoraReviewCount } from "@/lib/utils";
 import { SephoraProduct, UltaProduct } from "@prisma/client";
+import StarsSmall from "@/app/components/Review/StarsSmall";
 
 type DataProps = {
 	metaData: UltaProduct | SephoraProduct;
@@ -35,11 +30,15 @@ export default function RatingChart({ metaData }: DataProps) {
 				<div className="flex items-end gap-2">
 					<div className="flex">
 						<Stars rating={metaData.avg_rating} />
-
-						<p className="text-xl font-bold ml-4">
-							{metaData.avg_rating &&
-								formatRating(metaData.avg_rating)}
-						</p>
+						<div className="flex items-center gap-1">
+							<span className=" mb-1 lg:hidden">
+								<StarIcon sx={{ fontSize: "1.25rem" }} />
+							</span>
+							<p className='text-xl font-bold'>
+								{metaData.avg_rating &&
+									formatRating(metaData.avg_rating)}
+							</p>
+						</div>
 					</div>
 					<p className="text-xs text-slate-400 pb-1">
 						{metaData.total_reviews?.toLocaleString()} Reviews
@@ -64,13 +63,17 @@ export default function RatingChart({ metaData }: DataProps) {
 									style={{
 										display: "grid",
 										gridTemplateColumns:
-											"repeat(3, 20% 75% 5%)",
+											"repeat(3, 15% 75% 10%)",
 										alignItems: "center",
 									}}
 								>
 									{metaData.review_histogram &&
 										metaData.total_reviews && (
 											<>
+												<StarsSmall
+													index={Math.abs(index - 5)}
+												/>
+
 												<Stars
 													rating={
 														metaData
@@ -79,7 +82,6 @@ export default function RatingChart({ metaData }: DataProps) {
 													}
 													reverse={true}
 												/>
-
 												<Progress
 													value={
 														metaData.retailer_id ===

@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { AllProducts, Review } from "../libs/types";
+import { AllProducts, Review } from "../../../../libs/types";
 import Image, { StaticImageData } from "next/image";
 import CombinedLogo from "@/public/CombinedLogo.png";
 import ComparisonTable from "./ComparisonTable";
-import OpenAIAnalysis from './OpenAIAnalysis';
+import OpenAIAnalysis from "./OpenAIAnalysis";
 
 type SharedComparisonProps = {
 	data: {
@@ -45,16 +45,18 @@ export default function SharedComparison({ data }: SharedComparisonProps) {
 	const productTitle = ultaData.productData?.product_name;
 	const brandName = ultaData.productData?.brand_name;
 
-	const allReviews = data.map(item => item.reviewsData).filter(rev => rev !== null)
+	const allReviews = data
+		.map((item) => item.reviewsData)
+		.filter((rev) => rev !== null);
 
 	return (
-		<Card className=''>
+		<Card className="grid justify-items-stretch place-content-center w-max">
 			<CardHeader className="flex-row">
-				<div className="h-auto w-1/3 relative mr-8">
+				<div className="h-[100px] w-1/3 relative mr-8">
 					<Image
 						src={productSrc}
 						fill
-						className='object-contain'
+						className="object-contain"
 						// sizes="(max-width: 430px), 300px "
 						alt={`product image`}
 						priority
@@ -67,10 +69,12 @@ export default function SharedComparison({ data }: SharedComparisonProps) {
 						</p>
 						<CardTitle>{productTitle}</CardTitle>
 					</div>
-					<ComparisonTable data={data} />
 				</div>
-			{/* <OpenAIAnalysis reviews={allReviews}/> */}
+				{/* <OpenAIAnalysis reviews={allReviews}/> */}
 			</CardHeader>
+			<div className="justify-self-center lg:pb-2">
+				<ComparisonTable data={data} />
+			</div>
 		</Card>
 	);
 }

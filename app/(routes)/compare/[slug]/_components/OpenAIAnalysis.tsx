@@ -8,12 +8,12 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from "@/components/ui/accordion";
-import ChatGPTIcon from "./Icons/ChatGPT";
+import ChatGPTIcon from "../../../../components/Icons/ChatGPT";
 import { Button } from "@/components/ui/button";
 
-import { chatSchema, Review, TChatSchema } from "../libs/types";
+import { chatSchema, Review, TChatSchema } from "../../../../libs/types";
 import { useState } from "react";
-import { getChatAI } from "../actions/getChatAI";
+import { getChatAI } from "../../../../actions/getChatAI";
 
 import { readStreamableValue } from "ai/rsc";
 

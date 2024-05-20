@@ -1,7 +1,12 @@
 import Image, { StaticImageData } from "next/image";
 import CombinedLogo from "@/public/CombinedLogo.png";
-import { AllProducts } from "../libs/types";
+import { AllProducts } from "../../../../libs/types";
 import { formatPrice } from "@/lib/utils";
+import { Card } from "@/components/ui/card";
+
+import UltaLogo from "@/public/Ulta_Logo.png";
+import SephoraLogo from "@/public/Sephora_Logo.png";
+
 import GoToPage from "./GoToPage";
 
 type ProductMetaDataProps = {
@@ -26,9 +31,9 @@ export default function ProductMetaData({ data }: ProductMetaDataProps) {
 	const productSrc = getImage(data.product_image_url[0], data.retailer_id);
 
 	return (
-		<div className="flex justify-between items-center w-full my-4 px-4">
-			<div className="flex flex-col items-center">
-				<div className="h-[100px] w-[200px] relative mb-2">
+		<div className="flex items-start w-full my-4">
+			<div className="flex flex-col items-center mr-auto mt-4">
+				<div className="h-[100px] w-[100px] relative mb-2">
 					<Image
 						src={productSrc}
 						fill
@@ -38,9 +43,19 @@ export default function ProductMetaData({ data }: ProductMetaDataProps) {
 					/>
 				</div>
 			</div>
-			<div className="flex flex-col items-end">
+			<div className="flex flex-col mt-4">
 				<p className="text-lg font-semibold">{data.product_name}</p>
 				<p>{formatPrice(data.product_price)}</p>
+				<GoToPage pageLink={data.page_link}/>
+			</div>
+			<div className='h-[50px] w-[100px] relative ml-auto'>
+				<Image
+					src={data.retailer_id === "Ulta" ? UltaLogo : SephoraLogo}
+					alt="ulta logo"
+					fill
+					style={{ objectFit: "contain" }}
+					sizes="(max-width: 430px), 300px "
+				></Image>
 			</div>
 		</div>
 	);

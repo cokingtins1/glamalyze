@@ -34,6 +34,15 @@ export default async function scrapeSharedReviews(
 	console.log(allLinks.length);
 
 	if (allLinks.length > 0) {
+		// const failedIndices = [
+		// 	39, 70, 118, 155, 165, 190, 217, 232, 240, 255, 334, 374, 396, 402,
+		// 	405, 507, 574, 596, 610, 618, 631, 632, 637, 639, 657, 663, 678,
+		// 	749, 752, 759, 768, 782, 797, 802, 821, 834, 864, 895, 932, 952,
+		// 	953, 954,
+		// ];
+
+		// const failArray = failedIndices.map((index) => allLinks[index]);
+
 		const failedScrapes = await runReviewScraper(allLinks);
 
 		if (failedScrapes.length > 0) {
@@ -261,7 +270,7 @@ export default async function scrapeSharedReviews(
 
 	let end: number = new Date().getTime();
 
-	console.log(`Done: ${start - end / 1000} seconds`);
+	console.log(`Done: ${(end - start) / 1000} seconds`);
 	return {
 		message: {
 			executionTime: `${(end - start) / 1000}`,

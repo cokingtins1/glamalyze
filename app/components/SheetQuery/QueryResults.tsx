@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
-import Query from "../libs/QueryFunctions/query";
-import DisplaySkeleton from "./Loading Skeletons/DisplaySkeleton";
+import Query from "../../libs/QueryFunctions/query";
+import DisplaySkeleton from "../Loading Skeletons/DisplaySkeleton";
 import QueryResultCard from "./QueryResultCard";
 import { SharedProduct } from "@prisma/client";
-import { QueryResult } from '../libs/types';
-import RetailerQueryResultCard from './RetailerQueryResultCard';
+import { QueryResult } from "../../libs/types";
+import RetailerQueryResultCard from "./RetailerQueryResultCard";
 
 type Props = {
 	isSubmitting: boolean;
@@ -12,7 +12,6 @@ type Props = {
 };
 
 export default function QueryResults({ isSubmitting, data }: Props) {
-	console.log(data)
 	return (
 		<>
 			{isSubmitting && (
@@ -42,6 +41,5 @@ export default function QueryResults({ isSubmitting, data }: Props) {
 		</>
 	);
 }
-
 
 //Rocky1!

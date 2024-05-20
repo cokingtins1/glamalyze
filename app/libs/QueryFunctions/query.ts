@@ -5,7 +5,31 @@ import { QueryResult } from "../types";
 const prisma = new PrismaClient().$extends(withPgTrgm({ logQueries: false }));
 
 export default async function Query(query: string): Promise<QueryResult> {
-	let threshold = 0.9;
+	let threshold = 1;
+
+	let sharedResult = await prisma.sharedProduct.similarity({
+		query: {
+			ulta_product_name: {
+				similarity: { text: query, order: "desc" },
+				word_similarity: { text: query, threshold: { gt: threshold } },
+			},
+		},
+	});
+
+	while (sharedResult.length < 1 || threshold <= 0.05) {
+		threshold = threshold - 0.05;
+		sharedResult = await prisma.sharedProduct.similarity({
+			query: {
+				ulta_product_name: {
+					similarity: { text: query, order: "desc" },
+					word_similarity: {
+						text: query,
+						threshold: { gt: threshold },
+					},
+				},
+			},
+		});
+	}
 
 	let ultaResult = await prisma.ultaProduct.similarity({
 		query: {
@@ -45,30 +69,6 @@ export default async function Query(query: string): Promise<QueryResult> {
 		sephoraResult = await prisma.sephoraProduct.similarity({
 			query: {
 				product_name: {
-					similarity: { text: query, order: "desc" },
-					word_similarity: {
-						text: query,
-						threshold: { gt: threshold },
-					},
-				},
-			},
-		});
-	}
-
-	let sharedResult = await prisma.sharedProduct.similarity({
-		query: {
-			ulta_product_name: {
-				similarity: { text: query, order: "desc" },
-				word_similarity: { text: query, threshold: { gt: threshold } },
-			},
-		},
-	});
-
-	while (sharedResult.length < 1 || threshold <= 0.05) {
-		threshold = threshold - 0.05;
-		sharedResult = await prisma.sharedProduct.similarity({
-			query: {
-				ulta_product_name: {
 					similarity: { text: query, order: "desc" },
 					word_similarity: {
 						text: query,

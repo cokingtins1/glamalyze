@@ -58,6 +58,7 @@ export type AllProductsSelectors = {
 
 export const querySchema = z.object({
 	query: z.string().min(1, { message: "Please enter a valid URL" }),
+	retailer: z.string().optional()
 });
 
 export type TQuerySchema = z.infer<typeof querySchema>;

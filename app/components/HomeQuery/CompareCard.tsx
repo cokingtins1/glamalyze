@@ -3,27 +3,20 @@ import Image, { StaticImageData } from "next/image";
 import CombinedLogo from "@/public/CombinedLogo.png";
 import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
-import { SharedProduct } from "@prisma/client";
-import { SheetClose } from "@/components/ui/sheet";
-import { useSearchParams } from "next/navigation";
-import { AllProducts } from "../libs/types";
+import { AllProducts } from "../../libs/types";
 
-type QueryResultCardProps = {
+type Props = {
 	data: AllProducts;
 };
 
-export default function RetailerQueryResultCard({
-	data,
-}: QueryResultCardProps) {
-	const searchParams = useSearchParams();
-
+export default function CompareCard({ data }: Props) {
 	function getImage(src: string, retailer: string) {
 		let imageSrc: string | StaticImageData = CombinedLogo;
 
 		if (src.includes("ulta.com")) {
-			imageSrc = imageSrc;
+			imageSrc = src;
 		} else if (src.includes("sephora.com")) {
-			imageSrc = imageSrc;
+			imageSrc = src;
 		} else if (retailer === "Ulta") {
 			imageSrc = UltaLogo;
 		} else if (retailer === "Sephora") {
@@ -32,11 +25,10 @@ export default function RetailerQueryResultCard({
 
 		return imageSrc;
 	}
-
 	return (
 		<Card className="hover:shadow hover:shadow-slate-500">
-			<button type="submit" className="flex p-2">
-				<div className="size-[100px] relative">
+			<button className="flex p-2">
+				<div className="size-[75px] relative">
 					<Image
 						src={getImage(
 							data.product_image_url[0],
@@ -48,8 +40,8 @@ export default function RetailerQueryResultCard({
 					/>
 				</div>
 				<div className="flex flex-col p-2">
-					<h1 className="text-sm font-bold">{data.product_name}</h1>
-					<h2 className="text-xs">{data.brand_name}</h2>
+					<h1 className="text-sm font-bold text-left">{data.product_name}</h1>
+					<h2 className="text-xs text-left">{data.brand_name}</h2>
 					<input
 						readOnly={true}
 						className="hidden"

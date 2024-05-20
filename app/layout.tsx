@@ -18,7 +18,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<main className="mx-auto max-w-[1440px] h-dvh pt-[80px] pb-[100px]">
+				<main className="mx-auto max-w-[1440px] h-full pt-[20px] pb-[100px]">
 					<NextUIProvider>{children}</NextUIProvider>
 				</main>
 			</body>
