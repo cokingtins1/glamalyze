@@ -19,6 +19,7 @@
 		"@nextui-org/autocomplete": "^2.0.16",
 		"@nextui-org/checkbox": "^2.0.29",
 		"@nextui-org/react": "^2.3.6",
+		"@nextui-org/scroll-shadow": "^2.1.16",
 		"@nextui-org/tabs": "^2.0.29",
 		"@nextui-org/tooltip": "^2.0.33",
 		"@prisma/client": "^5.12.1",

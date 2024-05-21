@@ -8,6 +8,9 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollShadow } from "@nextui-org/scroll-shadow";
+
 import { Input } from "@/components/ui/input";
 import RetailerQueryForm from "../components/HomeQuery/RetailerQueryForm";
 import { useState } from "react";
@@ -40,6 +43,7 @@ export default function Search({}: Props) {
 			setProducts((prevProducts) => [...prevProducts, product]);
 		}
 	};
+
 	return (
 		<Card className="">
 			<CardHeader>
@@ -77,20 +81,21 @@ export default function Search({}: Props) {
 								</div>
 							</PopoverTrigger>
 
-                      
-							<PopoverContent
-								side="bottom"
-								className="flex flex-col gap-2"
-							>
-								{data.map((result, index) => (
-									<RetailerQueryResultCardHome
-										onClick={() => {
-											handleClick(result);
-										}}
-										key={index}
-										data={result}
-									/>
-								))}
+							<PopoverContent side="bottom">
+								<ScrollArea className="h-72 w-full">
+									<div className="flex flex-col gap-2">
+										{data.length > 0 &&
+											data.map((result, index) => (
+												<RetailerQueryResultCardHome
+													onClick={() => {
+														handleClick(result);
+													}}
+													key={index}
+													data={result}
+												/>
+											))}
+									</div>
+								</ScrollArea>
 							</PopoverContent>
 						</PopoverAnchor>
 					</Popover>
