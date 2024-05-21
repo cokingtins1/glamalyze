@@ -18,17 +18,9 @@ import Search from "@/app/_components/Search";
 
 type Props = {
 	isSubmitting: boolean;
-	data: {
-		product_id: string
-		product_name: string | null;
-		retailer_id: string;
-		brand_name: string | null;
-		sku_id: string | null;
-		product_image_url: string[];
-	}[];
 };
 
-export default function QueryResultsHome({ isSubmitting, data }: Props) {
+export default function QueryResultsHome({ isSubmitting }: Props) {
 	const [products, setProducts] = useState<AllProducts[]>([]);
 
 	return (
@@ -52,7 +44,6 @@ export default function QueryResultsHome({ isSubmitting, data }: Props) {
 						</CardDescription>
 					</CardHeader>
 					<CardContent className="pt-6">
-						<Search data={data}/>
 					</CardContent>
 
 					{/* <CardContent className="grid grid-cols-2 gap-2">
@@ -62,20 +53,6 @@ export default function QueryResultsHome({ isSubmitting, data }: Props) {
 							))}
 					</CardContent> */}
 				</Card>
-
-				<div className="flex flex-col gap-4 lg:grid grid-cols-2 lg:gap-4">
-					{/* <RetailerExclusive
-						retailer="Ulta"
-						products={products}
-						setProducts={setProducts}
-					/>
-
-					<RetailerExclusive
-						retailer="Sephora"
-						products={products}
-						setProducts={setProducts}
-					/> */}
-				</div>
 			</div>
 		</>
 	);

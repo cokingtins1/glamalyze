@@ -1,39 +1,101 @@
-import { Card } from "@/components/ui/card";
+"use client";
 
 import {
-	Autocomplete,
-	AutocompleteSection,
-	AutocompleteItem,
-} from "@nextui-org/autocomplete";
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 
-type Props = {
-	data: {
-        product_id: string
-		product_name: string | null;
-		retailer_id: string;
-		brand_name: string | null;
-		sku_id: string | null;
-		product_image_url: string[];
-	}[];
-};
+import { Input } from "@/components/ui/input";
+import RetailerQueryForm from "../components/HomeQuery/RetailerQueryForm";
+import { useState } from "react";
+import { AllProducts } from "../libs/types";
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover";
+import { PopoverAnchor } from "@radix-ui/react-popover";
+import RetailerQueryResultCardHome from "../components/HomeQuery/RetailerQueryResultCardHome";
+import CompareCard from "../components/HomeQuery/CompareCard";
+import PlaceholderCard from "./PlaceholderCard";
 
-export default function Search({ data }: Props) {
-	const animals = [{ value: "balls", label: "balls" }];
-    console.log(data.length)
+type Props = {};
+
+export default function Search({}: Props) {
+	const [data, setData] = useState<AllProducts[]>([]);
+	const [products, setProducts] = useState<AllProducts[]>([]);
+
+	const handleClick = (product: AllProducts) => {
+		const existingProductIndex = products.findIndex(
+			(p) => p.product_id === product.product_id
+		);
+		if (existingProductIndex !== -1) {
+			setProducts((prevProducts) =>
+				prevProducts.filter((p) => p.product_id !== product.product_id)
+			);
+		} else if (products.length < 2) {
+			setProducts((prevProducts) => [...prevProducts, product]);
+		}
+	};
 	return (
-		<Card className="p-2 h-max">
-			<div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-				<Autocomplete label="Search products" className="max-w-xs">
-					{data.map((p) => (
-						<AutocompleteItem
-							key={p.product_id}
-							value={p.product_id}
-						>
-							{p.product_name}
-						</AutocompleteItem>
-					))}
-				</Autocomplete>
-			</div>
+		<Card className="">
+			<CardHeader>
+				<CardTitle className="text-primary">Compare Products</CardTitle>
+				<CardDescription>
+					These products are only carried by
+				</CardDescription>
+			</CardHeader>
+			<CardContent className="flex flex-col items-center">
+				<div className="flex flex-col gap-2 lg:grid grid-cols-2 lg:h-[100px] w-full ">
+					{products[0] ? (
+						<CompareCard data={products[0]} />
+					) : (
+						<PlaceholderCard num={1} />
+					)}
+
+					{products[1] ? (
+						<CompareCard data={products[1]} />
+					) : (
+						<PlaceholderCard num={2} />
+					)}
+				</div>
+				<div className="pt-6">
+					<Popover>
+						<PopoverAnchor>
+							<PopoverTrigger asChild>
+								<div className="p-2 h-max">
+									<div className="flex w-full flex-wrap md:flex-nowrap gap-4">
+										<RetailerQueryForm
+											sheet={false}
+											setData={setData}
+											retailer={"Sephora"}
+										/>
+									</div>
+								</div>
+							</PopoverTrigger>
+
+                      
+							<PopoverContent
+								side="bottom"
+								className="flex flex-col gap-2"
+							>
+								{data.map((result, index) => (
+									<RetailerQueryResultCardHome
+										onClick={() => {
+											handleClick(result);
+										}}
+										key={index}
+										data={result}
+									/>
+								))}
+							</PopoverContent>
+						</PopoverAnchor>
+					</Popover>
+				</div>
+			</CardContent>
 		</Card>
 	);
 }

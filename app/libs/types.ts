@@ -57,8 +57,9 @@ export type AllProductsSelectors = {
 };
 
 export const querySchema = z.object({
-	query: z.string().min(1, { message: "Please enter a valid URL" }),
-	retailer: z.string().optional()
+	query: z.string().min(1, { message: "Please enter a search term" }),
+	ulta: z.boolean(),
+	sephora: z.boolean(),
 });
 
 export type TQuerySchema = z.infer<typeof querySchema>;

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import Search from './_components/Search';
 import GetProductForm from "./components/GetProductForm/GetProductForm";
 import QueryResultsHome from "./components/HomeQuery/QueryResultsHome";
 import NewQueryDrawer from "./components/NewQueryDrawer";
@@ -9,22 +9,9 @@ const font = Baloo_2({
 	weight: ["600"],
 });
 
-const prisma = new PrismaClient();
 export default async function Home() {
-	// const data = await prisma.ultaProduct.findMany({
-	// 	select: {
-	// 		product_id: true,
-	// 		product_name: true,
-	// 		brand_name: true,
-	// 		retailer_id: true,
-	// 		sku_id: true,
-	// 		product_image_url: true,
-	// 	},
-	// });
-
-
 	return (
-		<main className="flex flex-col items-center justify-center px-10 lg:px-80">
+		<main className="flex flex-col items-center justify-center px-10 lg:px-80 h-dvh">
 			<section className="flex flex-col items-center">
 				<h1
 					className={`${font.className} text-6xl text-primary text-center`}
@@ -36,9 +23,10 @@ export default async function Home() {
 					compare reviews and product data
 				</h2>
 			</section>
-			<section className="w-full mt-8">
+			<section className="w-full h-full mt-8">
 				{/* <GetProductForm sheet={false} /> */}
-				<QueryResultsHome isSubmitting={false} data={data}/>
+				{/* <QueryResultsHome isSubmitting={false} /> */}
+				<Search/>
 			</section>
 			{/* <NewQueryDrawer /> */}
 		</main>

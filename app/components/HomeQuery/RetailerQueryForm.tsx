@@ -11,8 +11,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Tabs, Tab } from "@nextui-org/tabs";
-
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover";
 import {
 	Form,
 	FormControl,
@@ -22,10 +25,12 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Checkbox } from "@nextui-org/checkbox";
 
 import QueryResults from "../SheetQuery/QueryResults";
 import QueryResultsHome from "./QueryResultsHome";
 import { cn } from "@/lib/utils";
+import { PopoverAnchor } from "@radix-ui/react-popover";
 
 type RetailerQueryFormProps = {
 	sheet: boolean;
@@ -40,36 +45,22 @@ export default function RetailerQueryForm({
 	const [sheetData, setSheetData] = useState<QueryResult | null>(null);
 	const [homeData, setHomeData] = useState<QueryResult | null>(null);
 
-	const router = useRouter();
-	const pathname = usePathname();
-	const searchParams = useSearchParams();
-
 	const form = useForm<TQuerySchema>({
 		resolver: zodResolver(querySchema),
 		defaultValues: {
 			query: "",
-			retailer: retailer,
+			ulta: false,
+			sephora: false,
 		},
 	});
 
-	const createQueryString = useCallback(
-		(name: string, value: string) => {
-			const params = new URLSearchParams(searchParams.toString());
-			params.set(name, value);
-
-			return params.toString();
-		},
-		[searchParams]
-	);
-
 	const onSubmit = async (data: TQuerySchema) => {
-		router.push("/" + "?" + createQueryString("search", data.query));
-
 		const res = await fetch("/api/retailerQuery", {
 			method: "POST",
 			body: JSON.stringify({
 				query: data.query,
-				retailer: data.retailer,
+				ulta: data.ulta,
+				sephora: data.sephora,
 			}),
 			headers: {
 				"Content-Type": "application/json",
@@ -91,39 +82,59 @@ export default function RetailerQueryForm({
 		<>
 			<Form {...form}>
 				<form
+					autoComplete="off"
 					onSubmit={form.handleSubmit(onSubmit)}
 					className="flex flex-col gap-2 px-2"
 				>
 					<div
 						className={cn("flex flex-col", {
 							"flex-col gap-4 w-full": sheet,
-							"flex-row items-center justify-center gap-2":
+							"flex-col items-center justify-center gap-4":
 								!sheet,
 						})}
 					>
-						<FormField
-							control={form.control}
-							name="query"
-							render={({ field }) => (
-								<FormItem className="grow">
-									<FormControl>
-										<Input
-											placeholder="Search for products"
-											{...field}
-											className="bg-white"
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
+						<div className="flex gap-4">
+							<p>Search within:</p>
+							<Checkbox
+								{...form.register("ulta")}
+								defaultSelected
+							>
+								Ulta
+							</Checkbox>
 
-						<SubmitForm
-							disabled={!form.formState.isDirty}
-							pending={form.formState.isSubmitting}
-							pendingText={["Searching...", "Search"]}
-							sheet={sheet}
-						/>
+							<Checkbox
+								{...form.register("sephora")}
+								defaultSelected
+							>
+								Sephora
+							</Checkbox>
+						</div>
+						<div className="flex gap-2">
+							<FormField
+								control={form.control}
+								name="query"
+								render={({ field }) => (
+									<FormItem className="grow">
+										<FormControl>
+											<Input
+												autoFocus
+												placeholder="Search for products"
+												{...field}
+												className="bg-white"
+											/>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+
+							<SubmitForm
+								disabled={!form.formState.isDirty}
+								pending={form.formState.isSubmitting}
+								pendingText={["Searching...", "Search"]}
+								sheet={sheet}
+							/>
+						</div>
 					</div>
 				</form>
 			</Form>

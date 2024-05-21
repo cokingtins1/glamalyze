@@ -4,6 +4,7 @@ import { querySchema } from "@/app/libs/types";
 import { NextResponse } from "next/server";
 import { insertData } from "@/app/actions/prisma/insertData";
 import Query from "@/app/libs/QueryFunctions/query";
+import singleRetailerQuery from "@/app/libs/QueryFunctions/singleRetailerQuery";
 
 export async function POST(req: Request) {
 	const body = await req.json();
@@ -24,12 +25,14 @@ export async function POST(req: Request) {
 		);
 	}
 
-	const retailer = result.data.retailer;
+	console.log(result.data);
 
 	await new Promise((resolve) => setTimeout(resolve, 500));
-	// const Qdata = await Query(result.data.query);
+	const { query, ulta, sephora } = result.data;
+	const Qdata = await Query(query, ulta, sephora);
 
-	// console.log(JSON.stringify(Qdata));
+	const retData = await singleRetailerQuery(query, ulta, sephora);
+
 
 	const ultaData = [
 		{
@@ -196,7 +199,7 @@ export async function POST(req: Request) {
 			? { errors: zodErrors }
 			: {
 					success: {
-						data: retailer === "Ulta" ? ultaData : sephoraData,
+						data: retData,
 					},
 			  }
 	);
