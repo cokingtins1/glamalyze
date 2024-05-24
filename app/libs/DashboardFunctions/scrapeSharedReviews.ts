@@ -18,6 +18,7 @@ import { getSharedProducts } from "./getSharedProducts";
 import { getUltaReviews } from "@/app/actions/getUltaReviews";
 import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
 import { getSharedUpdate } from "@/lib/badUtils";
+import { getRetailerProduct } from "./getRetailerProduct";
 
 const prisma = new PrismaClient();
 
@@ -29,35 +30,47 @@ export default async function scrapeSharedReviews(
 
 	console.log("input:", input);
 
-	const allLinks: SharedLinks[] = await getSharedProducts(input);
+	let allLinks: SharedLinks[] = [];
+
+	if (input.retailer === "Shared") {
+		allLinks = await getSharedProducts(input);
+	} else {
+		allLinks = await getRetailerProduct(input);
+	}
 
 	console.log(allLinks.length);
 
 	if (allLinks.length > 0) {
-		// const failedIndices = [
-		// 	39, 70, 118, 155, 165, 190, 217, 232, 240, 255, 334, 374, 396, 402,
-		// 	405, 507, 574, 596, 610, 618, 631, 632, 637, 639, 657, 663, 678,
-		// 	749, 752, 759, 768, 782, 797, 802, 821, 834, 864, 895, 932, 952,
-		// 	953, 954,
-		// ];
+		// const data = await prisma.sharedProduct.findMany({
+		// 	where: { ulta_product_price: null },
+		// });
+		// const links: SharedLinks[] = data.map((p) => ({
+		// 	sharedId: [p.id],
+		// 	id: [p.ulta_product_id, ""],
+		// 	page_link: [p.ulta_page_link ?? "", ""],
+		// 	name: [p.ulta_product_name ?? "", p.sephora_product_name ?? ""],
+		// 	total_reviews: [
+		// 		p.ulta_total_reviews ?? 0,
+		// 		p.sephora_total_reviews ?? 0,
+		// 	],
+		// }));
+		// console.log(links.length);
 
-		// const failArray = failedIndices.map((index) => allLinks[index]);
-
-		const failedScrapes = await runReviewScraper(allLinks);
-
-		if (failedScrapes.length > 0) {
-			console.log("failed scrapes:", failedScrapes);
-			console.log(`Running ${failedScrapes.length} failed scrapes`);
-			const failedScrapesTwice = await runReviewScraper(failedScrapes);
-			await prisma.failedScrapes.createMany({ data: failedScrapesTwice });
-		}
+		// const failedScrapes = await runReviewScraper(allLinks);
+		// if (failedScrapes.length > 0) {
+		// 	console.log("Failed Scrapes:");
+		// 	console.dir(failedScrapes, { maxArrayLength: null });
+		// 	console.log(`Running ${failedScrapes.length} failed scrapes`);
+		// 	const failedScrapesTwice = await runReviewScraper(failedScrapes);
+		// 	await prisma.failedScrapes.createMany({ data: failedScrapesTwice });
+		// }
 	}
 
 	async function runReviewScraper(
 		allProducts: SharedLinks[]
 	): Promise<FailedScrapes[]> {
 		let count = 0;
-		let forceStop = Infinity;
+		let forceStop = 100;
 		const numProducts = allProducts.length;
 
 		let failedScrapes: FailedScrapes[] = [];
@@ -72,11 +85,15 @@ export default async function scrapeSharedReviews(
 				count
 			].total_reviews?.map(Boolean) ?? [false, false];
 
+			const retailer = !!allProducts[count].page_link[0]
+				? "Ulta"
+				: "Sephora";
+
 			console.log(
 				"current index:",
 				`${count + 1}/ ${allProducts.length} of ${numProducts}`,
 				"product name:",
-				`${ultaProductName}`
+				`${retailer} - ${ultaProductName || sephoraProductName}`
 			);
 
 			const [ultaData, sephoraData] = await Promise.all([
@@ -84,24 +101,30 @@ export default async function scrapeSharedReviews(
 				getSephoraReviews(sephoraUrl, sephoraProductId, sephoraReviews),
 			]);
 
-			if (!ultaData.response.status.success) {
+			if (
+				!ultaData.response.status.success &&
+				ultaData.response.status.messasge !== "No Url provided"
+			) {
 				failedScrapes.push({
 					scrape_id: crypto.randomUUID(),
 					id: [ultaProductId, ""],
 					sharedId: [sharedId],
 					page_link: [ultaUrl, ""],
-					name: allProducts[0].name,
+					name: allProducts[count].name,
 					total_reviews: allProducts[count].total_reviews,
 				});
 				console.log(`${ultaData.response.status.messasge}: ${ultaUrl}`);
 			}
-			if (!sephoraData.response.status.success) {
+			if (
+				!sephoraData.response.status.success &&
+				sephoraData.response.status.messasge !== "No Url provided"
+			) {
 				failedScrapes.push({
 					scrape_id: crypto.randomUUID(),
 					id: ["", sephoraProductId],
 					sharedId: [sharedId],
 					page_link: ["", sephoraUrl],
-					name: allProducts[0].name,
+					name: allProducts[count].name,
 					total_reviews: allProducts[count].total_reviews,
 				});
 				console.log(
@@ -161,11 +184,18 @@ export default async function scrapeSharedReviews(
 			});
 		}
 
-		const sharedData = getSharedUpdate(data.metaData, retailer);
-		await prisma.sharedProduct.update({
-			where: { id: sharedId },
-			data: sharedData,
-		});
+		const sharedData = getSharedUpdate(data.metaData, input.retailer);
+		if (input.retailer === "Shared") {
+			await prisma.sharedProduct.update({
+				where: { id: sharedId },
+				data: sharedData,
+			});
+		} else {
+			await prisma.allProduct.update({
+				where: { product_id: sharedId },
+				data: sharedData,
+			});
+		}
 
 		if (!reviewsPresent) {
 			console.log(data.response.status.messasge);

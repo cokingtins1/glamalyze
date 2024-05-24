@@ -37,7 +37,7 @@ export async function runUltaScraper(
 
 	if (!url || !options) {
 		response.status.success = false;
-		response.status.messasge = "No Url provided, or error with options";
+		response.status.messasge = "No Url provided";
 		return { metaData, reviewsData, response };
 	}
 
@@ -173,6 +173,6 @@ export async function runUltaScraper(
 		const pages = await browser.pages();
 
 		for (const page of pages) await page.close();
-		await browser.close()
+		await browser.close();
 	}
 }

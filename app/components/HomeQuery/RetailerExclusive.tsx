@@ -53,18 +53,14 @@ export default function RetailerExclusive({
 					"text-black": retailer === "Sephora",
 				})}
 			>
-				<div className='pl-2'>
+				<div className="pl-2">
 					<CardTitle>{retailer} Exclusive</CardTitle>
 					<CardDescription>
 						Search for {retailer} products
 					</CardDescription>
 				</div>
 				<div>
-					<RetailerQueryForm
-						sheet={false}
-						setData={setData}
-						retailer={retailer}
-					/>
+					<RetailerQueryForm sheet={false} setData={setData} />
 				</div>
 			</CardHeader>
 			<CardContent className="px-2">
@@ -80,7 +76,7 @@ export default function RetailerExclusive({
 					))}
 					<Accordion type="single" collapsible>
 						{restOfData.map((result, index) => (
-							<AccordionItem value="index">
+							<AccordionItem key={index} value="index">
 								<AccordionTrigger className="text-slate-500 text-md text-center">
 									Show More ({restOfData.length})
 								</AccordionTrigger>
@@ -89,7 +85,6 @@ export default function RetailerExclusive({
 										onClick={() => {
 											handleClick(result);
 										}}
-										key={index}
 										data={result}
 									/>
 								</AccordionContent>

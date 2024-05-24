@@ -40,6 +40,7 @@ export default function RetailerQueryResultCardHome({
 							data.retailer_id
 						)}
 						alt="product image"
+						sizes='sizes="(max-width: 430px), 65px'
 						fill
 						style={{ objectFit: "contain" }}
 					/>

@@ -1,7 +1,6 @@
 import { createProduct, createQuery } from "@/lib/seeding/seedingFuncs";
 import {
 	PrismaClient,
-	Review,
 	SephoraProduct,
 	UltaProduct,
 	User,
@@ -15,6 +14,7 @@ import {
 	updateQuery,
 	updateSku,
 } from "./seed";
+import { Review } from "@/app/libs/types";
 const prisma = new PrismaClient();
 
 export async function insertData(

@@ -2,7 +2,6 @@ import { getUltaReviews } from "@/app/actions/getUltaReviews";
 import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
 import { querySchema } from "@/app/libs/types";
 import { NextResponse } from "next/server";
-import { insertData } from "@/app/actions/prisma/insertData";
 import Query from "@/app/libs/QueryFunctions/query";
 import singleRetailerQuery from "@/app/libs/QueryFunctions/singleRetailerQuery";
 
@@ -25,14 +24,10 @@ export async function POST(req: Request) {
 		);
 	}
 
-	console.log(result.data);
-
 	await new Promise((resolve) => setTimeout(resolve, 500));
-	const { query, ulta, sephora } = result.data;
-	const Qdata = await Query(query, ulta, sephora);
+	const { query, ulta, sephora, shared } = result.data;
 
-	const retData = await singleRetailerQuery(query, ulta, sephora);
-
+	const retData = await singleRetailerQuery(query, ulta, sephora, shared);
 
 	const ultaData = [
 		{

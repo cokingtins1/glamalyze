@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useCallback, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import SubmitForm from "../SubmitForm";
 import {
 	AllProducts,
@@ -12,11 +12,6 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from "@/components/ui/popover";
-import {
 	Form,
 	FormControl,
 	FormField,
@@ -24,23 +19,18 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Checkbox } from "@nextui-org/checkbox";
 
-import QueryResults from "../SheetQuery/QueryResults";
-import QueryResultsHome from "./QueryResultsHome";
 import { cn } from "@/lib/utils";
-import { PopoverAnchor } from "@radix-ui/react-popover";
+import InfoPopover from "@/app/_components/InfoPopover";
 
 type RetailerQueryFormProps = {
 	sheet: boolean;
 	setData: Dispatch<SetStateAction<AllProducts[]>>;
-	retailer: "Ulta" | "Sephora";
 };
 export default function RetailerQueryForm({
 	sheet,
 	setData,
-	retailer,
 }: RetailerQueryFormProps) {
 	const [sheetData, setSheetData] = useState<QueryResult | null>(null);
 	const [homeData, setHomeData] = useState<QueryResult | null>(null);
@@ -49,8 +39,9 @@ export default function RetailerQueryForm({
 		resolver: zodResolver(querySchema),
 		defaultValues: {
 			query: "",
-			ulta: false,
-			sephora: false,
+			ulta: true,
+			sephora: true,
+			shared: false,
 		},
 	});
 
@@ -61,6 +52,7 @@ export default function RetailerQueryForm({
 				query: data.query,
 				ulta: data.ulta,
 				sephora: data.sephora,
+				shared: data.shared,
 			}),
 			headers: {
 				"Content-Type": "application/json",
@@ -84,7 +76,7 @@ export default function RetailerQueryForm({
 				<form
 					autoComplete="off"
 					onSubmit={form.handleSubmit(onSubmit)}
-					className="flex flex-col gap-2 px-2"
+					className="flex flex-col gap-2 px-2 w-full"
 				>
 					<div
 						className={cn("flex flex-col", {
@@ -93,23 +85,41 @@ export default function RetailerQueryForm({
 								!sheet,
 						})}
 					>
-						<div className="flex gap-4">
-							<p>Search within:</p>
-							<Checkbox
-								{...form.register("ulta")}
-								defaultSelected
-							>
-								Ulta
-							</Checkbox>
+						<div className="flex flex-col items-center gap-2 lg:flex-row">
+							<p className="text-xs lg:text-base">
+								Search within:
+							</p>
+							<div className="flex gap-4">
+								<Checkbox
+									{...form.register("ulta")}
+									defaultSelected
+									className="text-xs lg:text-base"
+								>
+									<p className="text-xs lg:text-base">
+										Ulta
+									</p>
+								</Checkbox>
 
-							<Checkbox
-								{...form.register("sephora")}
-								defaultSelected
-							>
-								Sephora
-							</Checkbox>
+								<Checkbox
+									{...form.register("sephora")}
+									defaultSelected
+									className="text-xs lg:text-base"
+								>
+									<p className="text-xs lg:text-base">
+										Sephora
+									</p>
+								</Checkbox>
+								<Checkbox {...form.register("shared")}>
+									<span className="flex gap-1">
+										<p className="text-xs lg:text-base">
+											Shared
+										</p>
+										<InfoPopover />
+									</span>
+								</Checkbox>
+							</div>
 						</div>
-						<div className="flex gap-2">
+						<div className="flex gap-2 items-center lg:flex-row lg:full">
 							<FormField
 								control={form.control}
 								name="query"

@@ -2,7 +2,6 @@ import { getUltaReviews } from "@/app/actions/getUltaReviews";
 import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
 import { querySchema } from "@/app/libs/types";
 import { NextResponse } from "next/server";
-import { insertData } from "@/app/actions/prisma/insertData";
 import Query from "@/app/libs/QueryFunctions/query";
 
 export async function POST(req: Request) {

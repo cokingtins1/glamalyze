@@ -2,7 +2,6 @@ import Image, { StaticImageData } from "next/image";
 import CombinedLogo from "@/public/CombinedLogo.png";
 import { AllProducts } from "../../../../libs/types";
 import { formatPrice } from "@/lib/utils";
-import { Card } from "@/components/ui/card";
 
 import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
@@ -43,12 +42,12 @@ export default function ProductMetaData({ data }: ProductMetaDataProps) {
 					/>
 				</div>
 			</div>
-			<div className="flex flex-col mt-4">
+			<div className="flex flex-col mt-8">
 				<p className="text-lg font-semibold">{data.product_name}</p>
 				<p>{formatPrice(data.product_price)}</p>
-				<GoToPage pageLink={data.page_link}/>
+				<GoToPage pageLink={data.page_link} />
 			</div>
-			<div className='h-[50px] w-[100px] relative ml-auto'>
+			<div className="h-[50px] w-[100px] relative ml-auto">
 				<Image
 					src={data.retailer_id === "Ulta" ? UltaLogo : SephoraLogo}
 					alt="ulta logo"

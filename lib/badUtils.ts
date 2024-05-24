@@ -13,15 +13,42 @@ export function getSharedUpdate(data: MetaData, upperRetailer: string) {
 		)
 	);
 
-	const keys = ["product_image_url", "total_reviews", "product_price"];
+	let keys: string[] = [];
+
+	if (upperRetailer === "Shared") {
+		keys = ["product_image_url", "total_reviews", "product_price"];
+	} else {
+		keys = ["total_reviews", "product_price", "review_histogram"];
+	}
 
 	const extractedValues = keys
 		.map((key) => [key, scrubbedProductData[key]])
 		.filter(([_, value]) => value !== undefined);
 
+	// const objectData = extractedValues.reduce<{ [key: string]: number }>(
+	// 	(obj, [key, value]) => {
+	// 		//@ts-ignore
+	// 		if(upperRetailer === "Shared"){
+	// 			obj[key] = value;
+
+	// 		} else {
+	// 			obj[`${retailer}_` + key] = value;
+
+	// 		}
+	// 		return obj;
+	// 	},
+	// 	{}
+	// );
+
 	const objectData = extractedValues.reduce<{ [key: string]: number }>(
 		(obj, [key, value]) => {
-			obj[`${retailer}_` + key] = value;
+			if (upperRetailer === "Ulta" || upperRetailer === "Sephora") {
+				//@ts-ignore
+				obj[key] = value;
+			} else {
+				//@ts-ignore
+				obj[`${retailer}_${key}`] = value;
+			}
 			return obj;
 		},
 		{}

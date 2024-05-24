@@ -1,23 +1,23 @@
-import {
-	PrismaClient,
-	Product,
-	Query,
-	Review,
-	Reviewer,
-	SephoraProduct,
-	UltaProduct,
-	User,
-} from "@prisma/client";
-import dayjs from "dayjs";
+// import {
+// 	PrismaClient,
+// 	Product,
+// 	Query,
+// 	Review,
+// 	Reviewer,
+// 	SephoraProduct,
+// 	UltaProduct,
+// 	User,
+// } from "@prisma/client";
+// import dayjs from "dayjs";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 export async function seedUser(userData: User[]) {
 	await prisma.user.createMany({ data: userData });
 }
 
 export async function seedProduct(productData: Product) {
-	await prisma.product.create({ data: productData });
+	// await prisma.product.create({ data: productData });
 
 	// const productsToAdd: Product[] = [];
 

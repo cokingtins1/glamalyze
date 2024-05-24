@@ -25,9 +25,9 @@ export default function SubmitForm({
 			type="submit"
 			disabled={pending || disabled}
 			{...props}
-			className={cn("px-8", {
+			className={cn("px-4", {
 				"w-full": sheet,
-				"w-1/4": !sheet,
+				"w-fit lg:w-[135px]": !sheet,
 			})}
 		>
 			{pending && !sheet && <Spinner />}

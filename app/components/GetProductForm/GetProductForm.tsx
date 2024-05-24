@@ -85,7 +85,8 @@ export default function GetProductForm({ sheet }: GetProductFormProps) {
 					<div
 						className={cn("flex flex-col", {
 							"flex-col gap-4 w-full": sheet,
-							"flex-row items-center justify-center gap-2": !sheet,
+							"flex-row items-center justify-center gap-2":
+								!sheet,
 						})}
 					>
 						<FormField
@@ -133,7 +134,6 @@ export default function GetProductForm({ sheet }: GetProductFormProps) {
 				{homeData && (
 					<QueryResultsHome
 						isSubmitting={form.formState.isSubmitting}
-						data={homeData}
 					/>
 				)}
 			</form>

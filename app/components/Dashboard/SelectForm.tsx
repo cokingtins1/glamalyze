@@ -202,14 +202,13 @@ export default function SelectForm() {
 							{/* <Label>
 								{form.formState.errors.productLimit?.message}
 							</Label> */}
-							<Label>
-								{form.formState.errors.url?.message}
-							</Label>
+							<Label>{form.formState.errors.url?.message}</Label>
 						</div>
 
 						<SubmitForm
 							pending={form.formState.isSubmitting}
 							pendingText={["Scraping data...", "Get Data"]}
+							sheet={false}
 						/>
 					</form>
 				</CardContent>

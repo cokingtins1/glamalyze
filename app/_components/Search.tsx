@@ -9,11 +9,9 @@ import {
 } from "@/components/ui/card";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ScrollShadow } from "@nextui-org/scroll-shadow";
 
-import { Input } from "@/components/ui/input";
 import RetailerQueryForm from "../components/HomeQuery/RetailerQueryForm";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { AllProducts } from "../libs/types";
 import {
 	Popover,
@@ -24,68 +22,127 @@ import { PopoverAnchor } from "@radix-ui/react-popover";
 import RetailerQueryResultCardHome from "../components/HomeQuery/RetailerQueryResultCardHome";
 import CompareCard from "../components/HomeQuery/CompareCard";
 import PlaceholderCard from "./PlaceholderCard";
+import { Button } from "@/components/ui/button";
+import { useRouter, useSearchParams } from "next/navigation";
 
-type Props = {};
-
-export default function Search({}: Props) {
+export default function Search() {
 	const [data, setData] = useState<AllProducts[]>([]);
 	const [products, setProducts] = useState<AllProducts[]>([]);
+	const [open, setOpen] = useState(false);
+	const [sku, setSku] = useState("");
+
+	const router = useRouter();
+    const searchParams = useSearchParams()
+
+    const createQueryString = useCallback(
+		(name: string, value: string) => {
+			const params = new URLSearchParams(searchParams.toString());
+			params.set(name, value);
+
+			return params.toString();
+		},
+		[searchParams]
+	);
+
 
 	const handleClick = (product: AllProducts) => {
 		const existingProductIndex = products.findIndex(
 			(p) => p.product_id === product.product_id
 		);
+		let updatedProducts;
+
 		if (existingProductIndex !== -1) {
-			setProducts((prevProducts) =>
-				prevProducts.filter((p) => p.product_id !== product.product_id)
+			updatedProducts = products.filter(
+				(p) => p.product_id !== product.product_id
 			);
 		} else if (products.length < 2) {
-			setProducts((prevProducts) => [...prevProducts, product]);
+			updatedProducts = [...products, product];
+		} else {
+			updatedProducts = products;
 		}
+
+		setProducts(updatedProducts);
+		updateSku(updatedProducts);
 	};
 
+	const updateSku = (products: AllProducts[]) => {
+		const ultaSkus = products
+			.filter((p) => p.retailer_id === "Ulta")
+			.map((p) => p.sku_id);
+		const sephoraSkus = products
+			.filter((p) => p.retailer_id === "Sephora")
+			.map((p) => p.sku_id);
+
+		const ultaSkuString = `u:[${ultaSkus.join(",")}]`;
+		const sephoraSkuString = `s:[${sephoraSkus.join(",")}]`;
+		const skuString = `${ultaSkuString}, ${sephoraSkuString}`;
+
+		setSku(skuString);
+	};
+
+    const handleCompare = () => {
+		router.push("/" + "?" + createQueryString("compare",sku));
+
+    }
+
+	useEffect(() => {
+		setOpen(true);
+	}, [products, products.length]);
+
 	return (
-		<Card className="">
-			<CardHeader>
-				<CardTitle className="text-primary">Compare Products</CardTitle>
-				<CardDescription>
-					These products are only carried by
-				</CardDescription>
+		<Card>
+			<CardHeader className="flex-row justify-between">
+				<div className="space-y-px">
+					<CardTitle className="text-lg text-primary lg:text-2xl">
+						Compare Products
+					</CardTitle>
+					<CardDescription>
+						Choose two products to compare
+					</CardDescription>
+				</div>
+				<Button
+					onClick={handleCompare}
+				>
+					Compare
+				</Button>
 			</CardHeader>
 			<CardContent className="flex flex-col items-center">
 				<div className="flex flex-col gap-2 lg:grid grid-cols-2 lg:h-[100px] w-full ">
 					{products[0] ? (
-						<CompareCard data={products[0]} />
+						<CompareCard
+							data={products[0]}
+							onClick={() => handleClick(products[0])}
+						/>
 					) : (
 						<PlaceholderCard num={1} />
 					)}
 
 					{products[1] ? (
-						<CompareCard data={products[1]} />
+						<CompareCard
+							data={products[1]}
+							onClick={() => handleClick(products[1])}
+						/>
 					) : (
 						<PlaceholderCard num={2} />
 					)}
 				</div>
 				<div className="pt-6">
-					<Popover>
+					<Popover open={open} onOpenChange={() => setOpen(!open)}>
 						<PopoverAnchor>
 							<PopoverTrigger asChild>
-								<div className="p-2 h-max">
-									<div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-										<RetailerQueryForm
-											sheet={false}
-											setData={setData}
-											retailer={"Sephora"}
-										/>
-									</div>
+								<div>
+									<RetailerQueryForm
+										sheet={false}
+										setData={setData}
+									/>
 								</div>
 							</PopoverTrigger>
 
-							<PopoverContent side="bottom">
-								<ScrollArea className="h-72 w-full">
-									<div className="flex flex-col gap-2">
-										{data.length > 0 &&
-											data.map((result, index) => (
+							{data.length > 0 && (
+								<PopoverContent side="bottom">
+									<ScrollArea className="h-52 lg:h-72 w-full">
+										<div className="flex flex-col gap-2">
+											{data.map((result, index) => (
 												<RetailerQueryResultCardHome
 													onClick={() => {
 														handleClick(result);
@@ -94,9 +151,10 @@ export default function Search({}: Props) {
 													data={result}
 												/>
 											))}
-									</div>
-								</ScrollArea>
-							</PopoverContent>
+										</div>
+									</ScrollArea>
+								</PopoverContent>
+							)}
 						</PopoverAnchor>
 					</Popover>
 				</div>

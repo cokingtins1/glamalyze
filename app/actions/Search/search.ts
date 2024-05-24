@@ -1,14 +1,10 @@
-import { PrismaClient, SharedProduct } from "@prisma/client";
+import { QueryResult } from '@/app/libs/types';
+import { PrismaClient } from "@prisma/client";
 import { withPgTrgm } from "prisma-extension-pg-trgm";
-import { AllProducts, QueryResult } from "../types";
 
 const prisma = new PrismaClient().$extends(withPgTrgm({ logQueries: false }));
 
-export default async function Query(
-	query: string,
-	ulta: boolean,
-	sephora: boolean
-) {
+export default async function searchQuery(query: string): Promise<QueryResult> {
 	let threshold = 1;
 
 	let sharedResult = await prisma.sharedProduct.similarity({

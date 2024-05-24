@@ -1,6 +1,6 @@
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["relationJoins", "fullTextSearch", "fullTextIndex", "postgresqlExtensions"]
+  provider = "prisma-client-js"
+  // previewFeatures = ["relationJoins", "fullTextSearch", "fullTextIndex", "postgresqlExtensions"]
 }
 
 datasource db {
@@ -183,14 +183,18 @@ model SephoraReviewer {
   product_id    String
 }
 
-model ScrapeLog {
-  scrape_id     String   @id @default(uuid())
-  scrape_date   DateTime @default(now()) @db.Timestamptz(6)
-  retailer      String?
-  target        String?
-  scrapeRange   String[]
-  failedOn      String?
-  executionTime Int?
+model AllProduct {
+  product_id          String  @id @default(uuid())
+  product_name        String?
+  retailer_id         String
+  brand_id            String
+  brand_name          String?
+  review_histogram    Int[]
+  product_price_range Float[]
+  product_price       Float?
+  sku_id              String?
+  total_reviews       Float?
+  page_link           String?
 }
 
 model FailedScrapes {

@@ -40,7 +40,7 @@ export async function runSephoraScraper(
 
 	if (!url || !options) {
 		response.status.success = false;
-		response.status.messasge = "No Url provided, or error with options";
+		response.status.messasge = "No Url provided";
 		return { metaData, reviewsData, response };
 	}
 
