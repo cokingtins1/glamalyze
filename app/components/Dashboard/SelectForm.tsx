@@ -208,7 +208,6 @@ export default function SelectForm() {
 						<SubmitForm
 							pending={form.formState.isSubmitting}
 							pendingText={["Scraping data...", "Get Data"]}
-							sheet={false}
 						/>
 					</form>
 				</CardContent>

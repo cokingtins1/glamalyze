@@ -16,7 +16,7 @@ export default async function Home({
 }) {
 	const slug = searchParams.compare;
 
-	// const data = await compareProducts(slug);
+	const data = await compareProducts(slug);
 
 	return (
 		<main className="flex flex-col items-center justify-center px-10 h-full">
@@ -40,7 +40,7 @@ export default async function Home({
 				aria-label="compare2"
 				className="mt-4 flex flex-col lg:grid grid-cols-2 w-full gap-4 h-full"
 			>
-				{/* {data &&
+				{data &&
 					data.length > 0 &&
 					data.map(
 						(result, index) =>
@@ -52,7 +52,7 @@ export default async function Home({
 									reviewsData={result.reviewsData}
 								/>
 							)
-					)} */}
+					)}
 			</section>
 		</main>
 	);

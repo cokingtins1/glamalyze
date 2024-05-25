@@ -3,14 +3,17 @@ import Image, { StaticImageData } from "next/image";
 import CombinedLogo from "@/public/CombinedLogo.png";
 import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
-import { AllProducts } from "../../libs/types";
+import { AllProducts } from "../libs/types";
 
-type Props = {
+type QueryResultCardProps = {
 	data: AllProducts;
 	onClick: (product: AllProducts) => void;
 };
 
-export default function CompareCard({ data, onClick }: Props) {
+export default function ProductQueryCard({
+	data,
+	onClick,
+}: QueryResultCardProps) {
 	function getImage(src: string, retailer: string) {
 		let imageSrc: string | StaticImageData = CombinedLogo;
 
@@ -26,23 +29,24 @@ export default function CompareCard({ data, onClick }: Props) {
 
 		return imageSrc;
 	}
+
 	return (
 		<Card className="hover:shadow hover:shadow-slate-500">
-			<button onClick={() => onClick(data)} className="flex p-2">
-				<div className="size-[52px] lg:size-[75px] relative">
+			<button onClick={() => onClick(data)} className="flex w-full p-2">
+				<div className="size-[65px] relative">
 					<Image
 						src={getImage(
 							data.product_image_url[0],
 							data.retailer_id
 						)}
 						alt="product image"
+						sizes='sizes="(max-width: 430px), 65px'
 						fill
-						sizes='sizes="(max-width: 430px), 75px'
 						style={{ objectFit: "contain" }}
 					/>
 				</div>
 				<div className="flex flex-col p-2">
-					<h1 className="text-xs lg:text-sm font-bold text-left">
+					<h1 className="text-sm font-bold text-left">
 						{data.product_name}
 					</h1>
 					<h2 className="text-xs text-left">{data.brand_name}</h2>

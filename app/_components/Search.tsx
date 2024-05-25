@@ -10,7 +10,7 @@ import {
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import RetailerQueryForm from "../components/HomeQuery/RetailerQueryForm";
+import RetailerQueryForm from "./RetailerQueryForm";
 import { useCallback, useEffect, useState } from "react";
 import { AllProducts } from "../libs/types";
 import {
@@ -19,11 +19,13 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { PopoverAnchor } from "@radix-ui/react-popover";
-import RetailerQueryResultCardHome from "../components/HomeQuery/RetailerQueryResultCardHome";
-import CompareCard from "../components/HomeQuery/CompareCard";
+import CompareCard from "./CompareCard";
 import PlaceholderCard from "./PlaceholderCard";
 import { Button } from "@/components/ui/button";
+import { Button as NextUIButton } from "@nextui-org/button";
 import { useRouter, useSearchParams } from "next/navigation";
+import ProductQueryCard from "./RetailerQueryResultCardHome";
+import compareProducts from "../actions/Compare/compareProducts";
 
 export default function Search() {
 	const [data, setData] = useState<AllProducts[]>([]);
@@ -31,10 +33,12 @@ export default function Search() {
 	const [open, setOpen] = useState(false);
 	const [sku, setSku] = useState("");
 
-	const router = useRouter();
-    const searchParams = useSearchParams()
+	const [loading, setLoading] = useState(false);
 
-    const createQueryString = useCallback(
+	const router = useRouter();
+	const searchParams = useSearchParams();
+
+	const createQueryString = useCallback(
 		(name: string, value: string) => {
 			const params = new URLSearchParams(searchParams.toString());
 			params.set(name, value);
@@ -43,7 +47,6 @@ export default function Search() {
 		},
 		[searchParams]
 	);
-
 
 	const handleClick = (product: AllProducts) => {
 		const existingProductIndex = products.findIndex(
@@ -80,14 +83,22 @@ export default function Search() {
 		setSku(skuString);
 	};
 
-    const handleCompare = () => {
-		router.push("/" + "?" + createQueryString("compare",sku));
+	const handleCompare = async () => {
+		setLoading(true);
+		try {
+			const data = await compareProducts("slug");
 
-    }
+			if (data) {
+				setLoading(false);
+			}
+		} catch (error) {}
+
+		router.push("/" + "?" + createQueryString("compare", sku));
+	};
 
 	useEffect(() => {
 		setOpen(true);
-	}, [products, products.length]);
+	}, [products, products.length, data, data.length]);
 
 	return (
 		<Card>
@@ -100,11 +111,13 @@ export default function Search() {
 						Choose two products to compare
 					</CardDescription>
 				</div>
-				<Button
+				<NextUIButton
+					color="primary"
+					isLoading={loading}
 					onClick={handleCompare}
 				>
-					Compare
-				</Button>
+					{loading ? "Comparing..." : "Compare"}
+				</NextUIButton>
 			</CardHeader>
 			<CardContent className="flex flex-col items-center">
 				<div className="flex flex-col gap-2 lg:grid grid-cols-2 lg:h-[100px] w-full ">
@@ -143,7 +156,7 @@ export default function Search() {
 									<ScrollArea className="h-52 lg:h-72 w-full">
 										<div className="flex flex-col gap-2">
 											{data.map((result, index) => (
-												<RetailerQueryResultCardHome
+												<ProductQueryCard
 													onClick={() => {
 														handleClick(result);
 													}}

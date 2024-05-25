@@ -16,6 +16,7 @@
 		"@mui/icons-material": "^5.15.15",
 		"@mui/styled-engine-sc": "^6.0.0-alpha.18",
 		"@nextui-org/autocomplete": "^2.0.16",
+		"@nextui-org/button": "^2.0.31",
 		"@nextui-org/checkbox": "^2.0.29",
 		"@nextui-org/react": "^2.3.6",
 		"@nextui-org/scroll-shadow": "^2.1.16",

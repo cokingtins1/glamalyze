@@ -1,21 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { randomUserName } from "@/lib/utils";
 import { PrismaClient } from "@prisma/client";
-import { randomInt } from "crypto";
-import dayjs from "dayjs";
-import { generate } from "random-words";
+
 import React from "react";
-import { getAllSephoraProducts } from "../../actions/getAllSephoraProducts";
-import elements from "@/app/libs/JSON/elemets.json";
-import { AllProducts, AllProductsSelectors, Review } from "../../libs/types";
-import { getAllUltaProducts } from "../../actions/getAllUltaProducts";
-import { getAllUltaBrands } from "../../actions/getAllUltaBrands";
-import { getAllSephoraBrands } from "../../actions/getAllSephoraBrands";
-import { withPgTrgm } from "prisma-extension-pg-trgm";
+
 import Link from "next/link";
-import { getUltaReviews } from "@/app/actions/getUltaReviews";
-import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
-import { getSharedUpdate } from "@/lib/badUtils";
 
 const prisma = new PrismaClient();
 // const prisma = new PrismaClient().$extends(withPgTrgm());

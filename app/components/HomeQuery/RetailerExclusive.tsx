@@ -5,11 +5,11 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import RetailerQueryResultCardHome from "./RetailerQueryResultCardHome";
+import RetailerQueryResultCardHome from "../../_components/RetailerQueryResultCardHome";
 import { AllProducts } from "@/app/libs/types";
 import { cn } from "@/lib/utils";
 import { Dispatch, SetStateAction, useState } from "react";
-import RetailerQueryForm from "./RetailerQueryForm";
+import RetailerQueryForm from "../../_components/RetailerQueryForm";
 import {
 	Accordion,
 	AccordionTrigger,

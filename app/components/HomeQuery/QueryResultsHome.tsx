@@ -4,7 +4,7 @@ import React, { Suspense, useState } from "react";
 import DisplaySkeleton from "../Loading Skeletons/DisplaySkeleton";
 import { AllProducts, QueryResult } from "../../libs/types";
 import QueryResultCardHome from "./QueryResultCardHome";
-import RetailerQueryResultCardHome from "./RetailerQueryResultCardHome";
+import RetailerQueryResultCardHome from "../../_components/RetailerQueryResultCardHome";
 import {
 	Card,
 	CardContent,
@@ -13,7 +13,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import RetailerExclusive from "./RetailerExclusive";
-import CompareCard from "./CompareCard";
+import CompareCard from "../../_components/CompareCard";
 import Search from "@/app/_components/Search";
 
 type Props = {
@@ -43,8 +43,7 @@ export default function QueryResultsHome({ isSubmitting }: Props) {
 							These products are only carried by
 						</CardDescription>
 					</CardHeader>
-					<CardContent className="pt-6">
-					</CardContent>
+					<CardContent className="pt-6"></CardContent>
 
 					{/* <CardContent className="grid grid-cols-2 gap-2">
 						{products.length > 0 &&

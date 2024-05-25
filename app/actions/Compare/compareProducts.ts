@@ -11,7 +11,8 @@ export default async function compareProducts(slug: string) {
 	const start = new Date().getTime();
 
 	if (!slug) {
-		// return [];
+		console.log("no")
+		return [];
 	}
 
 	await new Promise((resolve) => setTimeout(resolve, 2000));

@@ -1,13 +1,13 @@
 "use client";
 
 import { Dispatch, SetStateAction, useState } from "react";
-import SubmitForm from "../SubmitForm";
+import SubmitForm from "../components/SubmitForm";
 import {
 	AllProducts,
 	QueryResult,
 	querySchema,
 	TQuerySchema,
-} from "../../libs/types";
+} from "../libs/types";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -95,9 +95,7 @@ export default function RetailerQueryForm({
 									defaultSelected
 									className="text-xs lg:text-base"
 								>
-									<p className="text-xs lg:text-base">
-										Ulta
-									</p>
+									<p className="text-xs lg:text-base">Ulta</p>
 								</Checkbox>
 
 								<Checkbox
@@ -142,7 +140,6 @@ export default function RetailerQueryForm({
 								disabled={!form.formState.isDirty}
 								pending={form.formState.isSubmitting}
 								pendingText={["Searching...", "Search"]}
-								sheet={sheet}
 							/>
 						</div>
 					</div>

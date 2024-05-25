@@ -110,7 +110,6 @@ export default function GetProductForm({ sheet }: GetProductFormProps) {
 							disabled={!form.formState.isDirty}
 							pending={form.formState.isSubmitting}
 							pendingText={["Searching...", "Search"]}
-							sheet={sheet}
 						/>
 					</div>
 					{/* <CompareTabs /> */}
