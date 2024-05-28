@@ -3,6 +3,10 @@ import { Baloo_2 } from "next/font/google";
 import { AllProducts, Review, SearchParams } from "./libs/types";
 import ProductCard from "./(routes)/compare/[slug]/_components/ProductCard";
 import compareProducts from "./actions/Compare/compareProducts";
+import suspense from "./actions/Compare/suspense";
+import { Suspense } from "react";
+import ReviewData from "./_components/ReviewData";
+import ReviewDataSkeleton from "./_components/ReviewDataSkeleton";
 
 const font = Baloo_2({
 	subsets: ["latin"],
@@ -15,8 +19,6 @@ export default async function Home({
 	searchParams: { compare: string };
 }) {
 	const slug = searchParams.compare;
-
-	const data = await compareProducts(slug);
 
 	return (
 		<main className="flex flex-col items-center justify-center px-10 h-full">
@@ -32,27 +34,11 @@ export default async function Home({
 					compare reviews and product data
 				</h2>
 			</section>
-			<section className="w-full h-full mt-8 lg:px-80">
-				<Search />
-			</section>
-
-			<section
-				aria-label="compare2"
-				className="mt-4 flex flex-col lg:grid grid-cols-2 w-full gap-4 h-full"
-			>
-				{data &&
-					data.length > 0 &&
-					data.map(
-						(result, index) =>
-							result.productData &&
-							result.reviewsData && (
-								<ProductCard
-									key={index}
-									data={result.productData}
-									reviewsData={result.reviewsData}
-								/>
-							)
-					)}
+			<Search />
+			<section className="mt-4 flex flex-col lg:grid grid-cols-2 w-full gap-4 h-full">
+				<Suspense key={slug} fallback={<ReviewDataSkeleton />}>
+					<ReviewData sku={slug} />
+				</Suspense>
 			</section>
 		</main>
 	);

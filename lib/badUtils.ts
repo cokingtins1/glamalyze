@@ -25,22 +25,7 @@ export function getSharedUpdate(data: MetaData, upperRetailer: string) {
 		.map((key) => [key, scrubbedProductData[key]])
 		.filter(([_, value]) => value !== undefined);
 
-	// const objectData = extractedValues.reduce<{ [key: string]: number }>(
-	// 	(obj, [key, value]) => {
-	// 		//@ts-ignore
-	// 		if(upperRetailer === "Shared"){
-	// 			obj[key] = value;
-
-	// 		} else {
-	// 			obj[`${retailer}_` + key] = value;
-
-	// 		}
-	// 		return obj;
-	// 	},
-	// 	{}
-	// );
-
-	const objectData = extractedValues.reduce<{ [key: string]: number }>(
+	const objectData = extractedValues.reduce<{ [key: string]: number | boolean }>(
 		(obj, [key, value]) => {
 			if (upperRetailer === "Ulta" || upperRetailer === "Sephora") {
 				//@ts-ignore

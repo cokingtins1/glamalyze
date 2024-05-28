@@ -195,6 +195,7 @@ model AllProduct {
   sku_id              String?
   total_reviews       Float?
   page_link           String?
+  scraped             Boolean @default(false)
 }
 
 model FailedScrapes {

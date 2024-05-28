@@ -10,7 +10,7 @@ export default async function singleRetailerQuery(
 	sephora: boolean,
 	shared: boolean
 ): Promise<AllProducts[] | SharedProduct[] | undefined> {
-	if (shared) {
+	if (!shared) {
 		// 		let res: SharedProduct[] = await prisma.$queryRaw`
 		//         with input as (select ${query} as q)
 		//         select *,
@@ -71,7 +71,7 @@ export default async function singleRetailerQuery(
 		//     return allProduct;
 		//   }
 		//   const sharedRes = transformToAllProduct(res)
-	} else if (ulta && !sephora) {
+	} else if (ulta && !sephora && shared) {
 		let res: AllProducts[] = await prisma.$queryRaw`
             with input as (select ${query} as q)
             select *,
@@ -90,7 +90,7 @@ export default async function singleRetailerQuery(
     `;
 
 		return res;
-	} else if (sephora && !ulta) {
+	} else if (sephora && !ulta && shared) {
 		let res: AllProducts[] = await prisma.$queryRaw`
             with input as (select ${query} as q)
             select *,

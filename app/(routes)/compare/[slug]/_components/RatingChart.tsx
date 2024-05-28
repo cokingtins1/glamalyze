@@ -34,7 +34,7 @@ export default function RatingChart({ metaData }: DataProps) {
 							<span className=" mb-1 lg:hidden">
 								<StarIcon sx={{ fontSize: "1.25rem" }} />
 							</span>
-							<p className='text-xl font-bold'>
+							<p className="text-xl font-bold ml-2">
 								{metaData.avg_rating &&
 									formatRating(metaData.avg_rating)}
 							</p>
@@ -75,6 +75,7 @@ export default function RatingChart({ metaData }: DataProps) {
 												/>
 
 												<Stars
+													searchResult
 													rating={
 														metaData
 															.review_histogram

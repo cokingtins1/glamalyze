@@ -35,8 +35,6 @@ export async function getSharedProducts(
 	startIndex = String.fromCharCode(64 + startIndexPos);
 	endIndex = String.fromCharCode(65 + endIndexPos);
 
-	console.log(startIndex, endIndex);
-
 	if (url) {
 		const specificProduct = await prisma.sharedProduct.findFirst({
 			where: {

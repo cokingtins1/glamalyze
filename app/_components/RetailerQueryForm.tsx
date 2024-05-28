@@ -27,14 +27,13 @@ import InfoPopover from "@/app/_components/InfoPopover";
 type RetailerQueryFormProps = {
 	sheet: boolean;
 	setData: Dispatch<SetStateAction<AllProducts[]>>;
+	setShared: Dispatch<SetStateAction<boolean>>;
 };
 export default function RetailerQueryForm({
 	sheet,
 	setData,
+	setShared,
 }: RetailerQueryFormProps) {
-	const [sheetData, setSheetData] = useState<QueryResult | null>(null);
-	const [homeData, setHomeData] = useState<QueryResult | null>(null);
-
 	const form = useForm<TQuerySchema>({
 		resolver: zodResolver(querySchema),
 		defaultValues: {
@@ -44,6 +43,12 @@ export default function RetailerQueryForm({
 			shared: false,
 		},
 	});
+
+	const { register, watch } = form;
+
+	const ultaVal = watch("ulta");
+	const sephoraVal = watch("sephora");
+	const sharedVal = watch("shared");
 
 	const onSubmit = async (data: TQuerySchema) => {
 		const res = await fetch("/api/retailerQuery", {
@@ -61,98 +66,89 @@ export default function RetailerQueryForm({
 
 		if (res.ok) {
 			const responseData = await res.json();
-			if (sheet) {
-				setSheetData(responseData.success.data);
-			} else {
-				setHomeData(responseData.success.data);
+			if (!sheet) {
 				setData(responseData.success.data);
 			}
 		}
 	};
 
+	const handleCheck = (value: boolean) => {
+		setShared(value)
+	};
+
 	return (
-		<>
-			<Form {...form}>
-				<form
-					autoComplete="off"
-					onSubmit={form.handleSubmit(onSubmit)}
-					className="flex flex-col gap-2 px-2 w-full"
+		<Form {...form}>
+			<form
+				autoComplete="off"
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="flex flex-col gap-2 px-2 w-full"
+			>
+				<div
+					className={cn("flex flex-col", {
+						"flex-col gap-4 w-full": sheet,
+						"flex-col items-center justify-center gap-4": !sheet,
+					})}
 				>
-					<div
-						className={cn("flex flex-col", {
-							"flex-col gap-4 w-full": sheet,
-							"flex-col items-center justify-center gap-4":
-								!sheet,
-						})}
-					>
-						<div className="flex flex-col items-center gap-2 lg:flex-row">
-							<p className="text-xs lg:text-base">
-								Search within:
-							</p>
-							<div className="flex gap-4">
-								<Checkbox
-									{...form.register("ulta")}
-									defaultSelected
-									className="text-xs lg:text-base"
-								>
-									<p className="text-xs lg:text-base">Ulta</p>
-								</Checkbox>
+					<div className="flex flex-col items-center gap-2 lg:flex-row">
+						<p className="text-xs lg:text-base">Search within:</p>
+						<div className="flex gap-4">
+							<Checkbox
+								{...register("ulta")}
+								defaultSelected={ultaVal}
+								className="text-xs lg:text-base"
+								// onClick={() => setRetailer("Retailer")}
+							>
+								<p className="text-xs lg:text-base">Ulta</p>
+							</Checkbox>
 
-								<Checkbox
-									{...form.register("sephora")}
-									defaultSelected
-									className="text-xs lg:text-base"
-								>
+							<Checkbox
+								{...register("sephora")}
+								defaultSelected={sephoraVal}
+								className="text-xs lg:text-base"
+							>
+								<p className="text-xs lg:text-base">Sephora</p>
+							</Checkbox>
+							<Checkbox
+								{...register("shared")}
+								defaultSelected={sharedVal}
+								onClick={() => handleCheck(!sharedVal)}
+							>
+								<span className="flex gap-1">
 									<p className="text-xs lg:text-base">
-										Sephora
+										Shared
 									</p>
-								</Checkbox>
-								<Checkbox {...form.register("shared")}>
-									<span className="flex gap-1">
-										<p className="text-xs lg:text-base">
-											Shared
-										</p>
-										<InfoPopover />
-									</span>
-								</Checkbox>
-							</div>
-						</div>
-						<div className="flex gap-2 items-center lg:flex-row lg:full">
-							<FormField
-								control={form.control}
-								name="query"
-								render={({ field }) => (
-									<FormItem className="grow">
-										<FormControl>
-											<Input
-												autoFocus
-												placeholder="Search for products"
-												{...field}
-												className="bg-white"
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-
-							<SubmitForm
-								disabled={!form.formState.isDirty}
-								pending={form.formState.isSubmitting}
-								pendingText={["Searching...", "Search"]}
-							/>
+									<InfoPopover />
+								</span>
+							</Checkbox>
 						</div>
 					</div>
-				</form>
-			</Form>
-			<form
-				action={(formData) => {
-					// const ultaLink = formData.get("ultaLink");
-					// const sephoraLink = formData.get("sephoraLink");
-					// const compareString = `u:[${ultaLink}],s:[${sephoraLink}]`;
-					// router.push(`/compare/${compareString}`);
-				}}
-			></form>
-		</>
+					<div className="flex gap-2 items-center lg:flex-row lg:full">
+						<FormField
+							control={form.control}
+							name="query"
+							render={({ field }) => (
+								<FormItem className="grow">
+									<FormControl>
+										<Input
+											autoFocus
+											placeholder="Search for products"
+											{...field}
+											className="bg-white"
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+
+						<SubmitForm
+							disabled={!form.formState.isDirty}
+							pending={form.formState.isSubmitting}
+							pendingText={["Searching...", "Search"]}
+						/>
+					</div>
+				</div>
+			</form>
+		</Form>
 	);
 }
