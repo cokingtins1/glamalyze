@@ -73,7 +73,7 @@ export default async function scrapeSharedReviews(
 		let avgTime: number = 0;
 
 		let count = 0;
-		let forceStop = Infinity;
+		let forceStop = 1100;
 		const numProducts = allProducts.length;
 
 		let failedScrapes: FailedScrapes[] = [];
