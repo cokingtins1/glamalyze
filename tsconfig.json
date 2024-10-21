@@ -21,6 +21,7 @@
 		"paths": {
 			"@/*": ["./*"]
 		}
+		// "target": "ES2015"
 	},
 	"include": [
 		"next-env.d.ts",

@@ -1,12 +1,13 @@
-import Search from "./_components/Search";
 import { Baloo_2 } from "next/font/google";
 import { AllProducts, Review, SearchParams } from "./libs/types";
 import ProductCard from "./(routes)/compare/[slug]/_components/ProductCard";
 import compareProducts from "./actions/Compare/compareProducts";
 import suspense from "./actions/Compare/suspense";
 import { Suspense } from "react";
-import ReviewData from "./_components/ReviewData";
-import ReviewDataSkeleton from "./_components/ReviewDataSkeleton";
+import Search from './components/_components/Search';
+import ReviewDataSkeleton from './components/_components/ReviewDataSkeleton';
+import ReviewData from './components/_components/ReviewData';
+
 
 const font = Baloo_2({
 	subsets: ["latin"],

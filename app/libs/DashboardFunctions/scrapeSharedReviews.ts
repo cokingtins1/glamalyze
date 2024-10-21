@@ -39,6 +39,7 @@ export default async function scrapeSharedReviews(
 	}
 
 	console.log(allLinks.length);
+	console.log((allLinks.length * 15) / 3600);
 
 	if (allLinks.length > 0) {
 		// const data = await prisma.sharedProduct.findMany({
@@ -73,7 +74,7 @@ export default async function scrapeSharedReviews(
 		let avgTime: number = 0;
 
 		let count = 0;
-		let forceStop = 1100;
+		let forceStop = Infinity;
 		const numProducts = allProducts.length;
 
 		let failedScrapes: FailedScrapes[] = [];

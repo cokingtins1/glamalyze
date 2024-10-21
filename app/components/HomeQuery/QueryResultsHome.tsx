@@ -4,7 +4,7 @@ import React, { Suspense, useState } from "react";
 import DisplaySkeleton from "../Loading Skeletons/DisplaySkeleton";
 import { AllProducts, QueryResult } from "../../libs/types";
 import QueryResultCardHome from "./QueryResultCardHome";
-import RetailerQueryResultCardHome from "../../_components/RetailerQueryResultCardHome";
+import RetailerQueryResultCardHome from "../Dashboard/_components/RetailerProductQueryCard";
 import {
 	Card,
 	CardContent,
@@ -13,8 +13,8 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import RetailerExclusive from "./RetailerExclusive";
-import CompareCard from "../../_components/CompareCard";
-import Search from "@/app/_components/Search";
+import CompareCard from "../Dashboard/_components/CompareCard";
+import Search from "@/app/components/_components/Search";
 
 type Props = {
 	isSubmitting: boolean;

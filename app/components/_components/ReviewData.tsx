@@ -1,8 +1,6 @@
 import React from "react";
-import compareProducts from "../actions/Compare/compareProducts";
-import ProductCard from "../(routes)/compare/[slug]/_components/ProductCard";
-
-type Props = {};
+import compareProducts from "../../actions/Compare/compareProducts";
+import ProductCard from "../../(routes)/compare/[slug]/_components/ProductCard";
 
 export default async function ReviewData(props: { sku: string }) {
 	const reviewData = await compareProducts(props.sku);

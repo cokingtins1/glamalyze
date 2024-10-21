@@ -13,7 +13,7 @@ export default async function Page({ params }: Props) {
 
 	return (
 		<>
-			<main aria-label="compare" className="flex flex-col px-4">
+			{/* <main aria-label="compare" className="flex flex-col px-4">
 				<section className="flex justify-center">
 					<SharedComparison data={data} />
 				</section>
@@ -34,7 +34,7 @@ export default async function Page({ params }: Props) {
 								)
 						)}
 				</section>
-			</main>
+			</main> */}
 		</>
 	);
 }

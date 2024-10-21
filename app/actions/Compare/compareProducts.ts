@@ -798,27 +798,18 @@ export default async function compareProducts(slug: string) {
 		},
 	];
 
-	return dummyData;
+	// return dummyData;
 
 	function getSku(slug: string) {
-		const string = decodeURIComponent(slug);
-
-		const uSkuPattern = /u:\[([\d,]+)\]/;
-		const sSkuPattern = /s:\[([\d,]+)\]/;
-
-		const uSkuMatch = string.match(uSkuPattern);
-		const u_sku = uSkuMatch
-			? uSkuMatch[1].split(",").map((sku) => ({ sku, retailer: "Ulta" }))
-			: [];
-
-		const sSkuMatch = string.match(sSkuPattern);
-		const s_sku = sSkuMatch
-			? sSkuMatch[1]
-					.split(",")
-					.map((sku) => ({ sku, retailer: "Sephora" }))
-			: [];
-
-		return [...u_sku, ...s_sku];
+		const parts = slug.split(", ");
+		return parts.map((part) => {
+			const retailer = part.startsWith("u") ? "Ulta" : "Sephora";
+			const sku = part.match(/\d+/)?.[0];
+			return {
+				sku: sku ?? "",
+				retailer,
+			};
+		});
 	}
 
 	async function checkExisting(
@@ -1015,7 +1006,7 @@ export default async function compareProducts(slug: string) {
 	}
 
 	const end = new Date().getTime();
-	console.log(`Execution time: ${(end - start) / 1000} seconds`);
+	// console.log(`Execution time: ${(end - start) / 1000} seconds`);
 
 	return data;
 }

@@ -1,8 +1,7 @@
 "use server";
 
-
 import { runUltaAllProductsScraper } from "../libs/Scraping Functions/Ulta-AllProducts/runUltaAllProductsScraper";
-import { AllProducts } from '../libs/types';
+import { AllProducts } from "../libs/types";
 
 export async function getAllUltaProducts(
 	url: string | null,
@@ -13,10 +12,10 @@ export async function getAllUltaProducts(
 	try {
 		const allProducts = await runUltaAllProductsScraper(url as string, {
 			sephoraSelectors: {
-				allProductsContSelector: '[data-test="products-list"]', //done
+				allProductsContSelector: '[data-test="products-list"]',
 				productCardContSelector:
-					".Text-ds.Text-ds--title-6.Text-ds--left", // not implemented
-				productNameSelector: ".Text-ds.Text-ds--body-2.Text-ds--left", //D
+					".Text-ds.Text-ds--title-6.Text-ds--left",
+				productNameSelector: ".Text-ds.Text-ds--body-2.Text-ds--left",
 				productImageSelector: ".Image img",
 				brandNameSelector:
 					".Text-ds.Text-ds--body-2.Text-ds--left.Text-ds--neutral-600",

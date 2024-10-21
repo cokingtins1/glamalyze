@@ -1,5 +1,5 @@
 import React from "react";
-import DisplaySkeleton from "../components/Loading Skeletons/DisplaySkeleton";
+import DisplaySkeleton from "../Loading Skeletons/DisplaySkeleton";
 
 type Props = {};
 

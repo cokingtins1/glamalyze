@@ -1,13 +1,13 @@
 "use client";
 
 import { Dispatch, SetStateAction, useState } from "react";
-import SubmitForm from "../components/SubmitForm";
+import SubmitForm from "../SubmitForm";
 import {
 	AllProducts,
 	QueryResult,
 	querySchema,
 	TQuerySchema,
-} from "../libs/types";
+} from "../../libs/types";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,17 +22,21 @@ import {
 import { Checkbox } from "@nextui-org/checkbox";
 
 import { cn } from "@/lib/utils";
-import InfoPopover from "@/app/_components/InfoPopover";
+import InfoPopover from "@/app/components/_components/InfoPopover";
+import { SharedProduct } from "@prisma/client";
 
 type RetailerQueryFormProps = {
 	sheet: boolean;
 	setData: Dispatch<SetStateAction<AllProducts[]>>;
+	setCombinedProducts: Dispatch<SetStateAction<QueryResult>>;
+
 	setShared: Dispatch<SetStateAction<boolean>>;
 };
 export default function RetailerQueryForm({
 	sheet,
 	setData,
 	setShared,
+	setCombinedProducts,
 }: RetailerQueryFormProps) {
 	const form = useForm<TQuerySchema>({
 		resolver: zodResolver(querySchema),
@@ -68,12 +72,13 @@ export default function RetailerQueryForm({
 			const responseData = await res.json();
 			if (!sheet) {
 				setData(responseData.success.data);
+				setCombinedProducts(responseData.success.data);
 			}
 		}
 	};
 
 	const handleCheck = (value: boolean) => {
-		setShared(value)
+		setShared(value);
 	};
 
 	return (
@@ -90,9 +95,9 @@ export default function RetailerQueryForm({
 					})}
 				>
 					<div className="flex flex-col items-center gap-2 lg:flex-row">
-						<p className="text-xs lg:text-base">Search within:</p>
+						{/* <p className="text-xs lg:text-base">Search within:</p> */}
 						<div className="flex gap-4">
-							<Checkbox
+							{/* <Checkbox
 								{...register("ulta")}
 								defaultSelected={ultaVal}
 								className="text-xs lg:text-base"
@@ -119,7 +124,7 @@ export default function RetailerQueryForm({
 									</p>
 									<InfoPopover />
 								</span>
-							</Checkbox>
+							</Checkbox> */}
 						</div>
 					</div>
 					<div className="flex gap-2 items-center lg:flex-row lg:full">

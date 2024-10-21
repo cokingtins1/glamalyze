@@ -12,7 +12,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import RetailerQueryForm from "./RetailerQueryForm";
 import { useCallback, useEffect, useState } from "react";
-import { AllProducts, Review } from "../libs/types";
+import { AllProducts, QueryResult, Review } from "../../libs/types";
 import {
 	Popover,
 	PopoverContent,
@@ -23,10 +23,15 @@ import CompareCard from "./CompareCard";
 import PlaceholderCard from "./PlaceholderCard";
 import { Button as NextUIButton } from "@nextui-org/button";
 import { useRouter, useSearchParams } from "next/navigation";
-import ProductQueryCard from "./RetailerQueryResultCardHome";
-import compareProducts from "../actions/Compare/compareProducts";
+import ProductQueryCard from "./RetailerProductQueryCard";
+import compareProducts from "../../actions/Compare/compareProducts";
 import { cn } from "@/lib/utils";
 import { isNull } from "util";
+import { SharedProduct } from "@prisma/client";
+import { Checkbox } from "@nextui-org/checkbox";
+import InfoPopover from "./InfoPopover";
+import { select } from "@nextui-org/react";
+import { checkServerIdentity } from "tls";
 
 type ReviewData = {
 	productData: AllProducts | null;
@@ -39,6 +44,57 @@ type SearchProps = {
 
 export default function Search() {
 	const [data, setData] = useState<AllProducts[]>([]);
+	const [combinedData, setCombinedData] = useState<AllProducts[]>([]);
+
+	const [combinedProducts, setCombinedProducts] = useState<QueryResult>({
+		ultaRes: [],
+		sephoraRes: [],
+		sharedRes: [],
+	});
+
+	const [selectedProducts, setSelectedProducts] = useState<any[]>([]);
+	const [checkedStates, setCheckedStates] = useState({
+		ulta: false,
+		sephora: false,
+		all: true,
+		shared: false,
+	});
+
+	useEffect(() => {
+		let updatedProducts: any[] = [];
+
+		if (checkedStates.ulta) {
+			updatedProducts = updatedProducts.concat(combinedProducts.ultaRes);
+		}
+		if (checkedStates.sephora) {
+			updatedProducts = updatedProducts.concat(
+				combinedProducts.sephoraRes
+			);
+		}
+		if (checkedStates.all) {
+			updatedProducts = [];
+			updatedProducts = updatedProducts.concat(
+				combinedProducts.ultaRes,
+				combinedProducts.sephoraRes
+			);
+		}
+		if (checkedStates.shared) {
+			updatedProducts = updatedProducts.concat(
+				combinedProducts.sharedRes
+			);
+		}
+
+		setSelectedProducts(updatedProducts);
+	}, [checkedStates, combinedProducts]);
+
+	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, checked } = e.target;
+		setCheckedStates((prev) => ({
+			...prev,
+			[name]: checked,
+		}));
+	};
+
 	const [products, setProducts] = useState<AllProducts[]>([]);
 	const [sharedProduct, setSharedProduct] = useState<AllProducts | null>(
 		null
@@ -61,8 +117,6 @@ export default function Search() {
 	);
 
 	const handleClick = (product: AllProducts) => {
-		console.log(shared);
-		console.log(sharedProduct);
 		if (shared) {
 			if (sharedProduct?.product_id === product.product_id) {
 				setSharedProduct(null);
@@ -86,7 +140,7 @@ export default function Search() {
 			}
 
 			setProducts(updatedProducts);
-			updateSku(updatedProducts); // Assuming updateSku is defined elsewhere
+			updateSku(updatedProducts);
 		}
 		// const existingProductIndex = products.findIndex(
 		// 	(p) => p.product_id === product.product_id
@@ -123,35 +177,51 @@ export default function Search() {
 	};
 
 	const [count, setCount] = useState(0);
+	// console.log("products:", products);
 
-	const handleCompare = async () => {
-		setCount(count + 1);
+	const handleCompare = async (products: AllProducts[]) => {
+		// setCount(count + 1);
+		// const sku1 = "u:[2210030], s:[2162220]";
+		// const sku2 = "u:[2607622], s:[2255503]";
+		// const sku3 = "u:[2572193], s:[2435006]";
+		// let skuToCompare;
+		// switch (count) {
+		// 	case 0:
+		// 		skuToCompare = sku1;
+		// 		break;
+		// 	case 1:
+		// 		skuToCompare = sku2;
+		// 		break;
+		// 	case 2:
+		// 		skuToCompare = sku3;
+		// 		break;
+		// 	default:
+		// 		skuToCompare = sku1;
+		// }
+		// router.push("/" + "?" + createQueryString("compare", skuToCompare));
 
-		const sku1 = "u:[2210030], s:[2162220]";
-		const sku2 = "u:[2607622], s:[2255503]";
-		const sku3 = "u:[2572193], s:[2435006]";
+		let string = "";
 
-		let skuToCompare;
-		switch (count) {
-			case 0:
-				skuToCompare = sku1;
-				break;
-			case 1:
-				skuToCompare = sku2;
-				break;
-			case 2:
-				skuToCompare = sku3;
-				break;
-			default:
-				skuToCompare = sku1;
-		}
+		products.find((product) => {
+			const prefix = product.retailer_id === "Ulta" ? "u" : "s";
+			string += `${prefix}:[${product.sku_id}], `;
+		});
 
-		router.push("/" + "?" + createQueryString("compare", skuToCompare));
+		const queryString = string.slice(0, -2);
+		router.push("/" + "?" + createQueryString("compare", queryString));
 	};
 
 	useEffect(() => {
 		setOpen(true);
-	}, [products, products.length, data, data.length]);
+	}, [
+		products,
+		products.length,
+		combinedProducts,
+		checkedStates.ulta,
+		checkedStates.sephora,
+		checkedStates.all,
+		checkedStates.shared,
+	]);
 
 	return (
 		<>
@@ -166,7 +236,10 @@ export default function Search() {
 								Choose two products to compare
 							</CardDescription>
 						</div>
-						<NextUIButton color="primary" onClick={handleCompare}>
+						<NextUIButton
+							color="primary"
+							onClick={() => handleCompare(products)}
+						>
 							Compare
 						</NextUIButton>
 					</CardHeader>
@@ -175,12 +248,14 @@ export default function Search() {
 							className={cn(
 								"flex flex-col gap-2 lg:h-[100px] w-full",
 								{
-									"lg:grid max-w-[330px]": shared,
-									"lg:grid grid-cols-2": !shared,
+									"lg:grid max-w-[330px]":
+										checkedStates.shared,
+									"lg:grid grid-cols-2":
+										!checkedStates.shared,
 								}
 							)}
 						>
-							{shared ? (
+							{checkedStates.shared ? (
 								sharedProduct ? (
 									<CompareCard
 										data={sharedProduct}
@@ -218,6 +293,60 @@ export default function Search() {
 							)}
 						</div>
 						<div className="pt-6">
+							<div className="flex flex-col items-center gap-2 lg:flex-row">
+								<p className="text-xs lg:text-base">
+									Search within:
+								</p>
+
+								<div className="flex gap-4">
+									<Checkbox
+										name="ulta"
+										onChange={handleCheckboxChange}
+										checked={checkedStates.ulta}
+										className="text-xs lg:text-base"
+									>
+										<p className="text-xs lg:text-base">
+											Ulta
+										</p>
+									</Checkbox>
+
+									<Checkbox
+										name="sephora"
+										onChange={handleCheckboxChange}
+										checked={checkedStates.sephora}
+										className="text-xs lg:text-base"
+									>
+										<p className="text-xs lg:text-base">
+											Sephora
+										</p>
+									</Checkbox>
+
+									<Checkbox
+										name="all"
+										defaultChecked={checkedStates.all}
+										onChange={handleCheckboxChange}
+										className="text-xs lg:text-base"
+									>
+										<p className="text-xs lg:text-base">
+											All Products
+										</p>
+									</Checkbox>
+
+									<Checkbox
+										isDisabled={true}
+										name="shared"
+										checked={checkedStates.shared}
+										onChange={handleCheckboxChange}
+									>
+										<span className="flex gap-1">
+											<p className="text-xs lg:text-base">
+												Shared
+											</p>
+											<InfoPopover />
+										</span>
+									</Checkbox>
+								</div>
+							</div>
 							<Popover
 								open={open}
 								onOpenChange={() => setOpen(!open)}
@@ -228,16 +357,19 @@ export default function Search() {
 											<RetailerQueryForm
 												sheet={false}
 												setData={setData}
+												setCombinedProducts={
+													setCombinedProducts
+												}
 												setShared={setShared}
 											/>
 										</div>
 									</PopoverTrigger>
 
-									{data.length > 0 && (
+									{selectedProducts.length > 0 && (
 										<PopoverContent side="bottom">
 											<ScrollArea className="h-52 lg:h-72 w-full">
 												<div className="flex flex-col gap-2">
-													{data.map(
+													{selectedProducts.map(
 														(result, index) => (
 															<ProductQueryCard
 																onClick={() => {

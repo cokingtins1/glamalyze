@@ -4,6 +4,7 @@ import { querySchema } from "@/app/libs/types";
 import { NextResponse } from "next/server";
 import Query from "@/app/libs/QueryFunctions/query";
 import singleRetailerQuery from "@/app/libs/QueryFunctions/singleRetailerQuery";
+import combinedRetailerQuery from "@/app/libs/QueryFunctions/combinedRetailerQuery";
 
 export async function POST(req: Request) {
 	const body = await req.json();
@@ -24,10 +25,12 @@ export async function POST(req: Request) {
 		);
 	}
 
-	await new Promise((resolve) => setTimeout(resolve, 500));
+	// await new Promise((resolve) => setTimeout(resolve, 500));
 	const { query, ulta, sephora, shared } = result.data;
-
-	const retData = await singleRetailerQuery(query, ulta, sephora, shared);
+	// console.log(result.data);
+	// const retData = await singleRetailerQuery(query, ulta, sephora, shared);
+	const retData = await combinedRetailerQuery(query);
+	// console.log("retData:", retData);
 
 	const ultaData = [
 		{

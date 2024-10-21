@@ -144,8 +144,14 @@ export type SharedLinks = {
 	total_reviews: number[];
 };
 
+// export type QueryResult = {
+// 	filteredShared: SharedProduct[];
+// 	filteredUlta: AllProducts[];
+// 	filteredSephora: AllProducts[];
+// };
+
 export type QueryResult = {
-	filteredShared: SharedProduct[];
-	filteredUlta: AllProducts[];
-	filteredSephora: AllProducts[];
+	ultaRes: AllProducts[];
+	sephoraRes: AllProducts[];
+	sharedRes: SharedProduct[];
 };
