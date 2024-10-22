@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 	}
 
 	// await new Promise((resolve) => setTimeout(resolve, 500));
-	const { query, ulta, sephora, shared } = result.data;
+	const { query } = result.data;
 	// console.log(result.data);
 	// const retData = await singleRetailerQuery(query, ulta, sephora, shared);
 	const retData = await combinedRetailerQuery(query);

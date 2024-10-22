@@ -298,7 +298,7 @@ export default function Search() {
 									Search within:
 								</p>
 
-								<div className="flex gap-4">
+								<div className="flex gap-4 my-4">
 									<Checkbox
 										name="ulta"
 										onChange={handleCheckboxChange}
