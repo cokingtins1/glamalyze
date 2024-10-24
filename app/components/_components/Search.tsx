@@ -12,7 +12,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import RetailerQueryForm from "./RetailerQueryForm";
 import { useCallback, useEffect, useState } from "react";
-import { AllProducts, QueryResult, Review } from "../../libs/types";
+import { AllProducts, QueryResult } from "../../libs/types";
 import {
 	Popover,
 	PopoverContent,
@@ -23,28 +23,18 @@ import CompareCard from "./CompareCard";
 import PlaceholderCard from "./PlaceholderCard";
 import { Button as NextUIButton } from "@nextui-org/button";
 import { useRouter, useSearchParams } from "next/navigation";
-import ProductQueryCard from "./RetailerProductQueryCard";
-import compareProducts from "../../actions/Compare/compareProducts";
+import ProductQueryCard from "./ProductQueryCard";
 import { cn } from "@/lib/utils";
-import { isNull } from "util";
-import { SharedProduct } from "@prisma/client";
 import { Checkbox } from "@nextui-org/checkbox";
 import InfoPopover from "./InfoPopover";
-import { select } from "@nextui-org/react";
-import { checkServerIdentity } from "tls";
-
-type ReviewData = {
-	productData: AllProducts | null;
-	reviewsData: Review[] | null;
-};
-
-type SearchProps = {
-	reviews: Review[][] | undefined;
-};
+import SharedProductQueryCard from "./SharedProductQueryCard";
+import { SharedProduct } from "@prisma/client";
+import SharedCompareCard from "./SharedCompareCard";
 
 export default function Search() {
 	const [data, setData] = useState<AllProducts[]>([]);
-	const [combinedData, setCombinedData] = useState<AllProducts[]>([]);
+	const [open, setOpen] = useState(false);
+	const [sharedSku, setSharedSku] = useState("");
 
 	const [combinedProducts, setCombinedProducts] = useState<QueryResult>({
 		ultaRes: [],
@@ -79,6 +69,7 @@ export default function Search() {
 			);
 		}
 		if (checkedStates.shared) {
+			updatedProducts = [];
 			updatedProducts = updatedProducts.concat(
 				combinedProducts.sharedRes
 			);
@@ -89,19 +80,25 @@ export default function Search() {
 
 	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = e.target;
-		setCheckedStates((prev) => ({
-			...prev,
-			[name]: checked,
-		}));
+		if (name === "shared") {
+			setCheckedStates({
+				ulta: false,
+				sephora: false,
+				all: false,
+				shared: !checkedStates.shared,
+			});
+			setSelectedProducts([]);
+		} else {
+			setCheckedStates((prev) => ({
+				...prev,
+				[name]: checked,
+			}));
+		}
 	};
 
 	const [products, setProducts] = useState<AllProducts[]>([]);
-	const [sharedProduct, setSharedProduct] = useState<AllProducts | null>(
-		null
-	);
-	const [open, setOpen] = useState(false);
-	const [shared, setShared] = useState(false);
-	const [sku, setSku] = useState("");
+	const [selectedSharedProduct, setSelectedSharedProduct] =
+		useState<SharedProduct | null>(null);
 
 	const router = useRouter();
 	const searchParams = useSearchParams();
@@ -117,98 +114,49 @@ export default function Search() {
 	);
 
 	const handleClick = (product: AllProducts) => {
-		if (shared) {
-			if (sharedProduct?.product_id === product.product_id) {
-				setSharedProduct(null);
-			} else {
-				setSharedProduct(product);
-			}
-		} else {
-			const existingProductIndex = products.findIndex(
-				(p) => p.product_id === product.product_id
+		const existingProductIndex = products.findIndex(
+			(p) => p.product_id === product.product_id
+		);
+		let updatedProducts;
+
+		if (existingProductIndex !== -1) {
+			updatedProducts = products.filter(
+				(p) => p.product_id !== product.product_id
 			);
-			let updatedProducts;
-
-			if (existingProductIndex !== -1) {
-				updatedProducts = products.filter(
-					(p) => p.product_id !== product.product_id
-				);
-			} else if (products.length < 2) {
-				updatedProducts = [...products, product];
-			} else {
-				updatedProducts = products;
-			}
-
-			setProducts(updatedProducts);
-			updateSku(updatedProducts);
+		} else if (products.length < 2) {
+			updatedProducts = [...products, product];
+		} else {
+			updatedProducts = products;
 		}
-		// const existingProductIndex = products.findIndex(
-		// 	(p) => p.product_id === product.product_id
-		// );
-		// let updatedProducts;
 
-		// if (existingProductIndex !== -1) {
-		// 	updatedProducts = products.filter(
-		// 		(p) => p.product_id !== product.product_id
-		// 	);
-		// } else if (products.length < 2) {
-		// 	updatedProducts = [...products, product];
-		// } else {
-		// 	updatedProducts = products;
-		// }
-
-		// setProducts(updatedProducts);
-		// updateSku(updatedProducts);
+		setProducts(updatedProducts);
 	};
 
-	const updateSku = (products: AllProducts[]) => {
-		const ultaSkus = products
-			.filter((p) => p.retailer_id === "Ulta")
-			.map((p) => p.sku_id);
-		const sephoraSkus = products
-			.filter((p) => p.retailer_id === "Sephora")
-			.map((p) => p.sku_id);
-
-		const ultaSkuString = `u:[${ultaSkus.join(",")}]`;
-		const sephoraSkuString = `s:[${sephoraSkus.join(",")}]`;
-		const skuString = `${ultaSkuString}, ${sephoraSkuString}`;
-
-		setSku(skuString);
+	const handleSharedClick = (product: SharedProduct | null) => {
+		if (product) {
+			setSelectedSharedProduct(product);
+			setSharedSku(
+				`u:[${product.ulta_sku_id}]:s[${product.sephora_sku_id}]`
+			);
+		}
 	};
-
-	const [count, setCount] = useState(0);
-	// console.log("products:", products);
 
 	const handleCompare = async (products: AllProducts[]) => {
-		// setCount(count + 1);
-		// const sku1 = "u:[2210030], s:[2162220]";
-		// const sku2 = "u:[2607622], s:[2255503]";
-		// const sku3 = "u:[2572193], s:[2435006]";
-		// let skuToCompare;
-		// switch (count) {
-		// 	case 0:
-		// 		skuToCompare = sku1;
-		// 		break;
-		// 	case 1:
-		// 		skuToCompare = sku2;
-		// 		break;
-		// 	case 2:
-		// 		skuToCompare = sku3;
-		// 		break;
-		// 	default:
-		// 		skuToCompare = sku1;
-		// }
-		// router.push("/" + "?" + createQueryString("compare", skuToCompare));
+		if (products.length === 0 && !checkedStates.shared) return;
+		if (checkedStates.shared) {
+			console.log(sharedSku);
+			router.push("/" + "?" + createQueryString("compare", sharedSku));
+		} else {
+			let string = "";
 
-		let string = "";
+			products.find((product) => {
+				const prefix = product.retailer_id === "Ulta" ? "u" : "s";
+				string += `${prefix}:[${product.sku_id}], `;
+			});
 
-		products.find((product) => {
-			const prefix = product.retailer_id === "Ulta" ? "u" : "s";
-			string += `${prefix}:[${product.sku_id}], `;
-		});
-
-		const queryString = string.slice(0, -2);
-		router.push("/" + "?" + createQueryString("compare", queryString));
+			const queryString = string.slice(0, -2);
+			router.push("/" + "?" + createQueryString("compare", queryString));
+		}
 	};
 
 	useEffect(() => {
@@ -256,11 +204,14 @@ export default function Search() {
 							)}
 						>
 							{checkedStates.shared ? (
-								sharedProduct ? (
-									<CompareCard
-										data={sharedProduct}
+								combinedProducts.sharedRes &&
+								combinedProducts.sharedRes.length > 0 ? (
+									<SharedCompareCard
+										data={selectedSharedProduct}
 										onClick={() =>
-											handleClick(sharedProduct)
+											handleSharedClick(
+												selectedSharedProduct
+											)
 										}
 									/>
 								) : (
@@ -300,9 +251,10 @@ export default function Search() {
 
 								<div className="flex gap-4 my-4">
 									<Checkbox
+										isDisabled={checkedStates.shared}
 										name="ulta"
 										onChange={handleCheckboxChange}
-										checked={checkedStates.ulta}
+										isSelected={checkedStates.ulta}
 										className="text-xs lg:text-base"
 									>
 										<p className="text-xs lg:text-base">
@@ -311,9 +263,10 @@ export default function Search() {
 									</Checkbox>
 
 									<Checkbox
+										isDisabled={checkedStates.shared}
 										name="sephora"
 										onChange={handleCheckboxChange}
-										checked={checkedStates.sephora}
+										isSelected={checkedStates.sephora}
 										className="text-xs lg:text-base"
 									>
 										<p className="text-xs lg:text-base">
@@ -322,8 +275,10 @@ export default function Search() {
 									</Checkbox>
 
 									<Checkbox
+										isDisabled={checkedStates.shared}
 										name="all"
-										defaultChecked={checkedStates.all}
+										defaultSelected={checkedStates.all}
+										isSelected={checkedStates.all}
 										onChange={handleCheckboxChange}
 										className="text-xs lg:text-base"
 									>
@@ -333,9 +288,8 @@ export default function Search() {
 									</Checkbox>
 
 									<Checkbox
-										isDisabled={true}
 										name="shared"
-										checked={checkedStates.shared}
+										isSelected={checkedStates.shared}
 										onChange={handleCheckboxChange}
 									>
 										<span className="flex gap-1">
@@ -360,7 +314,6 @@ export default function Search() {
 												setCombinedProducts={
 													setCombinedProducts
 												}
-												setShared={setShared}
 											/>
 										</div>
 									</PopoverTrigger>
@@ -369,19 +322,47 @@ export default function Search() {
 										<PopoverContent side="bottom">
 											<ScrollArea className="h-52 lg:h-72 w-full">
 												<div className="flex flex-col gap-2">
-													{selectedProducts.map(
-														(result, index) => (
-															<ProductQueryCard
-																onClick={() => {
-																	handleClick(
-																		result
-																	);
-																}}
-																key={index}
-																data={result}
-															/>
-														)
-													)}
+													{!checkedStates.shared
+														? selectedProducts.map(
+																(
+																	result,
+																	index
+																) => (
+																	<ProductQueryCard
+																		onClick={() => {
+																			handleClick(
+																				result
+																			);
+																		}}
+																		key={
+																			index
+																		}
+																		data={
+																			result
+																		}
+																	/>
+																)
+														  )
+														: selectedProducts.map(
+																(
+																	result,
+																	index
+																) => (
+																	<SharedProductQueryCard
+																		onClick={() => {
+																			handleSharedClick(
+																				result
+																			);
+																		}}
+																		key={
+																			index
+																		}
+																		data={
+																			result
+																		}
+																	/>
+																)
+														  )}
 												</div>
 											</ScrollArea>
 										</PopoverContent>

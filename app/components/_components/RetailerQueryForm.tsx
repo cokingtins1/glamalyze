@@ -16,26 +16,20 @@ import {
 	FormControl,
 	FormField,
 	FormItem,
-	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
-import { Checkbox } from "@nextui-org/checkbox";
 
 import { cn } from "@/lib/utils";
-import InfoPopover from "@/app/components/_components/InfoPopover";
-import { SharedProduct } from "@prisma/client";
 
 type RetailerQueryFormProps = {
 	sheet: boolean;
 	setData: Dispatch<SetStateAction<AllProducts[]>>;
 	setCombinedProducts: Dispatch<SetStateAction<QueryResult>>;
 
-	setShared: Dispatch<SetStateAction<boolean>>;
 };
 export default function RetailerQueryForm({
 	sheet,
 	setData,
-	setShared,
 	setCombinedProducts,
 }: RetailerQueryFormProps) {
 	const form = useForm<TQuerySchema>({
