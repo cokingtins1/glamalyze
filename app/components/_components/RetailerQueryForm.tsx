@@ -19,13 +19,12 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/app/libs/utils";
 
 type RetailerQueryFormProps = {
 	sheet: boolean;
 	setData: Dispatch<SetStateAction<AllProducts[]>>;
 	setCombinedProducts: Dispatch<SetStateAction<QueryResult>>;
-
 };
 export default function RetailerQueryForm({
 	sheet,

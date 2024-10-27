@@ -5,7 +5,7 @@ import StarIcon from "@mui/icons-material/Star";
 
 import { Progress } from "@/components/ui/progress";
 import Stars from "../../../../components/Review/Stars";
-import { formatRating, SephoraReviewCount } from "@/lib/utils";
+import { formatRating, SephoraReviewCount } from "@/app/libs/utils";
 import { SephoraProduct, UltaProduct } from "@prisma/client";
 import StarsSmall from "@/app/components/Review/StarsSmall";
 

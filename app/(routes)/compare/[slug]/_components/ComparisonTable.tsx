@@ -1,6 +1,6 @@
 "use client";
 
-import { formatPercent, formatPrice } from "@/lib/utils";
+import { formatPercent, formatPrice } from "@/app/libs/utils";
 import { AllProducts, Review } from "../../../../libs/types";
 
 import {
@@ -22,7 +22,7 @@ type Props = {
 export default function ComparisonTable({ data }: Props) {
 	return (
 		<Table className="lg:w-fit text-center">
-			<TableHeader className='text-xs'>
+			<TableHeader className="text-xs">
 				<TableColumn className="text-left">RETAILER</TableColumn>
 				<TableColumn>PRICE</TableColumn>
 				<TableColumn>RATING</TableColumn>

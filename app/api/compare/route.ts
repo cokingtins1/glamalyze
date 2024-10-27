@@ -61,14 +61,9 @@ export async function POST(req: NextRequest) {
 	}
 
 	const slug = await req.json();
-	console.log(slug);
 
 	const skuArray = getSku(slug);
 	const productInfo = await getProductDetails(skuArray);
-
-	// if (productInfo.length === 0) {
-	// 	throw new Error("One or both pages not found.");
-	// }
 
 	let data: {
 		productData: AllProducts | null;
@@ -97,23 +92,3 @@ export async function POST(req: NextRequest) {
 
 	return NextResponse.json({ data });
 }
-
-
-
-			// const res = await fetch("/api/compare", {
-			// 	method: "POST",
-			// 	body: JSON.stringify(sku),
-			// 	headers: {
-			// 		"Content-Type": "application/json",
-			// 	},
-			// });
-
-			// if (res.ok) {
-			// 	const resData = await res.json();
-			// 	setReviewData(resData.data);
-			// }
-
-			// const data = await compareProducts(sku);
-			// setLoading(false);
-			// if (data) {
-			// }

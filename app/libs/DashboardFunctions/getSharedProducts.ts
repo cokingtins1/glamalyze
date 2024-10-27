@@ -1,6 +1,6 @@
 import { PrismaClient, SharedProduct } from "@prisma/client";
 import { SharedLinks, TScrapeSchema } from "../types";
-import { alphaPos } from "@/lib/utils";
+import { alphaPos } from "@/app/libs/utils";
 
 const prisma = new PrismaClient();
 

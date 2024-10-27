@@ -25,7 +25,7 @@ import { Input } from "@/components/ui/input";
 import { scrapeSchema, TScrapeSchema } from "@/app/libs/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@/components/ui/label";
-import { formatTime } from "@/lib/utils";
+import { formatTime } from "@/app/libs/utils";
 
 export default function SelectForm() {
 	const [retailer, setRetailer] = useState("");

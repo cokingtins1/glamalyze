@@ -17,7 +17,7 @@ import { getSharedProducts } from "./getSharedProducts";
 
 import { getUltaReviews } from "@/app/actions/getUltaReviews";
 import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
-import { getSharedUpdate } from "@/lib/badUtils";
+import { getSharedUpdate } from "@/app/libs/badUtils";
 import { getRetailerProduct } from "./getRetailerProduct";
 
 const prisma = new PrismaClient();
@@ -41,7 +41,8 @@ export default async function scrapeSharedReviews(
 	console.log(allLinks.length);
 	console.log((allLinks.length * 15) / 3600);
 
-	if (allLinks.length < 0) { // change <---
+	if (allLinks.length < 0) {
+		// change <---
 		// const data = await prisma.sharedProduct.findMany({
 		// 	where: { ulta_product_price: null },
 		// });

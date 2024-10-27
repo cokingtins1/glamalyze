@@ -24,7 +24,7 @@ import PlaceholderCard from "./PlaceholderCard";
 import { Button as NextUIButton } from "@nextui-org/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import ProductQueryCard from "./ProductQueryCard";
-import { cn } from "@/lib/utils";
+import { cn } from "@/app/libs/utils";
 import { Checkbox } from "@nextui-org/checkbox";
 import InfoPopover from "./InfoPopover";
 import SharedProductQueryCard from "./SharedProductQueryCard";

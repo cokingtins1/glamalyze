@@ -1,5 +1,5 @@
 import { checkBrandExists } from "@/app/actions/checkBrandExists";
-import { alphaPos } from "@/lib/utils";
+import { alphaPos } from "@/app/libs/utils";
 import { AllBrands, PrismaClient } from "@prisma/client";
 import { TScrapeSchema } from "../types";
 

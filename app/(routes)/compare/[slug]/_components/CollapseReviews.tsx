@@ -10,7 +10,7 @@ import { Card } from "@/components/ui/card";
 
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
-import { parseReviewTimeStamp } from "@/lib/utils";
+import { parseReviewTimeStamp } from "@/app/libs/utils";
 import Stars from "@/app/components/Review/Stars";
 import Verified from "@/app/components/Review/Verified";
 

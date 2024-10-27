@@ -2,9 +2,9 @@ import { Review } from "@/app/libs/types";
 import Stars from "./Stars";
 import Verified from "./Verified";
 import { Card, CardContent } from "@/components/ui/card";
-import { parseReviewTimeStamp } from "@/lib/utils";
+import { parseReviewTimeStamp } from "@/app/libs/utils";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
+import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 type ReviewData = {
 	reviewData: Review;
 };
@@ -32,13 +32,13 @@ export default function ReviewCard({ reviewData }: ReviewData) {
 				</div>
 				<p className="text-sm mt-4">{reviewData.review_text}</p>
 				<div className="flex gap-4 mt-2">
-					<span className='flex gap-2 items-center'>
+					<span className="flex gap-2 items-center">
 						<ThumbUpOffAltIcon fontSize="small" />
-						<p className='text-xs'>{`(${reviewData.up_votes})`}</p>
+						<p className="text-xs">{`(${reviewData.up_votes})`}</p>
 					</span>
-					<span className='flex gap-2 items-center'>
+					<span className="flex gap-2 items-center">
 						<ThumbDownOffAltIcon fontSize="small" />
-						<p className='text-xs'>{`(${reviewData.down_votes})`}</p>
+						<p className="text-xs">{`(${reviewData.down_votes})`}</p>
 					</span>
 				</div>
 			</CardContent>
