@@ -81,18 +81,6 @@ export default async function scrapeProducts(
 						.map((p) => p.product_name)
 						.filter((name) => name !== null);
 					end = new Date().getTime();
-
-					// await prisma.scrapeLog.create({
-					// 	data: {
-					// 		scrape_id: crypto.randomUUID(),
-					// 		scrape_date: new Date(),
-					// 		retailer: retailer,
-					// 		target: target,
-					// 		scrapeRange: productNames,
-					// 		failedOn: null,
-					// 		executionTime: (end - start) / 1000,
-					// 	},
-					// });
 				}
 				if (productsToUpdate.length > 0) {
 					console.log(

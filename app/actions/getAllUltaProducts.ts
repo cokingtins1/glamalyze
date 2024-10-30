@@ -11,7 +11,7 @@ export async function getAllUltaProducts(
 
 	try {
 		const allProducts = await runUltaAllProductsScraper(url as string, {
-			sephoraSelectors: {
+			selectors: {
 				allProductsContSelector: '[data-test="products-list"]',
 				productCardContSelector:
 					".Text-ds.Text-ds--title-6.Text-ds--left",

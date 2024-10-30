@@ -20,7 +20,7 @@ export default async function combinedRetailerQuery(
 		        order by input.q <<-> (coalesce(id, '') || ' ' ||
 		            coalesce(ulta_product_name, '') || ' ' ||
 		            coalesce(brand_name, ''))
-		        limit 3
+		        limit 6
 		`;
 
 	let ultaRes: AllProducts[] = await prisma.$queryRaw`
@@ -36,7 +36,7 @@ export default async function combinedRetailerQuery(
             order by input.q <<-> (coalesce(product_id, '') || ' ' ||
                 coalesce(product_name, '') || ' ' ||
                 coalesce(brand_name, ''))
-			limit 3
+			limit 6
 
     `;
 
@@ -53,7 +53,7 @@ export default async function combinedRetailerQuery(
             order by input.q <<-> (coalesce(product_id, '') || ' ' ||
                 coalesce(product_name, '') || ' ' ||
                 coalesce(brand_name, ''))
-			limit 3
+			limit 6
 
     `;
 

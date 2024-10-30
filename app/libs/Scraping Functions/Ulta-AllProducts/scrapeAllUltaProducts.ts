@@ -176,7 +176,7 @@ export async function scrapeAllUltaProducts(
 		});
 
 		return result;
-	}, options.sephoraSelectors);
+	}, options.selectors);
 
 	if (productData.length > 0) {
 		productData.forEach((p) => {

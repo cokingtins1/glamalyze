@@ -10,27 +10,30 @@ const prisma = new PrismaClient();
 
 export default async function Page() {
 	async function handleSubmit() {
+
 		"use server";
 
-		// const data = await prisma.sharedProduct.findMany({
-		// 	where: { sephora_product_price: null },
-		// });
-		// console.log(data.length);
+		const sku = [5]
 
-		// const sLinks = data.map((p) => ({
-		// 	sharedId: [p.id],
-		// 	id: ["", p.sephora_product_id],
-		// 	page_link: ["", p.sephora_page_link],
-		// 	name: [p.ulta_product_name, p.sephora_product_name],
-		// 	total_reviews: [p.ulta_total_reviews, p.sephora_total_reviews],
-		// }));
+		const res = await fetch("/api/retailerQuery", {
 
-		const url =
-			"https://www.sephora.com/product/lights-camera-lashes-tm-4-in-1-mascara-mini-P439932?skuId=2156420&icid2=products grid:p439932:product";
-		console.log("getting data");
-		// const data = await getSephoraReviews(url, "696969696", true);
-		// const data = await getUltaReviews(url, "69", true);
-		// console.log(data);
+
+			method: "POST",
+			body: JSON.stringify({
+				// query: data.query,
+			}),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		// if (res.ok) {
+		// 	const responseData = await res.json();
+		// 	if (!sheet) {
+		// 		setData(responseData.success.data);
+		// 		setCombinedProducts(responseData.success.data);
+		// 	}
+		// }
 
 		
 	}

@@ -40,7 +40,7 @@ export type OptionProps = {
 };
 
 export type AllProductsSelectors = {
-	sephoraSelectors: {
+	selectors: {
 		allProductsContSelector: string;
 		productCardContSelector: string;
 		productNameSelector: string;

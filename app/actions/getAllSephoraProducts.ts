@@ -11,7 +11,7 @@ export async function getAllSephoraProducts(
 
 	try {
 		const allProducts = await runSephoraAllProductsScraper(url as string, {
-			sephoraSelectors: {
+			selectors: {
 				allProductsContSelector: ".css-1322gsb",
 				productCardContSelector: ".css-1qe8tjm",
 				productNameSelector: ".ProductTile-name.css-h8cc3p.eanm77i0",

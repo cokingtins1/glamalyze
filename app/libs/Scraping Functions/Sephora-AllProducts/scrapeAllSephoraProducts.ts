@@ -196,7 +196,7 @@ export async function scrapeAllSephoraProducts(
 		});
 
 		return result;
-	}, options.sephoraSelectors);
+	}, options.selectors);
 
 	if (productData.length > 0) {
 		productData.forEach((p) => {

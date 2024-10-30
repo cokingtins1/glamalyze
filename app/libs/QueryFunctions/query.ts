@@ -1,6 +1,5 @@
-import { PrismaClient, SharedProduct } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { withPgTrgm } from "prisma-extension-pg-trgm";
-import { AllProducts, QueryResult } from "../types";
 
 const prisma = new PrismaClient().$extends(withPgTrgm({ logQueries: false }));
 

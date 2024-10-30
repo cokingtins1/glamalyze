@@ -27,16 +27,16 @@ export async function runUltaAllProductsScraper(
 		await page.goto(url);
 
 		let loadMoreButton = await page.$(
-			options.sephoraSelectors.loadMoreSelector
+			options.selectors.loadMoreSelector
 		);
 
 		while (loadMoreButton) {
 			await loadAllProducts(page, false);
-			await page.click(options.sephoraSelectors.loadMoreSelector);
+			await page.click(options.selectors.loadMoreSelector);
 			await loadAllProducts(page, true);
 
 			loadMoreButton = await page.$(
-				options.sephoraSelectors.loadMoreSelector
+				options.selectors.loadMoreSelector
 			);
 		}
 		const data = await scrapeAllUltaProducts(page, options);
