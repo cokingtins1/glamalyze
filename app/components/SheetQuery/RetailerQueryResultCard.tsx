@@ -3,9 +3,7 @@ import Image, { StaticImageData } from "next/image";
 import CombinedLogo from "@/public/CombinedLogo.png";
 import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
-import { SharedProduct } from "@prisma/client";
 import { SheetClose } from "@/components/ui/sheet";
-import { useSearchParams } from "next/navigation";
 import { AllProducts } from "../../libs/types";
 
 type QueryResultCardProps = {
@@ -15,8 +13,6 @@ type QueryResultCardProps = {
 export default function RetailerQueryResultCard({
 	data,
 }: QueryResultCardProps) {
-	const searchParams = useSearchParams();
-
 	function getImage(src: string, retailer: string) {
 		let imageSrc: string | StaticImageData = CombinedLogo;
 
