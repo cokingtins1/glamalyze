@@ -146,3 +146,5 @@ export type QueryResult = {
 	sephoraRes: AllProducts[];
 	sharedRes: SharedProduct[];
 };
+
+export type Retailer = "Ulta" | "Sephora";

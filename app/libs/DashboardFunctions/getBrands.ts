@@ -2,8 +2,7 @@ import { checkBrandExists } from "@/app/actions/checkBrandExists";
 import { alphaPos } from "@/app/libs/utils";
 import { AllBrands, PrismaClient } from "@prisma/client";
 import { TScrapeSchema } from "../types";
-
-const prisma = new PrismaClient();
+import { prisma } from '@/prisma/_base';
 
 export async function getBrands(input: TScrapeSchema) {
 	let { retailer, target, startIndex, endIndex, url } = input;

@@ -1,12 +1,5 @@
+import { FailedScrapes, SephoraReviewer, UltaReviewer } from "@prisma/client";
 import {
-	FailedScrapes,
-	PrismaClient,
-	SephoraReviewer,
-	SharedProduct,
-	UltaReviewer,
-} from "@prisma/client";
-import {
-	AllProducts,
 	Review,
 	ReviewsScrape,
 	ScrapeReturnMessage,
@@ -19,8 +12,7 @@ import { getUltaReviews } from "@/app/actions/getUltaReviews";
 import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
 import { getSharedUpdate } from "@/app/libs/badUtils";
 import { getRetailerProduct } from "./getRetailerProduct";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/prisma/_base";
 
 export default async function scrapeSharedReviews(
 	input: TScrapeSchema

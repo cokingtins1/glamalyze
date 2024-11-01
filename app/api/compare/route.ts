@@ -1,8 +1,8 @@
 import { AllProducts, Review } from "@/app/libs/types";
+import { prisma } from '@/prisma/_base';
 import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-const prisma = new PrismaClient();
 export async function POST(req: NextRequest) {
 	function getSku(slug: string) {
 		const string = decodeURIComponent(slug);

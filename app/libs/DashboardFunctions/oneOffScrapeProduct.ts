@@ -1,9 +1,7 @@
 import { getAllUltaProducts } from "@/app/actions/getAllUltaProducts";
 import { AllProducts } from "../types";
 import { getAllSephoraProducts } from "@/app/actions/getAllSephoraProducts";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/prisma/_base";
 
 export default async function oneOffScrapeProduct(
 	retailer: string,

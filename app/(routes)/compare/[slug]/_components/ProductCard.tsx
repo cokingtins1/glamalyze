@@ -26,11 +26,11 @@ export default function ProductCard({ data, reviewsData }: Props) {
 			label: "Reviews",
 			content: <CollapseReviews reviews={reviewsData} />,
 		},
-        {
-			id: "aiAnalysis",
-			label: "AI Analysis",
-			content: <OpenAIAnalysis reviews={[reviewsData]}/>
-		},
+        // {
+		// 	id: "aiAnalysis",
+		// 	label: "AI Analysis",
+		// 	content: <OpenAIAnalysis reviews={[reviewsData]}/>
+		// },
 	];
 	return (
 		<Card aria-label='product card' className="flex flex-col justify-start items-center bg-white p-4 h-min-[560px]">

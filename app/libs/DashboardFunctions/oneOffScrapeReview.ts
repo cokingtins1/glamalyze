@@ -1,33 +1,31 @@
 import { getSephoraReviews } from "@/app/actions/getSephoraReviews";
 import { getUltaReviews } from "@/app/actions/getUltaReviews";
-import {
-	FailedScrapes,
-	PrismaClient,
-	SephoraReviewer,
-	UltaReviewer,
-} from "@prisma/client";
-import { Review, ReviewsScrape } from "../types";
+import { SephoraReviewer, UltaReviewer } from "@prisma/client";
+import { Retailer, Review, ReviewsScrape } from "../types";
 import { getSharedUpdate } from "../badUtils";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/prisma/_base";
 
 export default async function oneOffScrapeReview(
 	url: string,
 	productId: string,
 	reviewsPresent: boolean,
-	retailer: string
-) {
-	let data;
-	let failedScrapes: FailedScrapes[] = [];
+	retailer: Retailer
+): Promise<boolean> {
+	let success = false;
+	let data: ReviewsScrape | null = null;
 
-	if (retailer === "Ulta" && url !== null) {
+	if (retailer === "Ulta") {
 		data = await getUltaReviews(url, productId, reviewsPresent);
-	} else if (retailer === "Sephora" && url !== null) {
+	} else if (retailer === "Sephora") {
 		data = await getSephoraReviews(url, productId, reviewsPresent);
 	}
 
-	if (data?.response.status.success) {
+	if (data?.response.status.success && data.reviewsData.length > 0) {
 		await upsertData(data, retailer, productId, reviewsPresent);
+		success = true;
+		return success;
+	} else {
+		return success;
 	}
 
 	async function upsertData(

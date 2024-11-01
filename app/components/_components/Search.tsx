@@ -31,7 +31,7 @@ import SharedProductQueryCard from "./SharedProductQueryCard";
 import { SharedProduct } from "@prisma/client";
 import SharedCompareCard from "./SharedCompareCard";
 
-export default function Search() {
+export default function Search(props: {existingSelected: AllProducts[]}) {
 	const [data, setData] = useState<AllProducts[]>([]);
 	const [open, setOpen] = useState(false);
 	const [sharedSku, setSharedSku] = useState("");
@@ -96,7 +96,7 @@ export default function Search() {
 		}
 	};
 
-	const [products, setProducts] = useState<AllProducts[]>([]);
+	const [products, setProducts] = useState<AllProducts[]>(props.existingSelected);
 	const [selectedSharedProduct, setSelectedSharedProduct] =
 		useState<SharedProduct | null>(null);
 

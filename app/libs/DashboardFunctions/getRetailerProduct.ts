@@ -1,8 +1,7 @@
-import { AllProduct, PrismaClient, SharedProduct } from "@prisma/client";
+import { AllProduct } from "@prisma/client";
 import { SharedLinks, TScrapeSchema } from "../types";
 import { alphaPos } from "@/app/libs/utils";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/prisma/_base";
 
 export async function getRetailerProduct(
 	input: TScrapeSchema

@@ -1,6 +1,9 @@
+import { prisma } from "@/prisma/_base";
 import { type ClassValue, clsx } from "clsx";
 import { generate } from "random-words";
 import { twMerge } from "tailwind-merge";
+import { Retailer } from "./types";
+import { AllProduct, SephoraProduct, UltaProduct } from "@prisma/client";
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -199,4 +202,95 @@ export const formatPercent = (percent: number | null | undefined): string => {
 	if (!percent) return "N/A";
 
 	return `${percent}%`;
+};
+
+export const checkExpired = async (
+	id: string,
+	retailer: string,
+
+	expirationThreshold: number
+) => {
+	let lastScrapedTime;
+	let expired = false;
+	let lastScraped;
+
+	if (retailer === "Ulta") {
+		lastScraped = await prisma.ultaProduct.findFirst({
+			where: { product_id: id },
+			select: {
+				updated_at: true,
+			},
+		});
+	} else if (retailer === "Sephora") {
+		lastScraped = await prisma.sephoraProduct.findFirst({
+			where: { product_id: id },
+			select: {
+				updated_at: true,
+			},
+		});
+	}
+
+	lastScrapedTime = lastScraped?.updated_at?.getTime();
+	if (lastScrapedTime) {
+		const delta =
+			(new Date().getTime() - lastScrapedTime) / (1000 * 60 * 60 * 24);
+		if (delta > expirationThreshold) {
+			expired = true;
+		}
+	}
+
+	return expired;
+};
+
+export const getProductFromSku = async (
+	searchParam: string
+): Promise<(UltaProduct | SephoraProduct)[]> => {
+	if (!searchParam) {
+		return [];
+	}
+	function getSku(slug: string) {
+		const parts = slug.split(", ");
+		return parts.map((part) => {
+			const retailer: Retailer = part.startsWith("u")
+				? "Ulta"
+				: "Sephora";
+			const sku = part.match(/\d+/)?.[0];
+			return {
+				sku: sku ?? "",
+				retailer,
+			};
+		});
+	}
+
+	async function getProductDetails(
+		skuArray: { sku: string; retailer: Retailer }[]
+	): Promise<(UltaProduct | SephoraProduct)[]> {
+		const promises = skuArray.map(async ({ sku, retailer }) => {
+			let productData;
+
+			if (retailer === "Ulta") {
+				productData = await prisma.ultaProduct.findFirst({
+					where: { sku_id: sku },
+				});
+			} else if (retailer === "Sephora") {
+				productData = await prisma.sephoraProduct.findFirst({
+					where: { sku_id: sku },
+				});
+			}
+
+			return productData;
+		});
+
+		const results = await Promise.all(promises);
+
+		return results.filter(
+			(product): product is UltaProduct | SephoraProduct =>
+				product !== null
+		);
+	}
+
+	const skuArray = getSku(searchParam);
+	const data = getProductDetails(skuArray);
+
+	return data;
 };

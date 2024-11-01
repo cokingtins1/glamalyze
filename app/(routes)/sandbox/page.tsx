@@ -1,12 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { PrismaClient } from "@prisma/client";
 
 import React from "react";
 
 import Link from "next/link";
-
-const prisma = new PrismaClient();
-// const prisma = new PrismaClient().$extends(withPgTrgm());
 
 export default async function Page() {
 	async function handleSubmit() {

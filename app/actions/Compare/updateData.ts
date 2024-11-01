@@ -1,4 +1,5 @@
 import { MetaData, Review } from "@/app/libs/types";
+import { prisma } from '@/prisma/_base';
 import {
 	PrismaClient,
 	SephoraReviewer,
@@ -11,7 +12,6 @@ type ScrapedData = {
 	reviewsData: Review[];
 };
 
-const prisma = new PrismaClient();
 
 export default async function updateData(scrapedData: ScrapedData[]) {
 	// scrub results for "", {}, [], null, undefined -> extract only: product_id,

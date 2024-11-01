@@ -3,8 +3,7 @@ import { getBrands } from "./getBrands";
 import { AllProducts, ScrapeReturnMessage, TScrapeSchema } from "../types";
 import { getAllUltaProducts } from "@/app/actions/getAllUltaProducts";
 import { getAllSephoraProducts } from "@/app/actions/getAllSephoraProducts";
-
-const prisma = new PrismaClient();
+import { prisma } from "@/prisma/_base";
 
 export default async function scrapeProducts(
 	input: TScrapeSchema
