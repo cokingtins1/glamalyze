@@ -72,5 +72,8 @@
 		"random-words": "^2.0.1",
 		"tailwindcss": "^3.3.0",
 		"typescript": "^5"
+	},
+	"pkg": {
+		"assets": "node_modules/puppeteer-extra-plugin-stealth/**/*.*"
 	}
 }
