@@ -1,6 +1,5 @@
 import { AllProducts, Review } from "@/app/libs/types";
-import { prisma } from '@/prisma/_base';
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/prisma/_base";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
