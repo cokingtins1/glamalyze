@@ -36,7 +36,6 @@ export default function DataDisplay({ data, reviewsData }: DataDisplayProps) {
 					<GoToPage pageLink={data.page_link} />
 
 					<RatingChart metaData={data} />
-
 					<div className="flex flex-col w-full mt-4">
 						<p className="text-sm text-slate-500 pl-4 mb-2">{`Reviews (${reviewsData.length}) - Most Helpful`}</p>
 						{reviewsData.map((review, index) => (

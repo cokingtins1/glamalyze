@@ -25,35 +25,35 @@ export default async function oneOffScrapeProduct(
 		if (productsToInsert.length > 0) {
 			console.log(`Adding ${productsToInsert.length} products...`);
 
-			if (retailer === "Ulta") {
-				await prisma.ultaProduct.createMany({
-					data: productsToInsert,
-				});
-			} else if ((retailer = "Sephora")) {
-				await prisma.sephoraProduct.createMany({
-					data: productsToInsert,
-				});
-			}
+			// if (retailer === "Ulta") {
+			// 	await prisma.ultaProduct.createMany({
+			// 		data: productsToInsert,
+			// 	});
+			// } else if ((retailer = "Sephora")) {
+			// 	await prisma.sephoraProduct.createMany({
+			// 		data: productsToInsert,
+			// 	});
+			// }
 		}
 		if (productsToUpdate.length > 0) {
-			console.log(`Updating ${productsToInsert.length} products...`);
+			console.log(`Updating ${productsToUpdate.length} products...`);
 
-			for (const product of productsToUpdate) {
-				const { sku_id, product_id, created_at, ...updateData } =
-					product;
+			// for (const product of productsToUpdate) {
+			// 	const { sku_id, product_id, created_at, ...updateData } =
+			// 		product;
 
-				if (retailer === "Ulta") {
-					await prisma.ultaProduct.update({
-						where: { product_id: product.product_id },
-						data: updateData,
-					});
-				} else if ((retailer = "Sephora")) {
-					await prisma.sephoraProduct.update({
-						where: { product_id: product.product_id },
-						data: updateData,
-					});
-				}
-			}
+			// 	if (retailer === "Ulta") {
+			// 		await prisma.ultaProduct.update({
+			// 			where: { product_id: product.product_id },
+			// 			data: updateData,
+			// 		});
+			// 	} else if ((retailer = "Sephora")) {
+			// 		await prisma.sephoraProduct.update({
+			// 			where: { product_id: product.product_id },
+			// 			data: updateData,
+			// 		});
+			// 	}
+			// }
 		}
 	}
 

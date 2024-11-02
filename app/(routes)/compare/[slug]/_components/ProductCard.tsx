@@ -33,7 +33,7 @@ export default function ProductCard({ data, reviewsData }: Props) {
 		// },
 	];
 	return (
-		<Card aria-label='product card' className="flex flex-col justify-start items-center bg-white p-4 h-min-[560px]">
+		<Card aria-label='product card' className="flex flex-col justify-start items-center bg-white px-6 py-2 h-min-[560px]">
 			<ProductMetaData data={data} />
 
 			<div aria-label='product tabs' className='w-full'>

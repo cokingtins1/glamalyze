@@ -30,7 +30,7 @@ export default function ProductMetaData({ data }: ProductMetaDataProps) {
 	const productSrc = getImage(data.product_image_url[0], data.retailer_id);
 
 	return (
-		<div className="flex items-start w-full my-4">
+		<div className="flex items-start w-full">
 			<div className="flex flex-col items-center mr-auto mt-4">
 				<div className="h-[100px] w-[100px] relative mb-2">
 					<Image

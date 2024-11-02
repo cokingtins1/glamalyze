@@ -28,30 +28,43 @@ export default function CompareCard({ data, onClick }: Props) {
 	}
 	return (
 		<Card className="hover:shadow hover:shadow-slate-500">
-			<button onClick={() => onClick(data)} className="flex p-2">
-				<div className="size-[52px] lg:size-[75px] relative">
+			<button onClick={() => onClick(data)} className="flex flex-col p-2">
+				<div className="size-[30px] relative">
 					<Image
-						src={getImage(
-							data.product_image_url[0],
-							data.retailer_id
-						)}
+						src={
+							data.retailer_id === "Ulta" ? UltaLogo : SephoraLogo
+						}
 						alt="product image"
+						sizes='sizes="(max-width: 30px), 30px'
 						fill
-						sizes='sizes="(max-width: 430px), 75px'
 						style={{ objectFit: "contain" }}
 					/>
 				</div>
-				<div className="flex flex-col p-2">
-					<h1 className="text-xs lg:text-sm font-bold text-left">
-						{data.product_name}
-					</h1>
-					<h2 className="text-xs text-left">{data.brand_name}</h2>
-					<input
-						readOnly={true}
-						className="hidden"
-						name="ultaLink"
-						value={`${data.sku_id}`}
-					/>
+				<div className="flex">
+					<div className="size-[52px] lg:size-[75px] relative">
+						<Image
+							src={getImage(
+								data.product_image_url[0],
+								data.retailer_id
+							)}
+							alt="product image"
+							fill
+							sizes='sizes="(max-width: 430px), 75px'
+							style={{ objectFit: "contain" }}
+						/>
+					</div>
+					<div className="flex flex-col p-2">
+						<h1 className="text-xs lg:text-sm font-bold text-left">
+							{data.product_name}
+						</h1>
+						<h2 className="text-xs text-left">{data.brand_name}</h2>
+						<input
+							readOnly={true}
+							className="hidden"
+							name="ultaLink"
+							value={`${data.sku_id}`}
+						/>
+					</div>
 				</div>
 			</button>
 		</Card>

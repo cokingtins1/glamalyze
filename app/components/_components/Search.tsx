@@ -136,7 +136,7 @@ export default function Search(props: {existingSelected: AllProducts[]}) {
 		if (product) {
 			setSelectedSharedProduct(product);
 			setSharedSku(
-				`u:[${product.ulta_sku_id}]:s[${product.sephora_sku_id}]`
+				`u:[${product.ulta_sku_id}]:, s[${product.sephora_sku_id}]`
 			);
 		}
 	};
@@ -144,7 +144,6 @@ export default function Search(props: {existingSelected: AllProducts[]}) {
 	const handleCompare = async (products: AllProducts[]) => {
 		if (products.length === 0 && !checkedStates.shared) return;
 		if (checkedStates.shared) {
-			console.log(sharedSku);
 			router.push("/" + "?" + createQueryString("compare", sharedSku));
 		} else {
 			let string = "";
@@ -173,7 +172,7 @@ export default function Search(props: {existingSelected: AllProducts[]}) {
 
 	return (
 		<>
-			<section className="w-full h-full mt-8 lg:px-80">
+			<section className="w-full h-full mt-4 lg:px-80">
 				<Card>
 					<CardHeader className="flex-row justify-between">
 						<div className="space-y-px">

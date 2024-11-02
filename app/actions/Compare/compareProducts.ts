@@ -87,6 +87,7 @@ export default async function compareProducts(slug: string) {
 
 	async function checkScraped(id: string, retailer: string) {
 		let found = false;
+		let reviewsPresent = true;
 		let expired = false;
 
 		expired = await checkExpired(id, retailer, 365);
@@ -96,8 +97,20 @@ export default async function compareProducts(slug: string) {
 			select: { review_histogram: true },
 		});
 
+		if (retailer === "Ulta") {
+			const reviews = await prisma.ultaReview.findMany({
+				where: { product_id: id },
+			});
+			reviews.length === 0 && (reviewsPresent = false);
+		} else if (retailer === "Sephora") {
+			const reviews = await prisma.sephoraReview.findMany({
+				where: { product_id: id },
+			});
+			reviews.length === 0 && (reviewsPresent = false);
+		}
+
 		if (res) {
-			found = expired ? false : res.review_histogram.length > 0;
+			found = expired ? false : reviewsPresent;
 		}
 
 		return found;

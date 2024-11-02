@@ -24,6 +24,11 @@ export default function RatingChart({ metaData }: DataProps) {
 		(r) => r !== null
 	) as number[];
 
+	const totalReviews = metaData.review_histogram.reduce(
+		(total, sum) => total + sum,
+		0
+	);
+
 	return (
 		<Card className="w-full">
 			<div className="flex items-center justify-between p-6">
@@ -68,7 +73,7 @@ export default function RatingChart({ metaData }: DataProps) {
 									}}
 								>
 									{metaData.review_histogram &&
-										metaData.total_reviews && (
+										totalReviews && (
 											<>
 												<StarsSmall
 													index={Math.abs(index - 5)}
@@ -89,7 +94,7 @@ export default function RatingChart({ metaData }: DataProps) {
 														"Sephora"
 															? count
 															: (count /
-																	metaData.total_reviews) *
+																	totalReviews) *
 															  100
 													}
 												/>
@@ -99,7 +104,7 @@ export default function RatingChart({ metaData }: DataProps) {
 										{metaData.retailer_id === "Sephora"
 											? SephoraReviewCount(
 													count,
-													metaData.total_reviews
+													totalReviews
 											  )
 											: count}
 									</p>

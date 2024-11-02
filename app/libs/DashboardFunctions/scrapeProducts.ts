@@ -83,7 +83,7 @@ export default async function scrapeProducts(
 				}
 				if (productsToUpdate.length > 0) {
 					console.log(
-						`Updating ${productsToInsert.length} products...`
+						`Updating ${productsToUpdate.length} products...`
 					);
 
 					for (const product of productsToUpdate) {

@@ -1,9 +1,7 @@
 import React from "react";
 import DisplaySkeleton from "../Loading Skeletons/DisplaySkeleton";
 
-type Props = {};
-
-export default function ReviewDataSkeleton({}: Props) {
+export default function ReviewDataSkeleton() {
 	return (
 		<>
 			<DisplaySkeleton />

@@ -3,9 +3,8 @@ import { Suspense } from "react";
 import Search from "./components/_components/Search";
 import ReviewDataSkeleton from "./components/_components/ReviewDataSkeleton";
 import ReviewData from "./components/_components/ReviewData";
-import { prisma } from "@/prisma/_base";
-import { Retailer } from "./libs/types";
-import { getProductFromSku } from './libs/utils';
+import { getProductFromSku } from "./libs/utils";
+import compareProducts from "./actions/Compare/compareProducts";
 
 const font = Baloo_2({
 	subsets: ["latin"],
@@ -19,7 +18,7 @@ export default async function Home({
 }) {
 	const slug = searchParams.compare;
 
-	const existingSelected = await getProductFromSku(searchParams.compare)
+	const existingSelected = await getProductFromSku(searchParams.compare);
 
 	return (
 		<main className="flex flex-col items-center justify-center px-10 h-full">
@@ -30,7 +29,7 @@ export default async function Home({
 					Welcome to Glamalyze
 					<span className="text-lg align-super">&#169;</span>
 				</h1>
-				<h2 className="text-sm text-center lg:text-base">
+				<h2 className="text-sm text-center lg:text-nowrap lg:text-base">
 					Choose from over 25,000 products across Ulta and Sephora to
 					compare reviews and product data
 				</h2>
