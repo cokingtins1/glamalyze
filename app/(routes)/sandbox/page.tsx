@@ -3,68 +3,27 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 
 import Link from "next/link";
+import oneOffScrapeProduct from "@/app/libs/DashboardFunctions/oneOffScrapeProduct";
+import oneOffScrapeReview from "@/app/libs/DashboardFunctions/oneOffScrapeReview";
 
 export default async function Page() {
 	async function handleSubmit() {
-
 		"use server";
+		const productId = "00403a7c-7ee7-4072-9a81-d688eb127c0f";
+		const url =
+			"https://www.ulta.com/p/hy-glam-powder-foundation-pimprod2044289?sku=2624364";
 
-		const sku = [5]
-
-		const res = await fetch("/api/retailerQuery", {
-
-
-			method: "POST",
-			body: JSON.stringify({
-				// query: data.query,
-			}),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-
-		// if (res.ok) {
-		// 	const responseData = await res.json();
-		// 	if (!sheet) {
-		// 		setData(responseData.success.data);
-		// 		setCombinedProducts(responseData.success.data);
-		// 	}
-		// }
-
-		
+		await oneOffScrapeReview(url, productId, true, "Ulta");
 	}
-
-	function getSku(slug: string) {
-		const string = decodeURIComponent(slug);
-
-		const uSkuPattern = /u:\[([\d,]+)\]/;
-		const sSkuPattern = /s:\[([\d,]+)\]/;
-
-		const uSkuMatch = string.match(uSkuPattern);
-		const u_sku = uSkuMatch
-			? uSkuMatch[1].split(",").map((sku) => ({ sku, retailer: "Ulta" }))
-			: [];
-
-		const sSkuMatch = string.match(sSkuPattern);
-		const s_sku = sSkuMatch
-			? sSkuMatch[1]
-					.split(",")
-					.map((sku) => ({ sku, retailer: "Sephora" }))
-			: [];
-
-		return [...u_sku, ...s_sku];
-	}
-
-	// console.log(getSku("u:[546215,435135]"))
 
 	const ref = "/compare/u:[2614776],s:[2641884]";
 
 	return (
 		<>
 			<div className="space-y-8">
-				<Link href={ref}>
+				{/* <Link href={ref}>
 					<Button type="button">Test Compare</Button>
-				</Link>
+				</Link> */}
 				<form action={handleSubmit}>
 					<Button type="submit">Scrape All Products</Button>
 				</form>

@@ -20,7 +20,7 @@ import {
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import SubmitForm from "../SubmitForm";
+import SubmitForm from "../_components/SubmitForm";
 import { Input } from "@/components/ui/input";
 import { scrapeSchema, TScrapeSchema } from "@/app/libs/types";
 import { zodResolver } from "@hookform/resolvers/zod";

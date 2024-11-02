@@ -17,10 +17,12 @@ export default async function oneOffScrapeReview(
 	if (retailer === "Ulta") {
 		data = await getUltaReviews(url, productId, reviewsPresent);
 	} else if (retailer === "Sephora") {
+		console.log("here");
 		data = await getSephoraReviews(url, productId, reviewsPresent);
 	}
 
 	if (data?.response.status.success && data.reviewsData.length > 0) {
+		// console.log("data:", data.metaData, data.reviewsData);
 		await upsertData(data, retailer, productId, reviewsPresent);
 		success = true;
 		return success;

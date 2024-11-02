@@ -16,12 +16,17 @@ export default async function oneOffScrapeProduct(
 		data = await getAllSephoraProducts(url as string, brandId);
 	}
 
+	console.log("data:", data)
+
 	if (data) {
 		const { productsToInsert, productsToUpdate } = await validateResult(
 			data,
 			retailer,
 			brandId
 		);
+		console.log("productsToInsert", productsToInsert)
+		console.log("productsToUpdate", productsToUpdate)
+
 		if (productsToInsert.length > 0) {
 			console.log(`Adding ${productsToInsert.length} products...`);
 

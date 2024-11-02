@@ -1,7 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useState } from "react";
-import SubmitForm from "../SubmitForm";
+import SubmitForm from "./SubmitForm";
 import {
 	AllProducts,
 	QueryResult,

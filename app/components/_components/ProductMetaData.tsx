@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import CombinedLogo from "@/public/CombinedLogo.png";
-import { AllProducts } from "../../../../libs/types";
+import { AllProducts } from "../../libs/types";
 import { formatPrice } from "@/app/libs/utils";
 
 import UltaLogo from "@/public/Ulta_Logo.png";

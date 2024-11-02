@@ -1,6 +1,6 @@
 import React from "react";
 import compareProducts from "../../actions/Compare/compareProducts";
-import ProductCard from "../../(routes)/compare/[slug]/_components/ProductCard";
+import ProductCard from "./ProductCard";
 import { AllProducts, Review } from "@/app/libs/types";
 
 type Props =

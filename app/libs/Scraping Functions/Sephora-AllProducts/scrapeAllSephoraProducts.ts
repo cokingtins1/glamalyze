@@ -69,6 +69,7 @@ export async function scrapeAllSephoraProducts(
 		} = options;
 
 		const allProductsCont = document.querySelector(allProductsContSelector);
+		console.log("allProductsCont:", allProductsCont);
 
 		if (!allProductsCont) return [];
 

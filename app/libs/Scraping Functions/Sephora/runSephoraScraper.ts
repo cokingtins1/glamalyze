@@ -8,6 +8,7 @@ import { scrapeSephoraMetadata } from "./scrapeSephoraMetadata";
 
 import { loadSephoraContent } from "./loadSephoraContent";
 import { loadContent } from "../Ulta/loadContent";
+import { loadAllProducts } from "../Sephora-AllProducts/loadAllProducts";
 
 export async function runSephoraScraper(
 	url: string,
@@ -104,6 +105,8 @@ export async function runSephoraScraper(
 					let el = document.querySelector("#custom_sort_trigger");
 					return el ? true : false;
 				});
+
+				console.log(sortButton);
 
 				if (!sortButton) {
 					response.status.success = false;
