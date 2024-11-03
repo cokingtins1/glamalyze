@@ -1,5 +1,7 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
+// import { puppeteer } from "@/app/actions/_puppeteer_base";
+// const puppeteer = require("@/app/actions/_puppeteer_base");
 
 import { MetaData, OptionProps, Review, ScrapeResponse } from "../../types";
 import { scrapeSephoraReviews } from "./scrapeSephoraReviews";
@@ -9,6 +11,7 @@ import { scrapeSephoraMetadata } from "./scrapeSephoraMetadata";
 import { loadSephoraContent } from "./loadSephoraContent";
 import { loadContent } from "../Ulta/loadContent";
 import { loadAllProducts } from "../Sephora-AllProducts/loadAllProducts";
+import { returnBrowser } from '@/app/actions/_puppeteer_base';
 
 export async function runSephoraScraper(
 	url: string,
@@ -52,9 +55,7 @@ export async function runSephoraScraper(
 			setTimeout(resolve, time);
 		});
 	}
-	const browser = await puppeteer.launch({
-		headless: true,
-	});
+	const browser = await returnBrowser()
 
 	try {
 		const page = await browser.newPage();

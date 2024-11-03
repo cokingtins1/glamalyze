@@ -49,7 +49,7 @@
 		"prisma": "^5.12.1",
 		"prisma-extension-pg-trgm": "^1.1.0",
 		"puppeteer": "^22.6.1",
-		"puppeteer-core": "^22.6.0",
+		"puppeteer-core": "^22.15.0",
 		"puppeteer-extra": "^3.3.6",
 		"puppeteer-extra-plugin-stealth": "^2.11.2",
 		"react": "^18",

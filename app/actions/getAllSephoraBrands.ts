@@ -3,6 +3,7 @@ import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
 import { scrapeAllSephoraBrands } from "../libs/Scraping Functions/Sephora-AllProducts/scrapeAllSephoraBrands";
+import { returnBrowser } from "./_puppeteer_base";
 
 export async function getAllSephoraBrands(): Promise<AllBrands[]> {
 	puppeteer.use(StealthPlugin());
@@ -14,9 +15,8 @@ export async function getAllSephoraBrands(): Promise<AllBrands[]> {
 	}
 
 	try {
-		const browser = await puppeteer.launch({
-			headless: true,
-		});
+		const browser = await returnBrowser();
+
 		const page = await browser.newPage();
 		await page.setViewport({
 			width: 1920,

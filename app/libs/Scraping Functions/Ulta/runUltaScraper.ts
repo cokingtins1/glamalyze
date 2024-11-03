@@ -1,10 +1,12 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
+// import { puppeteer } from "@/app/actions/_puppeteer_base";
 
 import { MetaData, OptionProps, Review, ScrapeResponse } from "../../types";
 import { scrapeUltaReviews } from "./scrapeUltaReviews";
 import { loadContent } from "./loadContent";
 import { scrapeUltaMetadata } from "./scrapeUltaMetadata";
+import { returnBrowser } from "@/app/actions/_puppeteer_base";
 
 export async function runUltaScraper(
 	url: string,
@@ -42,9 +44,7 @@ export async function runUltaScraper(
 	}
 
 	puppeteer.use(StealthPlugin());
-	const browser = await puppeteer.launch({
-		headless: true,
-	});
+	const browser = await returnBrowser();
 
 	try {
 		const page = await browser.newPage();
