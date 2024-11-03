@@ -157,7 +157,7 @@ export default async function compareProducts(slug: string) {
 			});
 			const uniqueReviews = Array.from(
 				new Map(
-					rData.map((review) => [review.review_text, review])
+					rData.map((review: Review) => [review.review_text, review])
 				).values()
 			);
 			data.push({ productData: pData, reviewsData: uniqueReviews });
@@ -170,7 +170,7 @@ export default async function compareProducts(slug: string) {
 			});
 			const uniqueReviews = Array.from(
 				new Map(
-					rData.map((review) => [review.review_text, review])
+					rData.map((review: Review) => [review.review_text, review])
 				).values()
 			);
 			data.push({ productData: pData, reviewsData: uniqueReviews });
