@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import Image, { StaticImageData } from "next/image";
 import CombinedLogo from "@/public/CombinedLogo.png";
 import { SharedProduct } from "@prisma/client";
+import { cleanUrl } from "@/app/libs/utils";
 
 type SharedQueryResultCardProps = {
 	data: SharedProduct | null;
@@ -34,8 +35,8 @@ export default function SharedCompareCard({
 					<div className="size-[65px] relative">
 						<Image
 							src={getImage(
-								data.ulta_product_image_url[0],
-								data.sephora_product_image_url[0]
+								cleanUrl(data.ulta_product_image_url[0]),
+								cleanUrl(data.sephora_product_image_url[0])
 							)}
 							alt="product image"
 							sizes='sizes="(max-width: 430px), 65px'

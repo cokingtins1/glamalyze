@@ -82,6 +82,7 @@ export const scrapeSchema = z.object({
 		.min(1, { message: "A start index is required" }),
 	endIndex: z.string().max(1).min(1, { message: "An end index is required" }),
 	// productLimit: z.string().transform((v) => Number(v) || Infinity),
+	productLimit: z.coerce.number().positive().or(z.literal(Infinity)),
 	url: z.string().optional(),
 });
 

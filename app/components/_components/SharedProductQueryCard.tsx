@@ -5,6 +5,7 @@ import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
 import { AllProducts } from "../../libs/types";
 import { SharedProduct } from "@prisma/client";
+import { cleanUrl } from "@/app/libs/utils";
 
 type QueryResultCardProps = {
 	data: SharedProduct;
@@ -33,8 +34,8 @@ export default function SharedProductQueryCard({
 				<div className="size-[65px] relative">
 					<Image
 						src={getImage(
-							data.ulta_product_image_url[0],
-							data.sephora_product_image_url[0]
+							cleanUrl(data.ulta_product_image_url[0]),
+							cleanUrl(data.sephora_product_image_url[0])
 						)}
 						alt="product image"
 						sizes='sizes="(max-width: 430px), 65px'

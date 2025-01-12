@@ -43,7 +43,7 @@ export async function runUltaScraper(
 		return { metaData, reviewsData, response };
 	}
 
-	puppeteer.use(StealthPlugin());
+	// puppeteer.use(StealthPlugin());
 	const browser = await returnBrowser();
 
 	try {

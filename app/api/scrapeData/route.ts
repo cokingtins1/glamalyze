@@ -35,7 +35,8 @@ export async function POST(req: Request) {
 				: { success: { data: "data..." } }
 		);
 	}
-	const { retailer, target, startIndex, endIndex, url } = result.data;
+	const { retailer, target, startIndex, endIndex, url, productLimit } =
+		result.data;
 
 	if (url && !url.includes("ulta.com") && !url.includes("sephora.com")) {
 		return NextResponse.json({

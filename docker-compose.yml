@@ -1,0 +1,55 @@
+services:
+    db:
+        image: ankane/pgvector
+        container_name: glamDB
+        ports:
+            - 5432:5432 # ${PORT} is the host port, 5432 is the port inside the container
+        # volumes:
+        #     - postgres_data:/var/lib/postgresql/data
+        # volumes:
+        #     - .:/app # Mount local code for live changes
+        #     - /app/node_modules # Prevent overwriting of node_modules
+        volumes:
+            - postgres_data:/var/lib/postgresql/data # Use named volume for persistence
+        environment:
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            # POSTGRES_PASSWORD: drpeppa1212
+            POSTGRES_DB: ${DB_NAME}
+        networks:
+            - app-network
+        # command: ["npm", "run", "dev"] # Use dev command for hot-reloading
+    nextjs-app:
+        container_name: nextjs_app
+        build:
+            context: .
+            dockerfile: Dockerfile # Dockerfile.dev
+        ports:
+            - "3000:3000" # Map port 3000 to host
+        environment:
+            DATABASE_URL: ${DATABASE_URL}
+        volumes:
+            - .:/app
+            - /app/node_modules
+            - /app/.next
+
+        develop:
+            watch:
+                - action: sync
+                  path: ./
+                  target: /
+                  ignore:
+                      - node_modules/
+                - action: rebuild
+                  path: package.json
+        depends_on:
+            - db
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    postgres_data:

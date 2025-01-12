@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import CombinedLogo from "@/public/CombinedLogo.png";
 import { AllProducts } from "../../libs/types";
-import { formatPrice } from "@/app/libs/utils";
+import { cleanUrl, formatPrice } from "@/app/libs/utils";
 
 import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
@@ -27,7 +27,10 @@ export default function ProductMetaData({ data }: ProductMetaDataProps) {
 		return imageSrc;
 	}
 
-	const productSrc = getImage(data.product_image_url[0], data.retailer_id);
+	const productSrc = getImage(
+		cleanUrl(data.product_image_url[0]),
+		data.retailer_id
+	);
 
 	return (
 		<div className="flex items-start w-full">

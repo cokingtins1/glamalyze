@@ -42,7 +42,7 @@ export default function SelectForm() {
 			target: "Reviews",
 			startIndex: "A",
 			endIndex: "Z",
-			// productLimit: 1000000,
+			productLimit: 1000000,
 			url: "",
 		},
 	});
@@ -55,7 +55,7 @@ export default function SelectForm() {
 				target: target,
 				startIndex: data.startIndex.toUpperCase(),
 				endIndex: data.endIndex.toUpperCase(),
-				// productLimit: data.productLimit,
+				productLimit: data.productLimit,
 				url: data.url?.toLowerCase(),
 			}),
 			headers: {
@@ -89,12 +89,12 @@ export default function SelectForm() {
 						onSubmit={form.handleSubmit(onSubmit)}
 						className="grid grid-cols-auto gap-4 items-center"
 					>
-						<div className="grid grid-cols-5 grid-rows-auto gap-2 justify-items-stretch items-center justify-center text-center">
+						<div className="grid grid-cols-6 grid-rows-auto gap-2 justify-items-stretch items-center justify-center text-center">
 							<Label>Retailer</Label>
 							<Label>Target</Label>
 							<Label>Start Index</Label>
 							<Label>End Index</Label>
-							{/* <Label>Product Limit</Label> */}
+							<Label>Product Limit</Label>
 							<Label>Brand</Label>
 							<Select onValueChange={setRetailer}>
 								<SelectTrigger
@@ -170,14 +170,14 @@ export default function SelectForm() {
 								placeholder="End Index"
 								className="bg-white"
 							/>
-							{/* <Input
+							<Input
 								{...form.register("productLimit")}
 								type="number"
 								id="productLimit"
 								name="productLimit"
 								placeholder="Product Limit"
 								className="bg-white"
-							/> */}
+							/>
 							<Input
 								{...form.register("url")}
 								type="text"
@@ -199,9 +199,9 @@ export default function SelectForm() {
 							<Label>
 								{form.formState.errors.endIndex?.message}
 							</Label>
-							{/* <Label>
+							<Label>
 								{form.formState.errors.productLimit?.message}
-							</Label> */}
+							</Label>
 							<Label>{form.formState.errors.url?.message}</Label>
 						</div>
 

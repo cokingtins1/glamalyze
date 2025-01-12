@@ -30,6 +30,8 @@ model Retailer {
   SephoraProduct  SephoraProduct[]
   SephoraReview   SephoraReview[]
   SephoraReviewer SephoraReviewer[]
+
+  @@map("Retailer")
 }
 
 model AllBrands {
@@ -42,6 +44,8 @@ model AllBrands {
   UltaProduct       UltaProduct[]
   SephoraProduct    SephoraProduct[]
   SharedProduct     SharedProduct[]
+
+  @@map("AllBrands")
 }
 
 model SharedProduct {
@@ -73,6 +77,8 @@ model SharedProduct {
   allBrands       AllBrands      @relation(fields: [brand_id], references: [brand_id])
   ulta_product    UltaProduct    @relation(fields: [ulta_product_id], references: [product_id])
   sephora_product SephoraProduct @relation(fields: [sephora_product_id], references: [product_id])
+
+  @@map("SharedProduct")
 }
 
 model UltaProduct {
@@ -98,6 +104,8 @@ model UltaProduct {
   UltaReview    UltaReview[]
   SharedProduct SharedProduct[]
   UltaReviewer  UltaReviewer[]
+
+  @@map("UltaProduct")
 }
 
 model UltaReview {
@@ -118,6 +126,8 @@ model UltaReview {
   review_date_string String?
 
   retailer Retailer @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
+
+  @@map("UltaReview")
 }
 
 model UltaReviewer {
@@ -127,6 +137,8 @@ model UltaReviewer {
   retailer_id   String?
   product       UltaProduct @relation(fields: [product_id], references: [product_id])
   product_id    String
+
+  @@map("UltaReviewer")
 }
 
 model SephoraProduct {
@@ -152,6 +164,8 @@ model SephoraProduct {
   SephoraReview   SephoraReview[]
   SharedProduct   SharedProduct[]
   SephoraReviewer SephoraReviewer[]
+
+  @@map("SephoraProduct")
 }
 
 model SephoraReview {
@@ -172,6 +186,8 @@ model SephoraReview {
   review_date_string String?
 
   retailer Retailer @relation(fields: [retailer_id], references: [retailer_id], onDelete: Cascade)
+
+  @@map("SephoraReview")
 }
 
 model SephoraReviewer {
@@ -181,6 +197,8 @@ model SephoraReviewer {
   retailer_id   String?
   product       SephoraProduct @relation(fields: [product_id], references: [product_id])
   product_id    String
+
+  @@map("SephoraReviewer")
 }
 
 model AllProduct {
@@ -196,6 +214,8 @@ model AllProduct {
   total_reviews       Float?
   page_link           String?
   scraped             Boolean @default(false)
+
+  @@map("AllProduct")
 }
 
 model FailedScrapes {

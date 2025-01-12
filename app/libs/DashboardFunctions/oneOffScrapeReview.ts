@@ -17,7 +17,6 @@ export default async function oneOffScrapeReview(
 	if (retailer === "Ulta") {
 		data = await getUltaReviews(url, productId, reviewsPresent);
 	} else if (retailer === "Sephora") {
-		console.log("here");
 		data = await getSephoraReviews(url, productId, reviewsPresent);
 	}
 

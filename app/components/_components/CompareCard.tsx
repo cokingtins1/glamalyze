@@ -4,6 +4,7 @@ import CombinedLogo from "@/public/CombinedLogo.png";
 import UltaLogo from "@/public/Ulta_Logo.png";
 import SephoraLogo from "@/public/Sephora_Logo.png";
 import { AllProducts } from "../../libs/types";
+import { cleanUrl } from "@/app/libs/utils";
 
 type Props = {
 	data: AllProducts;
@@ -44,7 +45,7 @@ export default function CompareCard({ data, onClick }: Props) {
 					<div className="size-[52px] lg:size-[75px] relative">
 						<Image
 							src={getImage(
-								data.product_image_url[0],
+								cleanUrl(data.product_image_url[0]),
 								data.retailer_id
 							)}
 							alt="product image"

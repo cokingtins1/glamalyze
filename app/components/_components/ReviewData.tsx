@@ -1,14 +1,6 @@
 import React from "react";
 import compareProducts from "../../actions/Compare/compareProducts";
 import ProductCard from "./ProductCard";
-import { AllProducts, Review } from "@/app/libs/types";
-
-type Props =
-	| {
-			productData: AllProducts | null;
-			reviewsData: Review[] | null;
-	  }[]
-	| undefined;
 
 export default async function ReviewData(props: { sku: string }) {
 	const reviewData = await compareProducts(props.sku);

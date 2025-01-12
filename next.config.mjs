@@ -2,10 +2,20 @@
 const nextConfig = {
 	images: {
 		remotePatterns: [
+			// {
+			// 	protocol: "https",
+			// 	hostname: "*",
+			// 	port: "",
+			// },
 			{
 				protocol: "https",
-				hostname: "*",
-				port: "",
+				hostname: "www.sephora.com",
+				pathname: "/productimages/**",
+			},
+			{
+				protocol: "https",
+				hostname: "media.ulta.com",
+				pathname: "/i/ulta/**",
 			},
 		],
 	},

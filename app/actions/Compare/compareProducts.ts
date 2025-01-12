@@ -136,6 +136,7 @@ export default async function compareProducts(slug: string) {
 			let reviewSuccess = false;
 
 			while (failedCount < maxTrys && !reviewSuccess) {
+				console.log("Scraping live one-off");
 				reviewSuccess = await oneOffScrapeReview(
 					p.page_link,
 					p.product_id,

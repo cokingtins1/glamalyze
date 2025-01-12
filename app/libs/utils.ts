@@ -208,7 +208,7 @@ export const checkExpired = async (
 	id: string,
 	retailer: string,
 
-	expirationThreshold: number
+	expirationThreshold: number //days
 ) => {
 	let lastScrapedTime;
 	let expired = false;
@@ -293,4 +293,15 @@ export const getProductFromSku = async (
 	const data = getProductDetails(skuArray);
 
 	return data;
+};
+
+export const cleanUrl = (url: string) => {
+	if (!url) return "";
+	// First handle array if it's an array
+	const urlString = Array.isArray(url) ? url[0] : url;
+	return urlString
+		.replace(/[{}]/g, "") // Remove curly braces
+		.replace(/\\"/g, "") // Remove escaped quotes
+		.replace(/"/g, "") // Remove remaining quotes
+		.trim(); // Remove any whitespace
 };

@@ -13,9 +13,9 @@ import { Button } from "@/components/ui/button";
 
 import { chatSchema, Review, TChatSchema } from "../../libs/types";
 import { useState } from "react";
-import { getChatAI } from "../../actions/getChatAI";
+// import { getChatAI } from "../../actions/getChatAI";
 
-import { readStreamableValue } from "ai/rsc";
+// import { readStreamableValue } from "ai/rsc";
 
 type Props = {
 	reviews: Review[][];
@@ -65,13 +65,12 @@ export default function OpenAIAnalysis({ reviews }: Props) {
 	}
 
 	const generateSummary = async () => {
-		const { output } = await getChatAI(formatReviews(reviews));
-
-		for await (const delta of readStreamableValue(output)) {
-			setGeneration(
-				(currentGeneration) => `${currentGeneration}${delta}`
-			);
-		}
+		// const { output } = await getChatAI(formatReviews(reviews));
+		// for await (const delta of readStreamableValue(output)) {
+		// 	setGeneration(
+		// 		(currentGeneration) => `${currentGeneration}${delta}`
+		// 	);
+		// }
 	};
 
 	return (
